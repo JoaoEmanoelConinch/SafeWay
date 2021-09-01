@@ -1,10 +1,8 @@
 package modelo.entidade.mapa;
 
 import java.io.Serializable;
-
-import java.io.IOException;
-
 import java.util.ArrayList;
+import java.io.IOException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.codehaus.jackson.JsonParseException;
-import org.geojson.LineString;
-import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -41,12 +37,9 @@ public class Trajeto implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "id_partida_trajeto")
-	private Ponto inicio;
+	private Ponto inicio;;
 
-	@Column(name = "pontos_trajeto", nullable = false) // FALTA FAZER O TIPO DO ATRIBUTO
-	@Type(type = "org.hibernatespatial.mgeom")
-	private LineString pontos;
-
+	private ArrayList<Ponto> pontos;
 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 
@@ -108,11 +101,11 @@ public class Trajeto implements Serializable {
 		this.inicio = inicio;
 	}
 
-	public LineString getPontos() {
+	public ArrayList<Ponto> getPontos() {
 		return pontos;
 	}
 
-	public void setPontos(LineString pontos) {
+	public void setPontos(ArrayList<Ponto> pontos) {
 		this.pontos = pontos;
 	}
 
