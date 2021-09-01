@@ -12,7 +12,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import org.geojson.Point;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -33,10 +32,14 @@ public class Ponto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ponto",nullable = false,unique = true, columnDefinition = "UNSIGNED INT")
 	private Long idPonto; 
-	
-	@Column(columnDefinition = "long_lat_ponto" , nullable = false)
-	@Type(type = "org.hibernate.spatial.GeometryType")
-	private Point LongLatAlt;
+
+	@Column(columnDefinition = "lat_ponto" , nullable = false)
+	@Type(type = "double")
+	private double latitude;
+
+	@Column(columnDefinition = "long_ponto" , nullable = false)
+	@Type(type = "double")
+	private double longitude;
 
 	
 	public Ponto() {}
@@ -61,30 +64,22 @@ public class Ponto implements Serializable {
 		return idPonto;
 	}
 
-	public Point getLongLatAlt() {
-		return LongLatAlt;
-	}
-
-	public void setLongLatAlt(Point ponto) {
-		this.LongLatAlt = ponto;
-	}
-
 
 	private void setLatitude(double latitude) {
-		this.getLongLatAlt().getCoordinates().setLatitude(latitude);
+		this.latitude = latitude;
 	}
 
 	public double getLatitude() {
-		return getLongLatAlt().getCoordinates().getLatitude();
+		return this.latitude;
 	}
 
 	private void setLongitude(double longitude) {
-		this.getLongLatAlt().getCoordinates().setLongitude(longitude);
+		this.longitude = longitude;
 		;
 	}
 
 	public double getLongitude() {
-		return getLongLatAlt().getCoordinates().getLongitude();
+		return this.longitude;
 	}
 
 	public ArrayList<Double> transformarPontoEmVetor() {
