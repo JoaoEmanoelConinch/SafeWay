@@ -13,12 +13,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoFavorito;
+import modelo.entidade.mapa.Trajeto;
 import modelo.enumeracao.mapa.Estrelas;
 import modelo.enumeracao.mapa.NivelBloqueio;
 import modelo.enumeracao.mapa.Ocorrencia;
@@ -52,6 +56,12 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioCadastrado", cascade = CascadeType.ALL, orphanRemoval = true)
 	private ArrayList<Formulario> formulariosDoUsuario;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "usuario_trajeto",
+	joinColumns = @JoinColumn(name = "id_usuario"),
+	inverseJoinColumns = @JoinColumn(name = "id_trajeto"))
+	private ArrayList<Trajeto> trajetos;
 
 	public UsuarioCadastrado() {
 	}
@@ -143,6 +153,14 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	public ArrayList<Formulario> getFormulariosDoUsuario() {
 		return formulariosDoUsuario;
+	}
+
+	public ArrayList<Trajeto> getTrajetos() {
+		return trajetos;
+	}
+
+	public void setTrajetos(ArrayList<Trajeto> trajetos) {
+		this.trajetos = trajetos;
 	}
 
 	public boolean validarEmail(String email) {
