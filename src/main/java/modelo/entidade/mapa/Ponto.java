@@ -3,13 +3,18 @@ package modelo.entidade.mapa;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -41,7 +46,10 @@ public class Ponto implements Serializable {
 	@Type(type = "double")
 	private double longitude;
 
-	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "ponto_trageto", joinColumns = @JoinColumn(name = "id_ponto"), inverseJoinColumns = @JoinColumn(name = "id_trageto"))
+	private ArrayList<Trajeto> trajetos; 
+  
 	public Ponto() {}
 
 	public Ponto(double latitude, double longitude)
@@ -64,7 +72,6 @@ public class Ponto implements Serializable {
 		return idPonto;
 	}
 
-
 	private void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
@@ -80,6 +87,16 @@ public class Ponto implements Serializable {
 
 	public double getLongitude() {
 		return this.longitude;
+
+	}
+
+	public void setTrajetos(ArrayList<Trajeto> trajetos) {
+		this.trajetos = trajetos;
+	}
+
+	public ArrayList<Trajeto> getTrajetos() {
+		return trajetos;
+    
 	}
 
 	public ArrayList<Double> transformarPontoEmVetor() {

@@ -1,6 +1,7 @@
 package modelo.entidade.formulario;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,9 +18,6 @@ import javax.persistence.Table;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.usuario.UsuarioCadastrado;
-import modelo.enumeracao.mapa.Estrelas;
-import modelo.enumeracao.mapa.NivelBloqueio;
-import modelo.enumeracao.mapa.Ocorrencia;
 
 @Entity
 @Table(name = "Formulario")
@@ -34,27 +32,26 @@ public class Formulario implements Serializable {
 
 	@Column(name = "media_formulario", scale = 2, precision = 1, nullable = false, unique = false)
 	private double media;
+	
+	@Column(name = "lesaoCorporal_formulario", nullable = false)
+	private boolean lesaoCorporal;
 
-	@Column(name = "ocorrencia_Formulario", nullable = false, columnDefinition = "enum default NENHUMA")
-	@Enumerated(EnumType.STRING)
-	private Ocorrencia ocorrencia;
+	@Column(name = "furto_formulario", nullable = false)
+	private boolean furto;
 
-	@Column(name = "nivel_estrutura_Formulario", nullable = false, columnDefinition = "enum default ZERO" )
-	@Enumerated(EnumType.STRING)
-	private Estrelas nivelEstrutura;
+	@Column(name = "roubo_formulario", nullable = false)
+	private boolean roubo;
 
-	@Column(name = "nivel_Iluminacao_Formulario", nullable = false, columnDefinition = "enum default ZERO")
-	@Enumerated(EnumType.STRING)
-	private Estrelas nivelIluminacao;
+	@Column(name = "homicidio_formulario", nullable = false)
+	private boolean homicidio;
+
+	@Column(name = "latrocinio_formulario", nullable = false)
+	private boolean latrocinio;
 
 	@Column(name = "bloqueio_Ruas_Formulario", nullable = false, columnDefinition = "enum default LIVRE")
 	@Enumerated(EnumType.STRING)
-	private NivelBloqueio bloqueioRuas;
-
-	@Column(name = "nivel_Transito_Formulario", nullable = false, columnDefinition = "enum default ZERO")
-	@Enumerated(EnumType.STRING)
-	private Estrelas NivelTransito;
-
+	private boolean bloqueioRuas;
+	
 	@Column(name = "comentario_Formulario", length = 300, nullable = true, unique = true)
 	private String comentario;
 
@@ -69,50 +66,52 @@ public class Formulario implements Serializable {
 	public Formulario() {
 	}
 
-	public Formulario(Ocorrencia ocorrencia, Estrelas nivelEstrutura, Estrelas nivelIluminacao,
-			NivelBloqueio bloqueioRuas, Estrelas NivelTransito, String comentario, PontoAvaliado idPontoAvaliado,
-			UsuarioCadastrado idUsuario) {
+	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
+	 String comentario, boolean bloqueioRuas, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
 
-		setOcorrencia(ocorrencia);
-		setNivelEstrutura(nivelEstrutura);
-		setNivelIluminacao(nivelIluminacao);
-		setNivelBloqueio(bloqueioRuas);
-		setNivelTransito(NivelTransito);
+		setLesaoCorporal(lesaoCorporal);
+		setFurto(furto);
+		setRoubo(roubo);
+		setHomicidio(homicidio);
+		setLatrocinio(latrocinio);
 		setComentario(comentario);
-		setMedia();
+		setBloqueioRuas(bloqueioRuas);
+		setMedia(calcularMedia());
 		setIdPontoAvaliado(idPontoAvaliado);
 		setIdUsuario(idUsuario);
 
 	}
 
-	public Formulario(Long idFormulario, Ocorrencia ocorrencia, Estrelas nivelEstrutura, Estrelas nivelIluminacao,
-			NivelBloqueio bloqueioRuas, Estrelas NivelTransito, String comentario, PontoAvaliado idPontoAvaliado,
-			UsuarioCadastrado idUsuario) {
+	public Formulario(Long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
+	boolean latrocinio, boolean bloqueioRuas, double media, String comentario, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
 
 		setIdFormulario(idFormulario);
-		setOcorrencia(ocorrencia);
-		setNivelEstrutura(nivelEstrutura);
-		setNivelIluminacao(nivelIluminacao);
-		setNivelBloqueio(bloqueioRuas);
-		setNivelTransito(NivelTransito);
+		setLesaoCorporal(lesaoCorporal);
+		setFurto(furto);
+		setRoubo(roubo);
+		setHomicidio(homicidio);
+		setLatrocinio(latrocinio);
 		setComentario(comentario);
-		setMedia();
+		setComentario(comentario);
+		setBloqueioRuas(bloqueioRuas);
+		setMedia(media);
 		setIdPontoAvaliado(idPontoAvaliado);
 		setIdUsuario(idUsuario);
 
 	}
 
-	public Formulario(Ocorrencia ocorrencias, Estrelas nivelEstrutura, Estrelas nivelIluminacao,
-			NivelBloqueio bloqueioRuas, Estrelas NivelTransito, String comentario, Ponto idPontoAvaliado,
-			UsuarioCadastrado idUsuario) {
+	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
+	boolean bloqueioRuas, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
 
-		setOcorrencia(ocorrencias);
-		setNivelEstrutura(nivelEstrutura);
-		setNivelIluminacao(nivelIluminacao);
-		setNivelBloqueio(bloqueioRuas);
-		setNivelTransito(NivelTransito);
+		setLesaoCorporal(lesaoCorporal);
+		setFurto(furto);
+		setRoubo(roubo);
+		setHomicidio(homicidio);
+		setLatrocinio(latrocinio);
 		setComentario(comentario);
-		setMedia();
+		setComentario(comentario);
+		setBloqueioRuas(bloqueioRuas);
+		setMedia(calcularMedia());
 		setIdPontoAvaliado(idPontoAvaliado);
 		setIdUsuario(idUsuario);
 
@@ -126,36 +125,52 @@ public class Formulario implements Serializable {
 		this.idFormulario = idFormulario;
 	}
 
-	public Estrelas getNivelEstrutura() {
-		return nivelEstrutura;
+	public boolean isLatrocinio() {
+		return latrocinio;
 	}
 
-	private void setNivelEstrutura(Estrelas nivelEstrutura) {
-		this.nivelEstrutura = nivelEstrutura;
+	public void setLatrocinio(boolean latrocinio) {
+		this.latrocinio = latrocinio;
 	}
 
-	public Estrelas getNivelIluminacao() {
-		return nivelIluminacao;
+	public boolean isHomicidio() {
+		return homicidio;
 	}
 
-	private void setNivelIluminacao(Estrelas nivelIluminacao) {
-		this.nivelIluminacao = nivelIluminacao;
+	public void setHomicidio(boolean homicidio) {
+		this.homicidio = homicidio;
 	}
 
-	public NivelBloqueio getNivelBloqueio() {
+	public boolean isRoubo() {
+		return roubo;
+	}
+
+	public void setRoubo(boolean roubo) {
+		this.roubo = roubo;
+	}
+
+	public boolean isFurto() {
+		return furto;
+	}
+
+	public void setFurto(boolean furto) {
+		this.furto = furto;
+	}
+
+	public boolean isLesaoCorporal() {
+		return lesaoCorporal;
+	}
+
+	public void setLesaoCorporal(boolean lesaoCorporal) {
+		this.lesaoCorporal = lesaoCorporal;
+	}
+
+	public boolean isBloqueioRuas() {
 		return bloqueioRuas;
 	}
 
-	private void setNivelBloqueio(NivelBloqueio bloqueioRuas) {
+	public void setBloqueioRuas(boolean bloqueioRuas) {
 		this.bloqueioRuas = bloqueioRuas;
-	}
-
-	public Estrelas getNivelTransito() {
-		return NivelTransito;
-	}
-
-	private void setNivelTransito(Estrelas nivelTransito) {
-		this.NivelTransito = nivelTransito;
 	}
 
 	public String getComentario() {
@@ -166,16 +181,12 @@ public class Formulario implements Serializable {
 		this.comentario = comentario;
 	}
 
-	public Ocorrencia getOcorrencia() {
-		return ocorrencia;
-	}
-
-	private void setOcorrencia(Ocorrencia ocorrencia) {
-		this.ocorrencia = ocorrencia;
-	}
-
 	public double getMedia() {
 		return media;
+	}
+
+	public void setMedia(double media) {
+		this.media = media;
 	}
 
 	public Ponto getIdPontoAvaliado() {
@@ -194,9 +205,24 @@ public class Formulario implements Serializable {
 		this.idUsuario = idUsuario;
 	}
 
-	private void setMedia() {
-		this.media = (((getNivelEstrutura().getPeso() + getNivelTransito().getPeso() + getNivelIluminacao().getPeso())
-				/ 3) - getOcorrencia().getPeso());
+	private int calcularMedia() {
+		ArrayList<Boolean> ocorrencias = new ArrayList<>();
+		ocorrencias.add(isLesaoCorporal());
+		ocorrencias.add(isFurto());
+		ocorrencias.add(isRoubo());
+		ocorrencias.add(isHomicidio());
+		ocorrencias.add(isLatrocinio());
+
+		int media = 0;
+
+		for (int i = 0; i < ocorrencias.size(); i++){
+			if (ocorrencias.get(i)){
+				media += i+1;
+			}
+		}
+
+		return media;
+
 	}
 
 }

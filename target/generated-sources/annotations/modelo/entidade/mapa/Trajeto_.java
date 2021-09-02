@@ -1,16 +1,16 @@
 package modelo.entidade.mapa;
 
+import java.util.ArrayList;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import modelo.enumeracao.mapa.MeioDeTransporte;
-import org.geojson.LineString;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(Trajeto.class)
 public abstract class Trajeto_ {
 
-	public static volatile SingularAttribute<Trajeto, LineString> pontos;
+	public static volatile SingularAttribute<Trajeto, ArrayList> pontos;
 	public static volatile SingularAttribute<Trajeto, Ponto> chegada;
 	public static volatile SingularAttribute<Trajeto, MeioDeTransporte> transporteUsado;
 	public static volatile SingularAttribute<Trajeto, Ponto> inicio;
