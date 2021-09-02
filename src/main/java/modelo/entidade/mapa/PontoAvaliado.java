@@ -1,7 +1,7 @@
 package modelo.entidade.mapa;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +21,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import modelo.entidade.formulario.Formulario;
-import modelo.enumeracao.mapa.NivelBloqueio;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
@@ -36,68 +35,56 @@ public class PontoAvaliado extends Ponto implements Serializable {
 	@Column(name = "id_ponto", nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
 	private Long idPontoAvaliado;
 
-	private List<Formulario> avaliacoes;
+	private ArrayList<Formulario> avaliacoes;
 
-	// Formulario novo!
+	private long quantidadeLezoesCorporais;
+	
+	private long quantidadeFurtos;
+
+	private long quantidadeRoubos;
+
+	private long quantidadeHomicidios;
+
+	private long quantidadeLatrocinio;
 
 	@Column(name = "nivel_Bloqueio_Ponto_Avaliado", nullable = false)
 	@Enumerated(EnumType.STRING)
-	private NivelBloqueio bloqueio;
+	private boolean bloqueio;
 
 	@Column(name = "media_Avaliacao_Ponto_Avaliado", nullable = false)
-	private int mediaDeAvaliacao;
+	private double mediaDeAvaliacao;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
 	@JoinColumn(name = "id_cliente")
 	private Ponto ponto;
 
-	public PontoAvaliado() {
+	public PontoAvaliado() {}
+
+	public PontoAvaliado(long idPontoAvaliado, Ponto ponto, ArrayList<Formulario> avaliacoes,
+	long quantidadeLezoesCorporais, long quantidadeFurtos, long quantidadeRoubos, long quantidadeHomicidios,
+	long quantidadeLatrocinio, boolean bloqueio, double mediaDeAvaliacao){
+		
+		setId(idPontoAvaliado);
+		setPonto(ponto);
+		setAvaliacoes(avaliacoes);
+		setQuantidadeLezoesCorporais(quantidadeLezoesCorporais);
+		setQuantidadeFurtos(quantidadeFurtos);
+		setQuantidadeRoubos(quantidadeRoubos);
+		setQuantidadeHomicidios(quantidadeHomicidios);
+		setQuantidadeLatrocinio(quantidadeLatrocinio);
+		setBloqueio(bloqueio);
+		setMediaDeAvaliacao(mediaDeAvaliacao);
 	}
 
-	public PontoAvaliado(double latitude, double longitude, Long idPontoAvaliado, List<Formulario> avaliacoes,
-			int mediaDeAvaliacao) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
-		super(latitude, longitude);
-		this.setIdPontoAvaliado(idPontoAvaliado);
-		this.setAvaliacoes(avaliacoes);
-		this.setNivelDeCriminalidade();
-		this.setNivelDeEstruturaDaRua();
-		this.setNivelDeIluminacao();
-		this.setNivelDeTransito();
-		this.setBloqueio();
-		this.setMediaDeAvaliacao();
-
+	public PontoAvaliado(Ponto ponto, Formulario avaliacao){
+		
+		setPonto(ponto);
+		addAvaliacao(avaliacao);
 	}
 
-	public PontoAvaliado(double latitude, double longitude, List<Formulario> avaliacoes, double nivelDeCriminalidade,
-			) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
-		super(latitude, longitude);
-		this.setAvaliacoes(avaliacoes);
-		this.setNivelDeCriminalidade();
-		this.setNivelDeEstruturaDaRua();
-		this.setNivelDeIluminacao();
-		this.setNivelDeTransito();
-		this.setBloqueio();
-		this.setMediaDeAvaliacao();
-	}
-
-	public PontoAvaliado(Long idPontoAvaliado, Ponto ponto, Formulario avaliacao)
-			throws StatusInvalidoException, NullPointerException, JsonMappingException, JsonProcessingException {
-		super(ponto.getLatitude(), ponto.getLatitude());
-
-		this.setIdPontoAvaliado(idPontoAvaliado);
-		this.addAvaliacao(avaliacao);
-
-	}
-
-	public PontoAvaliado(Ponto ponto, Formulario avaliacao) throws StatusInvalidoException, NullPointerException, JsonMappingException, JsonProcessingException {
-		super(ponto.getLatitude(), ponto.getLatitude());
-		this.addAvaliacao(avaliacao);
-
-	}
-
-	public PontoAvaliado(Ponto ponto) throws StatusInvalidoException, NullPointerException, JsonMappingException, JsonProcessingException {
-		super(ponto.getLatitude(), ponto.getLatitude());
+	public PontoAvaliado(Ponto ponto){
+		setPonto(ponto);
 	}
 
 	public Long getIdPontoAvaliado() {
@@ -108,23 +95,59 @@ public class PontoAvaliado extends Ponto implements Serializable {
 		this.idPontoAvaliado = idPontoAvaliado;
 	}
 
-	public int getMediaDeAvaliacao() {
+	public long getQuantidadeLatrocinio() {
+		return quantidadeLatrocinio;
+	}
+
+	public void setQuantidadeLatrocinio(long quantidadeLatrocinio) {
+		this.quantidadeLatrocinio = quantidadeLatrocinio;
+	}
+
+	public long getQuantidadeHomicidios() {
+		return quantidadeHomicidios;
+	}
+
+	public void setQuantidadeHomicidios(long quantidadeHomicidios) {
+		this.quantidadeHomicidios = quantidadeHomicidios;
+	}
+
+	public long getQuantidadeRoubos() {
+		return quantidadeRoubos;
+	}
+
+	public void setQuantidadeRoubos(long quantidadeRoubos) {
+		this.quantidadeRoubos = quantidadeRoubos;
+	}
+
+	public long getQuantidadeFurtos() {
+		return quantidadeFurtos;
+	}
+
+	public void setQuantidadeFurtos(long quantidadeFurtos) {
+		this.quantidadeFurtos = quantidadeFurtos;
+	}
+
+	public long getQuantidadeLezoesCorporais() {
+		return quantidadeLezoesCorporais;
+	}
+
+	public void setQuantidadeLezoesCorporais(long quantidadeLezoesCorporais) {
+		this.quantidadeLezoesCorporais = quantidadeLezoesCorporais;
+	}
+
+	public double getMediaDeAvaliacao() {
 		return mediaDeAvaliacao;
 	}
 
-	private void setMediaDeAvaliacao() {
-		double soma = 0;
-		for (Formulario formulario : getAvaliacoes()) {
-			soma += formulario.getMedia();
-		}
-		this.nivelDeCriminalidade = soma / getAvaliacoes().size();
+	public void setMediaDeAvaliacao(double mediaDeAvaliacao) {
+		this.mediaDeAvaliacao = mediaDeAvaliacao;
 	}
 
-	public List<Formulario> getAvaliacoes() {
+	public ArrayList<Formulario> getAvaliacoes() {
 		return avaliacoes;
 	}
 
-	public void setAvaliacoes(List<Formulario> avaliacoes) {
+	public void setAvaliacoes(ArrayList<Formulario> avaliacoes) {
 		this.avaliacoes = avaliacoes;
 	}
 
@@ -133,14 +156,26 @@ public class PontoAvaliado extends Ponto implements Serializable {
 		if (avaliacao == null) {
 			throw new NullPointerException();
 		}
-
 		this.avaliacoes.add(avaliacao);
-		this.setNivelDeCriminalidade();
-		this.setNivelDeEstruturaDaRua();
-		this.setNivelDeIluminacao();
-		this.setBloqueio();
-		this.setNivelDeTransito();
-		this.setMediaDeAvaliacao();
+		
+		if (avaliacao.isLesaoCorporal()){
+			setQuantidadeLezoesCorporais(getQuantidadeLezoesCorporais()+1);
+		}
+		if (avaliacao.isFurto()){
+			setQuantidadeFurtos(getQuantidadeFurtos()+1);
+		}
+		if (avaliacao.isRoubo()){
+			setQuantidadeRoubos(getQuantidadeRoubos()+1);
+		}
+		if (avaliacao.isHomicidio()){
+			setQuantidadeHomicidios(getQuantidadeHomicidios()+1);
+		}
+		if (avaliacao.isLatrocinio()){
+			setQuantidadeLatrocinio(getQuantidadeLatrocinio()+1);
+		}
+		this.verificarBloqueio();
+
+		this.setMediaDeAvaliacao(calcularMediaPonto());
 	}
 
 	public void removeAvaliacao(Formulario avaliacao) throws NullPointerException {
@@ -152,83 +187,56 @@ public class PontoAvaliado extends Ponto implements Serializable {
 		this.avaliacoes.remove(avaliacao);
 
 		if (getAvaliacoes().size() > 0) {
+			
+			if (avaliacao.isLesaoCorporal()){
+				setQuantidadeLezoesCorporais(getQuantidadeLezoesCorporais()-1);
+			}
+			if (avaliacao.isFurto()){
+				setQuantidadeFurtos(getQuantidadeFurtos()-1);
+			}
+			if (avaliacao.isRoubo()){
+				setQuantidadeRoubos(getQuantidadeRoubos()-1);
+			}
+			if (avaliacao.isHomicidio()){
+				setQuantidadeHomicidios(getQuantidadeHomicidios()-1);
+			}
+			if (avaliacao.isLatrocinio()){
+				setQuantidadeLatrocinio(getQuantidadeLatrocinio()-1);
+			}
+			this.verificarBloqueio();
 
-			this.setNivelDeCriminalidade();
-			this.setNivelDeEstruturaDaRua();
-			this.setNivelDeIluminacao();
-			this.setBloqueio();
-			this.setNivelDeTransito();
-			this.setMediaDeAvaliacao();
-
+			this.setMediaDeAvaliacao(calcularMediaPonto());
 		}
 	}
 
-	public double getNivelDeCriminalidade() {
-		return nivelDeCriminalidade;
-	}
-
-	private void setNivelDeCriminalidade() {
-
-		double soma = 0;
-		for (Formulario formulario : getAvaliacoes()) {
-			soma += formulario.getOcorrencia().getPeso();
-		}
-		this.nivelDeCriminalidade = soma / getAvaliacoes().size();
-	}
-
-	public int getNivelDeEstruturaDaRua() {
-		return nivelDeEstruturaDaRua;
-	}
-
-	private void setNivelDeEstruturaDaRua() {
-		double soma = 0;
-		for (Formulario formulario : getAvaliacoes()) {
-			soma += formulario.getNivelEstrutura().getPeso();
-		}
-		this.nivelDeCriminalidade = soma / getAvaliacoes().size();
-	}
-
-	public int getNivelDeIluminacao() {
-		return nivelDeIluminacao;
-	}
-
-	private void setNivelDeIluminacao() {
-
-		double soma = 0;
-		for (Formulario formulario : getAvaliacoes()) {
-			soma += formulario.getNivelIluminacao().getPeso();
-		}
-		this.nivelDeCriminalidade = soma / getAvaliacoes().size();
-	}
-
-	public NivelBloqueio getBloqueio() {
+	public boolean isBloqueio() {
 		return bloqueio;
 	}
 
-	private void setBloqueio() {
-		this.bloqueio = getAvaliacoes().get(getAvaliacoes().size()).getNivelBloqueio();
+	public void setBloqueio(boolean bloqueio) {
+		this.bloqueio = bloqueio;
 	}
 
-	public int getNivelDeTransito() {
-		return nivelDeTransito;
+	private void verificarBloqueio() {
+		this.bloqueio = getAvaliacoes().get(getAvaliacoes().size()).isBloqueioRuas();
 	}
 
 	public Ponto getPonto() {
 		return ponto;
-
 	}
 
 	public void setPonto(Ponto ponto) {
 		this.ponto = ponto;
 	}
 
-	private void setNivelDeTransito() {
+	private double calcularMediaPonto(){
+		long media = 0;
+		ArrayList<Formulario> avaliacoesList = this.getAvaliacoes();
 
-		double soma = 0;
-		for (Formulario formulario : getAvaliacoes()) {
-			soma += formulario.getNivelTransito().getPeso();
+		for (int i = 0; i < avaliacoesList.size(); i++){
+			media += avaliacoesList.get(i).getMedia();
 		}
-		this.nivelDeCriminalidade = soma / getAvaliacoes().size();
+		return media/avaliacoesList.size();
 	}
 
 	public static PontoAvaliado CriarPonto(Ponto ponto, Formulario avaliacao)

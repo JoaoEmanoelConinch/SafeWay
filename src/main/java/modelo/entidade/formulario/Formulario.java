@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,6 +47,10 @@ public class Formulario implements Serializable {
 
 	@Column(name = "latrocinio_formulario", nullable = false)
 	private boolean latrocinio;
+
+	@Column(name = "bloqueio_Ruas_Formulario", nullable = false, columnDefinition = "enum default LIVRE")
+	@Enumerated(EnumType.STRING)
+	private boolean bloqueioRuas;
 	
 	@Column(name = "comentario_Formulario", length = 300, nullable = true, unique = true)
 	private String comentario;
@@ -61,7 +67,7 @@ public class Formulario implements Serializable {
 	}
 
 	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-	 String comentario, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
+	 String comentario, boolean bloqueioRuas, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
 
 		setLesaoCorporal(lesaoCorporal);
 		setFurto(furto);
@@ -69,14 +75,15 @@ public class Formulario implements Serializable {
 		setHomicidio(homicidio);
 		setLatrocinio(latrocinio);
 		setComentario(comentario);
+		setBloqueioRuas(bloqueioRuas);
 		setMedia(calcularMedia());
 		setIdPontoAvaliado(idPontoAvaliado);
 		setIdUsuario(idUsuario);
 
 	}
 
-	public Formulario(Long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-	String comentario, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
+	public Formulario(Long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
+	boolean latrocinio, boolean bloqueioRuas, double media, String comentario, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
 
 		setIdFormulario(idFormulario);
 		setLesaoCorporal(lesaoCorporal);
@@ -86,14 +93,15 @@ public class Formulario implements Serializable {
 		setLatrocinio(latrocinio);
 		setComentario(comentario);
 		setComentario(comentario);
-		setMedia(calcularMedia());
+		setBloqueioRuas(bloqueioRuas);
+		setMedia(media);
 		setIdPontoAvaliado(idPontoAvaliado);
 		setIdUsuario(idUsuario);
 
 	}
 
-	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio, String comentario, Ponto idPontoAvaliado,
-			UsuarioCadastrado idUsuario) {
+	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
+	boolean bloqueioRuas, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
 
 		setLesaoCorporal(lesaoCorporal);
 		setFurto(furto);
@@ -102,6 +110,7 @@ public class Formulario implements Serializable {
 		setLatrocinio(latrocinio);
 		setComentario(comentario);
 		setComentario(comentario);
+		setBloqueioRuas(bloqueioRuas);
 		setMedia(calcularMedia());
 		setIdPontoAvaliado(idPontoAvaliado);
 		setIdUsuario(idUsuario);
@@ -154,6 +163,14 @@ public class Formulario implements Serializable {
 
 	public void setLesaoCorporal(boolean lesaoCorporal) {
 		this.lesaoCorporal = lesaoCorporal;
+	}
+
+	public boolean isBloqueioRuas() {
+		return bloqueioRuas;
+	}
+
+	public void setBloqueioRuas(boolean bloqueioRuas) {
+		this.bloqueioRuas = bloqueioRuas;
 	}
 
 	public String getComentario() {
