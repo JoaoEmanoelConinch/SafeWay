@@ -63,7 +63,7 @@ public class Formulario implements Serializable {
 	private Ponto idPontoAvaliado;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario", columnDefinition = "enum default NULL" + "UNSIGNED INT")
+	@JoinColumn(name = "id_usuario")
 	private UsuarioCadastrado idUsuario;
 
 	public Formulario() {

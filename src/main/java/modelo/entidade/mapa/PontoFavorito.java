@@ -41,7 +41,6 @@ public class PontoFavorito extends Ponto implements Serializable {
 	private Ponto ponto;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario")
 	private UsuarioCadastrado usuario;
 
 	public PontoFavorito() {
@@ -84,13 +83,13 @@ public class PontoFavorito extends Ponto implements Serializable {
 		this.ponto = ponto;
 	}
 
-	public UsuarioCadastrado getUsuario() {
-		return usuario;
-	}
+//	public UsuarioCadastrado getUsuario() {
+//		return usuario;
+//	}
 
-	public void setUsuario(UsuarioCadastrado usuario) {
-		this.usuario = usuario;
-	}
+//	public void setUsuario(UsuarioCadastrado usuario) {
+//		this.usuario = usuario;
+//	}
 
 	public static PontoFavorito favoritarPontoENomear(Ponto ponto, String nomePonto) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
 

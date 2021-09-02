@@ -1,6 +1,7 @@
 package modelo.entidade.usuario;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,8 +52,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	@Column(name = "email_usuario", length = 45, nullable = false, unique = true)
 	private String email;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "id_usuario")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioCadastrado", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<PontoFavorito> favoritos;
 
 	public UsuarioCadastrado() {
@@ -121,9 +121,9 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		return email;
 	}
 
-	public List<PontoFavorito> getFavoritos() {
-		return favoritos;
-	}
+//	public List<PontoFavorito> getFavoritos() {
+//		return favoritos;
+//	}
 
 	private void setEmail(String email) throws EmailInvalidoException, StringVaziaException {
 
@@ -159,21 +159,21 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 			NivelBloqueio bloqueioRuas, Estrelas nivelTransito, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado usuario)
 			throws NullPointerException, StatusInvalidoException {
 
-		Formulario formulario = new Formulario();
-
-		if (idPontoAvaliado.getClass().equals("Ponto")) {
-			idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
-
-			formulario = new Formulario(ocorrencias, nivelEstrutura, nivelIluminacao, bloqueioRuas, nivelTransito, comentario, idPontoAvaliado,  usuario);
-
-			((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);
-
-		}
+//		Formulario formulario = new Formulario();
+//
+//		if (idPontoAvaliado.getClass().equals("Ponto")) {
+//			idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
+//
+//			formulario = new Formulario(ocorrencias, nivelEstrutura, nivelIluminacao, bloqueioRuas, nivelTransito, comentario, idPontoAvaliado,  usuario);
+//
+//			((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);
+//
+//		}
 	}
 
-	public void favoritarENomear(Ponto ponto, String nomePonto) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
-		PontoFavorito.favoritarPontoENomear(ponto, nomePonto);
-		favoritos.add((PontoFavorito) ponto);
-
-	}
+//	public void favoritarENomear(Ponto ponto, String nomePonto) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+//		PontoFavorito.favoritarPontoENomear(ponto, nomePonto);
+//		favoritos.add((PontoFavorito) ponto);
+//
+//	}
 }
