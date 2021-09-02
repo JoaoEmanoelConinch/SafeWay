@@ -30,15 +30,20 @@ public class Formulario implements Serializable {
 
 	@Column(name = "media_formulario", scale = 2, precision = 1, nullable = false, unique = false)
 	private double media;
-
+	
+	@Column(name = "lesaoCorporal_formulario", nullable = false)
 	private boolean lesaoCorporal;
 
+	@Column(name = "furto_formulario", nullable = false)
 	private boolean furto;
 
+	@Column(name = "roubo_formulario", nullable = false)
 	private boolean roubo;
 
+	@Column(name = "homicidio_formulario", nullable = false)
 	private boolean homicidio;
 
+	@Column(name = "latrocinio_formulario", nullable = false)
 	private boolean latrocinio;
 	
 	@Column(name = "comentario_Formulario", length = 300, nullable = true, unique = true)
