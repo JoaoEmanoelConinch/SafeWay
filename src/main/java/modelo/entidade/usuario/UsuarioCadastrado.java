@@ -1,6 +1,7 @@
 package modelo.entidade.usuario;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,16 +13,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
-import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.enumeracao.mapa.Estrelas;
 import modelo.enumeracao.mapa.NivelBloqueio;
@@ -50,10 +46,12 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	@Column(name = "email_usuario", length = 45, nullable = false, unique = true)
 	private String email;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "id_usuario")
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioCadastrado", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<PontoFavorito> favoritos;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioCadastrado", cascade = CascadeType.ALL, orphanRemoval = true)
+	private ArrayList<Formulario> formulariosDoUsuario;
 
 	public UsuarioCadastrado() {
 	}
@@ -137,6 +135,14 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 		this.email = email;
 
+	}
+
+	public void setFormulariosDoUsuario(ArrayList<Formulario> formulariosDoUsuario) {
+		this.formulariosDoUsuario = formulariosDoUsuario;
+	}
+
+	public ArrayList<Formulario> getFormulariosDoUsuario() {
+		return formulariosDoUsuario;
 	}
 
 	public boolean validarEmail(String email) {
