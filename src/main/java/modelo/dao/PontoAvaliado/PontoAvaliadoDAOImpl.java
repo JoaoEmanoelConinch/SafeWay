@@ -12,8 +12,6 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-import exemplo.modelo.entidade.cliente.Cliente;
-import exemplo.modelo.entidade.contato.Contato;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.factory.conexao.ConexaoFactory;
 

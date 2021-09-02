@@ -49,8 +49,7 @@ public class Ponto implements Serializable {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "ponto_trageto", joinColumns = @JoinColumn(name = "id_ponto"), inverseJoinColumns = @JoinColumn(name = "id_trageto"))
 	private ArrayList<Trajeto> trajetos; 
-
-	
+  
 	public Ponto() {}
 
 	public Ponto(double latitude, double longitude)
@@ -88,6 +87,7 @@ public class Ponto implements Serializable {
 
 	public double getLongitude() {
 		return this.longitude;
+
 	}
 
 	public void setTrajetos(ArrayList<Trajeto> trajetos) {
@@ -96,6 +96,7 @@ public class Ponto implements Serializable {
 
 	public ArrayList<Trajeto> getTrajetos() {
 		return trajetos;
+    
 	}
 
 	public ArrayList<Double> transformarPontoEmVetor() {
