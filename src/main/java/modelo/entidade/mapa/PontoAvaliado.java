@@ -38,17 +38,7 @@ public class PontoAvaliado extends Ponto implements Serializable {
 
 	private List<Formulario> avaliacoes;
 
-	@Column(name = "nivel_Criminalidade_Ponto_Avaliado", precision = 4, scale = 2, nullable = false)
-	private double nivelDeCriminalidade;
-
-	@Column(name = "nivel_Estrutura_Ponto_Avaliado", nullable = false, columnDefinition = "UNSIGNED INT")
-	private int nivelDeEstruturaDaRua;
-
-	@Column(name = "nivel_Iluminacao_Ponto_Avaliado", nullable = false)
-	private int nivelDeIluminacao;
-
-	@Column(name = "nivel_Trasito_Ponto_Avaliado", nullable = false)
-	private int nivelDeTransito;
+	// Formulario novo!
 
 	@Column(name = "nivel_Bloqueio_Ponto_Avaliado", nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -66,8 +56,7 @@ public class PontoAvaliado extends Ponto implements Serializable {
 	}
 
 	public PontoAvaliado(double latitude, double longitude, Long idPontoAvaliado, List<Formulario> avaliacoes,
-			double nivelDeCriminalidade, int nivelDeEstruturaDaRua, int nivelDeIluminacao, int nivelDeTransito,
-			NivelBloqueio bloqueio, int mediaDeAvaliacao) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+			int mediaDeAvaliacao) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
 		super(latitude, longitude);
 		this.setIdPontoAvaliado(idPontoAvaliado);
 		this.setAvaliacoes(avaliacoes);
@@ -81,8 +70,7 @@ public class PontoAvaliado extends Ponto implements Serializable {
 	}
 
 	public PontoAvaliado(double latitude, double longitude, List<Formulario> avaliacoes, double nivelDeCriminalidade,
-			int nivelDeEstruturaDaRua, int nivelDeIluminacao, int nivelDeTransito, NivelBloqueio bloqueio,
-			int mediaDeAvaliacao) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+			) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
 		super(latitude, longitude);
 		this.setAvaliacoes(avaliacoes);
 		this.setNivelDeCriminalidade();
