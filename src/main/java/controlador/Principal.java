@@ -20,11 +20,11 @@ public class Principal {
 //		UsuarioDAOImpl daoUsuario = new UsuarioDAOImpl();
 //		daoUsuario.inserirUsuario(usuario);
 		
-		Ponto ponto = new Ponto(12, -4);
+		UsuarioCadastrado usuario = new UsuarioCadastrado("Maria", "123ma456", "maria@gmail.com");
 		
-		PontoDAOImpl pontoDAOImpl = new PontoDAOImpl();
+		UsuarioDAOImpl usuarioDao = new UsuarioDAOImpl();
 		
-		pontoDAOImpl.inserirPonto(ponto);
+		usuarioDao.inserirUsuario(usuario);
 		
 	}
 
