@@ -51,7 +51,7 @@ public class Formulario implements Serializable {
 	@Column(name = "bloqueio_Ruas_Formulario", nullable = false)
 	private boolean bloqueioRuas;
 	
-	@Column(name = "comentario_Formulario", length = 300, nullable = true, unique = true)
+	@Column(name = "comentario_Formulario", length = 300, nullable = true)
 	private String comentario;
 
 	
