@@ -19,6 +19,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoFavorito;
@@ -70,6 +73,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
 		super();
 
+		this.setIdUsuario(idUsuario);
 		this.setNome(nome);
 		this.setSenha(senha);
 		this.setEmail(email);
@@ -78,6 +82,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	public UsuarioCadastrado(String nome, String senha, String email)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
 		super();
+
 		this.setNome(nome);
 		this.setSenha(senha);
 		this.setEmail(email);
@@ -93,13 +98,12 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	public String getNome() {
 		return nome;
-
 	}
 
 	public void setNome(String nome) throws StringVaziaException {
 
 		if (nome.isEmpty()) {
-			throw new StringVaziaException("O nome de Usu�rio � inv�lido!");
+			throw new StringVaziaException("Nome invalido!");
 		}
 
 		this.nome = nome;
@@ -114,11 +118,11 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	public void setSenha(String senha) throws StringVaziaException, SenhaPequenaException {
 
 		if (senha.length() < 8) {
-			throw new SenhaPequenaException("A senha n�o pode ter menos que 8 digitos");
+			throw new SenhaPequenaException("A senha nao pode ter menos que 8 digitos");
 		}
 
 		if (nome.isEmpty()) {
-			throw new StringVaziaException("A senha n�o pode ser vazia!");
+			throw new StringVaziaException("A senha nao pode ser vazia!");
 		}
 
 		this.senha = senha;
@@ -136,11 +140,11 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	private void setEmail(String email) throws EmailInvalidoException, StringVaziaException {
 
 		if (nome.isEmpty()) {
-			throw new StringVaziaException("O nome de Usu�rio � inv�lido!");
+			throw new StringVaziaException("Email invalido!");
 		}
 
 		if (validarEmail(email) == false) {
-			throw new EmailInvalidoException("Email Inv�lido!");
+			throw new EmailInvalidoException("Email Invalido!");
 		}
 
 		this.email = email;
@@ -202,7 +206,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 
 	
-	public void favoritarENomear(Ponto ponto, String nomePonto) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+	public void favoritarENomear(Ponto ponto, String nomePonto) throws StatusInvalidoException, JsonMappingException, JsonProcessingException{
 		PontoFavorito pontoFavorito = PontoFavorito.favoritarPontoENomear(ponto, nomePonto);
 		addFavorito(pontoFavorito);
 	}
