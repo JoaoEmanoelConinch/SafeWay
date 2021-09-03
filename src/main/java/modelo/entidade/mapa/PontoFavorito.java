@@ -36,11 +36,20 @@ public class PontoFavorito extends Ponto{
 	@Column(name = "nome_ponto_favorito", length = 20, nullable = false )
 	private String nomePonto;
 
-	@ManyToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "id_ponto")
+	 @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(
+	        name = "id_ponto",
+	        referencedColumnName = "id_ponto"
+	    )
+	
 	private Ponto ponto;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	 
+	 @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(
+	        name = "id_usuario",
+	        referencedColumnName = "id_usuario"
+	    )
 	private UsuarioCadastrado usuario;
 
 	public PontoFavorito() {
