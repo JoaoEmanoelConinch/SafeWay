@@ -29,10 +29,7 @@ public class PontoAvaliado extends Ponto{
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_ponto", nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
-	private Long idPontoAvaliado;
+	
 
 	@OneToMany(
         mappedBy = "ponto_avaliado",
