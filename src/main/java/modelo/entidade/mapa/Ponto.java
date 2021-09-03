@@ -19,10 +19,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
+import controlador.consultaAPI.ConsultaPonto;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import modelo.consultaAPI.ConsultaPonto;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
