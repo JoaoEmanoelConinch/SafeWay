@@ -41,6 +41,7 @@ public class Trajeto implements Serializable {
 	@JoinColumn(name = "id_partida_trajeto")
 	private Ponto inicio;;
 
+	@ManyToMany(mappedBy = "trajetos")
 	private ArrayList<Ponto> pontos;
 
 	@GeneratedValue(strategy = GenerationType.AUTO)
