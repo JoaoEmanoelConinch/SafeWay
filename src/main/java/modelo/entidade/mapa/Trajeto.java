@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,16 +43,24 @@ public class Trajeto implements Serializable {
 	private Long idTrajeto;
 
 
-	@ManyToOne
-	@JoinColumn(name = "id_partida_trajeto")
-	private Ponto inicio;;
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+        name = "id_partida_trajeto",
+        referencedColumnName = "id_ponto")
+	private Ponto inicio;
 
-	@ManyToMany(mappedBy = "trajetos")
+	
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "ponto_trajeto",
+    joinColumns = @JoinColumn(name = "id_trajeto"),
+    inverseJoinColumns = @JoinColumn(name = "id_ponto")
+    )
 	private ArrayList<Ponto> pontos;
 
-	@GeneratedValue(strategy = GenerationType.AUTO)
-
-	@JoinColumn(name = "id_chegada_trajeto")
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+        name = "id_chegada_trajeto",
+        referencedColumnName = "id_ponto")
 	private Ponto chegada;
 
 	@Column(name = "Meio_transporte")
