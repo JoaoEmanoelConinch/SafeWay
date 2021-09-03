@@ -11,7 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -56,11 +55,9 @@ public class Formulario implements Serializable {
 	private String comentario;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_ponto_avaliado", nullable = false, columnDefinition = "UNSIGNED INT")
 	private Ponto idPontoAvaliado;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario", columnDefinition = "enum default NULL" + "UNSIGNED INT")
 	private UsuarioCadastrado idUsuario;
 
 	public Formulario() {

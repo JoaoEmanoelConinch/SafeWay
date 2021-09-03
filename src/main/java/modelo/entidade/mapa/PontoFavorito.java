@@ -2,6 +2,7 @@ package modelo.entidade.mapa;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -36,12 +36,11 @@ public class PontoFavorito extends Ponto implements Serializable {
 	@Column(name = "nome_ponto_favorito", length = 20, nullable = false )
 	private String nomePonto;
 
-	@OneToMany(fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_ponto")
 	private Ponto ponto;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario")
 	private UsuarioCadastrado usuario;
 
 	public PontoFavorito() {

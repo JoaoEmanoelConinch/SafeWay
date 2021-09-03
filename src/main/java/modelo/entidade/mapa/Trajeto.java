@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.codehaus.jackson.JsonParseException;
@@ -18,6 +19,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 import modelo.consultaAPI.ConsultaTrajeto;
+import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.StatusInvalidoException;
 
@@ -39,6 +41,7 @@ public class Trajeto implements Serializable {
 	@JoinColumn(name = "id_partida_trajeto")
 	private Ponto inicio;;
 
+	@ManyToMany(mappedBy = "trajetos")
 	private ArrayList<Ponto> pontos;
 
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,6 +50,9 @@ public class Trajeto implements Serializable {
 	private Ponto chegada;
 
 	private MeioDeTransporte transporteUsado;
+	
+	@ManyToMany(mappedBy = "trajetos")
+	private ArrayList<UsuarioCadastrado> usuariosCadastrados;
 
 	public Trajeto() {
 	}
@@ -130,6 +136,13 @@ public class Trajeto implements Serializable {
 		this.transporteUsado = transporteUsado;
 	}
 
+	public ArrayList<UsuarioCadastrado> getUsuariosCadastrados() {
+		return usuariosCadastrados;
+	}
+
+	public void setUsuariosCadastrados(ArrayList<UsuarioCadastrado> usuariosCadastrados) {
+		this.usuariosCadastrados = usuariosCadastrados;
+	}
 
 	public void criarLineString(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado)
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {

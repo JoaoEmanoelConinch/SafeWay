@@ -3,16 +3,15 @@ package modelo.entidade.mapa;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -35,6 +34,10 @@ public class PontoAvaliado extends Ponto implements Serializable {
 	@Column(name = "id_ponto", nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
 	private Long idPontoAvaliado;
 
+	@OneToMany(
+        mappedBy = "ponto_avaliado",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true)
 	private ArrayList<Formulario> avaliacoes;
 
 	@Column(name = "quantidade_lezoes_corporais_ponto-avaliado", nullable = false)
@@ -60,7 +63,6 @@ public class PontoAvaliado extends Ponto implements Serializable {
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@MapsId
-	@JoinColumn(name = "id_cliente")
 	private Ponto ponto;
 
 	public PontoAvaliado() {}
