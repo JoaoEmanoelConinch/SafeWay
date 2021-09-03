@@ -4,12 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.io.IOException;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -50,9 +54,16 @@ public class Trajeto implements Serializable {
 	@JoinColumn(name = "id_chegada_trajeto")
 	private Ponto chegada;
 
+	@Column(name = "Meio_transporte")
+	@Enumerated(EnumType.STRING)
 	private MeioDeTransporte transporteUsado;
 	
-	@ManyToMany(mappedBy = "trajetos")
+	
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE })
+	    @JoinTable(name = "usuario_trajeto",
+	    joinColumns = @JoinColumn(name = "id_trajeto"),
+	    inverseJoinColumns = @JoinColumn(name = "id_usuario")
+	    )
 	private ArrayList<UsuarioCadastrado> usuariosCadastrados;
 
 	public Trajeto() {
