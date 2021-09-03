@@ -12,7 +12,6 @@ public abstract class PontoAvaliado_ extends modelo.entidade.mapa.Ponto_ {
 	public static volatile SingularAttribute<PontoAvaliado, Long> quantidadeLezoesCorporais;
 	public static volatile SingularAttribute<PontoAvaliado, Long> quantidadeRoubos;
 	public static volatile SingularAttribute<PontoAvaliado, Ponto> ponto;
-	public static volatile SingularAttribute<PontoAvaliado, Long> idPontoAvaliado;
 	public static volatile SingularAttribute<PontoAvaliado, ArrayList> avaliacoes;
 	public static volatile SingularAttribute<PontoAvaliado, Long> quantidadeFurtos;
 	public static volatile SingularAttribute<PontoAvaliado, Double> mediaDeAvaliacao;
@@ -23,7 +22,6 @@ public abstract class PontoAvaliado_ extends modelo.entidade.mapa.Ponto_ {
 	public static final String QUANTIDADE_LEZOES_CORPORAIS = "quantidadeLezoesCorporais";
 	public static final String QUANTIDADE_ROUBOS = "quantidadeRoubos";
 	public static final String PONTO = "ponto";
-	public static final String ID_PONTO_AVALIADO = "idPontoAvaliado";
 	public static final String AVALIACOES = "avaliacoes";
 	public static final String QUANTIDADE_FURTOS = "quantidadeFurtos";
 	public static final String MEDIA_DE_AVALIACAO = "mediaDeAvaliacao";

@@ -39,11 +39,11 @@ public class Ponto implements Serializable {
 	@Column(name = "id_ponto",nullable = false,unique = true, columnDefinition = "UNSIGNED INT")
 	private Long idPonto; 
 
-	@Column(columnDefinition = "lat_ponto" , nullable = false)
+	@Column(name = "latitude" , nullable = false)
 	@Type(type = "double")
 	private double latitude;
 
-	@Column(columnDefinition = "long_ponto" , nullable = false)
+	@Column(name = "longitude", nullable = false)
 	@Type(type = "double")
 	private double longitude;
 

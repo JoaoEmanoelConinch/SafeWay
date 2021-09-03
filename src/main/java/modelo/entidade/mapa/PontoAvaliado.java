@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -29,10 +30,7 @@ public class PontoAvaliado extends Ponto{
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_ponto", nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
-	private Long idPontoAvaliado;
+	
 
 	@OneToMany(
         mappedBy = "ponto_avaliado",
@@ -62,8 +60,10 @@ public class PontoAvaliado extends Ponto{
 	private double mediaDeAvaliacao;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@MapsId
+    @JoinColumn(name = "id_ponto")
 	private Ponto ponto;
+
+	
 
 	public PontoAvaliado() {}
 
