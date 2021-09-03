@@ -48,7 +48,10 @@ public class Formulario implements Serializable {
 	@Column(name = "latrocinio_formulario", nullable = false)
 	private boolean latrocinio;
 
+
 	@Column(name = "bloqueio_Ruas_Formulario", nullable = false)
+
+
 	private boolean bloqueioRuas;
 	
 	@Column(name = "comentario_Formulario", length = 300, nullable = true)

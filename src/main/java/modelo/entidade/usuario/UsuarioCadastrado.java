@@ -19,6 +19,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoFavorito;
@@ -179,21 +182,21 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		return isEmailValid;
 	}
 
-	public void avaliacao(Ocorrencia ocorrencias, Estrelas nivelEstrutura, Estrelas nivelIluminacao,
-			NivelBloqueio bloqueioRuas, Estrelas nivelTransito, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado usuario)
-			throws NullPointerException, StatusInvalidoException {
-
-		Formulario formulario = new Formulario();
-
-		if (idPontoAvaliado.getClass().equals("Ponto")) {
-			idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
-
-			formulario = new Formulario(ocorrencias, nivelEstrutura, nivelIluminacao, bloqueioRuas, nivelTransito, comentario, idPontoAvaliado,  usuario);
-
-			((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);
-
-		}
-	}
+//	public void avaliacao(Ocorrencia ocorrencias, Estrelas nivelEstrutura, Estrelas nivelIluminacao,
+//			NivelBloqueio bloqueioRuas, Estrelas nivelTransito, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado usuario)
+//			throws NullPointerException, StatusInvalidoException {
+//
+//		Formulario formulario = new Formulario();
+//
+//		if (idPontoAvaliado.getClass().equals("Ponto")) {
+//			idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
+//
+//			formulario = new Formulario(ocorrencias, nivelEstrutura, nivelIluminacao, bloqueioRuas, nivelTransito, comentario, idPontoAvaliado,  usuario);
+//
+//			((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);
+//
+//		}
+//	}
 
 
 

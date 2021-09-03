@@ -129,20 +129,20 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 		try {
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<PontoAvaliado> criteria = construtor.createQuery(PontoAvaliado.class);
-			Root<PontoAvaliado> raizPonto = criteria.from(PontoAvaliado.class);
-
-			criteria.select(raizPonto).where(construtor.ge(raizPonto.get(Media_.mediaDeAvaliacao), nota));
-
-			TypedQuery<PontoAvaliado> queryPonto = sessao.createQuery(criteria);
-			pontos = queryPonto.getResultList();
-
-			sessao.getTransaction().commit();
+//			sessao = fabrica.getConexao().openSession();
+//			sessao.beginTransaction();
+//
+//			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+//
+//			CriteriaQuery<PontoAvaliado> criteria = construtor.createQuery(PontoAvaliado.class);
+//			Root<PontoAvaliado> raizPonto = criteria.from(PontoAvaliado.class);
+//
+//			criteria.select(raizPonto).where(construtor.ge(raizPonto.get(Media_.mediaDeAvaliacao), nota));
+//
+//			TypedQuery<PontoAvaliado> queryPonto = sessao.createQuery(criteria);
+//			pontos = queryPonto.getResultList();
+//
+//			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
 
@@ -170,20 +170,20 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 		try {
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<PontoAvaliado> criteria = construtor.createQuery(PontoAvaliado.class);
-			Root<PontoAvaliado> raizPonto = criteria.from(PontoAvaliado.class);
-
-			criteria.select(raizPonto).where(construtor.lessThan(raizPonto.get(Media_.mediaDeAvaliacao), nota));
-
-			TypedQuery<PontoAvaliado> queryPonto = sessao.createQuery(criteria);
-			pontos = queryPonto.getResultList();
-
-			sessao.getTransaction().commit();
+//			sessao = fabrica.getConexao().openSession();
+//			sessao.beginTransaction();
+//
+//			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+//
+//			CriteriaQuery<PontoAvaliado> criteria = construtor.createQuery(PontoAvaliado.class);
+//			Root<PontoAvaliado> raizPonto = criteria.from(PontoAvaliado.class);
+//
+//			criteria.select(raizPonto).where(construtor.lessThan(raizPonto.get(Media_.mediaDeAvaliacao), nota));
+//
+//			TypedQuery<PontoAvaliado> queryPonto = sessao.createQuery(criteria);
+//			pontos = queryPonto.getResultList();
+//
+//			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
 

@@ -36,11 +36,13 @@ public class PontoFavorito extends Ponto{
 	@Column(name = "nome_ponto_favorito", length = 20, nullable = false )
 	private String nomePonto;
 
+
 	 @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(
 	        name = "id_ponto_favorito",
 	        referencedColumnName = "id_ponto"
 	    )
+
 	private Ponto ponto;
 
 	 
