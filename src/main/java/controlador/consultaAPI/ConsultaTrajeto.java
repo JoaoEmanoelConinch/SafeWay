@@ -1,4 +1,4 @@
-package modelo.consultaAPI;
+package controlador.consultaAPI;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,10 +9,6 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.geojson.FeatureCollection;
-import org.geojson.GeoJsonObject;
-import org.geojson.LineString;
 
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;

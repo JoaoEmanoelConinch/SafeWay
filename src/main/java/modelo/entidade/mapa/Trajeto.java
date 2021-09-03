@@ -15,10 +15,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.codehaus.jackson.JsonParseException;
 
+import controlador.consultaAPI.ConsultaTrajeto;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import modelo.consultaAPI.ConsultaTrajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.StatusInvalidoException;
