@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -61,8 +62,10 @@ public class PontoAvaliado extends Ponto{
 	private double mediaDeAvaliacao;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@MapsId
+    @JoinColumn(name = "id_ponto")
 	private Ponto ponto;
+
+	
 
 	public PontoAvaliado() {}
 
