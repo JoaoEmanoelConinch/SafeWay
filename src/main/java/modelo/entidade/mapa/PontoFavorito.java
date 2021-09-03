@@ -38,10 +38,9 @@ public class PontoFavorito extends Ponto{
 
 	 @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(
-	        name = "id_ponto",
+	        name = "id_ponto_favorito",
 	        referencedColumnName = "id_ponto"
 	    )
-	
 	private Ponto ponto;
 
 	 
