@@ -1,6 +1,5 @@
 package modelo.entidade.mapa;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.CascadeType;

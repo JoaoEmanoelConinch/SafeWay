@@ -111,4 +111,11 @@ public class Ponto implements Serializable {
 		return transformarPontoEmVetor().toString();
 	}
 
+	public void addTrajeto(Trajeto trajeto){
+		trajetos.add(trajeto);
+	}
+
+	public void removeTrajeto(Trajeto trajeto){
+		trajetos.remove(trajeto);
+	}
 }
