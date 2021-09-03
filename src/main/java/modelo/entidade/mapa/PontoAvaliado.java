@@ -1,6 +1,7 @@
 package modelo.entidade.mapa;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,7 +38,7 @@ public class PontoAvaliado extends Ponto{
         mappedBy = "ponto_avaliado",
         cascade = CascadeType.ALL,
         orphanRemoval = true)
-	private ArrayList<Formulario> avaliacoes;
+	private List<Formulario> avaliacoes = new ArrayList<Formulario>();
 
 	@Column(name = "quantidade_lezoes_corporais_ponto-avaliado", nullable = false)
 	private long quantidadeLezoesCorporais;
@@ -148,7 +149,7 @@ public class PontoAvaliado extends Ponto{
 		this.mediaDeAvaliacao = mediaDeAvaliacao;
 	}
 
-	public ArrayList<Formulario> getAvaliacoes() {
+	public List<Formulario> getAvaliacoes() {
 		return avaliacoes;
 	}
 
@@ -236,7 +237,7 @@ public class PontoAvaliado extends Ponto{
 
 	private double calcularMediaPonto(){
 		long media = 0;
-		ArrayList<Formulario> avaliacoesList = this.getAvaliacoes();
+		List<Formulario> avaliacoesList = this.getAvaliacoes();
 
 		for (int i = 0; i < avaliacoesList.size(); i++){
 			media += avaliacoesList.get(i).getMedia();
