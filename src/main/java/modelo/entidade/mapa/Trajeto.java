@@ -149,4 +149,20 @@ public class Trajeto implements Serializable {
 		ConsultaTrajeto.criarLineString(inicio, chegada, transporteUsado);
 	}
 
+	public void addPonto (Ponto ponto){
+		pontos.add(ponto);
+	}
+
+	public void removePonto (Ponto ponto){
+		pontos.remove(ponto);
+	}
+
+	public void addUsuarioCadastrado(UsuarioCadastrado usuarioCadastrado){
+		usuariosCadastrados.add(usuarioCadastrado);
+	}
+
+	public void remoreUsuarioCadastrado(UsuarioCadastrado usuarioCadastrado){
+		usuariosCadastrados.remove(usuarioCadastrado);
+	}
+
 }
