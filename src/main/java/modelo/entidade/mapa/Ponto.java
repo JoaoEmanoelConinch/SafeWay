@@ -34,7 +34,7 @@ public class Ponto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-//	@Id
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ponto",nullable = false,unique = true, columnDefinition = "UNSIGNED INT")
 	private Long idPonto; 

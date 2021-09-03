@@ -17,11 +17,9 @@
 		<dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-<<<<<<< Updated upstream
+
             <version>5.4.27.Final</version>
-=======
-            <version>4.3.0</version>
->>>>>>> Stashed changes
+
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -31,17 +29,11 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-<<<<<<< Updated upstream
+
 			<version>5.4.27.Final</version>
-=======
-			<version>4.3.0</version>
->>>>>>> Stashed changes
+
 		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-spatial</artifactId>
-			<version>4.3.0</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.glassfish.jersey.inject</groupId>
 			<artifactId>jersey-hk2</artifactId>
@@ -114,7 +106,7 @@
 							<annotationProcessorPath>
 								<groupId>org.hibernate</groupId>
 								<artifactId>hibernate-jpamodelgen</artifactId>
-								<version>4.3.0</version>
+								<version>5.4.27.Final</version>
 							</annotationProcessorPath>
 						</annotationProcessorPaths>
 					</configuration>

@@ -10,13 +10,13 @@ import javax.persistence.metamodel.StaticMetamodel;
 public abstract class Ponto_ {
 
 	public static volatile ListAttribute<Ponto, Trajeto> trajetos;
+	public static volatile SingularAttribute<Ponto, Long> idPonto;
 	public static volatile SingularAttribute<Ponto, Double> latitude;
-	public static volatile SingularAttribute<Ponto, Long> id;
 	public static volatile SingularAttribute<Ponto, Double> longitude;
 
 	public static final String TRAJETOS = "trajetos";
+	public static final String ID_PONTO = "idPonto";
 	public static final String LATITUDE = "latitude";
-	public static final String ID = "id";
 	public static final String LONGITUDE = "longitude";
 
 }
