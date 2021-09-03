@@ -48,7 +48,6 @@ public class Formulario implements Serializable {
 	private boolean latrocinio;
 
 	@Column(name = "bloqueio_Ruas_Formulario", nullable = false, columnDefinition = "enum default LIVRE")
-	@Enumerated(EnumType.STRING)
 	private boolean bloqueioRuas;
 	
 	@Column(name = "comentario_Formulario", length = 300, nullable = true, unique = true)
