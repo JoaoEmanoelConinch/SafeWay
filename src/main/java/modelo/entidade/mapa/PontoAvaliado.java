@@ -1,6 +1,5 @@
 package modelo.entidade.mapa;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
@@ -25,7 +24,7 @@ import modelo.excecao.mapa.StatusInvalidoException;
 @Entity
 @Table(name = "ponto_avaliado")
 @PrimaryKeyJoinColumn(name="id_ponto")
-public class PontoAvaliado extends Ponto implements Serializable {
+public class PontoAvaliado extends Ponto{
 
 	private static final long serialVersionUID = 1L;
 

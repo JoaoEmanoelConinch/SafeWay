@@ -24,7 +24,7 @@ import modelo.excecao.mapa.StatusInvalidoException;
 @PrimaryKeyJoinColumn(name="id_ponto_favorito")
 @Table(name = "ponto_favorito")
 
-public class PontoFavorito extends Ponto implements Serializable {
+public class PontoFavorito extends Ponto{
 
 	private static final long serialVersionUID = 1L;
 

@@ -195,9 +195,43 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		}
 	}
 
-	public void favoritarENomear(Ponto ponto, String nomePonto) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
-		PontoFavorito.favoritarPontoENomear(ponto, nomePonto);
-		favoritos.add((PontoFavorito) ponto);
 
+
+
+
+
+
+	
+	public void favoritarENomear(Ponto ponto, String nomePonto) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+		PontoFavorito pontoFavorito = PontoFavorito.favoritarPontoENomear(ponto, nomePonto);
+		addFavorito(pontoFavorito);
+	}
+
+	public void desfavoritar(PontoFavorito pontoFavorito){
+		favoritos.remove(pontoFavorito);
+	}
+	
+	public void removeFavorito(PontoFavorito pontoFavorito){
+		favoritos.remove(pontoFavorito);
+	}
+
+	public void addFavorito(PontoFavorito pontoFavorito){
+		favoritos.add(pontoFavorito);
+	}
+
+	public void addFormulario(Formulario formulario){
+		formulariosDoUsuario.add(formulario);
+	}
+
+	public void remuveFormulario(Formulario formulario){
+		formulariosDoUsuario.remove(formulario);
+	}
+
+	public void addTrajeto(Trajeto trajeto){
+		trajetos.add(trajeto);
+	}
+
+	public void RemuveTrajeto(Trajeto trajeto){
+		trajetos.remove(trajeto);
 	}
 }

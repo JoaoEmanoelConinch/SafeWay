@@ -15,10 +15,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.codehaus.jackson.JsonParseException;
 
+import controlador.consultaAPI.ConsultaTrajeto;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import modelo.consultaAPI.ConsultaTrajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -147,6 +148,22 @@ public class Trajeto implements Serializable {
 	public void criarLineString(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado)
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
 		ConsultaTrajeto.criarLineString(inicio, chegada, transporteUsado);
+	}
+
+	public void addPonto (Ponto ponto){
+		pontos.add(ponto);
+	}
+
+	public void removePonto (Ponto ponto){
+		pontos.remove(ponto);
+	}
+
+	public void addUsuarioCadastrado(UsuarioCadastrado usuarioCadastrado){
+		usuariosCadastrados.add(usuarioCadastrado);
+	}
+
+	public void remoreUsuarioCadastrado(UsuarioCadastrado usuarioCadastrado){
+		usuariosCadastrados.remove(usuarioCadastrado);
 	}
 
 }
