@@ -22,14 +22,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import javassist.expr.NewArray;
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
-import modelo.enumeracao.mapa.Estrelas;
-import modelo.enumeracao.mapa.NivelBloqueio;
-import modelo.enumeracao.mapa.Ocorrencia;
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;

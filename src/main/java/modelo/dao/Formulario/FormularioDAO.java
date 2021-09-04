@@ -4,7 +4,6 @@ import java.util.List;
 
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.PontoAvaliado;
-import modelo.entidade.mapa.PontoFavorito;
 
 public interface FormularioDAO {
 	
