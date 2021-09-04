@@ -28,8 +28,8 @@ public class PontoFavorito extends Ponto{
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	
 	@Column(name = "id_ponto_favorito", nullable = false, unique = true, columnDefinition = "UNSIGNED LONG")
 	private Long idPontoFav;
 

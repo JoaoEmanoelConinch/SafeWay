@@ -68,7 +68,7 @@ public class Trajeto implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private MeioDeTransporte transporteUsado;
 	
-	
+
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE })
 	    @JoinTable(name = "usuario_trajeto",
 	    joinColumns = @JoinColumn(name = "id_trajeto"),
