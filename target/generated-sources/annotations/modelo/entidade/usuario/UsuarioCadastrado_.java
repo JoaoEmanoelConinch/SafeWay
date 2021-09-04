@@ -1,20 +1,21 @@
 package modelo.entidade.usuario;
 
-import java.util.ArrayList;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
+import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.PontoFavorito;
+import modelo.entidade.mapa.Trajeto;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(UsuarioCadastrado.class)
 public abstract class UsuarioCadastrado_ {
 
-	public static volatile SingularAttribute<UsuarioCadastrado, ArrayList> trajetos;
+	public static volatile ListAttribute<UsuarioCadastrado, Trajeto> trajetos;
 	public static volatile SingularAttribute<UsuarioCadastrado, String> senha;
 	public static volatile SingularAttribute<UsuarioCadastrado, Long> idUsuario;
-	public static volatile SingularAttribute<UsuarioCadastrado, ArrayList> formulariosDoUsuario;
+	public static volatile ListAttribute<UsuarioCadastrado, Formulario> formulariosDoUsuario;
 	public static volatile SingularAttribute<UsuarioCadastrado, String> nome;
 	public static volatile ListAttribute<UsuarioCadastrado, PontoFavorito> favoritos;
 	public static volatile SingularAttribute<UsuarioCadastrado, String> email;

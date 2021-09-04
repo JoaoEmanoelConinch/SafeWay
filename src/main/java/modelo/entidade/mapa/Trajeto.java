@@ -50,11 +50,7 @@ public class Trajeto implements Serializable {
 	private Ponto inicio;
 
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(name = "ponto_trajeto",
-    joinColumns = @JoinColumn(name = "id_trajeto"),
-    inverseJoinColumns = @JoinColumn(name = "id_ponto")
-    )
+	@ManyToMany(mappedBy = "trajetos", fetch = FetchType.LAZY)
 	private ArrayList<Ponto> pontos;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -68,11 +64,7 @@ public class Trajeto implements Serializable {
 	private MeioDeTransporte transporteUsado;
 	
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE })
-	    @JoinTable(name = "usuario_trajeto",
-	    joinColumns = @JoinColumn(name = "id_trajeto"),
-	    inverseJoinColumns = @JoinColumn(name = "id_usuario")
-	    )
+	@ManyToMany(mappedBy = "trajetos", fetch = FetchType.LAZY)
 	private ArrayList<UsuarioCadastrado> usuariosCadastrados;
 
 	public Trajeto() {
