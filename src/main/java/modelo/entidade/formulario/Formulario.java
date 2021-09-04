@@ -30,7 +30,7 @@ public class Formulario implements Serializable {
 	@Column(name = "id_formulario", nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
 	private Long idFormulario;
 
-	@Column(name = "media_formulario", scale = 2, precision = 1, nullable = false, unique = false)
+	@Column(name = "media_formulario", scale = 2, precision = 1, nullable = false)
 	private double media;
 	
 	@Column(name = "lesaoCorporal_formulario", nullable = false)
@@ -48,21 +48,33 @@ public class Formulario implements Serializable {
 	@Column(name = "latrocinio_formulario", nullable = false)
 	private boolean latrocinio;
 
-	@Column(name = "bloqueio_Ruas_Formulario", nullable = false, columnDefinition = "enum default LIVRE")
-	@Enumerated(EnumType.STRING)
+
+	@Column(name = "bloqueio_Ruas_Formulario", nullable = false)
+
+
 	private boolean bloqueioRuas;
 	
-	@Column(name = "comentario_Formulario", length = 300, nullable = true, unique = true)
+	@Column(name = "comentario_Formulario", length = 300, nullable = true)
 	private String comentario;
 
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_ponto_avaliado", nullable = false, columnDefinition = "UNSIGNED INT")
+	 @JoinColumn(
+		        name = "id_ponto_avaliado",
+		        referencedColumnName = "id_ponto"
+		    )
 	private Ponto idPontoAvaliado;
 
+	
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario", columnDefinition = "enum default NULL" + "UNSIGNED INT")
+	 @JoinColumn(
+		        name = "id_usuario",
+		        referencedColumnName = "id_usuario"
+		    )
 	private UsuarioCadastrado idUsuario;
 
+	
 	public Formulario() {
 	}
 

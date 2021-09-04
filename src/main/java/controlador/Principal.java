@@ -16,15 +16,12 @@ public class Principal {
 
 	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, JsonMappingException, JsonProcessingException, StatusInvalidoException {
 		
-//		UsuarioCadastrado usuario = new UsuarioCadastrado("Jorge", "golfinho456", "JorgeJohnson@gmail.com");
-//		UsuarioDAOImpl daoUsuario = new UsuarioDAOImpl();
-//		daoUsuario.inserirUsuario(usuario);
+		UsuarioCadastrado usuario = new UsuarioCadastrado("Jorge", "golfinho456", "JorgeJohnson@gmail.com");
+		UsuarioDAOImpl daoUsuario = new UsuarioDAOImpl();
+		daoUsuario.inserirUsuario(usuario);
 		
-		Ponto ponto = new Ponto(12, -4);
-		
-		PontoDAOImpl pontoDAOImpl = new PontoDAOImpl();
-		
-		pontoDAOImpl.inserirPonto(ponto);
+
+
 		
 	}
 

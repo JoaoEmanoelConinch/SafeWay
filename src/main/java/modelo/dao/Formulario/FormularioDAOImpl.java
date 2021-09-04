@@ -119,23 +119,23 @@ public class FormularioDAOImpl implements FormularioDAO {
 
 		try {
 
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
-			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
-
-			Join<Formulario, PontoAvaliado> juncaoPonto = raizFormulario.join(Formulario_.PontoFavorito);
-
-			ParameterExpression<Long> idPontoAvaliado = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(juncaoPonto.get(PontoAva_.ID), idPontoAvaliado));
-
-			formularios = sessao.createQuery(criteria).setParameter(idPontoAvaliado, ponto.getIdPontoAvaliado())
-					.getResultList();
-
-			sessao.getTransaction().commit();
+//			sessao = fabrica.getConexao().openSession();
+//			sessao.beginTransaction();
+//
+//			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+//
+//			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
+//			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
+//
+//			Join<Formulario, PontoAvaliado> juncaoPonto = raizFormulario.join(Formulario_.PontoFavorito);
+//
+//			ParameterExpression<Long> idPontoAvaliado = construtor.parameter(Long.class);
+//			criteria.where(construtor.equal(juncaoPonto.get(PontoAva_.ID), idPontoAvaliado));
+//
+//			formularios = sessao.createQuery(criteria).setParameter(idPontoAvaliado, ponto.getIdPontoAvaliado())
+//					.getResultList();
+//
+//			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
 

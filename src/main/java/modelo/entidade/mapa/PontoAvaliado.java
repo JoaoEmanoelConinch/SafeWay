@@ -1,18 +1,18 @@
 package modelo.entidade.mapa;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -26,16 +26,17 @@ import modelo.excecao.mapa.StatusInvalidoException;
 @Entity
 @Table(name = "ponto_avaliado")
 @PrimaryKeyJoinColumn(name="id_ponto")
-public class PontoAvaliado extends Ponto implements Serializable {
+public class PontoAvaliado extends Ponto{
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id_ponto", nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
-	private Long idPontoAvaliado;
+	
 
-	private ArrayList<Formulario> avaliacoes;
+	@OneToMany(
+        mappedBy = "ponto_avaliado",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true)
+	private List<Formulario> avaliacoes;
 
 	@Column(name = "quantidade_lezoes_corporais_ponto-avaliado", nullable = false)
 	private long quantidadeLezoesCorporais;
@@ -59,15 +60,17 @@ public class PontoAvaliado extends Ponto implements Serializable {
 	private double mediaDeAvaliacao;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@MapsId
-	@JoinColumn(name = "id_cliente")
+    @JoinColumn(name = "id_ponto")
 	private Ponto ponto;
+
+	
 
 	public PontoAvaliado() {}
 
 	public PontoAvaliado(long idPontoAvaliado, Ponto ponto, ArrayList<Formulario> avaliacoes,
 	long quantidadeLezoesCorporais, long quantidadeFurtos, long quantidadeRoubos, long quantidadeHomicidios,
-	long quantidadeLatrocinio, boolean bloqueio, double mediaDeAvaliacao){
+	long quantidadeLatrocinio, boolean bloqueio, double mediaDeAvaliacao) throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
+		super(ponto.getLatitude(),ponto.getLongitude());
 		
 		setId(idPontoAvaliado);
 		setPonto(ponto);
@@ -81,22 +84,18 @@ public class PontoAvaliado extends Ponto implements Serializable {
 		setMediaDeAvaliacao(mediaDeAvaliacao);
 	}
 
-	public PontoAvaliado(Ponto ponto, Formulario avaliacao){
+	public PontoAvaliado(Ponto ponto, Formulario avaliacao) throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
+		super(ponto.getLatitude(),ponto.getLongitude());
 		
 		setPonto(ponto);
+		this.setAvaliacoes(new ArrayList<Formulario>());
 		addAvaliacao(avaliacao);
 	}
 
-	public PontoAvaliado(Ponto ponto){
+	public PontoAvaliado(Ponto ponto) throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
+		super(ponto.getLatitude(),ponto.getLongitude());
+
 		setPonto(ponto);
-	}
-
-	public Long getIdPontoAvaliado() {
-		return idPontoAvaliado;
-	}
-
-	public void setIdPontoAvaliado(Long idPontoAvaliado) {
-		this.idPontoAvaliado = idPontoAvaliado;
 	}
 
 	public long getQuantidadeLatrocinio() {
@@ -147,7 +146,7 @@ public class PontoAvaliado extends Ponto implements Serializable {
 		this.mediaDeAvaliacao = mediaDeAvaliacao;
 	}
 
-	public ArrayList<Formulario> getAvaliacoes() {
+	public List<Formulario> getAvaliacoes() {
 		return avaliacoes;
 	}
 
@@ -235,7 +234,7 @@ public class PontoAvaliado extends Ponto implements Serializable {
 
 	private double calcularMediaPonto(){
 		long media = 0;
-		ArrayList<Formulario> avaliacoesList = this.getAvaliacoes();
+		List<Formulario> avaliacoesList = this.getAvaliacoes();
 
 		for (int i = 0; i < avaliacoesList.size(); i++){
 			media += avaliacoesList.get(i).getMedia();

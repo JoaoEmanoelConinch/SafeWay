@@ -2,6 +2,7 @@ package modelo.entidade.mapa;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,17 +13,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import modelo.consultaAPI.ConsultaPonto;
+import controlador.consultaAPI.ConsultaPonto;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
@@ -38,26 +41,36 @@ public class Ponto implements Serializable {
 	@Column(name = "id_ponto",nullable = false,unique = true, columnDefinition = "UNSIGNED INT")
 	private Long idPonto; 
 
-	@Column(columnDefinition = "lat_ponto" , nullable = false)
+	@Column(name = "latitude" , nullable = false)
 	@Type(type = "double")
 	private double latitude;
 
-	@Column(columnDefinition = "long_ponto" , nullable = false)
+	@Column(name = "longitude", nullable = false)
 	@Type(type = "double")
 	private double longitude;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name = "ponto_trageto", joinColumns = @JoinColumn(name = "id_ponto"), inverseJoinColumns = @JoinColumn(name = "id_trageto"))
-	private ArrayList<Trajeto> trajetos; 
+	@ManyToMany(
+		fetch = FetchType.LAZY,
+		cascade = {
+			CascadeType.PERSIST,
+			CascadeType.MERGE
+		}
+	)
+	@JoinTable(
+		name = "ponto_trageto",
+		joinColumns = @JoinColumn(name = "id_ponto"),
+		inverseJoinColumns = @JoinColumn(name = "id_trageto")
+		)
+	@Fetch(FetchMode.JOIN)
+	private List<Trajeto> trajetos;
 
-	
 	public Ponto() {}
 
 	public Ponto(double latitude, double longitude)
 			throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
-
+		this.setTrajetos(new ArrayList<Trajeto>());
 	}
 
 	public static Ponto informatLocal(String local)
@@ -88,14 +101,16 @@ public class Ponto implements Serializable {
 
 	public double getLongitude() {
 		return this.longitude;
+
 	}
 
 	public void setTrajetos(ArrayList<Trajeto> trajetos) {
 		this.trajetos = trajetos;
 	}
 
-	public ArrayList<Trajeto> getTrajetos() {
+	public List<Trajeto> getTrajetos() {
 		return trajetos;
+    
 	}
 
 	public ArrayList<Double> transformarPontoEmVetor() {
@@ -110,4 +125,11 @@ public class Ponto implements Serializable {
 		return transformarPontoEmVetor().toString();
 	}
 
+	public void addTrajeto(Trajeto trajeto){
+		trajetos.add(trajeto);
+	}
+
+	public void removeTrajeto(Trajeto trajeto){
+		trajetos.remove(trajeto);
+	}
 }

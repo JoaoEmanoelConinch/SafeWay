@@ -1,18 +1,13 @@
-package modelo.consultaAPI;
+package controlador.consultaAPI;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.geojson.FeatureCollection;
-import org.geojson.GeoJsonObject;
-import org.geojson.Point;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import modelo.entidade.mapa.Ponto;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -44,11 +39,11 @@ public class ConsultaPonto {
 			throw new StatusInvalidoException("Ocoreu um erro no requrimento da API");
 		}
 
-		GeoJsonObject object = new ObjectMapper().readValue(response.readEntity(String.class), GeoJsonObject.class);
+		//GeoJsonObject object = new ObjectMapper().readValue(response.readEntity(String.class), GeoJsonObject.class);
 
 		Ponto ponto = new Ponto();
 
-		ponto.setLongLatAlt((Point) ((FeatureCollection) object).getFeatures().get(0).getGeometry());
+		//ponto.setLongLatAlt((Point) ((FeatureCollection) object).getFeatures().get(0).getGeometry());
 		
 		return ponto;
 	}

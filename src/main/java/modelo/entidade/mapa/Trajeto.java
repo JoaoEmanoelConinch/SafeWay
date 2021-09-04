@@ -4,20 +4,28 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.io.IOException;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.codehaus.jackson.JsonParseException;
 
+import controlador.consultaAPI.ConsultaTrajeto;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import modelo.consultaAPI.ConsultaTrajeto;
+import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.StatusInvalidoException;
 
@@ -35,18 +43,29 @@ public class Trajeto implements Serializable {
 	private Long idTrajeto;
 
 
-	@ManyToOne
-	@JoinColumn(name = "id_partida_trajeto")
-	private Ponto inicio;;
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+        name = "id_partida_trajeto",
+        referencedColumnName = "id_ponto")
+	private Ponto inicio;
 
+	
+	@ManyToMany(mappedBy = "trajetos", fetch = FetchType.LAZY)
 	private ArrayList<Ponto> pontos;
 
-	@GeneratedValue(strategy = GenerationType.AUTO)
-
-	@JoinColumn(name = "id_chegada_trajeto")
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+        name = "id_chegada_trajeto",
+        referencedColumnName = "id_ponto")
 	private Ponto chegada;
 
+	@Column(name = "Meio_transporte")
+	@Enumerated(EnumType.STRING)
 	private MeioDeTransporte transporteUsado;
+	
+	
+	@ManyToMany(mappedBy = "trajetos", fetch = FetchType.LAZY)
+	private ArrayList<UsuarioCadastrado> usuariosCadastrados;
 
 	public Trajeto() {
 	}
@@ -130,10 +149,33 @@ public class Trajeto implements Serializable {
 		this.transporteUsado = transporteUsado;
 	}
 
+	public ArrayList<UsuarioCadastrado> getUsuariosCadastrados() {
+		return usuariosCadastrados;
+	}
+
+	public void setUsuariosCadastrados(ArrayList<UsuarioCadastrado> usuariosCadastrados) {
+		this.usuariosCadastrados = usuariosCadastrados;
+	}
 
 	public void criarLineString(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado)
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
 		ConsultaTrajeto.criarLineString(inicio, chegada, transporteUsado);
+	}
+
+	public void addPonto (Ponto ponto){
+		pontos.add(ponto);
+	}
+
+	public void removePonto (Ponto ponto){
+		pontos.remove(ponto);
+	}
+
+	public void addUsuarioCadastrado(UsuarioCadastrado usuarioCadastrado){
+		usuariosCadastrados.add(usuarioCadastrado);
+	}
+
+	public void remoreUsuarioCadastrado(UsuarioCadastrado usuarioCadastrado){
+		usuariosCadastrados.remove(usuarioCadastrado);
 	}
 
 }

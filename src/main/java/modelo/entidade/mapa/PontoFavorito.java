@@ -2,6 +2,7 @@ package modelo.entidade.mapa;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -24,24 +24,33 @@ import modelo.excecao.mapa.StatusInvalidoException;
 @PrimaryKeyJoinColumn(name="id_ponto_favorito")
 @Table(name = "ponto_favorito")
 
-public class PontoFavorito extends Ponto implements Serializable {
+public class PontoFavorito extends Ponto{
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
+	
 	@Column(name = "id_ponto_favorito", nullable = false, unique = true, columnDefinition = "UNSIGNED LONG")
 	private Long idPontoFav;
 
 	@Column(name = "nome_ponto_favorito", length = 20, nullable = false )
 	private String nomePonto;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_ponto")
+
+	 @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(
+	        name = "id_ponto_favorito",
+	        referencedColumnName = "id_ponto"
+	    )
+
 	private Ponto ponto;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario")
+	 
+	 @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(
+	        name = "id_usuario",
+	        referencedColumnName = "id_usuario"
+	    )
 	private UsuarioCadastrado usuario;
 
 	public PontoFavorito() {
