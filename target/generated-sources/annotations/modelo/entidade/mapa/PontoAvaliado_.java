@@ -10,7 +10,7 @@ import modelo.entidade.formulario.Formulario;
 @StaticMetamodel(PontoAvaliado.class)
 public abstract class PontoAvaliado_ extends modelo.entidade.mapa.Ponto_ {
 
-	public static volatile SingularAttribute<PontoAvaliado, Long> quantidadeLezoesCorporais;
+	public static volatile SingularAttribute<PontoAvaliado, Long> quantidadeLesoesCorporais;
 	public static volatile SingularAttribute<PontoAvaliado, Long> quantidadeRoubos;
 	public static volatile SingularAttribute<PontoAvaliado, Ponto> ponto;
 	public static volatile ListAttribute<PontoAvaliado, Formulario> avaliacoes;
@@ -20,7 +20,7 @@ public abstract class PontoAvaliado_ extends modelo.entidade.mapa.Ponto_ {
 	public static volatile SingularAttribute<PontoAvaliado, Long> quantidadeLatrocinio;
 	public static volatile SingularAttribute<PontoAvaliado, Boolean> bloqueio;
 
-	public static final String QUANTIDADE_LEZOES_CORPORAIS = "quantidadeLezoesCorporais";
+	public static final String QUANTIDADE_LESOES_CORPORAIS = "quantidadeLesoesCorporais";
 	public static final String QUANTIDADE_ROUBOS = "quantidadeRoubos";
 	public static final String PONTO = "ponto";
 	public static final String AVALIACOES = "avaliacoes";
