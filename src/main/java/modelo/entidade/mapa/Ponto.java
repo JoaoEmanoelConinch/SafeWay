@@ -18,6 +18,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -47,9 +49,20 @@ public class Ponto implements Serializable {
 	@Type(type = "double")
 	private double longitude;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name = "ponto_trageto", joinColumns = @JoinColumn(name = "id_ponto"), inverseJoinColumns = @JoinColumn(name = "id_trageto"))
-	private List<Trajeto> trajetos = new ArrayList<Trajeto>();
+	@ManyToMany(
+		fetch = FetchType.LAZY,
+		cascade = {
+			CascadeType.PERSIST,
+			CascadeType.MERGE
+		}
+	)
+	@JoinTable(
+		name = "ponto_trageto",
+		joinColumns = @JoinColumn(name = "id_ponto"),
+		inverseJoinColumns = @JoinColumn(name = "id_trageto")
+		)
+	@Fetch(FetchMode.JOIN)
+	private List<Trajeto> trajetos;
 
 	public Ponto() {}
 
@@ -57,7 +70,7 @@ public class Ponto implements Serializable {
 			throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
-
+		this.setTrajetos(new ArrayList<Trajeto>());
 	}
 
 	public static Ponto informatLocal(String local)

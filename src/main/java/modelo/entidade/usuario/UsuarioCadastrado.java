@@ -56,11 +56,17 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	private List<PontoFavorito> favoritos;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioCadastrado", cascade = CascadeType.ALL, orphanRemoval = true)
-	private ArrayList<Formulario> formulariosDoUsuario;
+	private List<Formulario> formulariosDoUsuario;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+ 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "usuario_trajeto", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_trajeto"))
 	private ArrayList<Trajeto> trajetos;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(name = "usuario_trajeto",
+	joinColumns = @JoinColumn(name = "id_usuario"),
+	inverseJoinColumns = @JoinColumn(name = "id_trajeto"))
+	private List<Trajeto> trajetos;
 
 	public UsuarioCadastrado() {
 	}
@@ -80,6 +86,9 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		this.setNome(nome);
 		this.setSenha(senha);
 		this.setEmail(email);
+		this.setFavoritos(new ArrayList<PontoFavorito>());
+		this.setFormulariosDoUsuario(new ArrayList<Formulario>());
+		this.setTrajetos(new ArrayList<Trajeto>());
 	}
 
 	public Long getIdUsuario() {
@@ -132,6 +141,10 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		return favoritos;
 	}
 
+	public void setFavoritos(List<PontoFavorito> favoritos) {
+		this.favoritos = favoritos;
+	}
+
 	private void setEmail(String email) throws EmailInvalidoException, StringVaziaException {
 
 		if (nome.isEmpty()) {
@@ -146,19 +159,19 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	}
 
-	public void setFormulariosDoUsuario(ArrayList<Formulario> formulariosDoUsuario) {
+	public void setFormulariosDoUsuario(List<Formulario> formulariosDoUsuario) {
 		this.formulariosDoUsuario = formulariosDoUsuario;
 	}
 
-	public ArrayList<Formulario> getFormulariosDoUsuario() {
+	public List<Formulario> getFormulariosDoUsuario() {
 		return formulariosDoUsuario;
 	}
 
-	public ArrayList<Trajeto> getTrajetos() {
+	public List<Trajeto> getTrajetos() {
 		return trajetos;
 	}
 
-	public void setTrajetos(ArrayList<Trajeto> trajetos) {
+	public void setTrajetos(List<Trajeto> trajetos) {
 		this.trajetos = trajetos;
 	}
 

@@ -7,11 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -36,7 +32,7 @@ public class PontoAvaliado extends Ponto{
         mappedBy = "ponto_avaliado",
         cascade = CascadeType.ALL,
         orphanRemoval = true)
-	private List<Formulario> avaliacoes = new ArrayList<Formulario>();
+	private List<Formulario> avaliacoes;
 
 	@Column(name = "quantidade_lezoes_corporais_ponto-avaliado", nullable = false)
 	private long quantidadeLezoesCorporais;
@@ -69,7 +65,8 @@ public class PontoAvaliado extends Ponto{
 
 	public PontoAvaliado(long idPontoAvaliado, Ponto ponto, ArrayList<Formulario> avaliacoes,
 	long quantidadeLezoesCorporais, long quantidadeFurtos, long quantidadeRoubos, long quantidadeHomicidios,
-	long quantidadeLatrocinio, boolean bloqueio, double mediaDeAvaliacao){
+	long quantidadeLatrocinio, boolean bloqueio, double mediaDeAvaliacao) throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
+		super(ponto.getLatitude(),ponto.getLongitude());
 		
 		setId(idPontoAvaliado);
 		setPonto(ponto);
@@ -83,22 +80,18 @@ public class PontoAvaliado extends Ponto{
 		setMediaDeAvaliacao(mediaDeAvaliacao);
 	}
 
-	public PontoAvaliado(Ponto ponto, Formulario avaliacao){
+	public PontoAvaliado(Ponto ponto, Formulario avaliacao) throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
+		super(ponto.getLatitude(),ponto.getLongitude());
 		
 		setPonto(ponto);
+		this.setAvaliacoes(new ArrayList<Formulario>());
 		addAvaliacao(avaliacao);
 	}
 
-	public PontoAvaliado(Ponto ponto){
+	public PontoAvaliado(Ponto ponto) throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
+		super(ponto.getLatitude(),ponto.getLongitude());
+
 		setPonto(ponto);
-	}
-
-	public Long getIdPontoAvaliado() {
-		return idPontoAvaliado;
-	}
-
-	public void setIdPontoAvaliado(Long idPontoAvaliado) {
-		this.idPontoAvaliado = idPontoAvaliado;
 	}
 
 	public long getQuantidadeLatrocinio() {

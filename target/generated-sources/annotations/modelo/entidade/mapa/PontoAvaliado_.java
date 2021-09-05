@@ -1,9 +1,10 @@
 package modelo.entidade.mapa;
 
-import java.util.ArrayList;
 import javax.annotation.Generated;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
+import modelo.entidade.formulario.Formulario;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(PontoAvaliado.class)
@@ -12,7 +13,7 @@ public abstract class PontoAvaliado_ extends modelo.entidade.mapa.Ponto_ {
 	public static volatile SingularAttribute<PontoAvaliado, Long> quantidadeLezoesCorporais;
 	public static volatile SingularAttribute<PontoAvaliado, Long> quantidadeRoubos;
 	public static volatile SingularAttribute<PontoAvaliado, Ponto> ponto;
-	public static volatile SingularAttribute<PontoAvaliado, ArrayList> avaliacoes;
+	public static volatile ListAttribute<PontoAvaliado, Formulario> avaliacoes;
 	public static volatile SingularAttribute<PontoAvaliado, Long> quantidadeFurtos;
 	public static volatile SingularAttribute<PontoAvaliado, Double> mediaDeAvaliacao;
 	public static volatile SingularAttribute<PontoAvaliado, Long> quantidadeHomicidios;

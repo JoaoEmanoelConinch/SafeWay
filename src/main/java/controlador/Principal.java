@@ -18,19 +18,8 @@ public class Principal {
 		UsuarioDAOImpl daoUsuario = new UsuarioDAOImpl();
 		daoUsuario.inserirUsuario(usuario);
 		
-<<<<<<< Updated upstream
-//		Ponto ponto = new Ponto(12, -4);
-		
-//		PontoDAOImpl pontoDAOImpl = new PontoDAOImpl();
-		
-//		pontoDAOImpl.inserirPonto(ponto);
-=======
-		UsuarioCadastrado usuario = new UsuarioCadastrado("asas", "asdasdasdasd", "asasd@gmail.com");
-		
-		UsuarioDAOImpl dao= new UsuarioDAOImpl();
-		
-		dao.inserirUsuario(usuario);
->>>>>>> Stashed changes
+
+
 		
 	}
 

@@ -2,17 +2,11 @@ package modelo.dao.Formulario;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.PontoAvaliado;
-import modelo.entidade.mapa.PontoFavorito;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class FormularioDAOImpl implements FormularioDAO {

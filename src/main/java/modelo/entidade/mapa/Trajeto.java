@@ -1,8 +1,9 @@
 package modelo.entidade.mapa;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,13 +19,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.codehaus.jackson.JsonParseException;
 
-import controlador.consultaAPI.ConsultaTrajeto;
+import org.codehaus.jackson.JsonParseException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
+import controlador.consultaAPI.ConsultaTrajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -55,7 +56,7 @@ public class Trajeto implements Serializable {
     joinColumns = @JoinColumn(name = "id_trajeto"),
     inverseJoinColumns = @JoinColumn(name = "id_ponto")
     )
-	private ArrayList<Ponto> pontos;
+	private List<Ponto> pontos;
 
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
@@ -67,13 +68,13 @@ public class Trajeto implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private MeioDeTransporte transporteUsado;
 	
-	
+
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE })
 	    @JoinTable(name = "usuario_trajeto",
 	    joinColumns = @JoinColumn(name = "id_trajeto"),
 	    inverseJoinColumns = @JoinColumn(name = "id_usuario")
 	    )
-	private ArrayList<UsuarioCadastrado> usuariosCadastrados;
+	private List<UsuarioCadastrado> usuariosCadastrados;
 
 	public Trajeto() {
 	}
@@ -100,6 +101,8 @@ public class Trajeto implements Serializable {
 		this.setChegada(chegada);
 		this.setTransporteUsado(transporteUsado);
 		this.criarLineString(inicio, chegada, transporteUsado);
+		this.setPontos(new ArrayList<Ponto>());
+		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
 	}
 
 	public Trajeto(String inicio, String chegada, MeioDeTransporte transporteUsado)
@@ -128,11 +131,11 @@ public class Trajeto implements Serializable {
 		this.inicio = inicio;
 	}
 
-	public ArrayList<Ponto> getPontos() {
+	public List<Ponto> getPontos() {
 		return pontos;
 	}
 
-	public void setPontos(ArrayList<Ponto> pontos) {
+	public void setPontos(List<Ponto> pontos) {
 		this.pontos = pontos;
 	}
 
@@ -157,11 +160,11 @@ public class Trajeto implements Serializable {
 		this.transporteUsado = transporteUsado;
 	}
 
-	public ArrayList<UsuarioCadastrado> getUsuariosCadastrados() {
+	public List<UsuarioCadastrado> getUsuariosCadastrados() {
 		return usuariosCadastrados;
 	}
 
-	public void setUsuariosCadastrados(ArrayList<UsuarioCadastrado> usuariosCadastrados) {
+	public void setUsuariosCadastrados(List<UsuarioCadastrado> usuariosCadastrados) {
 		this.usuariosCadastrados = usuariosCadastrados;
 	}
 
