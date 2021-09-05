@@ -13,8 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,11 +24,9 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
-import modelo.enumeracao.mapa.Estrelas;
-import modelo.enumeracao.mapa.NivelBloqueio;
-import modelo.enumeracao.mapa.Ocorrencia;
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
@@ -42,7 +40,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario",nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
+	@Column(name = "id_usuario", nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
 	private Long idUsuario;
 
 	@Column(name = "nome_usuario", length = 45, nullable = false, unique = true)
@@ -53,17 +51,15 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	@Column(name = "email_usuario", length = 45, nullable = false, unique = true)
 	private String email;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioCadastrado", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<PontoFavorito> favoritos;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioCadastrado", cascade = CascadeType.ALL, orphanRemoval = true)
 	private ArrayList<Formulario> formulariosDoUsuario;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name = "usuario_trajeto",
-	joinColumns = @JoinColumn(name = "id_usuario"),
-	inverseJoinColumns = @JoinColumn(name = "id_trajeto"))
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "usuario_trajeto", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_trajeto"))
 	private ArrayList<Trajeto> trajetos;
 
 	public UsuarioCadastrado() {
@@ -182,59 +178,54 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		return isEmailValid;
 	}
 
-//	public void avaliacao(Ocorrencia ocorrencias, Estrelas nivelEstrutura, Estrelas nivelIluminacao,
-//			NivelBloqueio bloqueioRuas, Estrelas nivelTransito, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado usuario)
-//			throws NullPointerException, StatusInvalidoException {
-//
-//		Formulario formulario = new Formulario();
-//
-//		if (idPontoAvaliado.getClass().equals("Ponto")) {
-//			idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
-//
-//			formulario = new Formulario(ocorrencias, nivelEstrutura, nivelIluminacao, bloqueioRuas, nivelTransito, comentario, idPontoAvaliado,  usuario);
-//
-//			((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);
-//
-//		}
-//	}
+	public void avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
+			boolean bloqueioRuas, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario)
+			throws NullPointerException, StatusInvalidoException, Throwable, JsonProcessingException {
 
+		Formulario formulario = new Formulario();
 
+		if (idPontoAvaliado.getClass().equals("Ponto")) {
+			idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
 
+			formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueioRuas, comentario,
+					idPontoAvaliado, idUsuario);
 
+			((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);
 
+		}
+	}
 
-
-	
-	public void favoritarENomear(Ponto ponto, String nomePonto) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+	public void favoritarENomear(Ponto ponto, String nomePonto)
+			throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
 		PontoFavorito pontoFavorito = PontoFavorito.favoritarPontoENomear(ponto, nomePonto);
 		addFavorito(pontoFavorito);
 	}
 
-	public void desfavoritar(PontoFavorito pontoFavorito){
-		favoritos.remove(pontoFavorito);
-	}
-	
-	public void removeFavorito(PontoFavorito pontoFavorito){
+	public void desfavoritar(PontoFavorito pontoFavorito) {
 		favoritos.remove(pontoFavorito);
 	}
 
-	public void addFavorito(PontoFavorito pontoFavorito){
+	public void removeFavorito(PontoFavorito pontoFavorito) {
+		favoritos.remove(pontoFavorito);
+	}
+
+	public void addFavorito(PontoFavorito pontoFavorito) {
 		favoritos.add(pontoFavorito);
 	}
 
-	public void addFormulario(Formulario formulario){
+	public void addFormulario(Formulario formulario) {
 		formulariosDoUsuario.add(formulario);
 	}
 
-	public void remuveFormulario(Formulario formulario){
+	public void remuveFormulario(Formulario formulario) {
 		formulariosDoUsuario.remove(formulario);
 	}
 
-	public void addTrajeto(Trajeto trajeto){
+	public void addTrajeto(Trajeto trajeto) {
 		trajetos.add(trajeto);
 	}
 
-	public void RemuveTrajeto(Trajeto trajeto){
+	public void RemuveTrajeto(Trajeto trajeto) {
 		trajetos.remove(trajeto);
 	}
 }

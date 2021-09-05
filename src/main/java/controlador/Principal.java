@@ -3,9 +3,7 @@ package controlador;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
-import modelo.dao.Ponto.PontoDAOImpl;
 import modelo.dao.Usuario.UsuarioDAOImpl;
-import modelo.entidade.mapa.Ponto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
