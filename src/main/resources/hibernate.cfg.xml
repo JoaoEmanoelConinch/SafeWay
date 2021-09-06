@@ -16,5 +16,7 @@
 		<mapping class="modelo.entidade.mapa.PontoFavorito" />
 		<mapping class="modelo.entidade.mapa.Trajeto" />
 		<mapping class="modelo.entidade.usuario.UsuarioCadastrado" />
+		<mapping class="modelo.entidade.usuario.Usuario" />
+		<mapping class="modelo.entidade.usuario.UsuarioAnonimo" />
 	</session-factory>
 </hibernate-configuration>
