@@ -7,11 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -30,16 +26,14 @@ public class PontoAvaliado extends Ponto{
 
 	private static final long serialVersionUID = 1L;
 
-	
-
 	@OneToMany(
-        mappedBy = "ponto_avaliado",
+        mappedBy = "idPontoAvaliado",
         cascade = CascadeType.ALL,
         orphanRemoval = true)
 	private List<Formulario> avaliacoes;
 
-	@Column(name = "quantidade_lezoes_corporais_ponto-avaliado", nullable = false)
-	private long quantidadeLezoesCorporais;
+	@Column(name = "quantidade_lesoes_corporais_ponto-avaliado", nullable = false)
+	private long quantidadeLesoesCorporais;
 	
 	@Column(name = "quantidade_furtos_ponto-avaliado", nullable = false)
 	private long quantidadeFurtos;
@@ -61,9 +55,7 @@ public class PontoAvaliado extends Ponto{
 
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_ponto")
-	private Ponto ponto;
-
-	
+	private Ponto ponto;	
 
 	public PontoAvaliado() {}
 
@@ -75,7 +67,7 @@ public class PontoAvaliado extends Ponto{
 		setId(idPontoAvaliado);
 		setPonto(ponto);
 		setAvaliacoes(avaliacoes);
-		setQuantidadeLezoesCorporais(quantidadeLezoesCorporais);
+		setQuantidadeLesoesCorporais(quantidadeLezoesCorporais);
 		setQuantidadeFurtos(quantidadeFurtos);
 		setQuantidadeRoubos(quantidadeRoubos);
 		setQuantidadeHomicidios(quantidadeHomicidios);
@@ -130,12 +122,12 @@ public class PontoAvaliado extends Ponto{
 		this.quantidadeFurtos = quantidadeFurtos;
 	}
 
-	public long getQuantidadeLezoesCorporais() {
-		return quantidadeLezoesCorporais;
+	public long getQuantidadeLesoesCorporais() {
+		return quantidadeLesoesCorporais;
 	}
 
-	public void setQuantidadeLezoesCorporais(long quantidadeLezoesCorporais) {
-		this.quantidadeLezoesCorporais = quantidadeLezoesCorporais;
+	public void setQuantidadeLesoesCorporais(long quantidadeLezoesCorporais) {
+		this.quantidadeLesoesCorporais = quantidadeLezoesCorporais;
 	}
 
 	public double getMediaDeAvaliacao() {
@@ -162,7 +154,7 @@ public class PontoAvaliado extends Ponto{
 		this.avaliacoes.add(avaliacao);
 		
 		if (avaliacao.isLesaoCorporal()){
-			setQuantidadeLezoesCorporais(getQuantidadeLezoesCorporais()+1);
+			setQuantidadeLesoesCorporais(getQuantidadeLesoesCorporais()+1);
 		}
 		if (avaliacao.isFurto()){
 			setQuantidadeFurtos(getQuantidadeFurtos()+1);
@@ -192,7 +184,7 @@ public class PontoAvaliado extends Ponto{
 		if (getAvaliacoes().size() > 0) {
 			
 			if (avaliacao.isLesaoCorporal()){
-				setQuantidadeLezoesCorporais(getQuantidadeLezoesCorporais()-1);
+				setQuantidadeLesoesCorporais(getQuantidadeLesoesCorporais()-1);
 			}
 			if (avaliacao.isFurto()){
 				setQuantidadeFurtos(getQuantidadeFurtos()-1);
