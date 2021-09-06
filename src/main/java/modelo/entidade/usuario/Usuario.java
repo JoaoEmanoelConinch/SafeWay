@@ -2,14 +2,21 @@ package modelo.entidade.usuario;
 
 import java.io.IOException;
 
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import modelo.entidade.mapa.*;
+import modelo.entidade.mapa.Trajeto;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.StatusInvalidoException;
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 
 public abstract class Usuario {
 
@@ -25,10 +32,11 @@ public abstract class Usuario {
 		return transporte;
 	}
 
-	public Trajeto trajeto(String inicio, String chegada, MeioDeTransporte transporte) throws StatusInvalidoException, JsonParseException, JsonMappingException, com.fasterxml.jackson.databind.JsonMappingException, JsonProcessingException, IOException {
+	public Trajeto trajeto(String inicio, String chegada, MeioDeTransporte transporte)
+			throws StatusInvalidoException, JsonParseException, JsonMappingException,
+			com.fasterxml.jackson.databind.JsonMappingException, JsonProcessingException, IOException {
 
 		return new Trajeto(DefinirPartida(inicio), DefinirDestino(chegada), DefinirTransporte(transporte));
 	}
 
 }
-

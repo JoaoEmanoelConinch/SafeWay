@@ -58,14 +58,11 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioCadastrado", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Formulario> formulariosDoUsuario;
 
- 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "usuario_trajeto", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_trajeto"))
-	private ArrayList<Trajeto> trajetos;
-
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "usuario_trajeto",
 	joinColumns = @JoinColumn(name = "id_usuario"),
-	inverseJoinColumns = @JoinColumn(name = "id_trajeto"))
+	inverseJoinColumns = @JoinColumn(name = "id_trajeto")
+  )
 	private List<Trajeto> trajetos;
 
 	public UsuarioCadastrado() {
@@ -230,13 +227,16 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		formulariosDoUsuario.add(formulario);
 	}
 
+
 	public void remuveFormulario(Formulario formulario) {
+
 		formulariosDoUsuario.remove(formulario);
 	}
 
 	public void addTrajeto(Trajeto trajeto) {
 		trajetos.add(trajeto);
 	}
+
 
 	public void RemuveTrajeto(Trajeto trajeto) {
 		trajetos.remove(trajeto);

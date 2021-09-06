@@ -1,20 +1,25 @@
 package modelo.entidade.usuario;
 
+import javax.persistence.Entity;
+
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
 import modelo.excecao.usuario.StringVaziaException;
 
-public class UsuarioAnonimo extends Usuario{
+@Entity
+public class UsuarioAnonimo extends Usuario {
 
-	 public UsuarioAnonimo() {
+	public UsuarioAnonimo() {
 		super();
 	}
-	 public UsuarioCadastrado cadastrar(UsuarioAnonimo usuarioanonimo, String nome, String senha, String email) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
-			
-		 UsuarioCadastrado cadastrar = new UsuarioCadastrado(nome, email, senha);
-			
 
-			 return cadastrar;
-			 
-		 }
+	public UsuarioCadastrado cadastrar(UsuarioAnonimo usuarioanonimo, String nome, String senha, String email)
+			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
+
+		UsuarioCadastrado cadastrar = new UsuarioCadastrado(nome, email, senha);
+
+		return cadastrar;
+
+	}
+
 }
