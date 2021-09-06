@@ -15,7 +15,7 @@ import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
-@PrimaryKeyJoinColumn(name="id_ponto_favorito")
+@PrimaryKeyJoinColumn(name="id_ponto")
 @Table(name = "ponto_favorito")
 
 public class PontoFavorito extends Ponto{
@@ -31,12 +31,11 @@ public class PontoFavorito extends Ponto{
 	private String nomePonto;
 
 
-	 @ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(
 	        name = "id_ponto_favorito",
 	        referencedColumnName = "id_ponto"
 	    )
-
 	private Ponto ponto;
 
 	 
