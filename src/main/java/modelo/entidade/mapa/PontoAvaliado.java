@@ -32,19 +32,19 @@ public class PontoAvaliado extends Ponto{
         orphanRemoval = true)
 	private List<Formulario> avaliacoes;
 
-	@Column(name = "quantidade_lesoes_corporais_ponto-avaliado", nullable = false)
+	@Column(name = "quantidade_lesoes_corporais_ponto_avaliado", nullable = false)
 	private long quantidadeLesoesCorporais;
 	
-	@Column(name = "quantidade_furtos_ponto-avaliado", nullable = false)
+	@Column(name = "quantidade_furtos_ponto_avaliado", nullable = false)
 	private long quantidadeFurtos;
 
-	@Column(name = "quantidade_roubos_ponto-avaliado", nullable = false)
+	@Column(name = "quantidade_roubos_ponto_avaliado", nullable = false)
 	private long quantidadeRoubos;
 
-	@Column(name = "quantidade_homicidios_ponto-avaliado", nullable = false)
+	@Column(name = "quantidade_homicidios_ponto_avaliado", nullable = false)
 	private long quantidadeHomicidios;
 
-	@Column(name = "quantidade_latrocinio_ponto-avaliado", nullable = false)
+	@Column(name = "quantidade_latrocinio_ponto_avaliado", nullable = false)
 	private long quantidadeLatrocinio;
 
 	@Column(name = "nivel_Bloqueio_Ponto_Avaliado", nullable = false)

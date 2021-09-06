@@ -21,9 +21,6 @@ import modelo.excecao.mapa.StatusInvalidoException;
 public class PontoFavorito extends Ponto{
 
 	private static final long serialVersionUID = 1L;
-	
-	@Column(name = "id_ponto_favorito", nullable = false, unique = true, columnDefinition = "UNSIGNED LONG")
-	private Long idPontoFav;
 
 	@Column(name = "nome_ponto_favorito", length = 20, nullable = false )
 	private String nomePonto;
@@ -45,25 +42,14 @@ public class PontoFavorito extends Ponto{
 	public PontoFavorito() {
 	}
 
-	public PontoFavorito(Long idPontoFav, Ponto ponto, String nomePonto) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
-		super(ponto.getLatitude(), ponto.getLongitude());
 
-		setIdPontoFav(idPontoFav);
-		setNomePonto(nomePonto);
-	}
 
 	public PontoFavorito(Ponto ponto, String nomePonto) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
 		super(ponto.getLatitude(), ponto.getLongitude());
 		setNomePonto(nomePonto);
 	}
 
-	public Long getIdPontoFav() {
-		return idPontoFav;
-	}
 
-	public void setIdPontoFav(Long idPontoFav) {
-		this.idPontoFav = idPontoFav;
-	}
 
 	public String getNomePonto() {
 		return nomePonto;

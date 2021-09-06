@@ -25,7 +25,7 @@ public class Formulario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY  )
-	@Column(name = "id_formulario", nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
+	@Column(name = "id_formulario", nullable = false, unique = true)
 	private Long idFormulario;
 
 	@Column(name = "media_formulario", scale = 2, precision = 1, nullable = false)
