@@ -3,6 +3,7 @@ package modelo.entidade.usuario;
 import java.io.IOException;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
@@ -16,10 +17,13 @@ import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Usuario {
 
+	
+	@Id
+	private int id;
+	
 	public String DefinirPartida(String inicio) {
 		return inicio;
 	}
