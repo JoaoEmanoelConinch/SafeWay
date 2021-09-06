@@ -33,15 +33,14 @@ import modelo.excecao.mapa.StatusInvalidoException;
 @Table(name = "Ponto")
 public class Ponto implements Serializable {
 
-
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_ponto",nullable = false,unique = true, columnDefinition = "UNSIGNED INT")
-	private Long idPonto; 
+	@Column(name = "id_ponto", nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
+	private Long idPonto;
 
-	@Column(name = "latitude" , nullable = false)
+	@Column(name = "latitude", nullable = false)
 	@Type(type = "double")
 	private double latitude;
 
@@ -49,22 +48,13 @@ public class Ponto implements Serializable {
 	@Type(type = "double")
 	private double longitude;
 
-	@ManyToMany(
-		fetch = FetchType.LAZY,
-		cascade = {
-			CascadeType.PERSIST,
-			CascadeType.MERGE
-		}
-	)
-	@JoinTable(
-		name = "ponto_trageto",
-		joinColumns = @JoinColumn(name = "id_ponto"),
-		inverseJoinColumns = @JoinColumn(name = "id_trageto")
-		)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "ponto_trageto", joinColumns = @JoinColumn(name = "id_ponto"), inverseJoinColumns = @JoinColumn(name = "id_trageto"))
 	@Fetch(FetchMode.JOIN)
 	private List<Trajeto> trajetos;
 
-	public Ponto() {}
+	public Ponto() {
+	}
 
 	public Ponto(double latitude, double longitude)
 			throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
@@ -110,7 +100,7 @@ public class Ponto implements Serializable {
 
 	public List<Trajeto> getTrajetos() {
 		return trajetos;
-    
+
 	}
 
 	public ArrayList<Double> transformarPontoEmVetor() {
@@ -120,16 +110,15 @@ public class Ponto implements Serializable {
 		return pontoVetro;
 	}
 
-
 	public String TransformarVetorEmString() {
 		return transformarPontoEmVetor().toString();
 	}
 
-	public void addTrajeto(Trajeto trajeto){
+	public void addTrajeto(Trajeto trajeto) {
 		trajetos.add(trajeto);
 	}
 
-	public void removeTrajeto(Trajeto trajeto){
+	public void removeTrajeto(Trajeto trajeto) {
 		trajetos.remove(trajeto);
 	}
 }

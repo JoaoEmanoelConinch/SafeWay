@@ -53,6 +53,10 @@ public class Formulario implements Serializable {
 	private String comentario;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	 @JoinColumn(
+		        name = "id_ponto_avaliado",
+		        referencedColumnName = "id_ponto"
+		    )
 	private Ponto idPontoAvaliado;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -61,8 +65,10 @@ public class Formulario implements Serializable {
 		        referencedColumnName = "id_usuario"
 		    )
 	private UsuarioCadastrado usuario;
+
 	
-	public Formulario() {}
+	public Formulario() {
+	}
 
 	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
 	 String comentario, boolean bloqueioRuas, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
@@ -114,6 +120,7 @@ public class Formulario implements Serializable {
 		setIdUsuario(idUsuario);
 
 	}
+
 
 	public Long getIdFormulario() {
 		return idFormulario;
