@@ -40,7 +40,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario", nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
+	@Column(name = "id_usuario", nullable = false, unique = true)
 	private Long idUsuario;
 
 	@Column(name = "nome_usuario", length = 45, nullable = false, unique = true)

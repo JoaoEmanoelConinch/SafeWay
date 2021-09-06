@@ -40,7 +40,7 @@ public class Trajeto implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_trajeto", nullable = false, unique = true , columnDefinition = "UNSIGNED INT" )
+	@Column(name = "id_trajeto", nullable = false, unique = true)
 	private Long idTrajeto;
 
 
