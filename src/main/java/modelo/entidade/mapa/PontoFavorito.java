@@ -21,8 +21,6 @@ import modelo.excecao.mapa.StatusInvalidoException;
 public class PontoFavorito extends Ponto{
 
 	private static final long serialVersionUID = 1L;
-
-	
 	
 	@Column(name = "id_ponto_favorito", nullable = false, unique = true, columnDefinition = "UNSIGNED LONG")
 	private Long idPontoFav;
@@ -30,16 +28,14 @@ public class PontoFavorito extends Ponto{
 	@Column(name = "nome_ponto_favorito", length = 20, nullable = false )
 	private String nomePonto;
 
-
 	@ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(
 	        name = "id_ponto_favorito",
 	        referencedColumnName = "id_ponto"
 	    )
 	private Ponto ponto;
-
-	 
-	 @ManyToOne(fetch = FetchType.LAZY)
+ 
+	@ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(
 	        name = "id_usuario",
 	        referencedColumnName = "id_usuario"
