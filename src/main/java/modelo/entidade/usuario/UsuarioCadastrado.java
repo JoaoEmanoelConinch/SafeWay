@@ -38,7 +38,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario", nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
 	private Long idUsuario;
