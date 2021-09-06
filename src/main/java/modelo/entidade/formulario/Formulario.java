@@ -115,6 +115,7 @@ public class Formulario implements Serializable {
 
 	}
 
+
 	public Long getIdFormulario() {
 		return idFormulario;
 	}
