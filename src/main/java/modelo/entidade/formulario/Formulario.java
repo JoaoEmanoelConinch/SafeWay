@@ -46,35 +46,23 @@ public class Formulario implements Serializable {
 	@Column(name = "latrocinio_formulario", nullable = false)
 	private boolean latrocinio;
 
-
 	@Column(name = "bloqueio_Ruas_Formulario", nullable = false)
-
-
 	private boolean bloqueioRuas;
 	
 	@Column(name = "comentario_Formulario", length = 300, nullable = true)
 	private String comentario;
 
-	
 	@ManyToOne(fetch = FetchType.LAZY)
-	 @JoinColumn(
-		        name = "id_ponto_avaliado",
-		        referencedColumnName = "id_ponto"
-		    )
 	private Ponto idPontoAvaliado;
 
-	
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	 @JoinColumn(
 		        name = "id_usuario",
 		        referencedColumnName = "id_usuario"
 		    )
-	private UsuarioCadastrado idUsuario;
-
+	private UsuarioCadastrado usuario;
 	
-	public Formulario() {
-	}
+	public Formulario() {}
 
 	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
 	 String comentario, boolean bloqueioRuas, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
@@ -209,11 +197,11 @@ public class Formulario implements Serializable {
 	}
 
 	public UsuarioCadastrado getIdUsuario() {
-		return idUsuario;
+		return usuario;
 	}
 
 	public void setIdUsuario(UsuarioCadastrado idUsuario) {
-		this.idUsuario = idUsuario;
+		this.usuario = idUsuario;
 	}
 
 	private int calcularMedia() {
