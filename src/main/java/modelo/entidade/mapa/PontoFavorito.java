@@ -42,14 +42,10 @@ public class PontoFavorito extends Ponto{
 	public PontoFavorito() {
 	}
 
-
-
 	public PontoFavorito(Ponto ponto, String nomePonto) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
 		super(ponto.getLatitude(), ponto.getLongitude());
 		setNomePonto(nomePonto);
 	}
-
-
 
 	public String getNomePonto() {
 		return nomePonto;

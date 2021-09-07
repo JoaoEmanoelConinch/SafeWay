@@ -64,7 +64,7 @@ public class Trajeto implements Serializable {
         referencedColumnName = "id_ponto")
 	private Ponto chegada;
 
-	@Column(name = "Meio_transporte")
+	@Column(name = "Meio_transporte", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private MeioDeTransporte transporteUsado;
 	
