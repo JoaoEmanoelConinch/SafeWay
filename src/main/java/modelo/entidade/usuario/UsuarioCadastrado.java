@@ -41,7 +41,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario", nullable = false, unique = true)
-	private Long idUsuario;
+	private long idUsuario;
 
 	@Column(name = "nome_usuario", length = 45, nullable = false, unique = true)
 	private String nome;
@@ -66,6 +66,10 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	private List<Trajeto> trajetos;
 
 	public UsuarioCadastrado() {
+	}
+	
+	public UsuarioCadastrado(long id) {
+		this.setIdUsuario(id);
 	}
 
 	public UsuarioCadastrado(Long idUsuario, String nome, String senha, String email)
