@@ -41,7 +41,7 @@ public class Trajeto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_trajeto", nullable = false, unique = true)
-	private Long idTrajeto;
+	private long idTrajeto;
 
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -77,6 +77,10 @@ public class Trajeto implements Serializable {
 	private List<UsuarioCadastrado> usuariosCadastrados;
 
 	public Trajeto() {
+	}
+	
+	public Trajeto(long id) {
+		this.setIdTrajeto(id);
 	}
 
 	public Trajeto(Long id, Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado)
