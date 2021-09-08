@@ -14,7 +14,7 @@ public class Principal {
 
 	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, JsonMappingException, JsonProcessingException, StatusInvalidoException {
 		
-		UsuarioCadastrado usuario = new UsuarioCadastrado("Jorge", "golfinho456", "JorgeJohnson@gmail.com");
+		UsuarioCadastrado usuario = new UsuarioCadastrado("joao", "golfinho456", "joao@gmail.com");
 		UsuarioDAOImpl daoUsuario = new UsuarioDAOImpl();
 		daoUsuario.inserirUsuario(usuario);
 		

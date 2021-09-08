@@ -10,8 +10,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -54,7 +52,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "usuario_trajeto",
-	joinColumns = @JoinColumn(name = "id_usuario"),
+	joinColumns = @JoinColumn(name = "id"),
 	inverseJoinColumns = @JoinColumn(name = "id_trajeto")
   )
 	private List<Trajeto> trajetos;

@@ -2,6 +2,7 @@ package modelo.entidade.usuario;
 
 import java.io.IOException;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public abstract class Usuario {
 
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY  )
+	@Column(name = "id_usuario", nullable = false, unique = true)
 	private long id;
 	
 	public Usuario(){}
