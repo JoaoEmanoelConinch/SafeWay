@@ -3,6 +3,8 @@ package modelo.entidade.usuario;
 import java.io.IOException;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -22,7 +24,22 @@ public abstract class Usuario {
 
 	
 	@Id
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY  )
+	private long id;
+	
+	public Usuario(){}
+	
+	public Usuario(long id) {
+		setId(id);
+	}
+
+	public long getId() {
+		return id;
+	}
+	
+	public void setId(long id) {
+		this.id = id;
+	}
 	
 	public String DefinirPartida(String inicio) {
 		return inicio;
