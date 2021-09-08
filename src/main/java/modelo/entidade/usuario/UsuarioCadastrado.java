@@ -37,10 +37,6 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario", nullable = false, unique = true)
-	private Long idUsuario;
-
 	@Column(name = "nome_usuario", length = 45, nullable = false, unique = true)
 	private String nome;
 
@@ -68,7 +64,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	public UsuarioCadastrado(Long idUsuario, String nome, String senha, String email)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
-		super();
+		super(idUsuario);
 
 		this.setNome(nome);
 		this.setSenha(senha);
@@ -84,14 +80,6 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		this.setFavoritos(new ArrayList<PontoFavorito>());
 		this.setFormulariosDoUsuario(new ArrayList<Formulario>());
 		this.setTrajetos(new ArrayList<Trajeto>());
-	}
-
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
 	}
 
 	public String getNome() {
