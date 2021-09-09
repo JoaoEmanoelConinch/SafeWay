@@ -181,7 +181,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		if (idPontoAvaliado.getClass().equals("Ponto")) {
 			idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
 
-			formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueioRuas, comentario,
+			formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas,
 					idPontoAvaliado, idUsuario);
 
 			((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);

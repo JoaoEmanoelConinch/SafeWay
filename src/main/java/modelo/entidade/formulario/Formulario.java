@@ -99,7 +99,7 @@ public class Formulario implements Serializable {
 	}
 
 	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-	boolean bloqueioRuas, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
+	 String comentario, boolean bloqueioRuas, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
 
 		setLesaoCorporal(lesaoCorporal);
 		setFurto(furto);
