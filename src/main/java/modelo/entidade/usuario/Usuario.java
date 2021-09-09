@@ -20,13 +20,14 @@ import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario {
-
-	
-	@Id
-	@Column(name = "id_usuario", nullable = false, unique = true)
-	private long id;
+ 
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario", nullable = false, unique = true)
+    private long id;	
 	
 	public Usuario(){}
 	

@@ -12,15 +12,17 @@ import modelo.excecao.usuario.StringVaziaException;
 
 public class Principal {
 
-	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, JsonMappingException, JsonProcessingException, StatusInvalidoException {
-		
-		UsuarioCadastrado usuario = new UsuarioCadastrado("joao", "golfinho456", "joao@gmail.com");
-		UsuarioDAOImpl daoUsuario = new UsuarioDAOImpl();
-		daoUsuario.inserirUsuario(usuario);
-		
+	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException,
+			JsonMappingException, JsonProcessingException, StatusInvalidoException {
 
-
-		
+				UsuarioDAOImpl daoUsuario = new UsuarioDAOImpl();
+				 
+						UsuarioCadastrado primeiroUsuario = new UsuarioCadastrado("joao", "golfinho456", "joao@gmail.com");
+						daoUsuario.inserirUsuario(primeiroUsuario);
+				 
+						UsuarioCadastrado segundoUsuario = new UsuarioCadastrado("yuri", "golfinho123", "yuri@gmail.com");
+						daoUsuario.inserirUsuario(segundoUsuario);
+				
+				
 	}
-
 }
