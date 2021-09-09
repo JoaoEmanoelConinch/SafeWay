@@ -10,9 +10,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -38,11 +35,6 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario", nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
-	private Long idUsuario;
-
 	@Column(name = "nome_usuario", length = 45, nullable = false, unique = true)
 	private String nome;
 
@@ -60,7 +52,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "usuario_trajeto",
-	joinColumns = @JoinColumn(name = "id_usuario"),
+	joinColumns = @JoinColumn(name = "id"),
 	inverseJoinColumns = @JoinColumn(name = "id_trajeto")
   )
 	private List<Trajeto> trajetos;
@@ -70,7 +62,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	public UsuarioCadastrado(Long idUsuario, String nome, String senha, String email)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
-		super();
+		super(idUsuario);
 
 		this.setNome(nome);
 		this.setSenha(senha);
@@ -86,14 +78,6 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		this.setFavoritos(new ArrayList<PontoFavorito>());
 		this.setFormulariosDoUsuario(new ArrayList<Formulario>());
 		this.setTrajetos(new ArrayList<Trajeto>());
-	}
-
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
 	}
 
 	public String getNome() {
@@ -197,7 +181,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		if (idPontoAvaliado.getClass().equals("Ponto")) {
 			idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
 
-			formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueioRuas, comentario,
+			formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas,
 					idPontoAvaliado, idUsuario);
 
 			((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);

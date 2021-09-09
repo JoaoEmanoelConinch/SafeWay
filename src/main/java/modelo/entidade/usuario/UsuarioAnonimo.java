@@ -12,6 +12,10 @@ public class UsuarioAnonimo extends Usuario {
 	public UsuarioAnonimo() {
 		super();
 	}
+	
+	public UsuarioAnonimo(long id){
+		super(id);
+	}
 
 	public UsuarioCadastrado cadastrar(UsuarioAnonimo usuarioanonimo, String nome, String senha, String email)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {

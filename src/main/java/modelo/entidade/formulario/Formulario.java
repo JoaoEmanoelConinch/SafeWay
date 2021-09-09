@@ -25,7 +25,7 @@ public class Formulario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY  )
-	@Column(name = "id_formulario", nullable = false, unique = true, columnDefinition = "UNSIGNED INT")
+	@Column(name = "id_formulario", nullable = false, unique = true)
 	private Long idFormulario;
 
 	@Column(name = "media_formulario", scale = 2, precision = 1, nullable = false)
@@ -99,7 +99,7 @@ public class Formulario implements Serializable {
 	}
 
 	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-	boolean bloqueioRuas, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
+	 String comentario, boolean bloqueioRuas, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
 
 		setLesaoCorporal(lesaoCorporal);
 		setFurto(furto);
