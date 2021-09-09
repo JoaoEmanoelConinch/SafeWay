@@ -30,18 +30,22 @@ public class Principal {
 		FormularioDAOImpl formularioDAO = new FormularioDAOImpl();
 
 		UsuarioCadastrado usuarioCadastrado = new UsuarioCadastrado("Ana", "88224646", "anna@email.com");
+		usuarioDAO.inserirUsuario(usuarioCadastrado);
 		
 		Ponto ponto = new Ponto(-12.4, -4.76);
 		Ponto ponto2 = new Ponto(-12.90, -5.76);
+		pontoDAO.inserirPonto(ponto);
+		pontoDAO.inserirPonto(ponto2);
 
 		Formulario formulario = new Formulario(false, false, true, false, false, "não vi o rosto dele", 
 			false, ponto, usuarioCadastrado);
+		formularioDAO.inserirAvaliacao(formulario);
 
-		PontoAvaliado pontoAvaliado = new PontoAvaliado(ponto, formulario);
+		// PontoAvaliado pontoAvaliado = new PontoAvaliado(ponto, formulario);
 		// pontoAvaliadoDAO.adicionarPontoAvaliado(pontoAvaliado);
 
 		PontoFavorito pontoFavorito = new PontoFavorito(ponto2, "casa");
-		// pontoFavDAO.inserirPontoFav(pontoFavorito);
+		pontoFavDAO.inserirPontoFav(pontoFavorito);
 
 	}
 }
