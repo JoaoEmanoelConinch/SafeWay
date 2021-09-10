@@ -53,7 +53,13 @@ public class Ponto implements Serializable {
 	@Fetch(FetchMode.JOIN)
 	private List<Trajeto> trajetos;
 
-	public Ponto() {
+	public Ponto() {}
+
+	public Ponto(Long idPonto, double latitude, double longitude, List<Trajeto> trajetos) {
+		this.setId(idPonto);
+		this.setLatitude(latitude);
+		this.setLongitude(longitude);
+		this.setTrajetos(trajetos);
 	}
 
 	public Ponto(double latitude, double longitude)
@@ -94,7 +100,7 @@ public class Ponto implements Serializable {
 
 	}
 
-	public void setTrajetos(ArrayList<Trajeto> trajetos) {
+	public void setTrajetos(List<Trajeto> trajetos) {
 		this.trajetos = trajetos;
 	}
 

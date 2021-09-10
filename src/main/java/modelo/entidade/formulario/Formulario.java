@@ -90,7 +90,6 @@ public class Formulario implements Serializable {
 		setHomicidio(homicidio);
 		setLatrocinio(latrocinio);
 		setComentario(comentario);
-		setComentario(comentario);
 		setBloqueioRuas(bloqueioRuas);
 		setMedia(media);
 		setIdPontoAvaliado(idPontoAvaliado);
@@ -107,14 +106,12 @@ public class Formulario implements Serializable {
 		setHomicidio(homicidio);
 		setLatrocinio(latrocinio);
 		setComentario(comentario);
-		setComentario(comentario);
 		setBloqueioRuas(bloqueioRuas);
 		setMedia(calcularMedia());
 		setIdPontoAvaliado(idPontoAvaliado);
 		setIdUsuario(idUsuario);
 
 	}
-
 
 	public Long getIdFormulario() {
 		return idFormulario;

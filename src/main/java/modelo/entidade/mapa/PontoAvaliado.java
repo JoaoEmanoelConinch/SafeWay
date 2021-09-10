@@ -60,8 +60,10 @@ public class PontoAvaliado extends Ponto{
 	public PontoAvaliado() {}
 
 	public PontoAvaliado(long idPontoAvaliado, Ponto ponto, ArrayList<Formulario> avaliacoes,
-	long quantidadeLezoesCorporais, long quantidadeFurtos, long quantidadeRoubos, long quantidadeHomicidios,
-	long quantidadeLatrocinio, boolean bloqueio, double mediaDeAvaliacao) throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
+	long quantidadeLezoesCorporais, long quantidadeFurtos, long quantidadeRoubos,
+	long quantidadeHomicidios, long quantidadeLatrocinio, boolean bloqueio,
+	double mediaDeAvaliacao)
+	throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
 		super(ponto.getLatitude(),ponto.getLongitude());
 		
 		setId(idPontoAvaliado);
@@ -76,7 +78,8 @@ public class PontoAvaliado extends Ponto{
 		setMediaDeAvaliacao(mediaDeAvaliacao);
 	}
 
-	public PontoAvaliado(Ponto ponto, Formulario avaliacao) throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
+	public PontoAvaliado(Ponto ponto, Formulario avaliacao)
+	throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
 		super(ponto.getLatitude(),ponto.getLongitude());
 		
 		setPonto(ponto);
@@ -87,6 +90,7 @@ public class PontoAvaliado extends Ponto{
 	public PontoAvaliado(Ponto ponto) throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
 		super(ponto.getLatitude(),ponto.getLongitude());
 
+		this.setAvaliacoes(new ArrayList<Formulario>());
 		setPonto(ponto);
 	}
 
@@ -146,6 +150,26 @@ public class PontoAvaliado extends Ponto{
 		this.avaliacoes = avaliacoes;
 	}
 
+	public boolean isBloqueio() {
+		return bloqueio;
+	}
+
+	public void setBloqueio(boolean bloqueio) {
+		this.bloqueio = bloqueio;
+	}
+
+	private void verificarBloqueio() {
+		this.bloqueio = getAvaliacoes().get(getAvaliacoes().size()).isBloqueioRuas();
+	}
+
+	public Ponto getPonto() {
+		return ponto;
+	}
+
+	public void setPonto(Ponto ponto) {
+		this.ponto = ponto;
+	}
+
 	public void addAvaliacao(Formulario avaliacao) throws NullPointerException {
 
 		if (avaliacao == null) {
@@ -202,26 +226,6 @@ public class PontoAvaliado extends Ponto{
 
 			this.setMediaDeAvaliacao(calcularMediaPonto());
 		}
-	}
-
-	public boolean isBloqueio() {
-		return bloqueio;
-	}
-
-	public void setBloqueio(boolean bloqueio) {
-		this.bloqueio = bloqueio;
-	}
-
-	private void verificarBloqueio() {
-		this.bloqueio = getAvaliacoes().get(getAvaliacoes().size()).isBloqueioRuas();
-	}
-
-	public Ponto getPonto() {
-		return ponto;
-	}
-
-	public void setPonto(Ponto ponto) {
-		this.ponto = ponto;
 	}
 
 	private double calcularMediaPonto(){

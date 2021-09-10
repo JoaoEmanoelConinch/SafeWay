@@ -39,12 +39,15 @@ public class PontoFavorito extends Ponto{
 	    )
 	private UsuarioCadastrado usuario;
 
-	public PontoFavorito() {
-	}
+	public PontoFavorito() {}
 
-	public PontoFavorito(Ponto ponto, String nomePonto) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+	public PontoFavorito(Ponto ponto, String nomePonto, UsuarioCadastrado usuario)
+	throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
 		super(ponto.getLatitude(), ponto.getLongitude());
+		
+		setPonto(ponto);
 		setNomePonto(nomePonto);
+		setUsuario(usuario);
 	}
 
 	public String getNomePonto() {
@@ -72,9 +75,11 @@ public class PontoFavorito extends Ponto{
 		this.usuario = usuario;
 	}
 
-	public static PontoFavorito favoritarPontoENomear(Ponto ponto, String nomePonto) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+	public static PontoFavorito favoritarPontoENomear(Ponto ponto, String nomePonto,
+	UsuarioCadastrado usuario)
+	throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
 
-		return new PontoFavorito(ponto, nomePonto);
+		return new PontoFavorito(ponto, nomePonto, usuario);
 
 	}
 

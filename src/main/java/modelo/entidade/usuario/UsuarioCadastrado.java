@@ -54,19 +54,23 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	@JoinTable(name = "usuario_trajeto",
 	joinColumns = @JoinColumn(name = "id"),
 	inverseJoinColumns = @JoinColumn(name = "id_trajeto")
-  )
+	)
 	private List<Trajeto> trajetos;
 
 	public UsuarioCadastrado() {
 	}
 
-	public UsuarioCadastrado(Long idUsuario, String nome, String senha, String email)
+	public UsuarioCadastrado(Long idUsuario, String nome, String senha, String email,
+	List<PontoFavorito> favoritos, List<Formulario> formulariosDoUsuario, List<Trajeto> trajetos)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
 		super(idUsuario);
 
 		this.setNome(nome);
 		this.setSenha(senha);
 		this.setEmail(email);
+		this.setFavoritos(favoritos);
+		this.setFormulariosDoUsuario(formulariosDoUsuario);
+		this.setTrajetos(trajetos);
 	}
 
 	public UsuarioCadastrado(String nome, String senha, String email)
@@ -82,7 +86,6 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	public String getNome() {
 		return nome;
-
 	}
 
 	public void setNome(String nome) throws StringVaziaException {
@@ -92,8 +95,6 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		}
 
 		this.nome = nome;
-
-		// (FALTA FAZER) verificar nomes iguais
 	}
 
 	public String getSenha() {
@@ -118,14 +119,6 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		return email;
 	}
 
-	public List<PontoFavorito> getFavoritos() {
-		return favoritos;
-	}
-
-	public void setFavoritos(List<PontoFavorito> favoritos) {
-		this.favoritos = favoritos;
-	}
-
 	private void setEmail(String email) throws EmailInvalidoException, StringVaziaException {
 
 		if (nome.isEmpty()) {
@@ -138,6 +131,14 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 		this.email = email;
 
+	}
+
+	public List<PontoFavorito> getFavoritos() {
+		return favoritos;
+	}
+
+	public void setFavoritos(List<PontoFavorito> favoritos) {
+		this.favoritos = favoritos;
 	}
 
 	public void setFormulariosDoUsuario(List<Formulario> formulariosDoUsuario) {
@@ -191,7 +192,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	public void favoritarENomear(Ponto ponto, String nomePonto)
 			throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
-		PontoFavorito pontoFavorito = PontoFavorito.favoritarPontoENomear(ponto, nomePonto);
+		PontoFavorito pontoFavorito = PontoFavorito.favoritarPontoENomear(ponto, nomePonto, this);
 		addFavorito(pontoFavorito);
 	}
 
@@ -211,7 +212,6 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		formulariosDoUsuario.add(formulario);
 	}
 
-
 	public void remuveFormulario(Formulario formulario) {
 
 		formulariosDoUsuario.remove(formulario);
@@ -220,7 +220,6 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	public void addTrajeto(Trajeto trajeto) {
 		trajetos.add(trajeto);
 	}
-
 
 	public void RemuveTrajeto(Trajeto trajeto) {
 		trajetos.remove(trajeto);
