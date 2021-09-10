@@ -84,7 +84,7 @@ public class PontoAvaliado extends Ponto{
 		
 		setPonto(ponto);
 		this.setAvaliacoes(new ArrayList<Formulario>());
-		addAvaliacao(avaliacao);
+		this.addAvaliacao(avaliacao);
 	}
 
 	public PontoAvaliado(Ponto ponto) throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
@@ -159,7 +159,7 @@ public class PontoAvaliado extends Ponto{
 	}
 
 	private void verificarBloqueio() {
-		this.bloqueio = getAvaliacoes().get(getAvaliacoes().size()).isBloqueioRuas();
+		this.bloqueio = getAvaliacoes().get((getAvaliacoes().size())).isBloqueioRuas();
 	}
 
 	public Ponto getPonto() {

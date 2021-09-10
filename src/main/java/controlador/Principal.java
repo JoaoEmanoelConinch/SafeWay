@@ -23,29 +23,23 @@ public class Principal {
 	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException,
 			JsonMappingException, JsonProcessingException, StatusInvalidoException {
 
-		UsuarioDAOImpl usuarioDAO = new UsuarioDAOImpl();
-		PontoDAOImpl pontoDAO = new PontoDAOImpl();
-		PontoAvaliadoDAOImpl pontoAvaliadoDAO = new PontoAvaliadoDAOImpl();
-		PontoFavDAOImpl pontoFavDAO = new PontoFavDAOImpl();
-		FormularioDAOImpl formularioDAO = new FormularioDAOImpl();
-
-		UsuarioCadastrado usuarioCadastrado = new UsuarioCadastrado("Ana", "88224646", "anna@email.com");
-		usuarioDAO.inserirUsuario(usuarioCadastrado);
+		UsuarioDAOImpl usuarioDao = new UsuarioDAOImpl();
+		PontoDAOImpl pontoDao = new PontoDAOImpl();
+		FormularioDAOImpl formDao = new FormularioDAOImpl();
+		PontoAvaliadoDAOImpl pontoAvDao = new PontoAvaliadoDAOImpl();
 		
-		Ponto ponto = new Ponto(-12.4, -4.76);
-		Ponto ponto2 = new Ponto(-12.90, -5.76);
-		pontoDAO.inserirPonto(ponto);
-		pontoDAO.inserirPonto(ponto2);
-
-		Formulario formulario = new Formulario(false, false, true, false, false, "não vi o rosto dele", 
-			false, ponto, usuarioCadastrado);
-		formularioDAO.inserirAvaliacao(formulario);
-
-		// PontoAvaliado pontoAvaliado = new PontoAvaliado(ponto, formulario);
-		// pontoAvaliadoDAO.adicionarPontoAvaliado(pontoAvaliado);
-
-		PontoFavorito pontoFavorito = new PontoFavorito(ponto2, "casa");
-		pontoFavDAO.inserirPontoFav(pontoFavorito);
-
+		Ponto ponto = new Ponto(-26.456, 9.123);
+		pontoDao.inserirPonto(ponto);
+		
+		UsuarioCadastrado usuario = new UsuarioCadastrado("Mauri", "123456789", "mauri@email.com");
+		usuarioDao.inserirUsuario(usuario);
+		
+		Formulario form = new Formulario(false, false, false, false, false, "sla", false, ponto, usuario);
+		formDao.inserirAvaliacao(form);
+		
+	//	PontoAvaliado pontoAv = new PontoAvaliado(ponto, form);
+	//	pontoAvDao.adicionarPontoAvaliado(pontoAv);
+		
+		
 	}
 }
