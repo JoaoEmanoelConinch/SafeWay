@@ -22,8 +22,6 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.JsonParseException;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 
 import controlador.consultaAPI.ConsultaTrajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
@@ -82,72 +80,72 @@ public class Trajeto implements Serializable {
 	public Trajeto(Long id, Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado, List<UsuarioCadastrado> usuariosCadastrados)
 			throws StatusInvalidoException, JsonParseException, org.codehaus.jackson.map.JsonMappingException,
 			IOException {
-		this.setIdTrajeto(id);
-		this.setInicio(inicio);
+//		this.setIdTrajeto(id);
+//		this.setInicio(inicio);
 		this.setChegada(chegada);
 		this.setTransporteUsado(transporteUsado);
 		this.criarLineString(inicio, chegada, transporteUsado);
 		this.setUsuariosCadastrados(usuariosCadastrados);
 	}
 
-	public Trajeto(Long id, String inicio, String chegada, MeioDeTransporte transporteUsado, List<UsuarioCadastrado> usuariosCadastrados)
-			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, JsonMappingException,
-			JsonProcessingException, StatusInvalidoException, IOException {
-		this(id, Ponto.informatLocal(inicio), Ponto.informatLocal(chegada), transporteUsado, usuariosCadastrados);
-	}
-
-	public Trajeto(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws StatusInvalidoException,
-			JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
-		this.setInicio(inicio);
-		this.setChegada(chegada);
-		this.setTransporteUsado(transporteUsado);
-		this.criarLineString(inicio, chegada, transporteUsado);
-		this.setPontos(new ArrayList<Ponto>());
-		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
-	}
-
-	public Trajeto(String inicio, String chegada, MeioDeTransporte transporteUsado)
-			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, JsonMappingException,
-			JsonProcessingException, StatusInvalidoException, IOException {
-		this(Ponto.informatLocal(inicio), Ponto.informatLocal(chegada), transporteUsado);
-	}
-
-	public Long getIdTrajeto() {
-		return idTrajeto;
-	}
-
-	public void setIdTrajeto(Long idTrajeto) {
-		this.idTrajeto = idTrajeto;
-	}
-
-	public Ponto getInicio() {
-		return inicio;
-	}
-
-	public void setInicio(String inicio) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
-		this.inicio = Ponto.informatLocal(inicio);
-	}
-
-	private void setInicio(Ponto inicio) {
-		this.inicio = inicio;
-	}
-
-	public List<Ponto> getPontos() {
-		return pontos;
-	}
-
-	public void setPontos(List<Ponto> pontos) {
-		this.pontos = pontos;
-	}
-
-	public Ponto getChegada() {
-		return chegada;
-	}
-
-	public void setChegada(String chegada)
-			throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
-		this.chegada = Ponto.informatLocal(chegada);
-	}
+//	public Trajeto(Long id, String inicio, String chegada, MeioDeTransporte transporteUsado, List<UsuarioCadastrado> usuariosCadastrados)
+//			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, JsonMappingException,
+//			JsonProcessingException, StatusInvalidoException, IOException {
+//		this(id, Ponto.informatLocal(inicio), Ponto.informatLocal(chegada), transporteUsado, usuariosCadastrados);
+//	}
+//
+//	public Trajeto(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws StatusInvalidoException,
+//			JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
+//		this.setInicio(inicio);
+//		this.setChegada(chegada);
+//		this.setTransporteUsado(transporteUsado);
+//		this.criarLineString(inicio, chegada, transporteUsado);
+//		this.setPontos(new ArrayList<Ponto>());
+//		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
+//	}
+//
+//	public Trajeto(String inicio, String chegada, MeioDeTransporte transporteUsado)
+//			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, JsonMappingException,
+//			JsonProcessingException, StatusInvalidoException, IOException {
+//		this(Ponto.informatLocal(inicio), Ponto.informatLocal(chegada), transporteUsado);
+//	}
+//
+//	public Long getIdTrajeto() {
+//		return idTrajeto;
+//	}
+//
+//	public void setIdTrajeto(Long idTrajeto) {
+//		this.idTrajeto = idTrajeto;
+//	}
+//
+//	public Ponto getInicio() {
+//		return inicio;
+//	}
+//
+//	public void setInicio(String inicio) throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+//		this.inicio = Ponto.informatLocal(inicio);
+//	}
+//
+//	private void setInicio(Ponto inicio) {
+//		this.inicio = inicio;
+//	}
+//
+//	public List<Ponto> getPontos() {
+//		return pontos;
+//	}
+//
+//	public void setPontos(List<Ponto> pontos) {
+//		this.pontos = pontos;
+//	}
+//
+//	public Ponto getChegada() {
+//		return chegada;
+//	}
+//
+//	public void setChegada(String chegada)
+//			throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+//		this.chegada = Ponto.informatLocal(chegada);
+//	}
 
 	private void setChegada(Ponto chegada) {
 		this.chegada = chegada;

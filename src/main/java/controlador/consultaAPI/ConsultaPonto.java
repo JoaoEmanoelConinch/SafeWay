@@ -5,10 +5,6 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-
 import modelo.entidade.mapa.Ponto;
 import modelo.excecao.mapa.StatusInvalidoException;
 
@@ -17,7 +13,7 @@ public class ConsultaPonto {
 	public ConsultaPonto() {}
 
 	public static Ponto informatLocal(String local)
-			throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+			throws StatusInvalidoException{
 		String localParaURL = local.replaceAll(" ", "%20");
 		Client client = ClientBuilder.newClient();
 		Response response = client.target(

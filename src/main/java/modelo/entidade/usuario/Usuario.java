@@ -13,7 +13,7 @@ import javax.persistence.InheritanceType;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+//import com.fasterxml.jackson.core.JsonProcessingException;
 
 import modelo.entidade.mapa.Trajeto;
 import modelo.enumeracao.mapa.MeioDeTransporte;
@@ -54,11 +54,10 @@ public abstract class Usuario {
 		return transporte;
 	}
 
-	public Trajeto trajeto(String inicio, String chegada, MeioDeTransporte transporte)
-			throws StatusInvalidoException, JsonParseException, JsonMappingException,
-			com.fasterxml.jackson.databind.JsonMappingException, JsonProcessingException, IOException {
-
-		return new Trajeto(DefinirPartida(inicio), DefinirDestino(chegada), DefinirTransporte(transporte));
-	}
+//	public Trajeto trajeto(String inicio, String chegada, MeioDeTransporte transporte)
+//			throws StatusInvalidoException{
+//
+//		return new Trajeto(DefinirPartida(inicio), DefinirDestino(chegada), DefinirTransporte(transporte));
+//	}
 
 }
