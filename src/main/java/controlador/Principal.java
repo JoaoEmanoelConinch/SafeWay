@@ -44,7 +44,7 @@ public class Principal {
 		// PontoAvaliado pontoAvaliado = new PontoAvaliado(ponto, formulario);
 		// pontoAvaliadoDAO.adicionarPontoAvaliado(pontoAvaliado);
 
-		PontoFavorito pontoFavorito = new PontoFavorito(ponto2, "casa");
+		PontoFavorito pontoFavorito = new PontoFavorito(ponto, "Escola", usuarioCadastrado);
 		pontoFavDAO.inserirPontoFav(pontoFavorito);
 
 	}
