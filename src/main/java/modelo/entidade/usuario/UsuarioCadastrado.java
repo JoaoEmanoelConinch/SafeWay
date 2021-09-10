@@ -50,7 +50,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Formulario> formulariosDoUsuario;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinTable(name = "usuario_trajeto",
 	joinColumns = @JoinColumn(name = "id"),
 	inverseJoinColumns = @JoinColumn(name = "id_trajeto")
@@ -58,6 +58,10 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	private List<Trajeto> trajetos;
 
 	public UsuarioCadastrado() {
+	}
+	
+	public UsuarioCadastrado(long id) {
+		setId(id);
 	}
 
 	public UsuarioCadastrado(Long idUsuario, String nome, String senha, String email,
