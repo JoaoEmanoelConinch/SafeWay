@@ -59,17 +59,17 @@ public class Ponto implements Serializable {
 		this.setTrajetos(trajetos);
 	}
 
-//	public Ponto(double latitude, double longitude)
-//			throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
-//		this.setLatitude(latitude);
-//		this.setLongitude(longitude);
-//		this.setTrajetos(new ArrayList<Trajeto>());
-//	}
-//
-//	public static Ponto informatLocal(String local)
-//			throws JsonMappingException, JsonProcessingException, StatusInvalidoException {
-//		return ConsultaPonto.informatLocal(local);
-//	}
+	public Ponto(double latitude, double longitude)
+			throws StatusInvalidoException{
+		this.setLatitude(latitude);
+		this.setLongitude(longitude);
+		this.setTrajetos(new ArrayList<Trajeto>());
+	}
+
+	public static Ponto informatLocal(String local)
+			throws StatusInvalidoException {
+		return ConsultaPonto.informatLocal(local);
+	}
 
 	public void setId(Long id) {
 		this.idPonto = id;

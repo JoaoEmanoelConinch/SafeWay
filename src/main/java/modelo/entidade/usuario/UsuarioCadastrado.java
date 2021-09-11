@@ -174,28 +174,28 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		return isEmailValid;
 	}
 
-//	public void avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-//			boolean bloqueioRuas, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario)
-//			throws NullPointerException, StatusInvalidoException, Throwable, JsonProcessingException {
-//
-//		Formulario formulario = new Formulario();
-//
-//		if (idPontoAvaliado.getClass().equals("Ponto")) {
-//			idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
-//
-//			formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas,
-//					idPontoAvaliado, idUsuario);
-//
-//			((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);
-//
-//		}
-//	}
-//
-//	public void favoritarENomear(Ponto ponto, String nomePonto)
-//			throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
-//		PontoFavorito pontoFavorito = PontoFavorito.favoritarPontoENomear(ponto, nomePonto, this);
-//		addFavorito(pontoFavorito);
-//	}
+	public void avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
+			boolean bloqueioRuas, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario)
+			throws NullPointerException, StatusInvalidoException, Throwable{
+
+		Formulario formulario = new Formulario();
+
+		if (idPontoAvaliado.getClass().equals("Ponto")) {
+			idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
+
+			formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas,
+					idPontoAvaliado, idUsuario);
+
+			((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);
+
+		}
+	}
+
+	public void favoritarENomear(Ponto ponto, String nomePonto)
+			throws StatusInvalidoException{
+		PontoFavorito pontoFavorito = PontoFavorito.favoritarPontoENomear(ponto, nomePonto, this);
+		addFavorito(pontoFavorito);
+	}
 
 	public void desfavoritar(PontoFavorito pontoFavorito) {
 		favoritos.remove(pontoFavorito);
