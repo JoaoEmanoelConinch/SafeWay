@@ -1,43 +1,29 @@
 package controlador;
 
-
-import java.util.Scanner;
-
 import org.json.JSONObject;
 
 import controlador.consultaAPI.JSONpontoDAO;
 import controlador.consultaAPI.JSONpontoDAOImpl;
+import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
 import modelo.excecao.usuario.StringVaziaException;
 
 public class Principal {
 
-	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException{
+	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException{
 		
-		Scanner leitor = new Scanner(System.in);
-
-		 
-
-        System.out.println("Digite um alimento: ");
-        String alimento = leitor.nextLine();
-
- 
-
-        JSONpontoDAO foodDAO = new JSONpontoDAOImpl();
-			
-			
-
- 
-
-        JSONObject jsonObject = foodDAO.readJsonFromUrl(
-                "https://api.edamam.com/api/food-database/v2/parser?app_id=0ade5519&app_key=765cf001c347b17087e6af924d562b33&ingr="
-                        + alimento + "&nutrition-type=cooking");
-
- 
-
-        JSONObject food = jsonObject.getJSONArray("parsed").getJSONObject(0).getJSONObject("food");
-        double lucas = food.getJSONObject("nutrients").getDouble("ENERC_KCAL");
+                String localParaURL = "senac";
+		JSONpontoDAO JSONpontoDAO = new JSONpontoDAOImpl();
 		
+		JSONObject jsonObject = JSONpontoDAO.readJsonFromUrl(
+			"https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110&text="
+			+ localParaURL);
+                
+                Object JSONLatitude = jsonObject.getJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates").get(0);
+                Object JSONLongitude = jsonObject.getJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates").get(1);
+
+                System.out.println(JSONLatitude);
+                System.out.println(JSONLongitude);
 	}
 }
