@@ -79,7 +79,7 @@ public class Ponto implements Serializable {
 		return idPonto;
 	}
 
-	private void setLatitude(double latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
@@ -87,7 +87,7 @@ public class Ponto implements Serializable {
 		return this.latitude;
 	}
 
-	private void setLongitude(double longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 		;
 	}
