@@ -2,6 +2,7 @@ package controlador.consultaAPI;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -9,6 +10,8 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Response;
 
 import org.codehaus.jackson.JsonParseException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
@@ -17,18 +20,39 @@ import modelo.excecao.mapa.StatusInvalidoException;
 
 public class ConsultaTrajeto {
 
-	public static Class<?> criarLineString(Ponto inicio, Ponto chegada, MeioDeTransporte transporte)
+	public static List<Ponto> criarLineString(Ponto inicio, Ponto chegada, MeioDeTransporte transporte)
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
+
+		List<Ponto> pontosDoTrajeto = new ArrayList<Ponto>();
+
 		Client client = ClientBuilder.newClient();
 		Entity<String> payload = Entity.json("{\"coordinates\":[" + inicio.TransformarVetorEmString() + ","
-				+ chegada.TransformarVetorEmString() + "],\"elevation\":\"true");
+		+ chegada.TransformarVetorEmString() + "],\"elevation\":\"true");
 		Response response = client
 				.target("https://api.openrouteservice.org/v2/directions/" + transporte.getDescricao() + "/geojson")
 				.request().header("Authorization", "5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110")
 				.header("Accept", "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8")
 				.header("Content-Type", "application/json; charset=utf-8").post(payload);
 
-		return response.readEntity(String.class).getClass();
+		JSONObject jsonObject = (JSONObject) JSONObject.stringToValue(response.readEntity(String.class));
+
+		JSONArray pontosDaAPI = jsonObject.optJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates");
+
+		for (int i = 0; i < pontosDaAPI.length();i++){
+
+			Ponto pontoDoTrajeto = new Ponto();
+
+			Object latitude = pontosDaAPI.getJSONArray(i).get(0);
+			Object longitude = pontosDaAPI.getJSONArray(i).get(1);
+
+			pontoDoTrajeto.setLatitude((double) latitude);
+			pontoDoTrajeto.setLongitude((double)longitude);
+
+			pontosDoTrajeto.add(pontoDoTrajeto);
+			
+		}
+
+		return null;
 
 	}
 
