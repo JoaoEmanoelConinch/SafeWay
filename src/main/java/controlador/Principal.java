@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Trajeto;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -16,7 +17,10 @@ public class Principal {
 
 	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException, JsonParseException, JsonMappingException, IOException{
 		
-		Trajeto trajeto = new Trajeto("rua silvano candido da silva senio, 2491 blumenau", "rua 2 de setembro, 1531 blumenau", MeioDeTransporte.DRIVING_CAR);
+		Ponto p1 = new Ponto(-26.902611, -49.077709);
+		Ponto p2 = new Ponto(-26.911260, -49.081609);
+
+		Trajeto trajeto = new Trajeto(p1,p2, MeioDeTransporte.DRIVING_CAR);
 
 		System.out.println(trajeto.getPontos());
 	}
