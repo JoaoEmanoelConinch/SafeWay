@@ -74,12 +74,11 @@ public class PontoFavorito extends Ponto{
 		this.usuario = usuario;
 	}
 
-//	public static PontoFavorito favoritarPontoENomear(Ponto ponto, String nomePonto,
-//	UsuarioCadastrado usuario)
-//	throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
-//
-//		return new PontoFavorito(ponto, nomePonto, usuario);
-//
-//	}
+	public static PontoFavorito favoritarPontoENomear(Ponto ponto, String nomePonto, UsuarioCadastrado usuario)
+	throws StatusInvalidoException{
+
+		return new PontoFavorito(ponto, nomePonto, usuario);
+
+	}
 
 }

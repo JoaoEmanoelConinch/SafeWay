@@ -1,10 +1,5 @@
 package controlador.consultaAPI;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
 import org.json.JSONObject;
 
 import modelo.entidade.mapa.Ponto;
@@ -16,40 +11,24 @@ public class ConsultaPonto {
 
 	public static Ponto informatLocal(String local)
 			throws StatusInvalidoException{
+		
 		String localParaURL = local.replaceAll(" ", "%20");
+		
 		JSONpontoDAO JSONpontoDAO = new JSONpontoDAOImpl();
 		
 		JSONObject jsonObject = JSONpontoDAO.readJsonFromUrl(
 			"https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110&text="
 			+ localParaURL);
-
-		// Client client = ClientBuilder.newClient();
-		// Response response = client.target(
-		// 		"https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110&text="
-		// 				+ localParaURL)
-		// 		.request(MediaType.TEXT_PLAIN_TYPE)
-		// 		.header("Accept", "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8")
-		// 		.get();
-
-		// if (response.getStatus() == 4001) {
-		// 	throw new StatusInvalidoException("Erro de valor no paremetro");
-		// } else if (response.getStatus() == 4002) {
-		// 	throw new StatusInvalidoException("CabeÃ§alhos de HTTP errados");
-		// } else if (response.getStatus() == 4003) {
-		// 	throw new StatusInvalidoException("Problemas ao prover a geometria");
-		// } else if (response.getStatus() == 4004) {
-		// 	throw new StatusInvalidoException("Excedeu o nÃºmero de vÃ©rtices permitidos");
-		// } else if (response.getStatus() != 200) {
-		// 	throw new StatusInvalidoException("Ocoreu um erro no requrimento da API");
-		// }
-
-		//GeoJsonObject object = new ObjectMapper().readValue(response.readEntity(String.class), GeoJsonObject.class);
+                
+		Object latitude = jsonObject.getJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates").get(0);
+		Object longitude = jsonObject.getJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates").get(1);
 
 		Ponto ponto = new Ponto();
 
-		//ponto.setLongLatAlt((Point) ((FeatureCollection) object).getFeatures().get(0).getGeometry());
+		ponto.setLatitude((double) latitude);
+		ponto.setLongitude((double) longitude);
 		
-		return ponto;
+		return null;
 	}
 	
 	
