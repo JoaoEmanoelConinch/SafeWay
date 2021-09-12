@@ -52,7 +52,7 @@ public class ConsultaTrajeto {
 			
 		}
 
-		return null;
+		return pontosDoTrajeto;
 
 	}
 
