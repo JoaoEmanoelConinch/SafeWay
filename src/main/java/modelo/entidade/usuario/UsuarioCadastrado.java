@@ -60,6 +60,9 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	public UsuarioCadastrado() {
 	}
 	
+	public UsuarioCadastrado(long id) {
+		super(id);
+	}
 	
 
 	public UsuarioCadastrado(long idUsuario, String nome, String senha, String email,
