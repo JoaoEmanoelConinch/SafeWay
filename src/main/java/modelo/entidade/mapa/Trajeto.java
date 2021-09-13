@@ -167,7 +167,7 @@ public class Trajeto implements Serializable {
 
 	public void criarLineString(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado)
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
-		ConsultaTrajeto.criarLineString(inicio, chegada, transporteUsado);
+		setPontos(ConsultaTrajeto.criarLineString(inicio, chegada, transporteUsado));
 	}
 
 	public void addPonto (Ponto ponto){
