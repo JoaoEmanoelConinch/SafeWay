@@ -1,5 +1,7 @@
 package controlador;
 
+import java.util.List;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -8,9 +10,7 @@ import modelo.dao.Ponto.PontoDAOImpl;
 import modelo.dao.PontoAvaliado.PontoAvaliadoDAOImpl;
 import modelo.dao.PontoFavorito.PontoFavDAOImpl;
 import modelo.dao.Usuario.UsuarioDAOImpl;
-import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
-import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -27,18 +27,18 @@ public class Principal {
 		PontoDAOImpl pontoDao = new PontoDAOImpl();
 		FormularioDAOImpl formDao = new FormularioDAOImpl();
 		PontoAvaliadoDAOImpl pontoAvDao = new PontoAvaliadoDAOImpl();
+		PontoFavDAOImpl pontoFavDao = new PontoFavDAOImpl();
 		
-		Ponto ponto = new Ponto(-26.456, 9.123);
-		pontoDao.inserirPonto(ponto);
 		
-		UsuarioCadastrado usuario = new UsuarioCadastrado("Mauri", "123456789", "mauri@email.com");
-		usuarioDao.inserirUsuario(usuario);
+		UsuarioCadastrado usuario = new UsuarioCadastrado(2);
+		List<UsuarioCadastrado> usuario1 = usuarioDao.recuperarUsuario(usuario);
+		UsuarioCadastrado usuario2 = usuario1.get(0);
 		
-		Formulario form = new Formulario(false, false, false, false, false, "sla", false, ponto, usuario);
-		formDao.inserirAvaliacao(form);
+		usuarioDao.deletarUsuario(usuario2);
 		
-	//	PontoAvaliado pontoAv = new PontoAvaliado(ponto, form);
-	//	pontoAvDao.adicionarPontoAvaliado(pontoAv);
+//		usuarioDao.inserirUsuario(usuario);
+
+		
 		
 		
 	}
