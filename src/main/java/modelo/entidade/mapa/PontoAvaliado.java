@@ -58,6 +58,7 @@ public class PontoAvaliado extends Ponto{
 	private Ponto ponto;	
 
 	public PontoAvaliado() {}
+	
 
 	public PontoAvaliado(long idPontoAvaliado, Ponto ponto, ArrayList<Formulario> avaliacoes,
 	long quantidadeLezoesCorporais, long quantidadeFurtos, long quantidadeRoubos,
@@ -159,7 +160,7 @@ public class PontoAvaliado extends Ponto{
 	}
 
 	private void verificarBloqueio() {
-		this.bloqueio = getAvaliacoes().get((getAvaliacoes().size())).isBloqueioRuas();
+		this.bloqueio = getAvaliacoes().get((getAvaliacoes().size()-1)).isBloqueioRuas();
 	}
 
 	public Ponto getPonto() {

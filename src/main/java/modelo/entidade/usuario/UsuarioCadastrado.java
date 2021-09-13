@@ -59,8 +59,10 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	public UsuarioCadastrado() {
 	}
+	
+	
 
-	public UsuarioCadastrado(Long idUsuario, String nome, String senha, String email,
+	public UsuarioCadastrado(long idUsuario, String nome, String senha, String email,
 	List<PontoFavorito> favoritos, List<Formulario> formulariosDoUsuario, List<Trajeto> trajetos)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
 		super(idUsuario);
