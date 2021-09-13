@@ -1,6 +1,7 @@
 package modelo.entidade.usuario;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.InheritanceType;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Trajeto;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -39,6 +41,10 @@ public abstract class Usuario {
 	public void setId(long id) {
 		this.id = id;
 	}
+
+	public static List<Ponto> informatLocais(String local){
+		return Ponto.informatLocais(local);
+	} 
 	
 	public String DefinirPartida(String inicio) {
 		return inicio;
