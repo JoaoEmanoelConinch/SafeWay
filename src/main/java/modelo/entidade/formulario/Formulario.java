@@ -62,7 +62,9 @@ public class Formulario implements Serializable {
 		    )
 	private UsuarioCadastrado usuario;
 	
-	public Formulario() {}
+	public Formulario() {
+		setMedia(calcularMedia());
+	}
 	
 	public Formulario(long idFormulario) {
 		setIdFormulario(idFormulario);
@@ -102,6 +104,23 @@ public class Formulario implements Serializable {
 	}
 	
 	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
+			boolean latrocinio, boolean bloqueioRuas, double media, String comentario, Ponto idPontoAvaliado,UsuarioCadastrado idUsuario) {
+
+				setIdFormulario(idFormulario);
+				setLesaoCorporal(lesaoCorporal);
+				setFurto(furto);
+				setRoubo(roubo);
+				setHomicidio(homicidio);
+				setLatrocinio(latrocinio);
+				setComentario(comentario);
+				setBloqueioRuas(bloqueioRuas);
+				setMedia(calcularMedia());
+				setIdPontoAvaliado(idPontoAvaliado);
+				setIdUsuario(idUsuario);
+
+			}
+	
+	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
 			boolean latrocinio, boolean bloqueioRuas, String comentario) {
 
 				setIdFormulario(idFormulario);
@@ -111,6 +130,7 @@ public class Formulario implements Serializable {
 				setHomicidio(homicidio);
 				setLatrocinio(latrocinio);
 				setComentario(comentario);
+				setMedia(calcularMedia());
 				setBloqueioRuas(bloqueioRuas);
 				setIdPontoAvaliado(idPontoAvaliado);
 
@@ -220,7 +240,7 @@ public class Formulario implements Serializable {
 		this.usuario = idUsuario;
 	}
 
-	private int calcularMedia() {
+	private double calcularMedia() {
 		ArrayList<Boolean> ocorrencias = new ArrayList<>();
 		ocorrencias.add(isLesaoCorporal());
 		ocorrencias.add(isFurto());
@@ -236,7 +256,7 @@ public class Formulario implements Serializable {
 			}
 		}
 
-		return media;
+		return media / 5;
 
 	}
 
