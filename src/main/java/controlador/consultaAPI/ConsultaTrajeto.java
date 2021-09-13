@@ -1,6 +1,7 @@
 package controlador.consultaAPI;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,30 +25,36 @@ public class ConsultaTrajeto {
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
 
 		List<Ponto> pontosDoTrajeto = new ArrayList<Ponto>();
+//
+//		Client client = ClientBuilder.newClient();
+//		Entity<String> payload = Entity.json("{\"coordinates\":[" + inicio.TransformarVetorEmString() + ","
+//		+ chegada.TransformarVetorEmString() + "],\"elevation\":\"true");
+//		Response response = client
+//				.target("https://api.openrouteservice.org/v2/directions/" + transporte.getDescricao() + "/geojson")
+//				.request().header("Authorization", "5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110")
+//				.header("Accept", "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8")
+//				.header("Content-Type", "application/json; charset=utf-8").post(payload);
+//
+//		JSONObject jsonObject = (JSONObject) JSONObject.stringToValue(response.readEntity(String.class));
+		
+		JSONpontoDAO JSONpontoDAO = new JSONpontoDAOImpl();
+		
+		JSONObject jsonObject1 = JSONpontoDAO.readJsonFromUrl("https://api.openrouteservice.org/v2/directions/driving-car?api_key=5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110&text&start="
+		+((Double)inicio.getLatitude()).toString()+","+((Double)inicio.getLongitude()).toString()
+		+"&end="+((Double)chegada.getLatitude()).toString()+","+((Double)chegada.getLongitude()).toString());
 
-		Client client = ClientBuilder.newClient();
-		Entity<String> payload = Entity.json("{\"coordinates\":[" + inicio.TransformarVetorEmString() + ","
-		+ chegada.TransformarVetorEmString() + "],\"elevation\":\"true");
-		Response response = client
-				.target("https://api.openrouteservice.org/v2/directions/" + transporte.getDescricao() + "/geojson")
-				.request().header("Authorization", "5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110")
-				.header("Accept", "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8")
-				.header("Content-Type", "application/json; charset=utf-8").post(payload);
-
-		JSONObject jsonObject = (JSONObject) JSONObject.stringToValue(response.readEntity(String.class));
-
-		JSONArray pontosDaAPI = jsonObject.optJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates");
+		JSONArray pontosDaAPI = jsonObject1.optJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates");
 
 		for (int i = 0; i < pontosDaAPI.length();i++){
 
 			Ponto pontoDoTrajeto = new Ponto();
 
-			Object latitude = pontosDaAPI.getJSONArray(i).get(0);
-			Object longitude = pontosDaAPI.getJSONArray(i).get(1);
+			BigDecimal latitude = (BigDecimal) pontosDaAPI.getJSONArray(i).get(0);
+			BigDecimal longitude = (BigDecimal) pontosDaAPI.getJSONArray(i).get(1);
 
-			pontoDoTrajeto.setLatitude((double) latitude);
-			pontoDoTrajeto.setLongitude((double)longitude);
-
+			pontoDoTrajeto.setLatitude(latitude.doubleValue());
+			pontoDoTrajeto.setLongitude(longitude.doubleValue());
+			
 			pontosDoTrajeto.add(pontoDoTrajeto);
 			
 		}

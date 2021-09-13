@@ -22,12 +22,11 @@ public class Principal {
 //		System.out.println(p.getLatitude());
 //		System.out.println(p.getLongitude());
 
-		Ponto p1 = new Ponto(-26.902611, -49.077709);
-		Ponto p2 = new Ponto(-26.911260, -49.081609);
+		Ponto p1 = new Ponto(8.681495,49.41461);
+		Ponto p2 = new Ponto(8.687872,49.420318);
 
 		Trajeto trajeto = new Trajeto(p1,p2, MeioDeTransporte.DRIVING_CAR);
 
 		System.out.println(trajeto.getPontos());
-		
 	}
 }
