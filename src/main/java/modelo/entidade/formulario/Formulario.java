@@ -192,7 +192,7 @@ public class Formulario implements Serializable {
 		return comentario;
 	}
 
-	private void setComentario(String comentario) {
+	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
 
