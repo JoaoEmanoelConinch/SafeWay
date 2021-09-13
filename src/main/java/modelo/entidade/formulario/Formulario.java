@@ -136,7 +136,7 @@ public class Formulario implements Serializable {
 		return idFormulario;
 	}
 
-	public void setIdFormulario(Long idFormulario) {
+	public void setIdFormulario(long idFormulario) {
 		this.idFormulario = idFormulario;
 	}
 
