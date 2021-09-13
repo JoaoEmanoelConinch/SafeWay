@@ -26,7 +26,7 @@ public class Formulario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY  )
 	@Column(name = "id_formulario", nullable = false, unique = true)
-	private Long idFormulario;
+	private long idFormulario;
 
 	@Column(name = "media_formulario", scale = 2, precision = 1, nullable = false)
 	private double media;
@@ -63,6 +63,10 @@ public class Formulario implements Serializable {
 	private UsuarioCadastrado usuario;
 	
 	public Formulario() {}
+	
+	public Formulario(long idFormulario) {
+		setIdFormulario(idFormulario);
+	}
 
 	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
 	 String comentario, boolean bloqueioRuas, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
@@ -80,7 +84,7 @@ public class Formulario implements Serializable {
 
 	}
 
-	public Formulario(Long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
+	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
 	boolean latrocinio, boolean bloqueioRuas, double media, String comentario, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
 
 		setIdFormulario(idFormulario);
@@ -96,6 +100,21 @@ public class Formulario implements Serializable {
 		setIdUsuario(idUsuario);
 
 	}
+	
+	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
+			boolean latrocinio, boolean bloqueioRuas, String comentario) {
+
+				setIdFormulario(idFormulario);
+				setLesaoCorporal(lesaoCorporal);
+				setFurto(furto);
+				setRoubo(roubo);
+				setHomicidio(homicidio);
+				setLatrocinio(latrocinio);
+				setComentario(comentario);
+				setBloqueioRuas(bloqueioRuas);
+				setIdPontoAvaliado(idPontoAvaliado);
+
+			}
 
 	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
 	 String comentario, boolean bloqueioRuas, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
@@ -113,7 +132,7 @@ public class Formulario implements Serializable {
 
 	}
 
-	public Long getIdFormulario() {
+	public long getIdFormulario() {
 		return idFormulario;
 	}
 
