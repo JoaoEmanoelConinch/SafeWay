@@ -71,6 +71,15 @@ public class Ponto implements Serializable {
 		return ConsultaPonto.informatLocal(local);
 	}
 
+	public static Ponto informatLocal(String local, int posicao)
+			throws StatusInvalidoException{
+		return ConsultaPonto.informatLocal(local, posicao);
+	}
+
+	public static List<Ponto> informatLocais(String local){
+		return ConsultaPonto.informatLocais(local);
+	}
+
 	public void setId(Long id) {
 		this.idPonto = id;
 	}
