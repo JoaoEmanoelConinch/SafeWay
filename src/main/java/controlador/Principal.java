@@ -17,10 +17,10 @@ public class Principal {
 
 	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException, JsonParseException, JsonMappingException, IOException{
 		
-		Ponto p = Ponto.informatLocal("Rua silvano candido da silva senior, 2491 Blumenau");
-
-		System.out.println(p.getLatitude());
-		System.out.println(p.getLongitude());
+//		Ponto p = Ponto.informatLocal("Rua silvano candido da silva senior, 2491 Blumenau");
+//
+//		System.out.println(p.getLatitude());
+//		System.out.println(p.getLongitude());
 
 		Ponto p1 = new Ponto(-26.902611, -49.077709);
 		Ponto p2 = new Ponto(-26.911260, -49.081609);
@@ -28,5 +28,6 @@ public class Principal {
 		Trajeto trajeto = new Trajeto(p1,p2, MeioDeTransporte.DRIVING_CAR);
 
 		System.out.println(trajeto.getPontos());
+		
 	}
 }

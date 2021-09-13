@@ -1,5 +1,6 @@
 package controlador.consultaAPI;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +25,13 @@ public class ConsultaPonto {
 			"https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110&text="
 			+ localParaURL);
                 
-		Object latitude = jsonObject.getJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates").get(0);
-		Object longitude = jsonObject.getJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates").get(1);
+		BigDecimal latitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates").get(0);
+		BigDecimal longitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates").get(1);
 
 		Ponto ponto = new Ponto();
 
-		ponto.setLatitude((double) latitude);
-		ponto.setLongitude((double) longitude);
+		ponto.setLatitude(latitude.doubleValue());
+		ponto.setLongitude(longitude.doubleValue());
 		
 		return ponto;
 	}
@@ -46,13 +47,13 @@ public class ConsultaPonto {
 			"https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110&text="
 			+ localParaURL);
                 
-		Object latitude = jsonObject.getJSONArray("features").getJSONObject(posicao).getJSONObject("geometry").getJSONArray("coordinates").get(0);
-		Object longitude = jsonObject.getJSONArray("features").getJSONObject(posicao).getJSONObject("geometry").getJSONArray("coordinates").get(1);
+		BigDecimal latitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(posicao).getJSONObject("geometry").getJSONArray("coordinates").get(0);
+		BigDecimal longitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(posicao).getJSONObject("geometry").getJSONArray("coordinates").get(1);
 
 		Ponto ponto = new Ponto();
 
-		ponto.setLatitude((double) latitude);
-		ponto.setLongitude((double) longitude);
+		ponto.setLatitude(latitude.doubleValue());
+		ponto.setLongitude(longitude.doubleValue());
 		
 		return ponto;
 	}
@@ -73,11 +74,11 @@ public class ConsultaPonto {
 		for (int i = 0; i < tamanho.length(); i++){
 			Ponto ponto = new Ponto();
 
-			Object latitude = jsonObject.getJSONArray("features").getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates").get(0);
-			Object longitude = jsonObject.getJSONArray("features").getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates").get(1);
+			BigDecimal latitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates").get(0);
+			BigDecimal longitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates").get(1);
 
-			ponto.setLatitude((double) latitude);
-			ponto.setLongitude((double) longitude);
+			ponto.setLatitude(latitude.doubleValue());
+			ponto.setLongitude(longitude.doubleValue());
 
 			pontos.add(ponto);
 
