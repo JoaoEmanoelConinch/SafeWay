@@ -74,9 +74,16 @@ public abstract class Usuario {
 		return transporte;
 	}
 
-	public Trajeto trajeto(String inicio, String chegada, MeioDeTransporte transporte) throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException{
+	public Trajeto trajeto(String inicio, String chegada, MeioDeTransporte transporte)
+			throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException{
 
 		return new Trajeto(DefinirPartida(inicio), DefinirDestino(chegada), DefinirTransporte(transporte));
+	}
+
+	public Trajeto trajeto(String inicio, int posicaoInicio, String chegada, int posicaoChegada, MeioDeTransporte transporte)
+			throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException{
+
+		return new Trajeto(DefinirPartida(inicio, posicaoInicio), DefinirDestino(chegada, posicaoChegada),DefinirTransporte(transporte));
 	}
 
 }
