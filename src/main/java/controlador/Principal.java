@@ -15,18 +15,23 @@ import modelo.excecao.usuario.StringVaziaException;
 
 public class Principal {
 
-	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException, JsonParseException, JsonMappingException, IOException{
-		
+	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException,
+			StatusInvalidoException, JsonParseException, JsonMappingException, IOException {
+
 //		Ponto p = Ponto.informatLocal("Rua silvano candido da silva senior, 2491 Blumenau");
 //
 //		System.out.println(p.getLatitude());
 //		System.out.println(p.getLongitude());
 
-		Ponto p1 = new Ponto(8.681495,49.41461);
-		Ponto p2 = new Ponto(8.687872,49.420318);
+		Ponto p1 = new Ponto(8.681495, 49.41461);
+		Ponto p2 = new Ponto(8.687872, 49.420318);
 
-		Trajeto trajeto = new Trajeto(p1,p2, MeioDeTransporte.DRIVING_CAR);
+		Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.DRIVING_CAR);
 
-		System.out.println(trajeto.getPontos());
+		for (int i = 0; i < trajeto.getPontos().size(); i++) {
+			System.out.print(trajeto.getPontos().get(i).getLatitude());
+			System.out.print(" ");
+			System.out.println(trajeto.getPontos().get(i).getLongitude());
+		}
 	}
 }
