@@ -45,13 +45,29 @@ public abstract class Usuario {
 	public static List<Ponto> informatLocais(String local){
 		return Ponto.informatLocais(local);
 	} 
-	
-	public String DefinirPartida(String inicio) {
-		return inicio;
+
+	public Ponto DefinirLocal (String local) throws StatusInvalidoException{
+		return Ponto.informatLocal(local);
 	}
 
-	public String DefinirDestino(String chegada) {
-		return chegada;
+	public Ponto DefinirLocal (String local, int posicao) throws StatusInvalidoException{
+		return Ponto.informatLocal(local, posicao);
+	}
+	
+	public Ponto DefinirPartida(String inicio) throws StatusInvalidoException {
+		return DefinirLocal(inicio);
+	}
+
+	public Ponto DefinirDestino(String chegada) throws StatusInvalidoException {
+		return DefinirLocal(chegada);
+	}
+
+	public Ponto DefinirPartida(String inicio, int posicao) throws StatusInvalidoException {
+		return DefinirLocal(inicio, posicao);
+	}
+
+	public Ponto DefinirDestino(String chegada, int posicao) throws StatusInvalidoException {
+		return DefinirLocal(chegada, posicao);
 	}
 
 	public MeioDeTransporte DefinirTransporte(MeioDeTransporte transporte) {
