@@ -88,16 +88,6 @@ public class Trajeto implements Serializable {
 		this.setUsuariosCadastrados(usuariosCadastrados);
 	}
 
-	public Trajeto(Long id, String inicio, String chegada,  List<Ponto> pontos, MeioDeTransporte transporteUsado, List<UsuarioCadastrado> usuariosCadastrados)
-			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException {
-		this.setIdTrajeto(id);
-		this.setInicio(Ponto.informatLocal(inicio));
-		this.setChegada(Ponto.informatLocal(chegada));
-		this.setTransporteUsado(transporteUsado);
-		this.setPontos(pontos);
-		this.setUsuariosCadastrados(usuariosCadastrados);
-	}
-
 	public Trajeto(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws StatusInvalidoException,
 			JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
 		this.setInicio(inicio);
@@ -111,6 +101,15 @@ public class Trajeto implements Serializable {
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException {
 		this.setInicio(Ponto.informatLocal(inicio));
 		this.setChegada(Ponto.informatLocal(chegada));
+		this.setTransporteUsado(transporteUsado);
+		this.setPontos(criarLineString(Ponto.informatLocal(inicio), Ponto.informatLocal(chegada), transporteUsado));
+		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
+	}
+
+	public Trajeto(String inicio, int posicaoInicio, String chegada, int posicaoChegada, MeioDeTransporte transporteUsado)
+			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException {
+		this.setInicio(Ponto.informatLocal(inicio, posicaoInicio));
+		this.setChegada(Ponto.informatLocal(chegada, posicaoChegada));
 		this.setTransporteUsado(transporteUsado);
 		this.setPontos(criarLineString(Ponto.informatLocal(inicio), Ponto.informatLocal(chegada), transporteUsado));
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
