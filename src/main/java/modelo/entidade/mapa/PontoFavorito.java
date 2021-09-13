@@ -8,8 +8,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -42,7 +40,8 @@ public class PontoFavorito extends Ponto{
 	public PontoFavorito() {}
 
 	public PontoFavorito(Ponto ponto, String nomePonto, UsuarioCadastrado usuario)
-	throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+	throws StatusInvalidoException
+{
 		super(ponto.getLatitude(), ponto.getLongitude());
 		
 		setPonto(ponto);
@@ -75,9 +74,8 @@ public class PontoFavorito extends Ponto{
 		this.usuario = usuario;
 	}
 
-	public static PontoFavorito favoritarPontoENomear(Ponto ponto, String nomePonto,
-	UsuarioCadastrado usuario)
-	throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+	public static PontoFavorito favoritarPontoENomear(Ponto ponto, String nomePonto, UsuarioCadastrado usuario)
+	throws StatusInvalidoException{
 
 		return new PontoFavorito(ponto, nomePonto, usuario);
 

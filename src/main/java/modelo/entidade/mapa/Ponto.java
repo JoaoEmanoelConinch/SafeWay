@@ -22,9 +22,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-
 import controlador.consultaAPI.ConsultaPonto;
 import modelo.excecao.mapa.StatusInvalidoException;
 
@@ -63,14 +60,14 @@ public class Ponto implements Serializable {
 	}
 
 	public Ponto(double latitude, double longitude)
-			throws StatusInvalidoException, JsonMappingException, JsonProcessingException {
+			throws StatusInvalidoException{
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(new ArrayList<Trajeto>());
 	}
 
 	public static Ponto informatLocal(String local)
-			throws JsonMappingException, JsonProcessingException, StatusInvalidoException {
+			throws StatusInvalidoException {
 		return ConsultaPonto.informatLocal(local);
 	}
 
@@ -82,7 +79,7 @@ public class Ponto implements Serializable {
 		return idPonto;
 	}
 
-	private void setLatitude(double latitude) {
+	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
 
@@ -90,7 +87,7 @@ public class Ponto implements Serializable {
 		return this.latitude;
 	}
 
-	private void setLongitude(double longitude) {
+	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 		;
 	}
