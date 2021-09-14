@@ -26,6 +26,7 @@ import org.codehaus.jackson.JsonParseException;
 import controlador.consultaAPI.ConsultaTrajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
+import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
  
@@ -98,7 +99,7 @@ public class Trajeto implements Serializable {
 	}
 
 	public Trajeto(String inicio, String chegada, MeioDeTransporte transporteUsado)
-			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException {
+			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException {
 		this.setInicio(Ponto.informatLocal(inicio));
 		this.setChegada(Ponto.informatLocal(chegada));
 		this.setTransporteUsado(transporteUsado);
@@ -107,7 +108,7 @@ public class Trajeto implements Serializable {
 	}
 
 	public Trajeto(String inicio, int posicaoInicio, String chegada, int posicaoChegada, MeioDeTransporte transporteUsado)
-			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException {
+			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException {
 		this.setInicio(Ponto.informatLocal(inicio, posicaoInicio));
 		this.setChegada(Ponto.informatLocal(chegada, posicaoChegada));
 		this.setTransporteUsado(transporteUsado);
@@ -127,7 +128,7 @@ public class Trajeto implements Serializable {
 		return inicio;
 	}
 
-	public void setInicio(String inicio) throws StatusInvalidoException{
+	public void setInicio(String inicio) throws StatusInvalidoException, NumeroMenorQueZeroException{
 		this.inicio = Ponto.informatLocal(inicio);
 	}
 
@@ -147,8 +148,7 @@ public class Trajeto implements Serializable {
 		return chegada;
 	}
 
-	public void setChegada(String chegada)
-			throws StatusInvalidoException{
+	public void setChegada(String chegada) throws StatusInvalidoException, NumeroMenorQueZeroException{
 		this.chegada = Ponto.informatLocal(chegada);
 	}
 

@@ -23,6 +23,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import controlador.consultaAPI.ConsultaPonto;
+import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
@@ -67,12 +68,12 @@ public class Ponto implements Serializable {
 	}
 
 	public static Ponto informatLocal(String local)
-			throws StatusInvalidoException {
+			throws StatusInvalidoException, NumeroMenorQueZeroException {
 		return ConsultaPonto.informatLocal(local);
 	}
 
 	public static Ponto informatLocal(String local, int posicao)
-			throws StatusInvalidoException{
+			throws StatusInvalidoException, NumeroMenorQueZeroException{
 		return ConsultaPonto.informatLocal(local, posicao);
 	}
 
