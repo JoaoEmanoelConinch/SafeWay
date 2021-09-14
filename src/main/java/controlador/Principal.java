@@ -1,13 +1,19 @@
 package controlador;
 
-import java.io.IOException;
+import java.util.List;
 
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
+import modelo.dao.Formulario.FormularioDAOImpl;
+import modelo.dao.Ponto.PontoDAOImpl;
+import modelo.dao.PontoAvaliado.PontoAvaliadoDAOImpl;
+import modelo.dao.PontoFavorito.PontoFavDAOImpl;
+import modelo.dao.Usuario.UsuarioDAOImpl;
 import modelo.entidade.mapa.Ponto;
-import modelo.entidade.mapa.Trajeto;
-import modelo.enumeracao.mapa.MeioDeTransporte;
+import modelo.entidade.mapa.PontoFavorito;
+import modelo.entidade.usuario.UsuarioCadastrado;
+
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
@@ -16,22 +22,27 @@ import modelo.excecao.usuario.StringVaziaException;
 public class Principal {
 
 	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException,
-			StatusInvalidoException, JsonParseException, JsonMappingException, IOException {
 
-//		Ponto p = Ponto.informatLocal("Rua silvano candido da silva senior, 2491 Blumenau");
-//
-//		System.out.println(p.getLatitude());
-//		System.out.println(p.getLongitude());
+			JsonMappingException, JsonProcessingException, StatusInvalidoException {
 
-		Ponto p1 = new Ponto(8.681495, 49.41461);
-		Ponto p2 = new Ponto(8.687872, 49.420318);
+		UsuarioDAOImpl usuarioDao = new UsuarioDAOImpl();
+		PontoDAOImpl pontoDao = new PontoDAOImpl();
+		FormularioDAOImpl formDao = new FormularioDAOImpl();
+		PontoAvaliadoDAOImpl pontoAvDao = new PontoAvaliadoDAOImpl();
+		PontoFavDAOImpl pontoFavDao = new PontoFavDAOImpl();
+		
+		
+		UsuarioCadastrado usuario = new UsuarioCadastrado(2);
+		List<UsuarioCadastrado> usuario1 = usuarioDao.recuperarUsuario(usuario);
+		UsuarioCadastrado usuario2 = usuario1.get(0);
+		
+		usuarioDao.deletarUsuario(usuario2);
+		
+//		usuarioDao.inserirUsuario(usuario);
 
-		Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.DRIVING_CAR);
+		
+		
+		
 
-		for (int i = 0; i < trajeto.getPontos().size(); i++) {
-			System.out.print(trajeto.getPontos().get(i).getLatitude());
-			System.out.print(" ");
-			System.out.println(trajeto.getPontos().get(i).getLongitude());
-		}
 	}
 }

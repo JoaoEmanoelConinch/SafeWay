@@ -1,5 +1,6 @@
 package modelo.entidade.mapa;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,10 +21,10 @@ public class PontoFavorito extends Ponto{
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "nome_ponto_favorito", length = 20, nullable = false )
+	@Column(name = "nome_ponto_favorito", length = 20, nullable = true )
 	private String nomePonto;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	    @JoinColumn(
 	        name = "id_ponto_favorito",
 	        referencedColumnName = "id_ponto"
@@ -38,6 +39,10 @@ public class PontoFavorito extends Ponto{
 	private UsuarioCadastrado usuario;
 
 	public PontoFavorito() {}
+	
+	public PontoFavorito(long id) {
+		super(id);
+	}
 
 	public PontoFavorito(Ponto ponto, String nomePonto, UsuarioCadastrado usuario)
 	throws StatusInvalidoException
