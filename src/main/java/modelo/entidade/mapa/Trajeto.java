@@ -176,6 +176,20 @@ public class Trajeto implements Serializable {
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
 		 return ConsultaTrajeto.criarLineString(inicio, chegada, transporteUsado);
 	}
+	
+	public List<PontoAvaliado> pegarPontosAvaliadosDoTrageto(){
+		List<PontoAvaliado> pontosAvaliados = new ArrayList<PontoAvaliado>();
+		List<Ponto> pontos = this.getPontos();
+		
+		for (int i = 0; i < pontos.size(); i++) {
+			if (pontos.get(i).getClass().equals("PontoAvaliado")){
+				pontosAvaliados.add((PontoAvaliado) pontos.get(i));
+			}
+		}
+		
+		return pontosAvaliados;
+		
+	}
 
 	public void addPonto (Ponto ponto){
 		pontos.add(ponto);
