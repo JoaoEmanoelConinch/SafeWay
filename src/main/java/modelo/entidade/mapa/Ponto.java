@@ -37,7 +37,7 @@ public class Ponto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ponto", nullable = false, unique = true)
-	private Long idPonto;
+	private long idPonto;
 
 	@Column(name = "latitude", nullable = false)
 	@Type(type = "double")
@@ -52,10 +52,13 @@ public class Ponto implements Serializable {
 	@Fetch(FetchMode.JOIN)
 	private List<Trajeto> trajetos;
 
-	public Ponto() {
+	public Ponto() {}
+	
+	public Ponto(long id) {
+		setId(id);
 	}
 
-	public Ponto(Long idPonto, double latitude, double longitude, List<Trajeto> trajetos) {
+	public Ponto(long idPonto, double latitude, double longitude, List<Trajeto> trajetos) {
 		this.setId(idPonto);
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
@@ -82,10 +85,11 @@ public class Ponto implements Serializable {
 	}
 
 	public void setId(Long id) {
+
 		this.idPonto = id;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return idPonto;
 	}
 
