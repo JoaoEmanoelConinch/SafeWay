@@ -201,8 +201,16 @@ public class Trajeto implements Serializable {
 		return medias;
 	}
 	
-	public boolean verificarSePontosExixtemEm(List<Ponto> pontos) {
-		return pontos.containsAll(this.getPontos());
+	public List<Ponto> verificarQuaisPontosExixtemEm(List<Ponto> pontos) {
+		List<Ponto> pontosNaoExistentes = new ArrayList<Ponto>();
+		
+		for (int i = 0; i < this.getPontos().size();i++){
+			if (!(pontos.contains(this.getPontos().get(i)))) {
+				pontosNaoExistentes.add(this.getPontos().get(i));
+			}
+		}
+		
+		return pontosNaoExistentes;
 	}
 
 	public void addPonto (Ponto ponto){
