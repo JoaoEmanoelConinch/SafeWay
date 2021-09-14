@@ -13,8 +13,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 
 import modelo.entidade.formulario.Formulario;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -64,7 +62,7 @@ public class PontoAvaliado extends Ponto{
 	long quantidadeLezoesCorporais, long quantidadeFurtos, long quantidadeRoubos,
 	long quantidadeHomicidios, long quantidadeLatrocinio, boolean bloqueio,
 	double mediaDeAvaliacao)
-	throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
+	throws StatusInvalidoException{
 		super(ponto.getLatitude(),ponto.getLongitude());
 		
 		setId(idPontoAvaliado);
@@ -80,7 +78,7 @@ public class PontoAvaliado extends Ponto{
 	}
 
 	public PontoAvaliado(Ponto ponto, Formulario avaliacao)
-	throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
+	throws StatusInvalidoException{
 		super(ponto.getLatitude(),ponto.getLongitude());
 		
 		setPonto(ponto);
@@ -88,7 +86,7 @@ public class PontoAvaliado extends Ponto{
 		this.addAvaliacao(avaliacao);
 	}
 
-	public PontoAvaliado(Ponto ponto) throws JsonMappingException, JsonProcessingException, StatusInvalidoException{
+	public PontoAvaliado(Ponto ponto) throws StatusInvalidoException{
 		super(ponto.getLatitude(),ponto.getLongitude());
 
 		this.setAvaliacoes(new ArrayList<Formulario>());
@@ -240,7 +238,7 @@ public class PontoAvaliado extends Ponto{
 	}
 
 	public static PontoAvaliado CriarPonto(Ponto ponto, Formulario avaliacao)
-			throws NullPointerException, StatusInvalidoException, JsonMappingException, JsonProcessingException {
+			throws NullPointerException, StatusInvalidoException{
 
 		PontoAvaliado pontoAvaliado = new PontoAvaliado(ponto, avaliacao);
 
@@ -248,7 +246,7 @@ public class PontoAvaliado extends Ponto{
 	}
 
 	public static PontoAvaliado criarPontoAvaliado(Ponto ponto)
-			throws NullPointerException, StatusInvalidoException, JsonMappingException, JsonProcessingException {
+			throws NullPointerException, StatusInvalidoException{
 
 		PontoAvaliado pontoAvaliado = new PontoAvaliado(ponto);
 

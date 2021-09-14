@@ -13,6 +13,7 @@ import modelo.dao.Usuario.UsuarioDAOImpl;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.usuario.UsuarioCadastrado;
+
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
@@ -21,6 +22,7 @@ import modelo.excecao.usuario.StringVaziaException;
 public class Principal {
 
 	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException,
+
 			JsonMappingException, JsonProcessingException, StatusInvalidoException {
 
 		UsuarioDAOImpl usuarioDao = new UsuarioDAOImpl();
@@ -41,5 +43,6 @@ public class Principal {
 		
 		
 		
+
 	}
 }
