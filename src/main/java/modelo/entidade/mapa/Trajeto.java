@@ -188,7 +188,17 @@ public class Trajeto implements Serializable {
 		}
 		
 		return pontosAvaliados;
+	}
+	
+	public List<Double> pegarMediasDosPontosAvaliadosDoTrageto() {
+		List<Double> medias = new ArrayList<Double>();
+		List<PontoAvaliado> pontosAvaliados = pegarPontosAvaliadosDoTrageto();
 		
+		for (int i = 0; i < pontosAvaliados.size(); i++) {
+			medias.add(pontosAvaliados.get(i).getMediaDeAvaliacao());
+		}
+		
+		return medias;
 	}
 
 	public void addPonto (Ponto ponto){
