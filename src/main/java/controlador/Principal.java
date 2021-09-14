@@ -1,19 +1,20 @@
 package controlador;
 
-import java.util.List;
+import java.io.IOException;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
 
 import modelo.dao.Formulario.FormularioDAOImpl;
 import modelo.dao.Ponto.PontoDAOImpl;
 import modelo.dao.PontoAvaliado.PontoAvaliadoDAOImpl;
 import modelo.dao.PontoFavorito.PontoFavDAOImpl;
+import modelo.dao.Trajeto.TrajetoDAOImpl;
 import modelo.dao.Usuario.UsuarioDAOImpl;
+import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
-import modelo.entidade.mapa.PontoFavorito;
+import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.usuario.UsuarioCadastrado;
-
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
@@ -21,36 +22,45 @@ import modelo.excecao.usuario.StringVaziaException;
 
 public class Principal {
 
-	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException,
-
-			JsonMappingException, JsonProcessingException, StatusInvalidoException {
+	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException, JsonParseException, JsonMappingException, IOException {
 
 		UsuarioDAOImpl usuarioDao = new UsuarioDAOImpl();
 		PontoDAOImpl pontoDao = new PontoDAOImpl();
 		FormularioDAOImpl formDao = new FormularioDAOImpl();
 		PontoAvaliadoDAOImpl pontoAvDao = new PontoAvaliadoDAOImpl();
 		PontoFavDAOImpl pontoFavDao = new PontoFavDAOImpl();
+		TrajetoDAOImpl trajetoDao = new TrajetoDAOImpl();
 		
+		Ponto p1 = new Ponto(-26.456, 12.212);
 		
-		UsuarioCadastrado usuario = new UsuarioCadastrado(2);
-		List<UsuarioCadastrado> usuario1 = usuarioDao.recuperarUsuario(usuario);
-		UsuarioCadastrado usuario2 = usuario1.get(0);
+		pontoDao.inserirPonto(p1);
 		
-		usuarioDao.deletarUsuario(usuario2);
+		UsuarioCadastrado usuario = new UsuarioCadastrado("teste", "789654123", "teste12@email.com");
+		usuarioDao.inserirUsuario(usuario);
 		
-//		usuarioDao.inserirUsuario(usuario);
+		UsuarioCadastrado usuario2 = new UsuarioCadastrado("teste2", "789654123", "teste21@email.com");
+		usuarioDao.inserirUsuario(usuario2);
+		
 
+		Formulario form = new Formulario(true, false, false, false, false, "levei um soco :( mas não tinha bloqueio :)", false, p1, usuario);
+		formDao.inserirAvaliacao(form);
 		
+		Formulario form2 = new Formulario(false, true, false, false, false, "furtaram minha bolsa :(", false, p1, usuario2);
+		formDao.inserirAvaliacao(form2);
 		
+		PontoAvaliado pontoAv = new PontoAvaliado(p1);
+		pontoAvDao.adicionarPontoAvaliado(pontoAv);
 		
+		pontoAv.addAvaliacao(form);
+		pontoAv.addAvaliacao(form2);
+		
+		pontoAvDao.adicionarPontoAvaliado(pontoAv);
+		
+		System.out.println(formDao.recuperarAvaliacoes(pontoAv));
+		
+//		Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.FOOT_WALKING);
 
-//		for (int i = 0; i < trajeto.getPontos().size(); i++) {
-//			System.out.print(trajeto.getPontos().get(i).getLatitude());
-//			System.out.print(" ");
-//			System.out.println(trajeto.getPontos().get(i).getLongitude());
-//		}
-		
-		System.out.println(trajeto.pegarMediasDosPontosAvaliadosDoTrageto());
+//		trajetoDao.inserirTrajeto(trajeto);
 
 	}
 }
