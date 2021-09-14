@@ -177,8 +177,6 @@ public class Trajeto implements Serializable {
 		 return ConsultaTrajeto.criarLineString(inicio, chegada, transporteUsado);
 	}
 	
-	
-	
 	public List<PontoAvaliado> pegarPontosAvaliadosDoTrageto(){
 		List<PontoAvaliado> pontosAvaliados = new ArrayList<PontoAvaliado>();
 		List<Ponto> pontos = this.getPontos();
@@ -201,6 +199,10 @@ public class Trajeto implements Serializable {
 		}
 		
 		return medias;
+	}
+	
+	public boolean verificarSePontosExixtemEm(List<Ponto> pontos) {
+		return pontos.containsAll(this.getPontos());
 	}
 
 	public void addPonto (Ponto ponto){
