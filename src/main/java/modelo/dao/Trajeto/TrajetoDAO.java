@@ -14,7 +14,7 @@ public interface TrajetoDAO {
 
     List<Trajeto> recuperarTrajeto(Trajeto trajeto);
     
-    List<Trajeto> recuperar
+   
     	
     
 }

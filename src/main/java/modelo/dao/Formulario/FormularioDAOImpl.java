@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -14,6 +15,8 @@ import modelo.entidade.formulario.Formulario_;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.mapa.Trajeto_;
+import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.entidade.usuario.UsuarioCadastrado_;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class FormularioDAOImpl implements FormularioDAO {
@@ -156,10 +159,10 @@ public class FormularioDAOImpl implements FormularioDAO {
 		return formularios;
 	}
 
-	public List<Formulario> recuperarAvaliacao(Formulario form) {
+	public Formulario recuperarAvaliacaoId(Formulario form) {
 
 		Session sessao = null;
-		List<Formulario> forms = null;
+		Formulario formulario = null;
 
 		try {
 
@@ -169,14 +172,13 @@ public class FormularioDAOImpl implements FormularioDAO {
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
 			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
-			Root<Formulario> raizTrajeto = criteria.from(Formulario.class);
+			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
 
-			criteria.select(raizTrajeto)
-					.where(construtor.equal(raizTrajeto.get(Formulario_.ID_FORMULARIO), form.getIdFormulario()));
+			ParameterExpression<Long> idForm = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(raizFormulario.get(Formulario_.ID_FORMULARIO), idForm));
 
-			TypedQuery<Formulario> queryForm = sessao.createQuery(criteria);
-			forms = queryForm.getResultList();
-
+			formulario = sessao.createQuery(criteria).setParameter(idForm, form.getIdFormulario()).getSingleResult();
+			
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
@@ -194,7 +196,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 			}
 		}
 
-		return forms;
+		return formulario;
 
 	}
 
