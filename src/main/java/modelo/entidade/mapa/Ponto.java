@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.spi.ObjectFactory;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,7 +52,8 @@ public class Ponto implements Serializable {
 	@Fetch(FetchMode.JOIN)
 	private List<Trajeto> trajetos;
 
-	public Ponto() {}
+	public Ponto() {
+	}
 
 	public Ponto(Long idPonto, double latitude, double longitude, List<Trajeto> trajetos) {
 		this.setId(idPonto);
@@ -60,24 +62,22 @@ public class Ponto implements Serializable {
 		this.setTrajetos(trajetos);
 	}
 
-	public Ponto(double latitude, double longitude)
-			throws StatusInvalidoException{
+	public Ponto(double latitude, double longitude) throws StatusInvalidoException {
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(new ArrayList<Trajeto>());
 	}
 
-	public static Ponto informatLocal(String local)
-			throws StatusInvalidoException, NumeroMenorQueZeroException {
+	public static Ponto informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException {
 		return ConsultaPonto.informatLocal(local);
 	}
 
 	public static Ponto informatLocal(String local, int posicao)
-			throws StatusInvalidoException, NumeroMenorQueZeroException{
+			throws StatusInvalidoException, NumeroMenorQueZeroException {
 		return ConsultaPonto.informatLocal(local, posicao);
 	}
 
-	public static List<Ponto> informatLocais(String local){
+	public static List<Ponto> informatLocais(String local) {
 		return ConsultaPonto.informatLocais(local);
 	}
 
@@ -125,6 +125,28 @@ public class Ponto implements Serializable {
 
 	public String TransformarVetorEmString() {
 		return transformarPontoEmVetor().toString();
+	}
+
+	@Override
+	public boolean equals(Object objeto) {
+		
+		if (this == objeto)
+			return true;
+
+		if (objeto == null)
+			return false;
+
+		if (getClass() != objeto.getClass())
+			return false;
+		
+		Ponto ponto = (Ponto) objeto;
+		
+		if (!(this.getLatitude() == ponto.getLatitude())||!(this.getLongitude() == ponto.getLongitude())) {
+			return false;
+		}
+		
+		return true;
+		
 	}
 
 	public void addTrajeto(Trajeto trajeto) {

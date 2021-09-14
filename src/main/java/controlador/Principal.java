@@ -28,10 +28,13 @@ public class Principal {
 
 		Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.DRIVING_CAR);
 
-		for (int i = 0; i < trajeto.getPontos().size(); i++) {
-			System.out.print(trajeto.getPontos().get(i).getLatitude());
-			System.out.print(" ");
-			System.out.println(trajeto.getPontos().get(i).getLongitude());
-		}
+//		for (int i = 0; i < trajeto.getPontos().size(); i++) {
+//			System.out.print(trajeto.getPontos().get(i).getLatitude());
+//			System.out.print(" ");
+//			System.out.println(trajeto.getPontos().get(i).getLongitude());
+//		}
+		
+		System.out.println(trajeto.pegarMediasDosPontosAvaliadosDoTrageto());
+		
 	}
 }
