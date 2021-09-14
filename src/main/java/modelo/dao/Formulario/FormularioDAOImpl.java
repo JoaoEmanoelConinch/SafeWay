@@ -5,14 +5,18 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
+
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.formulario.Formulario_;
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
+import modelo.entidade.mapa.Ponto_;
 import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.mapa.Trajeto_;
 import modelo.entidade.usuario.UsuarioCadastrado;
@@ -119,27 +123,26 @@ public class FormularioDAOImpl implements FormularioDAO {
 	public List<Formulario> recuperarAvaliacoes(PontoAvaliado ponto) {
 
 		Session sessao = null;
-		List<Formulario> formularios = null;
+		List<Formulario> forms = null;
 
 		try {
 
-//			sessao = fabrica.getConexao().openSession();
-//			sessao.beginTransaction();
-//
-//			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-//
-//			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
-//			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
-//
-//			Join<Formulario, PontoAvaliado> juncaoPonto = raizFormulario.join(Formulario_.PontoFavorito);
-//
-//			ParameterExpression<Long> idPontoAvaliado = construtor.parameter(Long.class);
-//			criteria.where(construtor.equal(juncaoPonto.get(PontoAva_.ID), idPontoAvaliado));
-//
-//			formularios = sessao.createQuery(criteria).setParameter(idPontoAvaliado, ponto.getIdPontoAvaliado())
-//					.getResultList();
-//
-//			sessao.getTransaction().commit();
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
+			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
+
+			Join<Formulario, Ponto> juncaoPonto = raizFormulario.join(Formulario_.idPontoAvaliado);
+
+			ParameterExpression<Long> IdPonto = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoPonto.get(Ponto_.ID_PONTO), IdPonto));
+
+			forms = sessao.createQuery(criteria).setParameter(IdPonto, ponto.getId()).getResultList();
+
+			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
 
@@ -156,7 +159,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 			}
 		}
 
-		return formularios;
+		return forms;
 	}
 
 	public Formulario recuperarAvaliacaoId(Formulario form) {
