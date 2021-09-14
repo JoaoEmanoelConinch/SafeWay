@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -13,6 +14,7 @@ import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.mapa.Trajeto_;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.entidade.usuario.UsuarioCadastrado_;
+import modelo.entidade.usuario.Usuario_;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
@@ -60,6 +62,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
+			
+			
 			sessao.delete(usuario);
 
 			sessao.getTransaction().commit();
@@ -109,10 +113,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	}
 
-	public List<UsuarioCadastrado> recuperarUsuario(UsuarioCadastrado usuario) {
+	public UsuarioCadastrado recuperarUsuario(UsuarioCadastrado usuario) {
 
 		Session sessao = null;
-		List<UsuarioCadastrado> usuarios = null;
+		UsuarioCadastrado usuario1 = null;
 
 		try {
 
@@ -124,12 +128,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			CriteriaQuery<UsuarioCadastrado> criteria = construtor.createQuery(UsuarioCadastrado.class);
 			Root<UsuarioCadastrado> raizUsuario = criteria.from(UsuarioCadastrado.class);
 
-			criteria.select(raizUsuario)
-					.where(construtor.equal(raizUsuario.get(UsuarioCadastrado_.id), usuario.getId()));
+			ParameterExpression<Long> idUsuario = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(raizUsuario.get(UsuarioCadastrado_.ID), idUsuario)); //usuario.getId()
 
-			TypedQuery<UsuarioCadastrado> queryPonto = sessao.createQuery(criteria);
-			usuarios = queryPonto.getResultList();
-
+			usuario1 = sessao.createQuery(criteria).setParameter(idUsuario, usuario.getId()).getSingleResult();
+			
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
@@ -147,7 +150,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			}
 		}
 
-		return usuarios;
+		return usuario1;
 
 	}
 
