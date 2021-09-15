@@ -61,6 +61,10 @@ public class PontoAvaliado extends Ponto{
 		super(id);
 	}
 	
+	public PontoAvaliado(double media) {
+		setMediaDeAvaliacao(media);
+	}
+	
 
 	public PontoAvaliado(long idPontoAvaliado, Ponto ponto, ArrayList<Formulario> avaliacoes,
 	long quantidadeLezoesCorporais, long quantidadeFurtos, long quantidadeRoubos,

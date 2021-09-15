@@ -2,6 +2,7 @@ package modelo.dao.PontoAvaliado;
 
 import java.util.List;
 
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
@@ -122,68 +123,27 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 	}
 
-	public List<PontoAvaliado> recuperarPontoAvMaiorQue(int nota) {
+	public List<PontoAvaliado> recuperarPontoAvaliadoMediaIgual(PontoAvaliado ponto) {
 
 		Session sessao = null;
 		List<PontoAvaliado> pontos = null;
 
 		try {
 
-//			sessao = fabrica.getConexao().openSession();
-//			sessao.beginTransaction();
-//
-//			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-//
-//			CriteriaQuery<PontoAvaliado> criteria = construtor.createQuery(PontoAvaliado.class);
-//			Root<PontoAvaliado> raizPonto = criteria.from(PontoAvaliado.class);
-//
-//			criteria.select(raizPonto).where(construtor.ge(raizPonto.get(Media_.mediaDeAvaliacao), nota));
-//
-//			TypedQuery<PontoAvaliado> queryPonto = sessao.createQuery(criteria);
-//			pontos = queryPonto.getResultList();
-//
-//			sessao.getTransaction().commit();
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
 
-		} catch (Exception sqlException) {
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			sqlException.printStackTrace();
+			CriteriaQuery<PontoAvaliado> criteria = construtor.createQuery(PontoAvaliado.class);
+			Root<PontoAvaliado> raizPonto = criteria.from(PontoAvaliado.class);
 
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
+			criteria.select(raizPonto).where(construtor.equal(raizPonto.get(PontoAvaliado_.mediaDeAvaliacao), ponto));
 
-		} finally {
+			TypedQuery<PontoAvaliado> queryPonto = sessao.createQuery(criteria);
+			pontos = queryPonto.getResultList();
 
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-		return pontos;
-
-	}
-
-	public List<PontoAvaliado> recuperarPontoAvMenorQue(int nota) {
-	
-		Session sessao = null;
-		List<PontoAvaliado> pontos = null;
-
-		try {
-
-//			sessao = fabrica.getConexao().openSession();
-//			sessao.beginTransaction();
-//
-//			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-//
-//			CriteriaQuery<PontoAvaliado> criteria = construtor.createQuery(PontoAvaliado.class);
-//			Root<PontoAvaliado> raizPonto = criteria.from(PontoAvaliado.class);
-//
-//			criteria.select(raizPonto).where(construtor.lessThan(raizPonto.get(Media_.mediaDeAvaliacao), nota));
-//
-//			TypedQuery<PontoAvaliado> queryPonto = sessao.createQuery(criteria);
-//			pontos = queryPonto.getResultList();
-//
-//			sessao.getTransaction().commit();
+			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
 
@@ -205,7 +165,7 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 	}
 
 	public PontoAvaliado recuperarPontoAvaId(PontoAvaliado ponto) {
-		
+
 		Session sessao = null;
 		PontoAvaliado pontoAv = null;
 
@@ -223,7 +183,7 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 			criteria.where(construtor.equal(raizPontoAv.get(PontoAvaliado_.ID_PONTO), idPontoAv));
 
 			pontoAv = sessao.createQuery(criteria).setParameter(idPontoAv, ponto.getId()).getSingleResult();
-			
+
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
@@ -242,7 +202,7 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 		}
 
 		return pontoAv;
-		
+
 	}
 
 }
