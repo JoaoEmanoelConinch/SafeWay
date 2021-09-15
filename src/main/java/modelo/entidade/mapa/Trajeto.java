@@ -77,6 +77,10 @@ public class Trajeto implements Serializable {
 
 	public Trajeto() {
 	}
+	
+	public Trajeto(long id) {
+		setIdTrajeto(id);
+	}
 
 	public Trajeto(Long id, Ponto inicio, Ponto chegada, List<Ponto> pontos, MeioDeTransporte transporteUsado, List<UsuarioCadastrado> usuariosCadastrados)
 			throws StatusInvalidoException, JsonParseException, org.codehaus.jackson.map.JsonMappingException,
