@@ -236,7 +236,7 @@ public class PontoAvaliado extends Ponto{
 	}
 
 	private double calcularMediaPonto(){
-		long media = 0;
+		double media = 0;
 		List<Formulario> avaliacoesList = this.getAvaliacoes();
 
 		for (int i = 0; i < avaliacoesList.size(); i++){
