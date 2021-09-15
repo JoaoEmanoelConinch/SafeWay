@@ -49,7 +49,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinTable(name = "usuario_trajeto",
-	joinColumns = @JoinColumn(name = "id"),
+	joinColumns = @JoinColumn(name = "id_usuario"),
 	inverseJoinColumns = @JoinColumn(name = "id_trajeto")
 	)
 	private List<Trajeto> trajetos;

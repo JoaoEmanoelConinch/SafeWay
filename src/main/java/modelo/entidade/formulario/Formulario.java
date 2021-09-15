@@ -3,6 +3,7 @@ package modelo.entidade.formulario;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
@@ -24,7 +28,7 @@ public class Formulario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY  )
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_formulario", nullable = false, unique = true)
 	private long idFormulario;
 
@@ -52,13 +56,20 @@ public class Formulario implements Serializable {
 	@Column(name = "comentario_Formulario", length = 300, nullable = true)
 	private String comentario;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@JoinColumn(name = "idPontoAvaliado_id_ponto",
+				referencedColumnName = "id_ponto",
+				nullable = false
+			)
 	private Ponto idPontoAvaliado;
+	
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	 @JoinColumn(
 		        name = "id_usuario",
-		        referencedColumnName = "id_usuario"
+		        referencedColumnName = "id_usuario",
+		        nullable = true
 		    )
 	private UsuarioCadastrado usuario;
 	

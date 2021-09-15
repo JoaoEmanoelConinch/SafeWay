@@ -8,11 +8,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import modelo.entidade.formulario.Formulario;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -25,35 +28,39 @@ public class PontoAvaliado extends Ponto{
 	private static final long serialVersionUID = 1L;
 
 	@OneToMany(
-        mappedBy = "idPontoAvaliado",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true)
-	private List<Formulario> avaliacoes;
+	        mappedBy = "idPontoAvaliado",
+	        cascade = CascadeType.ALL,
+	        orphanRemoval = true)
+		private List<Formulario> avaliacoes;
 
-	@Column(name = "quantidade_lesoes_corporais_ponto_avaliado", nullable = false)
-	private long quantidadeLesoesCorporais;
-	
-	@Column(name = "quantidade_furtos_ponto_avaliado", nullable = false)
-	private long quantidadeFurtos;
+		@Column(name = "quantidade_lesoes_corporais_ponto_avaliado", nullable = false)
+		private long quantidadeLesoesCorporais;
+		
+		@Column(name = "quantidade_furtos_ponto_avaliado", nullable = false)
+		private long quantidadeFurtos;
 
-	@Column(name = "quantidade_roubos_ponto_avaliado", nullable = false)
-	private long quantidadeRoubos;
+		@Column(name = "quantidade_roubos_ponto_avaliado", nullable = false)
+		private long quantidadeRoubos;
 
-	@Column(name = "quantidade_homicidios_ponto_avaliado", nullable = false)
-	private long quantidadeHomicidios;
+		@Column(name = "quantidade_homicidios_ponto_avaliado", nullable = false)
+		private long quantidadeHomicidios;
 
-	@Column(name = "quantidade_latrocinio_ponto_avaliado", nullable = false)
-	private long quantidadeLatrocinio;
+		@Column(name = "quantidade_latrocinio_ponto_avaliado", nullable = false)
+		private long quantidadeLatrocinio;
 
-	@Column(name = "nivel_Bloqueio_Ponto_Avaliado", nullable = false)
-	private boolean bloqueio;
+		@Column(name = "nivel_Bloqueio_Ponto_Avaliado", nullable = false)
+		private boolean bloqueio;
 
-	@Column(name = "media_Avaliacao_Ponto_Avaliado", nullable = false)
-	private double mediaDeAvaliacao;
+		@Column(name = "media_Avaliacao_Ponto_Avaliado", nullable = false)
+		private double mediaDeAvaliacao;
 
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_ponto")
-	private Ponto ponto;	
+		@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+		@OnDelete(action = OnDeleteAction.CASCADE)
+	        @MapsId
+	    @JoinColumn(name = "id_ponto",
+	    			referencedColumnName = "id_ponto",
+	    			nullable = false)
+		private Ponto ponto;		
 
 	public PontoAvaliado() {}
 	

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.spi.ObjectFactory;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,7 +47,7 @@ public class Ponto implements Serializable {
 	private double longitude;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "ponto_trajeto", joinColumns = @JoinColumn(name = "id_ponto"), inverseJoinColumns = @JoinColumn(name = "id_trageto"))
+	@JoinTable(name = "ponto_trajeto", joinColumns = @JoinColumn(name = "id_ponto"))
 	@Fetch(FetchMode.JOIN)
 	private List<Trajeto> trajetos;
 

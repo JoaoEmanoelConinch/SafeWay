@@ -21,7 +21,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.JsonParseException;
-
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import controlador.consultaAPI.ConsultaTrajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
@@ -37,30 +38,35 @@ public class Trajeto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_trajeto", nullable = false, unique = true)
 	private Long idTrajeto;
 
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(
         name = "id_partida_trajeto",
-        referencedColumnName = "id_ponto")
+        referencedColumnName = "id_ponto",
+        nullable = false)
 	private Ponto inicio;
 
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL })
     @JoinTable(name = "ponto_trajeto",
     joinColumns = @JoinColumn(name = "id_trajeto"),
     inverseJoinColumns = @JoinColumn(name = "id_ponto")
     )
 	private List<Ponto> pontos;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(
         name = "id_chegada_trajeto",
-        referencedColumnName = "id_ponto")
+        referencedColumnName = "id_ponto",
+        nullable = false)
 	private Ponto chegada;
 
 	@Column(name = "Meio_transporte", nullable = false)
@@ -68,12 +74,13 @@ public class Trajeto implements Serializable {
 	private MeioDeTransporte transporteUsado;
 	
 
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL})
 	    @JoinTable(name = "usuario_trajeto",
 	    joinColumns = @JoinColumn(name = "id_trajeto"),
 	    inverseJoinColumns = @JoinColumn(name = "id_usuario")
 	    )
 	private List<UsuarioCadastrado> usuariosCadastrados;
+
 
 	public Trajeto() {
 	}

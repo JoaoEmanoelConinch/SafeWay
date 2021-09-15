@@ -14,6 +14,7 @@ import modelo.dao.Usuario.UsuarioDAOImpl;
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
+import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
@@ -31,6 +32,7 @@ public class Principal {
 		PontoFavDAOImpl pontoFavDao = new PontoFavDAOImpl();
 		TrajetoDAOImpl trajetoDao = new TrajetoDAOImpl();
 		
+		
 		Ponto p1 = new Ponto(-26.456, 12.212);
 		
 		pontoDao.inserirPonto(p1);
@@ -39,24 +41,34 @@ public class Principal {
 		usuarioDao.inserirUsuario(usuario);
 		
 		UsuarioCadastrado usuario2 = new UsuarioCadastrado("teste2", "789654123", "teste21@email.com");
+		
 		usuarioDao.inserirUsuario(usuario2);
 		
-
-		Formulario form = new Formulario(true, false, false, false, false, "levei um soco :( mas não tinha bloqueio :)", false, p1, usuario);
-		formDao.inserirAvaliacao(form);
+		usuarioDao.inserirUsuario(usuario);
 		
-		Formulario form2 = new Formulario(false, true, false, false, false, "furtaram minha bolsa :(", false, p1, usuario2);
-		formDao.inserirAvaliacao(form2);
+		usuarioDao.inserirUsuario(usuario2);
 		
-		PontoAvaliado pontoAv = new PontoAvaliado(p1);
-		pontoAvDao.adicionarPontoAvaliado(pontoAv);
+		PontoFavorito pontoFav = new PontoFavorito(-26.456, 12.212 , "ENOIS", usuario);
 		
-		pontoAv.addAvaliacao(form);
-		pontoAv.addAvaliacao(form2);
+		pontoFavDao.inserirPontoFav(pontoFav);
 		
-		pontoAvDao.adicionarPontoAvaliado(pontoAv);
+		usuario.addFavorito(pontoFav);
 		
-		System.out.println(formDao.recuperarAvaliacoes(pontoAv));
+		usuario2.addFavorito(pontoFav);
+//
+//		Formulario form = new Formulario(true, false, false, false, false, "levei um soco :( mas não tinha bloqueio :)", false, p1, usuario);
+//		formDao.inserirAvaliacao(form);
+//		
+//		Formulario form2 = new Formulario(false, true, false, false, false, "furtaram minha bolsa :(", false, p1, usuario2);
+//		formDao.inserirAvaliacao(form2);
+//		
+//		PontoAvaliado pontoAv = new PontoAvaliado(p1);
+//		
+//	
+//		
+//		pontoAvDao.adicionarPontoAvaliado(pontoAv);
+//		
+//		System.out.println(formDao.recuperarAvaliacoes(pontoAv));
 		
 //		Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.FOOT_WALKING);
 
