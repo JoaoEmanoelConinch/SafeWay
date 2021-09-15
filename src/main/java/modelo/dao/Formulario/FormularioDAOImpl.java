@@ -11,13 +11,16 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
+
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.formulario.Formulario_;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
-import modelo.entidade.mapa.PontoAvaliado_;
+import modelo.entidade.mapa.Ponto_;
 import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.mapa.Trajeto_;
+import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.entidade.usuario.UsuarioCadastrado_;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class FormularioDAOImpl implements FormularioDAO {
@@ -120,7 +123,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 	public List<Formulario> recuperarAvaliacoes(PontoAvaliado ponto) {
 
 		Session sessao = null;
-		List<Formulario> formularios = null;
+		List<Formulario> forms = null;
 
 		try {
 
@@ -134,51 +137,11 @@ public class FormularioDAOImpl implements FormularioDAO {
 
 			Join<Formulario, Ponto> juncaoPonto = raizFormulario.join(Formulario_.idPontoAvaliado);
 
-			ParameterExpression<Long> idPontoAvaliado = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(juncaoPonto.get(PontoAvaliado_.ID_PONTO), idPontoAvaliado));
 
-			formularios = sessao.createQuery(criteria).setParameter(idPontoAvaliado, ponto.getId()).getResultList();
+			ParameterExpression<Long> IdPonto = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoPonto.get(Ponto_.ID_PONTO), IdPonto));
 
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-		return formularios;
-	}
-
-	public List<Formulario> recuperarAvaliacao(Formulario form) {
-
-		Session sessao = null;
-		List<Formulario> forms = null;
-
-		try {
-
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
-			Root<Formulario> raizTrajeto = criteria.from(Formulario.class);
-
-			criteria.select(raizTrajeto)
-					.where(construtor.equal(raizTrajeto.get(Formulario_.ID_FORMULARIO), form.getIdFormulario()));
-
-			TypedQuery<Formulario> queryForm = sessao.createQuery(criteria);
-			forms = queryForm.getResultList();
+			forms = sessao.createQuery(criteria).setParameter(IdPonto, ponto.getId()).getResultList();
 
 			sessao.getTransaction().commit();
 
@@ -198,6 +161,46 @@ public class FormularioDAOImpl implements FormularioDAO {
 		}
 
 		return forms;
+	}
+
+	public Formulario recuperarAvaliacaoId(Formulario form) {
+
+		Session sessao = null;
+		Formulario formulario = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
+			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
+
+			ParameterExpression<Long> idForm = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(raizFormulario.get(Formulario_.ID_FORMULARIO), idForm));
+
+			formulario = sessao.createQuery(criteria).setParameter(idForm, form.getIdFormulario()).getSingleResult();
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return formulario;
 
 	}
 
