@@ -29,16 +29,12 @@ public class Principal {
 		PontoAvaliadoDAOImpl pontoAvDao = new PontoAvaliadoDAOImpl();
 		PontoFavDAOImpl pontoFavDao = new PontoFavDAOImpl();
 		TrajetoDAOImpl trajetoDao = new TrajetoDAOImpl();
-
-		Ponto p1 = new Ponto(-26.456, 12.212);
-		Ponto p2 = new Ponto(-26.789, 11.956);
-
-//		pontoDao.inserirPonto(p1);
-//		pontoDao.inserirPonto(p2);
-
-		Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.FOOT_WALKING);
-
-//		trajetoDao.inserirTrajeto(trajeto);
+		
+		Ponto p = new Ponto(1);
+		pontoDao.deletarPonto(pontoDao.recuperarPonto(p));
+		
+				
+	//	System.out.println(trajetoDao.recuperarTrajeto(trajeto));
 
 	}
 }
