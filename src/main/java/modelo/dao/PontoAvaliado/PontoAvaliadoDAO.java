@@ -10,6 +10,8 @@ public interface PontoAvaliadoDAO {
 	
 	void deletarPontoAvaliado(PontoAvaliado pontoAvaliado);
 	
+	void atualizarPontoAvaliado(PontoAvaliado pontoAvaliado);
+	
 	List<PontoAvaliado> recuperarPontosAvaliados();
 	
 	List<PontoAvaliado> recuperarPontoAvaliadoMediaIgual(PontoAvaliado ponto);

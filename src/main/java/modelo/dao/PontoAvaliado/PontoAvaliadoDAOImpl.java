@@ -83,6 +83,36 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 	}
 
+	public void atualizarPontoAvaliado(PontoAvaliado pontoAvaliado) {
+		
+		Session sessao = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			sessao.update(pontoAvaliado);
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		
+	}
+	
 	public List<PontoAvaliado> recuperarPontosAvaliados() {
 
 		Session sessao = null;
@@ -205,4 +235,5 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 	}
 
+	
 }
