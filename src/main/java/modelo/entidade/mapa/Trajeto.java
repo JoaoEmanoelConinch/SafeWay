@@ -128,11 +128,7 @@ public class Trajeto implements Serializable {
 		return inicio;
 	}
 
-	public void setInicio(String inicio) throws StatusInvalidoException, NumeroMenorQueZeroException{
-		this.inicio = Ponto.informatLocal(inicio);
-	}
-
-	private void setInicio(Ponto inicio) {
+	public void setInicio(Ponto inicio) {
 		this.inicio = inicio;
 	}
 
@@ -148,11 +144,7 @@ public class Trajeto implements Serializable {
 		return chegada;
 	}
 
-	public void setChegada(String chegada) throws StatusInvalidoException, NumeroMenorQueZeroException{
-		this.chegada = Ponto.informatLocal(chegada);
-	}
-
-	private void setChegada(Ponto chegada) {
+	public void setChegada(Ponto chegada) {
 		this.chegada = chegada;
 	}
 
@@ -177,8 +169,6 @@ public class Trajeto implements Serializable {
 		 return ConsultaTrajeto.criarLineString(inicio, chegada, transporteUsado);
 	}
 	
-	
-	
 	public List<PontoAvaliado> pegarPontosAvaliadosDoTrageto(){
 		List<PontoAvaliado> pontosAvaliados = new ArrayList<PontoAvaliado>();
 		List<Ponto> pontos = this.getPontos();
@@ -201,6 +191,18 @@ public class Trajeto implements Serializable {
 		}
 		
 		return medias;
+	}
+	
+	public List<Ponto> verificarQuaisPontosExixtemEm(List<Ponto> pontos) {
+		List<Ponto> pontosNaoExistentes = new ArrayList<Ponto>();
+		
+		for (int i = 0; i < this.getPontos().size();i++){
+			if (!(pontos.contains(this.getPontos().get(i)))) {
+				pontosNaoExistentes.add(this.getPontos().get(i));
+			}
+		}
+		
+		return pontosNaoExistentes;
 	}
 
 	public void addPonto (Ponto ponto){
