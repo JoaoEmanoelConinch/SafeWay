@@ -32,14 +32,20 @@ public class Principal {
 		Ponto p1 = new Ponto(8.681495,49.41461);
 		Ponto p2 = new Ponto(8.687872,49.420318);
 
-		Trajeto t = new Trajeto(p1, p2, MeioDeTransporte.DRIVING_CAR);
+		pontoDAOImpl.inserirPonto(p1);
+		pontoDAOImpl.inserirPonto(p2);
+		
+		Trajeto t = new Trajeto();
+		t.setInicio(p1);
+		t.setChegada(p2);
+		t.setTransporteUsado(MeioDeTransporte.DRIVING_CAR);
 
 		// for (int i = 0; i < t.getPontos().size(); i++){
 		// 	Ponto ponto = new Ponto(t.getPontos().get(i).getLatitude(), t.getPontos().get(i).getLongitude());
 		// 	pontoDAOImpl.inserirPonto(ponto);
 		// }
 
-		 trajetoDAOImpl.inserirTrajeto(t);
+		trajetoDAOImpl.inserirTrajeto(t);
 
 	}
 }
