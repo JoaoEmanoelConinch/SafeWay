@@ -39,7 +39,7 @@ public class Trajeto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_trajeto", nullable = false, unique = true)
-	private Long idTrajeto;
+	private long idTrajeto;
 
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -76,8 +76,12 @@ public class Trajeto implements Serializable {
 
 	public Trajeto() {
 	}
+	
+	public Trajeto(long id) {
+	setIdTrajeto(id);
+	}
 
-	public Trajeto(Long id, Ponto inicio, Ponto chegada, List<Ponto> pontos, MeioDeTransporte transporteUsado, List<UsuarioCadastrado> usuariosCadastrados)
+	public Trajeto(long id, Ponto inicio, Ponto chegada, List<Ponto> pontos, MeioDeTransporte transporteUsado, List<UsuarioCadastrado> usuariosCadastrados)
 			throws StatusInvalidoException, JsonParseException, org.codehaus.jackson.map.JsonMappingException,
 			IOException {
 		this.setIdTrajeto(id);
@@ -88,7 +92,7 @@ public class Trajeto implements Serializable {
 		this.setUsuariosCadastrados(usuariosCadastrados);
 	}
 
-	public Trajeto(Long id, String inicio, String chegada,  List<Ponto> pontos, MeioDeTransporte transporteUsado, List<UsuarioCadastrado> usuariosCadastrados)
+	public Trajeto(long id, String inicio, String chegada,  List<Ponto> pontos, MeioDeTransporte transporteUsado, List<UsuarioCadastrado> usuariosCadastrados)
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException {
 		this.setIdTrajeto(id);
 		this.setInicio(Ponto.informatLocal(inicio));
@@ -116,11 +120,11 @@ public class Trajeto implements Serializable {
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
 	}
 
-	public Long getIdTrajeto() {
+	public long getIdTrajeto() {
 		return idTrajeto;
 	}
 
-	public void setIdTrajeto(Long idTrajeto) {
+	public void setIdTrajeto(long idTrajeto) {
 		this.idTrajeto = idTrajeto;
 	}
 
@@ -132,7 +136,7 @@ public class Trajeto implements Serializable {
 		this.inicio = Ponto.informatLocal(inicio);
 	}
 
-	private void setInicio(Ponto inicio) {
+	public void setInicio(Ponto inicio) {
 		this.inicio = inicio;
 	}
 
@@ -153,7 +157,7 @@ public class Trajeto implements Serializable {
 		this.chegada = Ponto.informatLocal(chegada);
 	}
 
-	private void setChegada(Ponto chegada) {
+	public void setChegada(Ponto chegada) {
 		this.chegada = chegada;
 	}
 
