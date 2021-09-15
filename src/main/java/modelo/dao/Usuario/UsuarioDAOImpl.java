@@ -30,7 +30,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		Session sessao = null;
 
 		try {
-//<==>
+			
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
