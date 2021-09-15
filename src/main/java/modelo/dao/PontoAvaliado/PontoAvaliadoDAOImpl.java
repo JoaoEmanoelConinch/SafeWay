@@ -4,11 +4,15 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
 import modelo.entidade.mapa.PontoAvaliado;
+import modelo.entidade.mapa.PontoAvaliado_;
+import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.entidade.usuario.UsuarioCadastrado_;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
@@ -200,44 +204,44 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 	}
 
-	public PontoAvaliado recuperarPontoAvaId(Long id) {
+	public PontoAvaliado recuperarPontoAvaId(PontoAvaliado ponto) {
 		
-//		Session sessao = null;
-		PontoAvaliado contato = null;
-//
-//		try {
-//
-//			sessao = fabrica.getConexao().openSession();
-//			sessao.beginTransaction();
-//
-//			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-//
-//			CriteriaQuery<PontoAvaliado> criteria = construtor.createQuery(PontoAvaliado.class);
-//			Root<PontoAvaliado> raizPonto = criteria.from(PontoAvaliado.class);
-//
-//			ParameterExpression<Long> idPonto = construtor.parameter(Long.class);
-//			criteria.where(construtor.equal(id, cpfCliente));
-//
-//			contato = sessao.createQuery(criteria).setParameter(cpfCliente, cliente.getCpf()).getSingleResult();
-//
-//			sessao.getTransaction().commit();
-//
-//		} catch (Exception sqlException) {
-//
-//			sqlException.printStackTrace();
-//
-//			if (sessao.getTransaction() != null) {
-//				sessao.getTransaction().rollback();
-//			}
-//
-//		} finally {
-//
-//			if (sessao != null) {
-//				sessao.close();
-//			}
-//		}
+		Session sessao = null;
+		PontoAvaliado pontoAv = null;
 
-		return contato;
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<PontoAvaliado> criteria = construtor.createQuery(PontoAvaliado.class);
+			Root<PontoAvaliado> raizPontoAv = criteria.from(PontoAvaliado.class);
+
+			ParameterExpression<Long> idPontoAv = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(raizPontoAv.get(PontoAvaliado_.ID_PONTO), idPontoAv));
+
+			pontoAv = sessao.createQuery(criteria).setParameter(idPontoAv, ponto.getId()).getSingleResult();
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return pontoAv;
 		
 	}
 

@@ -16,6 +16,6 @@ public interface PontoAvaliadoDAO {
 	
 	List<PontoAvaliado> recuperarPontoAvMenorQue(int nota);
 	
-	PontoAvaliado recuperarPontoAvaId(Long id);
+	PontoAvaliado recuperarPontoAvaId(PontoAvaliado ponto);
 
 }
