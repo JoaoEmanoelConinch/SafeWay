@@ -159,10 +159,10 @@ public class FormularioDAOImpl implements FormularioDAO {
 		return formularios;
 	}
 
-	public List<Formulario> recuperarAvaliacao(Formulario form) {
+	public Formulario recuperarAvaliacao(Formulario form) {
 
 		Session sessao = null;
-		List<Formulario> forms = null;
+		Formulario f = null;
 
 		try {
 
@@ -172,13 +172,12 @@ public class FormularioDAOImpl implements FormularioDAO {
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
 			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
-			Root<Formulario> raizTrajeto = criteria.from(Formulario.class);
+			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
 
-			criteria.select(raizTrajeto)
-					.where(construtor.equal(raizTrajeto.get(Formulario_.ID_FORMULARIO), form.getIdFormulario()));
+			ParameterExpression<Long> idFormulario = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(raizFormulario.get(Formulario_.ID_FORMULARIO), idFormulario));
 
-			TypedQuery<Formulario> queryForm = sessao.createQuery(criteria);
-			forms = queryForm.getResultList();
+			f = sessao.createQuery(criteria).setParameter(idFormulario, form.getIdFormulario()).getSingleResult();
 
 			sessao.getTransaction().commit();
 
@@ -197,7 +196,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 			}
 		}
 
-		return forms;
+		return f;
 
 	}
 
