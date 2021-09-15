@@ -14,5 +14,7 @@ public interface FormularioDAO {
 	void atualizarAvaliacao(Formulario formulario);
 	
 	List<Formulario> recuperarAvaliacoes(PontoAvaliado ponto);
+	
+	Formulario recuperarAvaliacaoId(Formulario form);
 
 }
