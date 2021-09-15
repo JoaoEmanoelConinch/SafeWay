@@ -57,6 +57,9 @@ public class PontoAvaliado extends Ponto{
 
 	public PontoAvaliado() {}
 	
+	public PontoAvaliado(long id) {
+		super(id);
+	}
 
 	public PontoAvaliado(long idPontoAvaliado, Ponto ponto, ArrayList<Formulario> avaliacoes,
 	long quantidadeLezoesCorporais, long quantidadeFurtos, long quantidadeRoubos,
