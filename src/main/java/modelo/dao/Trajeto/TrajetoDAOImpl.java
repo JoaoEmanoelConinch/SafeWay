@@ -130,7 +130,7 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 			Root<Trajeto> raizTrajeto = criteria.from(Trajeto.class);
 
 			ParameterExpression<Long> idTrajeto = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(raizTrajeto.get(UsuarioCadastrado_.ID), idTrajeto)); 
+			criteria.where(construtor.equal(raizTrajeto.get(Trajeto_.ID_TRAJETO), idTrajeto)); 
 
 			trajeto1 = sessao.createQuery(criteria).setParameter(idTrajeto, trajeto.getIdTrajeto()).getSingleResult();
 			
