@@ -2,6 +2,7 @@ package controlador.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.dao.Usuario.UsuarioDAO;
+import modelo.entidade.mapa.PontoFavorito;
+import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.excecao.usuario.EmailInvalidoException;
+import modelo.excecao.usuario.SenhaPequenaException;
+import modelo.excecao.usuario.StringVaziaException;
 
 @WebServlet("/")
 public class Servlet extends HttpServlet {
@@ -43,10 +49,19 @@ public class Servlet extends HttpServlet {
 		}	
 	}
 	
-	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)throws SQLException, IOException{
+	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)throws SQLException, IOException, StringVaziaException, EmailInvalidoException, SenhaPequenaException{
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String email = request.getParameter("email");
+		usuarioDAO.inserirUsuario(new UsuarioCadastrado(nome, senha, email));
+	}
+
+	private void atualizarUsuario (HttpServletRequest request, HttpServletResponse response) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException{
+		long id = Long.parseLong(request.getParameter("id"));
+		String nome = request.getParameter("nome");
+		String senha = request.getParameter("senha");
+		String email = request.getParameter("email");
+		usuarioDAO.atualizarUsuario(new UsuarioCadastrado(id, nome, senha, email));
 	}
 
 }
