@@ -58,7 +58,8 @@ public class Servlet extends HttpServlet {
 					break;
 
 				default:
-					//404
+					mostrarTela404(request, response);
+					break;
 			
 			}
 			
@@ -67,6 +68,11 @@ public class Servlet extends HttpServlet {
 		catch (Exception ex) {
 			throw new ServletException(ex);
 		}	
+	}
+
+	private void mostrarTela404 (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		RequestDispatcher dispatcher = request.getRequestDispatcher("erro404.jsp");
+		dispatcher.forward(request, response);
 	}
 	
 	private void mostrarFormularioDeCadastroDeUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
