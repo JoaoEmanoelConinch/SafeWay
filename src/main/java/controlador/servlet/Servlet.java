@@ -36,17 +36,25 @@ public class Servlet extends HttpServlet {
 		try {
 			
 			switch(action) {
-			
+
+				case "/novo Usuario":
+					mostrarFormularioDeCadastroDeUsuario(request, response);
+					break;
+
 				case "/inserir Usuario":
 					inserirUsuario(request, response);
 					break;
 
-				case "/deletar Usuario":
-					deletarUsuario(request, response);
-					break;
-
 				case "/atualizar Usuario":
 					atualizarUsuario(request, response);
+					break;
+
+				case "/editar Usuario":
+					mostrarFormularioEditarUsuario(request, response);
+					break;
+
+				case "/deletar Usuario":
+					deletarUsuario(request, response);
 					break;
 
 				default:
