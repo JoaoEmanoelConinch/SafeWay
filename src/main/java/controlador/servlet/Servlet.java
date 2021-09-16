@@ -2,7 +2,6 @@ package controlador.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.dao.Usuario.UsuarioDAO;
-import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
@@ -38,7 +36,20 @@ public class Servlet extends HttpServlet {
 			
 			switch(action) {
 			
-				
+				case "/inserir Usuario":
+					inserirUsuario(request, response);
+					break;
+
+				case "/deletar Usuario":
+					deletarUsuario(request, response);
+					break;
+
+				case "/atualizar Usuario":
+					atualizarUsuario(request, response);
+					break;
+
+				default:
+					//404
 			
 			}
 			
