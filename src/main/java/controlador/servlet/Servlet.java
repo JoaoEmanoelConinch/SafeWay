@@ -64,4 +64,10 @@ public class Servlet extends HttpServlet {
 		usuarioDAO.atualizarUsuario(new UsuarioCadastrado(id, nome, senha, email));
 	}
 
+	private void deletarUsuario (HttpServletRequest request, HttpServletResponse response){
+		long id = Long.parseLong(request.getParameter("id"));
+		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(id));
+		usuarioDAO.deletarUsuario(usuarioCadastrado);
+	}
+
 }
