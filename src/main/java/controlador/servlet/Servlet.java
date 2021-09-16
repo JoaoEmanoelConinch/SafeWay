@@ -54,7 +54,7 @@ public class Servlet extends HttpServlet {
 			}
 			
 		}
-		//SQL
+		
 		catch (Exception ex) {
 			throw new ServletException(ex);
 		}	
