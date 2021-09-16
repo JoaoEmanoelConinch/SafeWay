@@ -3,6 +3,7 @@ package controlador.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -60,6 +61,19 @@ public class Servlet extends HttpServlet {
 		}	
 	}
 	
+	private void mostrarFormularioDeCadastroDeUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void mostrarFormularioEditarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		long id = Long.parseLong(request.getParameter("id"));
+		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(id));
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro.jsp");
+		request.setAttribute("usuarioCadastrado", usuarioCadastrado);
+		dispatcher.forward(request, response);
+	}
+
 	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)throws SQLException, IOException, StringVaziaException, EmailInvalidoException, SenhaPequenaException{
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
