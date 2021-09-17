@@ -31,7 +31,7 @@ public class PontoFavorito extends Ponto{
 	    )
 	private Ponto ponto;
  
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	    @JoinColumn(
 	        name = "id_usuario",
 	        referencedColumnName = "id_usuario"

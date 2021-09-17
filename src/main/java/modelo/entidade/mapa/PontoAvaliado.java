@@ -51,7 +51,7 @@ public class PontoAvaliado extends Ponto{
 	@Column(name = "media_Avaliacao_Ponto_Avaliado", nullable = false)
 	private double mediaDeAvaliacao;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_ponto")
 	private Ponto ponto;	
 
