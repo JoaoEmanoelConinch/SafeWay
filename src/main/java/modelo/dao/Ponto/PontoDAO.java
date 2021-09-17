@@ -12,4 +12,6 @@ public interface PontoDAO {
 	
 	List<Ponto> recuperarPontos();
 	
+	Ponto recuperarPonto(Ponto p);
+	
 }

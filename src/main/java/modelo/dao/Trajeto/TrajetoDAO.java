@@ -12,8 +12,7 @@ public interface TrajetoDAO {
 
     void atualizarTrajeto(Trajeto trajeto);
 
+
     Trajeto recuperarTrajeto(Trajeto trajeto);
-    
-    	
-    
+  
 }

@@ -23,6 +23,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import controlador.consultaAPI.ConsultaPonto;
+import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
@@ -63,19 +64,27 @@ public class Ponto implements Serializable {
 		this.setTrajetos(trajetos);
 	}
 
-	public Ponto(double latitude, double longitude)
-			throws StatusInvalidoException{
+	public Ponto(double latitude, double longitude) throws StatusInvalidoException {
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(new ArrayList<Trajeto>());
 	}
 
-	public static Ponto informatLocal(String local)
-			throws StatusInvalidoException {
+	public static Ponto informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException {
 		return ConsultaPonto.informatLocal(local);
 	}
 
-	public void setId(long id) {
+	public static Ponto informatLocal(String local, int posicao)
+			throws StatusInvalidoException, NumeroMenorQueZeroException {
+		return ConsultaPonto.informatLocal(local, posicao);
+	}
+
+	public static List<Ponto> informatLocais(String local) {
+		return ConsultaPonto.informatLocais(local);
+	}
+
+	public void setId(Long id) {
+
 		this.idPonto = id;
 	}
 
@@ -119,6 +128,28 @@ public class Ponto implements Serializable {
 
 	public String TransformarVetorEmString() {
 		return transformarPontoEmVetor().toString();
+	}
+
+	@Override
+	public boolean equals(Object objeto) {
+		
+		if (this == objeto)
+			return true;
+
+		if (objeto == null)
+			return false;
+
+		if (getClass() != objeto.getClass())
+			return false;
+		
+		Ponto ponto = (Ponto) objeto;
+		
+		if (!(this.getLatitude() == ponto.getLatitude())||!(this.getLongitude() == ponto.getLongitude())) {
+			return false;
+		}
+		
+		return true;
+		
 	}
 
 	public void addTrajeto(Trajeto trajeto) {

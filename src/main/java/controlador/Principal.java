@@ -30,11 +30,7 @@ public class Principal {
 		PontoFavDAOImpl pontoFavDao = new PontoFavDAOImpl();
 		TrajetoDAOImpl trajetoDao = new TrajetoDAOImpl();
 		
-		Ponto p = new Ponto(1);
-		pontoDao.deletarPonto(pontoDao.recuperarPonto(p));
 		
-				
-	//	System.out.println(trajetoDao.recuperarTrajeto(trajeto));
 
 	}
 }
