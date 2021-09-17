@@ -225,7 +225,7 @@ public class Trajeto implements Serializable {
 		usuariosCadastrados.add(usuarioCadastrado);
 	}
 
-	public void remoreUsuarioCadastrado(UsuarioCadastrado usuarioCadastrado){
+	public void removerUsuarioCadastrado(UsuarioCadastrado usuarioCadastrado){
 		usuariosCadastrados.remove(usuarioCadastrado);
 	}
 
