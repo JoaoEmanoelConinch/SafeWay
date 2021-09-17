@@ -8,7 +8,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import modelo.entidade.mapa.Ponto;
-import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 public class ConsultaPonto {
@@ -16,19 +15,29 @@ public class ConsultaPonto {
 	public ConsultaPonto() {}
 
 	public static Ponto informatLocal(String local)
-			throws StatusInvalidoException, NumeroMenorQueZeroException{
+			throws StatusInvalidoException{
 		
-		return informatLocal(local, 1);
+		String localParaURL = local.replaceAll(" ", "%20");
+		
+		JSONpontoDAO JSONpontoDAO = new JSONpontoDAOImpl();
+		
+		JSONObject jsonObject = JSONpontoDAO.readJsonFromUrl(
+			"https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110&text="
+			+ localParaURL);
+                
+		BigDecimal latitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates").get(0);
+		BigDecimal longitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates").get(1);
+
+		Ponto ponto = new Ponto();
+
+		ponto.setLatitude(latitude.doubleValue());
+		ponto.setLongitude(longitude.doubleValue());
+		
+		return ponto;
 	}
 
 	public static Ponto informatLocal(String local, int posicao)
-			throws StatusInvalidoException, NumeroMenorQueZeroException{
-
-		posicao --;
-
-		if (posicao < 0){
-			throw new NumeroMenorQueZeroException("Posição invalida");
-		}
+			throws StatusInvalidoException{
 		
 		String localParaURL = local.replaceAll(" ", "%20");
 		

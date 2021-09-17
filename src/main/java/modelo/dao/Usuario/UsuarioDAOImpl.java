@@ -129,7 +129,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			Root<UsuarioCadastrado> raizUsuario = criteria.from(UsuarioCadastrado.class);
 
 			ParameterExpression<Long> idUsuario = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(raizUsuario.get(UsuarioCadastrado_.ID), idUsuario)); //usuario.getId()
+			criteria.where(construtor.equal(raizUsuario.get(UsuarioCadastrado_.ID), idUsuario));
 
 			usuario1 = sessao.createQuery(criteria).setParameter(idUsuario, usuario.getId()).getSingleResult();
 			

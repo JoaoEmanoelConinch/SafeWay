@@ -10,12 +10,12 @@ public interface PontoAvaliadoDAO {
 	
 	void deletarPontoAvaliado(PontoAvaliado pontoAvaliado);
 	
+	void atualizarPontoAvaliado(PontoAvaliado pontoAvaliado);
+	
 	List<PontoAvaliado> recuperarPontosAvaliados();
 	
-	List<PontoAvaliado> recuperarPontoAvMaiorQue(int nota);
+	List<PontoAvaliado> recuperarPontoAvaliadoMediaIgual(PontoAvaliado ponto);
 	
-	List<PontoAvaliado> recuperarPontoAvMenorQue(int nota);
-	
-	PontoAvaliado recuperarPontoAvaId(Long id);
+	PontoAvaliado recuperarPontoAvaId(PontoAvaliado ponto);
 
 }

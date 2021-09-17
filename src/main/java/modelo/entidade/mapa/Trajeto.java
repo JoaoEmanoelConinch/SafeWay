@@ -40,7 +40,7 @@ public class Trajeto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_trajeto", nullable = false, unique = true)
-	private Long idTrajeto;
+	private long idTrajeto;
 
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -77,8 +77,12 @@ public class Trajeto implements Serializable {
 
 	public Trajeto() {
 	}
+	
+	public Trajeto(long id) {
+		setIdTrajeto(id);
+	}
 
-	public Trajeto(Long id, Ponto inicio, Ponto chegada, List<Ponto> pontos, MeioDeTransporte transporteUsado, List<UsuarioCadastrado> usuariosCadastrados)
+	public Trajeto(long id, Ponto inicio, Ponto chegada, List<Ponto> pontos, MeioDeTransporte transporteUsado, List<UsuarioCadastrado> usuariosCadastrados)
 			throws StatusInvalidoException, JsonParseException, org.codehaus.jackson.map.JsonMappingException,
 			IOException {
 		this.setIdTrajeto(id);
@@ -120,12 +124,16 @@ public class Trajeto implements Serializable {
 		return idTrajeto;
 	}
 
-	public void setIdTrajeto(Long idTrajeto) {
+	public void setIdTrajeto(long idTrajeto) {
 		this.idTrajeto = idTrajeto;
 	}
 
 	public Ponto getInicio() {
 		return inicio;
+	}
+
+	public void setInicio(String inicio) throws StatusInvalidoException, NumeroMenorQueZeroException{
+		this.inicio = Ponto.informatLocal(inicio);
 	}
 
 	public void setInicio(Ponto inicio) {

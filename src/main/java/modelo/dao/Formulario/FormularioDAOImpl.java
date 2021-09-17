@@ -137,6 +137,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 
 			Join<Formulario, Ponto> juncaoPonto = raizFormulario.join(Formulario_.idPontoAvaliado);
 
+
 			ParameterExpression<Long> IdPonto = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(juncaoPonto.get(Ponto_.ID_PONTO), IdPonto));
 
