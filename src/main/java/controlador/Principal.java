@@ -8,14 +8,14 @@ import org.codehaus.jackson.map.JsonMappingException;
 import modelo.dao.Formulario.FormularioDAOImpl;
 import modelo.dao.Ponto.PontoDAOImpl;
 import modelo.dao.PontoAvaliado.PontoAvaliadoDAOImpl;
-import modelo.dao.PontoFavorito.PontoFavDAO;
 import modelo.dao.PontoFavorito.PontoFavDAOImpl;
 import modelo.dao.Trajeto.TrajetoDAOImpl;
 import modelo.dao.Usuario.UsuarioDAOImpl;
+import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
-import modelo.entidade.mapa.Trajeto;
-import modelo.enumeracao.mapa.MeioDeTransporte;
-
+import modelo.entidade.mapa.PontoAvaliado;
+import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
@@ -33,19 +33,9 @@ public class Principal {
 		FormularioDAOImpl formularioDAOImpl       = new FormularioDAOImpl();
 		PontoAvaliadoDAOImpl pontoAvaliadoDAOImpl = new PontoAvaliadoDAOImpl();
 		
-
-		System.out.println();
-		Ponto p1 = pontoDAOImpl.recuperarPontos().get(0);
-		Ponto p2 = pontoDAOImpl.recuperarPontos().get(1);
+		UsuarioCadastrado usuario = new UsuarioCadastrado("Wesley", "123456789", "wesley@email.com");
 		
-		UsuarioCadastrado u1 = usuarioDAOImpl.recuperarUsuario(new UsuarioCadastrado(1));
-		UsuarioCadastrado u2 = usuarioDAOImpl.recuperarUsuario(new UsuarioCadastrado(2));
-
-		Formulario f = formularioDAOImpl.recuperarAvaliacaoId(new Formulario(1));
-
-		PontoAvaliado pa1 = new PontoAvaliado(p2, f);
-
-		//pontoAvaliadoDAOImpl.adicionarPontoAvaliado(pa1);
+		
 
 	}
 }
