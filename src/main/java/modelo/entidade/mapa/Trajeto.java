@@ -177,7 +177,7 @@ public class Trajeto implements Serializable {
 		 return ConsultaTrajeto.criarLineString(inicio, chegada, transporteUsado);
 	}
 	
-	public List<PontoAvaliado> pegarPontosAvaliadosDoTrageto(){
+	public List<PontoAvaliado> pegarPontosAvaliadosDoTrajeto(){
 		List<PontoAvaliado> pontosAvaliados = new ArrayList<PontoAvaliado>();
 		List<Ponto> pontos = this.getPontos();
 		
@@ -190,9 +190,9 @@ public class Trajeto implements Serializable {
 		return pontosAvaliados;
 	}
 	
-	public List<Double> pegarMediasDosPontosAvaliadosDoTrageto() {
+	public List<Double> pegarMediasDosPontosAvaliadosDoTrajeto() {
 		List<Double> medias = new ArrayList<Double>();
-		List<PontoAvaliado> pontosAvaliados = pegarPontosAvaliadosDoTrageto();
+		List<PontoAvaliado> pontosAvaliados = pegarPontosAvaliadosDoTrajeto();
 		
 		for (int i = 0; i < pontosAvaliados.size(); i++) {
 			medias.add(pontosAvaliados.get(i).getMediaDeAvaliacao());
