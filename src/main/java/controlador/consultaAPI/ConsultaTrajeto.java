@@ -25,21 +25,13 @@ public class ConsultaTrajeto {
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
 
 		List<Ponto> pontosDoTrajeto = new ArrayList<Ponto>();
-//
-//		Client client = ClientBuilder.newClient();
-//		Entity<String> payload = Entity.json("{\"coordinates\":[" + inicio.TransformarVetorEmString() + ","
-//		+ chegada.TransformarVetorEmString() + "],\"elevation\":\"true");
-//		Response response = client
-//				.target("https://api.openrouteservice.org/v2/directions/" + transporte.getDescricao() + "/geojson")
-//				.request().header("Authorization", "5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110")
-//				.header("Accept", "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8")
-//				.header("Content-Type", "application/json; charset=utf-8").post(payload);
-//
-//		JSONObject jsonObject = (JSONObject) JSONObject.stringToValue(response.readEntity(String.class));
 		
 		JSONpontoDAO JSONpontoDAO = new JSONpontoDAOImpl();
 		
-		JSONObject jsonObject1 = JSONpontoDAO.readJsonFromUrl("https://api.openrouteservice.org/v2/directions/"+transporte.getDescricao()+"?api_key=5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110&text&start="
+
+		JSONObject jsonObject1 = JSONpontoDAO.readJsonFromUrl("https://api.openrouteservice.org/v2/directions/"
+		+transporte.getDescricao()
+		+"?api_key=5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110&text&start="
 		+((Double)inicio.getLatitude()).toString()+","+((Double)inicio.getLongitude()).toString()
 		+"&end="+((Double)chegada.getLatitude()).toString()+","+((Double)chegada.getLongitude()).toString());
 
@@ -105,5 +97,6 @@ public class ConsultaTrajeto {
 		}
 		return evitar;
 	}
+
 
 }
