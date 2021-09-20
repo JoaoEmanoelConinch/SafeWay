@@ -72,7 +72,23 @@ public class Servlet extends HttpServlet {
 				case "/deletar-Usuario":
 					deletarUsuario(request, response);
 					break;
-
+					
+//				case "/mapa":
+//					mostrarMapa(request, response);
+//					break;
+//					
+//				case "/procurar-ponto":
+//					MostrarPontosCompativel(request, response);
+//					break;
+//
+//				case "/selecionar-ponto":
+//					selecionarPonto(request, response);
+//					break;
+//					
+//				case "/criar-trajeto":
+//					inserirTrajeto(request, response);
+//					break;
+					
 				case "/inserir-Ponto":
 					inserirPonto(request, response);
 					break;
@@ -84,9 +100,7 @@ public class Servlet extends HttpServlet {
 				default:
 					mostrarTela404(request, response);
 					break;
-			
 			}
-			
 		}
 		
 		catch (Exception ex) {
@@ -106,6 +120,11 @@ public class Servlet extends HttpServlet {
 	
 	private void mostrarFormularioDeCadastroDeUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void mostrarMapa (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mapa.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -163,11 +182,12 @@ public class Servlet extends HttpServlet {
 		Ponto chegada = (Ponto) request.getAttribute("chegada");
 		MeioDeTransporte meioDeTransporte = (MeioDeTransporte) request.getAttribute("meioDeTransporte");
 		trajetoDAO.atualizarTrajeto(new Trajeto(id, partida, chegada, meioDeTransporte));
-		
 	}
 
 	private void deletarTrajeto (HttpServletRequest request, HttpServletResponse response){
-		
+		long id = Long.parseLong(request.getParameter("id"));
+		Trajeto trajeto = trajetoDAO.recuperarTrajeto(new Trajeto(id));
+		trajetoDAO.deletarTrajeto(trajeto);
 	}
 
 }
