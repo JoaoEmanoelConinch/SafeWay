@@ -15,6 +15,7 @@ import modelo.dao.Trajeto.TrajetoDAO;
 import modelo.dao.Usuario.UsuarioDAO;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
@@ -144,8 +145,8 @@ public class Servlet extends HttpServlet {
 		pontoDAO.deletarPonto(ponto);
 	}
 
-	private void inserirTrajeto (HttpServletRequest request, HttpServletResponse response){
-
+	private void inserirTrajeto (HttpServletRequest request, HttpServletResponse response) throws StatusInvalidoException, NumeroMenorQueZeroException{
+		Ponto partida = Ponto.parseUnsignedPonto(request.getParameter("inicio"));
 	}
 
 	private void atualizarTrajeto (HttpServletRequest request, HttpServletResponse response){
@@ -153,7 +154,7 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void deletarTrajeto (HttpServletRequest request, HttpServletResponse response){
-		
+
 	}
 
 }
