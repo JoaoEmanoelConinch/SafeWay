@@ -21,7 +21,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.JsonParseException;
-
+import org.codehaus.jackson.map.JsonMappingException;
 
 import modelo.consultaAPI.ConsultaTrajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
@@ -117,6 +117,15 @@ public class Trajeto implements Serializable {
 		this.setChegada(Ponto.informatLocal(chegada, posicaoChegada));
 		this.setTransporteUsado(transporteUsado);
 		this.setPontos(criarLineString(Ponto.informatLocal(inicio), Ponto.informatLocal(chegada), transporteUsado));
+		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
+	}
+	
+	public Trajeto(long id, Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws JsonParseException, JsonMappingException, IOException {
+		this.setIdTrajeto(id);
+		this.setInicio(inicio);
+		this.setChegada(chegada);
+		this.setTransporteUsado(transporteUsado);
+		this.setPontos(criarLineString(inicio, chegada, transporteUsado));
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
 	}
 
