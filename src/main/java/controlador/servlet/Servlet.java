@@ -48,31 +48,31 @@ public class Servlet extends HttpServlet {
 					mostrarTelaInicial(request, response);
 					break;
 
-				case "/novo Usuario":
+				case "/novo-Usuario":
 					mostrarFormularioDeCadastroDeUsuario(request, response);
 					break;
 
-				case "/inserir Usuario":
+				case "/inserir-Usuario":
 					inserirUsuario(request, response);
 					break;
 
-				case "/atualizar Usuario":
+				case "/atualizar-Usuario":
 					atualizarUsuario(request, response);
 					break;
 
-				case "/editar Usuario":
+				case "/editar-Usuario":
 					mostrarFormularioEditarUsuario(request, response);
 					break;
 
-				case "/deletar Usuario":
+				case "/deletar-Usuario":
 					deletarUsuario(request, response);
 					break;
 
-				case "/inserir Ponto":
+				case "/inserir-Ponto":
 					inserirPonto(request, response);
 					break;
 
-				case "/deletar Ponto":
+				case "/deletar-Ponto":
 					deletarPonto(request, response);
 					break;
 
@@ -146,7 +146,7 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void inserirTrajeto (HttpServletRequest request, HttpServletResponse response) throws StatusInvalidoException, NumeroMenorQueZeroException{
-		Ponto partida = Ponto.parseUnsignedPonto(request.getParameter("inicio"));
+		
 	}
 
 	private void atualizarTrajeto (HttpServletRequest request, HttpServletResponse response){
