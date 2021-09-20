@@ -89,6 +89,10 @@ public class Servlet extends HttpServlet {
 					inserirTrajeto(request, response);
 					break;
 					
+				case "/mapa-trajeto":
+					
+					break;
+					
 				case "/inserir-Ponto":
 					inserirPonto(request, response);
 					break;
