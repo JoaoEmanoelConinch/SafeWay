@@ -75,6 +75,14 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		this.setTrajetos(trajetos);
 	}
 
+	public UsuarioCadastrado(long id, String nome, String senha, String email) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException{
+		this.setId(id);
+		this.setNome(nome);
+		this.setEmail(email);
+		this.setSenha(senha);
+		
+	}
+
 	public UsuarioCadastrado(String nome, String senha, String email)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
 		super();

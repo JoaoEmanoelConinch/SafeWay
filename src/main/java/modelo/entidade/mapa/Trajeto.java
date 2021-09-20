@@ -23,7 +23,7 @@ import javax.persistence.Table;
 import org.codehaus.jackson.JsonParseException;
 
 
-import controlador.consultaAPI.ConsultaTrajeto;
+import modelo.consultaAPI.ConsultaTrajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;

@@ -1,4 +1,4 @@
-package controlador.consultaAPI;
+package modelo.consultaAPI;
 
 import org.json.JSONObject;
 

@@ -11,13 +11,12 @@ import org.hibernate.Session;
 
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Ponto_;
-import modelo.entidade.usuario.UsuarioCadastrado;
-import modelo.entidade.usuario.UsuarioCadastrado_;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class PontoDAOImpl implements PontoDAO {
 
 	private ConexaoFactory fabrica;
+	private Ponto p;
 
 	public PontoDAOImpl() {
 		fabrica = new ConexaoFactory();
@@ -158,6 +157,51 @@ public class PontoDAOImpl implements PontoDAO {
 		}
 
 		return ponto;
+	}
+
+	@Override
+	public Ponto recuperarPontoPorLatLong(Ponto p) {
+		this.p = p;
+		Session sessao = null;
+		Ponto ponto = null;
+
+		try{
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Ponto> criteria = construtor.createQuery(Ponto.class);
+			Root<Ponto> raizPonto = criteria.from(Ponto.class);
+
+			ParameterExpression<Double> LatPonto = construtor.parameter(Double.class);
+			ParameterExpression<Double> LongPonto = construtor.parameter(Double.class);
+
+			criteria.where(construtor.equal(raizPonto.get(Ponto_.LATITUDE), LatPonto),
+				construtor.equal(raizPonto.get(Ponto_.LONGITUDE), LongPonto));
+
+			ponto = sessao.createQuery(criteria).setParameter(LatPonto, p.getLatitude()).getSingleResult();
+			ponto = sessao.createQuery(criteria).setParameter(LongPonto, p.getLongitude()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		}catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		return ponto;
+
 	}
 
 }

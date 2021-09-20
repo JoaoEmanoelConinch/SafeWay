@@ -1,4 +1,4 @@
-package controlador.consultaAPI;
+package modelo.consultaAPI;
 
 import java.io.BufferedReader;
 import java.io.IOException;

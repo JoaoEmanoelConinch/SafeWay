@@ -22,7 +22,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
-import controlador.consultaAPI.ConsultaPonto;
+import modelo.consultaAPI.ConsultaPonto;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
@@ -150,6 +150,10 @@ public class Ponto implements Serializable {
 		
 		return true;
 		
+	}
+
+	public static Ponto parseUnsignedPonto(java.lang.String s)throws StatusInvalidoException, NumeroMenorQueZeroException{
+		return new Ponto(0, 0);
 	}
 
 	public void addTrajeto(Trajeto trajeto) {
