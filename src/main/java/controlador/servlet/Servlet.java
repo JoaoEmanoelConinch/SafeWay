@@ -10,11 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+
 import modelo.dao.Ponto.PontoDAO;
 import modelo.dao.Trajeto.TrajetoDAO;
 import modelo.dao.Usuario.UsuarioDAO;
 import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
@@ -145,8 +150,11 @@ public class Servlet extends HttpServlet {
 		pontoDAO.deletarPonto(ponto);
 	}
 
-	private void inserirTrajeto (HttpServletRequest request, HttpServletResponse response) throws StatusInvalidoException, NumeroMenorQueZeroException{
-		
+	private void inserirTrajeto (HttpServletRequest request, HttpServletResponse response) throws StatusInvalidoException, NumeroMenorQueZeroException, JsonParseException, JsonMappingException, IOException{
+		Ponto partida = (Ponto) request.getAttribute("inicio");
+		Ponto chegada = (Ponto) request.getAttribute("chegada");
+		MeioDeTransporte meioDeTransporte = (MeioDeTransporte) request.getAttribute("meioDeTransporte");
+		trajetoDAO.inserirTrajeto(new Trajeto(partida, chegada, meioDeTransporte));
 	}
 
 	private void atualizarTrajeto (HttpServletRequest request, HttpServletResponse response){
