@@ -65,6 +65,14 @@ public class Servlet extends HttpServlet {
 					deletarUsuario(request, response);
 					break;
 
+				case "/inserir Ponto":
+					inserirPonto(request, response);
+					break;
+
+				case "/deletar Ponto":
+					deletarPonto(request, response);
+					break;
+
 				default:
 					mostrarTela404(request, response);
 					break;
