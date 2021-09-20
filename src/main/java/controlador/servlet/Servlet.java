@@ -157,12 +157,17 @@ public class Servlet extends HttpServlet {
 		trajetoDAO.inserirTrajeto(new Trajeto(partida, chegada, meioDeTransporte));
 	}
 
-	private void atualizarTrajeto (HttpServletRequest request, HttpServletResponse response){
-
+	private void atualizarTrajeto (HttpServletRequest request, HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException{
+		long id = Long.parseLong(request.getParameter("id"));
+		Ponto partida = (Ponto) request.getAttribute("inicio");
+		Ponto chegada = (Ponto) request.getAttribute("chegada");
+		MeioDeTransporte meioDeTransporte = (MeioDeTransporte) request.getAttribute("meioDeTransporte");
+		trajetoDAO.atualizarTrajeto(new Trajeto(id, partida, chegada, meioDeTransporte));
+		
 	}
 
 	private void deletarTrajeto (HttpServletRequest request, HttpServletResponse response){
-
+		
 	}
 
 }
