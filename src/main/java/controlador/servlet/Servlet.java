@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import modelo.dao.Ponto.PontoDAO;
 import modelo.dao.Usuario.UsuarioDAO;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.excecao.usuario.EmailInvalidoException;
@@ -22,6 +23,7 @@ public class Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private UsuarioDAO usuarioDAO;
+	private PontoDAO pontoDAO;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -36,6 +38,10 @@ public class Servlet extends HttpServlet {
 		try {
 			
 			switch(action) {
+
+				case "/inicio":
+					mostrarTelaInicial(request, response);
+					break;
 
 				case "/novo Usuario":
 					mostrarFormularioDeCadastroDeUsuario(request, response);
@@ -68,6 +74,11 @@ public class Servlet extends HttpServlet {
 		catch (Exception ex) {
 			throw new ServletException(ex);
 		}	
+	}
+
+	private void mostrarTelaInicial (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	private void mostrarTela404 (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
