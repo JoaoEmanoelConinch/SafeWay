@@ -44,17 +44,18 @@ public class Principal {
 		
 		usuarioDao.inserirUsuario(usuario2);
 		
-		usuarioDao.inserirUsuario(usuario);
-		
-		usuarioDao.inserirUsuario(usuario2);
-		
-		PontoFavorito pontoFav = new PontoFavorito(-26.456, 12.212 , "ENOIS", usuario);
+		PontoFavorito pontoFav = new PontoFavorito(p1 , "asd", usuario);
 		
 		pontoFavDao.inserirPontoFav(pontoFav);
 		
+		PontoFavorito pontoFav2 = new PontoFavorito(p1, "asddsadasd" , usuario2);
+	
+		pontoFavDao.inserirPontoFav(pontoFav2);
+	
+		
 		usuario.addFavorito(pontoFav);
 		
-		usuario2.addFavorito(pontoFav);
+		usuario2.addFavorito(pontoFav2);
 //
 //		Formulario form = new Formulario(true, false, false, false, false, "levei um soco :( mas não tinha bloqueio :)", false, p1, usuario);
 //		formDao.inserirAvaliacao(form);

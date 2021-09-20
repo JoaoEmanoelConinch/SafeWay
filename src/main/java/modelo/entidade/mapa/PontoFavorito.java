@@ -26,7 +26,7 @@ public class PontoFavorito extends Ponto{
 	private String nomePonto;
 
 //	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	@OnDelete(action = OnDeleteAction.CASCADE)
+//	@OnDelete(action = OnDeleteAction.NO_ACTION)
 //	    @JoinColumn(
 //	        name = "id_ponto_favorito",
 //	        referencedColumnName = "id_ponto",

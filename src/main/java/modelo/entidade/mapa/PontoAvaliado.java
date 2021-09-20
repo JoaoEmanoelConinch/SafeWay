@@ -54,8 +54,8 @@ public class PontoAvaliado extends Ponto{
 		@Column(name = "media_Avaliacao_Ponto_Avaliado", nullable = false)
 		private double mediaDeAvaliacao;
 
-		@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-		@OnDelete(action = OnDeleteAction.CASCADE)
+		@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+		@OnDelete(action = OnDeleteAction.NO_ACTION)
 	        @MapsId
 	    @JoinColumn(name = "id_ponto",
 	    			referencedColumnName = "id_ponto",
