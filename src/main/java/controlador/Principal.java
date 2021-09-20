@@ -17,7 +17,8 @@ import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
-import modelo.excecao.mapa.NumeroMenorQueZeroException;
+import modelo.enumeracao.mapa.MeioDeTransporte;
+
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
@@ -25,7 +26,8 @@ import modelo.excecao.usuario.StringVaziaException;
 
 public class Principal {
 
-	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException, JsonParseException, JsonMappingException, IOException, NumeroMenorQueZeroException{
+
+	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException, JsonParseException, JsonMappingException, IOException{
 		
 		PontoDAOImpl pontoDAOImpl                 = new PontoDAOImpl();
 		UsuarioDAOImpl usuarioDAOImpl             = new UsuarioDAOImpl();
@@ -34,6 +36,8 @@ public class Principal {
 		FormularioDAOImpl formularioDAOImpl       = new FormularioDAOImpl();
 		PontoAvaliadoDAOImpl pontoAvaliadoDAOImpl = new PontoAvaliadoDAOImpl();
 		
+
+		System.out.println();
 		Ponto p1 = pontoDAOImpl.recuperarPontos().get(0);
 		Ponto p2 = pontoDAOImpl.recuperarPontos().get(1);
 		
