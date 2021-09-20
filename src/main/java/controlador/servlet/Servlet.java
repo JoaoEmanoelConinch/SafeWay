@@ -160,7 +160,10 @@ public class Servlet extends HttpServlet {
 	private void inserirPonto (HttpServletRequest request, HttpServletResponse response) throws StatusInvalidoException{
 		double latitude = Double.parseDouble(request.getParameter("latitude"));
 		double longitude = Double.parseDouble(request.getParameter("longitude"));
-		pontoDAO.inserirPonto(new Ponto(latitude, longitude));
+		Ponto ponto = new Ponto(latitude, longitude);
+		if (pontoDAO.recuperarPontoPorLatLong(ponto) == null) {
+			pontoDAO.inserirPonto(new Ponto(latitude, longitude));
+		}
 	}
 
 	private void deletarPonto (HttpServletRequest request, HttpServletResponse response) {
