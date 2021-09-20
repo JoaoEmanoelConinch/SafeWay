@@ -73,9 +73,9 @@ public class Servlet extends HttpServlet {
 					deletarUsuario(request, response);
 					break;
 					
-//				case "/mapa":
-//					mostrarMapa(request, response);
-//					break;
+				case "/mapa":
+					mostrarMapa(request, response);
+					break;
 //					
 //				case "/procurar-ponto":
 //					MostrarPontosCompativel(request, response);
@@ -84,10 +84,10 @@ public class Servlet extends HttpServlet {
 //				case "/selecionar-ponto":
 //					selecionarPonto(request, response);
 //					break;
-//					
-//				case "/criar-trajeto":
-//					inserirTrajeto(request, response);
-//					break;
+					
+				case "/criar-trajeto":
+					inserirTrajeto(request, response);
+					break;
 					
 				case "/inserir-Ponto":
 					inserirPonto(request, response);
