@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.dao.Ponto.PontoDAO;
+import modelo.dao.Trajeto.TrajetoDAO;
 import modelo.dao.Usuario.UsuarioDAO;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.usuario.UsuarioCadastrado;
@@ -26,6 +27,7 @@ public class Servlet extends HttpServlet {
 
 	private UsuarioDAO usuarioDAO;
 	private PontoDAO pontoDAO;
+	private TrajetoDAO trajetoDAO;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -140,6 +142,18 @@ public class Servlet extends HttpServlet {
 		long id = Long.parseLong(request.getParameter("id"));
 		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(id));		
 		pontoDAO.deletarPonto(ponto);
+	}
+
+	private void inserirTrajeto (HttpServletRequest request, HttpServletResponse response){
+
+	}
+
+	private void atualizarTrajeto (HttpServletRequest request, HttpServletResponse response){
+
+	}
+
+	private void deletarTrajeto (HttpServletRequest request, HttpServletResponse response){
+		
 	}
 
 }

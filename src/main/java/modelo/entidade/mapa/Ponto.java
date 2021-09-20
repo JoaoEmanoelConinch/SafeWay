@@ -152,6 +152,10 @@ public class Ponto implements Serializable {
 		
 	}
 
+	public static Ponto parseUnsignedPonto(java.lang.String s)throws StatusInvalidoException, NumeroMenorQueZeroException{
+		return new Ponto(0, 0);
+	}
+
 	public void addTrajeto(Trajeto trajeto) {
 		trajetos.add(trajeto);
 	}
