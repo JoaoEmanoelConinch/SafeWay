@@ -1,4 +1,4 @@
-package controlador.consultaAPI;
+package modelo.consultaAPI;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

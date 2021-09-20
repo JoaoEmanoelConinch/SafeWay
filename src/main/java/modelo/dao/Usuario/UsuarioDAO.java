@@ -9,6 +9,8 @@ public interface UsuarioDAO {
 	void deletarUsuario(UsuarioCadastrado usuario);
 	
 	void atualizarUsuario(UsuarioCadastrado usuario);
+
+	public UsuarioCadastrado recuperarUsuario(UsuarioCadastrado usuario);
 	
 	UsuarioCadastrado recuperarUsuario(UsuarioCadastrado usuario);
 	
