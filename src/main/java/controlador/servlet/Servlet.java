@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import modelo.dao.Ponto.PontoDAO;
 import modelo.dao.Usuario.UsuarioDAO;
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
 import modelo.excecao.usuario.StringVaziaException;
@@ -118,6 +120,18 @@ public class Servlet extends HttpServlet {
 		long id = Long.parseLong(request.getParameter("id"));
 		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(id));
 		usuarioDAO.deletarUsuario(usuarioCadastrado);
+	}
+
+	private void inserirPonto (HttpServletRequest request, HttpServletResponse response) throws StatusInvalidoException{
+		double latitude = Double.parseDouble(request.getParameter("latitude"));
+		double longitude = Double.parseDouble(request.getParameter("longitude"));
+		pontoDAO.inserirPonto(new Ponto(latitude, longitude));
+	}
+
+	private void deletarPonto (HttpServletRequest request, HttpServletResponse response) {
+		long id = Long.parseLong(request.getParameter("id"));
+		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(id));		
+		pontoDAO.deletarPonto(ponto);
 	}
 
 }
