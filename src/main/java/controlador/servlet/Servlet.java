@@ -116,6 +116,15 @@ public class Servlet extends HttpServlet {
 		}	
 	}
 
+	private void recuperarUsuario (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		long id = Long.parseLong(request.getParameter("id"));
+		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(id));
+		request.setAttribute("usuario", usuarioCadastrado);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cabesanho.jsp");
+		dispatcher.forward(request, response);
+
+	}
+
 	private void mostrarTelaInicial (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
