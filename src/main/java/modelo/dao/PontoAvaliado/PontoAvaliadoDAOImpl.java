@@ -12,8 +12,6 @@ import org.hibernate.Session;
 
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoAvaliado_;
-import modelo.entidade.usuario.UsuarioCadastrado;
-import modelo.entidade.usuario.UsuarioCadastrado_;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
@@ -83,6 +81,7 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 	}
 
+	@Override
 	public void atualizarPontoAvaliado(PontoAvaliado pontoAvaliado) {
 		
 		Session sessao = null;
@@ -113,6 +112,7 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 		
 	}
 	
+	@Override
 	public List<PontoAvaliado> recuperarPontosAvaliados() {
 
 		Session sessao = null;
@@ -153,6 +153,7 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 	}
 
+	@Override
 	public List<PontoAvaliado> recuperarPontoAvaliadoMediaIgual(PontoAvaliado ponto) {
 
 		Session sessao = null;
@@ -194,6 +195,7 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 	}
 
+	@Override
 	public PontoAvaliado recuperarPontoAvaId(PontoAvaliado ponto) {
 
 		Session sessao = null;
