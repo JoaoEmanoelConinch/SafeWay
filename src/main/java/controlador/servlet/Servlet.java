@@ -120,7 +120,7 @@ public class Servlet extends HttpServlet {
 		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		request.setAttribute("usuario", usuarioCadastrado);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cabesanho.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cabecalho.jsp");
 		dispatcher.forward(request, response);
 
 	}
