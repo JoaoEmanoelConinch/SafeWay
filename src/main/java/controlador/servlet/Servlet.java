@@ -117,8 +117,8 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void recuperarUsuario (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		long id = Long.parseLong(request.getParameter("id"));
-		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(id));
+		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		request.setAttribute("usuario", usuarioCadastrado);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cabesanho.jsp");
 		dispatcher.forward(request, response);
@@ -146,8 +146,8 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void mostrarFormularioEditarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		long id = Long.parseLong(request.getParameter("id"));
-		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(id));
+		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro.jsp");
 		request.setAttribute("usuarioCadastrado", usuarioCadastrado);
 		dispatcher.forward(request, response);
@@ -161,16 +161,16 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void atualizarUsuario (HttpServletRequest request, HttpServletResponse response) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException{
-		long id = Long.parseLong(request.getParameter("id"));
+		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String email = request.getParameter("email");
-		usuarioDAO.atualizarUsuario(new UsuarioCadastrado(id, nome, senha, email));
+		usuarioDAO.atualizarUsuario(new UsuarioCadastrado(idUsuario, nome, senha, email));
 	}
 
 	private void deletarUsuario (HttpServletRequest request, HttpServletResponse response){
-		long id = Long.parseLong(request.getParameter("id"));
-		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(id));
+		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		usuarioDAO.deletarUsuario(usuarioCadastrado);
 	}
 
@@ -184,8 +184,8 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void deletarPonto (HttpServletRequest request, HttpServletResponse response) {
-		long id = Long.parseLong(request.getParameter("id"));
-		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(id));		
+		long idPonto = Long.parseLong(request.getParameter("idPonto"));
+		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(idPonto));		
 		pontoDAO.deletarPonto(ponto);
 	}
 
@@ -208,16 +208,16 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void atualizarTrajeto (HttpServletRequest request, HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException{
-		long id = Long.parseLong(request.getParameter("id"));
+		long idTrajeto = Long.parseLong(request.getParameter("idTrajeto"));
 		Ponto partida = (Ponto) request.getAttribute("inicio");
 		Ponto chegada = (Ponto) request.getAttribute("chegada");
 		MeioDeTransporte meioDeTransporte = (MeioDeTransporte) request.getAttribute("meioDeTransporte");
-		trajetoDAO.atualizarTrajeto(new Trajeto(id, partida, chegada, meioDeTransporte));
+		trajetoDAO.atualizarTrajeto(new Trajeto(idTrajeto, partida, chegada, meioDeTransporte));
 	}
 
 	private void deletarTrajeto (HttpServletRequest request, HttpServletResponse response){
-		long id = Long.parseLong(request.getParameter("id"));
-		Trajeto trajeto = trajetoDAO.recuperarTrajeto(new Trajeto(id));
+		long idTrajeto = Long.parseLong(request.getParameter("idTrajeto"));
+		Trajeto trajeto = trajetoDAO.recuperarTrajeto(new Trajeto(idTrajeto));
 		trajetoDAO.deletarTrajeto(trajeto);
 	}
 
