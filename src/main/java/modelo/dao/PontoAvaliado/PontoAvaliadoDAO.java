@@ -2,6 +2,7 @@ package modelo.dao.PontoAvaliado;
 
 import java.util.List;
 
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
 
 public interface PontoAvaliadoDAO {
@@ -17,5 +18,7 @@ public interface PontoAvaliadoDAO {
 	List<PontoAvaliado> recuperarPontoAvaliadoMediaIgual(PontoAvaliado ponto);
 	
 	PontoAvaliado recuperarPontoAvaId(PontoAvaliado ponto);
+	
+	boolean verificarPontoAvaliado(PontoAvaliado p);
 
 }
