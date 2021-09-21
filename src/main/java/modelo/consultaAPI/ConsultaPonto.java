@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import modelo.entidade.mapa.Ponto;
+import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
@@ -16,13 +17,13 @@ public class ConsultaPonto {
 	public ConsultaPonto() {}
 
 	public static Ponto informatLocal(String local)
-			throws StatusInvalidoException, NumeroMenorQueZeroException{
+			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 		
 		return informatLocal(local, 1);
 	}
 
 	public static Ponto informatLocal(String local, int posicao)
-			throws StatusInvalidoException, NumeroMenorQueZeroException{
+			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 
 		posicao --;
 
@@ -37,6 +38,12 @@ public class ConsultaPonto {
 		JSONObject jsonObject = JSONpontoDAO.readJsonFromUrl(
 			"https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110&text="
 			+ localParaURL);
+
+		JSONArray pontosCompativeis = jsonObject.getJSONArray("features");
+
+		if (posicao > pontosCompativeis.length()){
+			throw new NumeroMaiorQueLimiteException("Posicao inexistente");
+		}
                 
 		BigDecimal latitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(posicao).getJSONObject("geometry").getJSONArray("coordinates").get(0);
 		BigDecimal longitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(posicao).getJSONObject("geometry").getJSONArray("coordinates").get(1);

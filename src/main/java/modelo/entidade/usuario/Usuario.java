@@ -17,6 +17,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Trajeto;
 import modelo.enumeracao.mapa.MeioDeTransporte;
+import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
@@ -47,27 +48,27 @@ public abstract class Usuario {
 		return Ponto.informatLocais(local);
 	} 
 
-	public Ponto DefinirLocal (String local) throws StatusInvalidoException, NumeroMenorQueZeroException{
+	public Ponto DefinirLocal (String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 		return Ponto.informatLocal(local);
 	}
 
-	public Ponto DefinirLocal (String local, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException{
+	public Ponto DefinirLocal (String local, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 		return Ponto.informatLocal(local, posicao);
 	}
 	
-	public Ponto DefinirPartida(String inicio) throws StatusInvalidoException, NumeroMenorQueZeroException {
+	public Ponto DefinirPartida(String inicio) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return DefinirLocal(inicio);
 	}
 
-	public Ponto DefinirDestino(String chegada) throws StatusInvalidoException, NumeroMenorQueZeroException {
+	public Ponto DefinirDestino(String chegada) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return DefinirLocal(chegada);
 	}
 
-	public Ponto DefinirPartida(String inicio, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException {
+	public Ponto DefinirPartida(String inicio, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return DefinirLocal(inicio, posicao);
 	}
 
-	public Ponto DefinirDestino(String chegada, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException {
+	public Ponto DefinirDestino(String chegada, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return DefinirLocal(chegada, posicao);
 	}
 
@@ -76,13 +77,13 @@ public abstract class Usuario {
 	}
 
 	public Trajeto trajeto(String inicio, String chegada, MeioDeTransporte transporte)
-			throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException{
+			throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 
 		return new Trajeto(DefinirPartida(inicio), DefinirDestino(chegada), DefinirTransporte(transporte));
 	}
 
 	public Trajeto trajeto(String inicio, int posicaoInicio, String chegada, int posicaoChegada, MeioDeTransporte transporte)
-			throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException{
+			throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 
 		return new Trajeto(DefinirPartida(inicio, posicaoInicio), DefinirDestino(chegada, posicaoChegada),DefinirTransporte(transporte));
 	}

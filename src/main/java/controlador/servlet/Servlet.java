@@ -213,7 +213,7 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void inserirAvaliacao (HttpServletRequest request, HttpServletResponse response){
-
+		
 	}
 
 	private void atualizarAvaliacao (HttpServletRequest request, HttpServletResponse response){
