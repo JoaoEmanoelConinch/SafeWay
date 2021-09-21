@@ -180,7 +180,18 @@ public class Servlet extends HttpServlet {
 		Ponto partida = (Ponto) request.getAttribute("inicio");
 		Ponto chegada = (Ponto) request.getAttribute("chegada");
 		MeioDeTransporte meioDeTransporte = (MeioDeTransporte) request.getAttribute("meioDeTransporte");
-		trajetoDAO.inserirTrajeto(new Trajeto(partida, chegada, meioDeTransporte));
+		Trajeto trajeto = new Trajeto();
+		trajeto.setInicio(partida);
+		trajeto.setChegada(chegada);
+		trajeto.setTransporteUsado(meioDeTransporte);
+		//Ponto avaliado!
+		for (int i = 0; i < trajeto.getPontos().size(); i++){
+				Ponto ponto = trajeto.getPontos().get(i);
+				if (pontoDAO.recuperarPontoPorLatLong(ponto) == null){
+					pontoDAO.inserirPonto(ponto);
+				}
+		}
+		trajetoDAO.inserirTrajeto(trajeto);
 	}
 
 	private void atualizarTrajeto (HttpServletRequest request, HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException{
