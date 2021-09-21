@@ -23,6 +23,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import modelo.consultaAPI.ConsultaPonto;
+import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
@@ -70,12 +71,12 @@ public class Ponto implements Serializable {
 		this.setTrajetos(new ArrayList<Trajeto>());
 	}
 
-	public static Ponto informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException {
+	public static Ponto informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return ConsultaPonto.informatLocal(local);
 	}
 
 	public static Ponto informatLocal(String local, int posicao)
-			throws StatusInvalidoException, NumeroMenorQueZeroException {
+			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return ConsultaPonto.informatLocal(local, posicao);
 	}
 

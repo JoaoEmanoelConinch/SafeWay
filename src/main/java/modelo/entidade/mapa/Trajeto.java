@@ -21,11 +21,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.JsonParseException;
-
+import org.codehaus.jackson.map.JsonMappingException;
 
 import modelo.consultaAPI.ConsultaTrajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
+import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
@@ -103,7 +104,7 @@ public class Trajeto implements Serializable {
 	}
 
 	public Trajeto(String inicio, String chegada, MeioDeTransporte transporteUsado)
-			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException {
+			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		this.setInicio(Ponto.informatLocal(inicio));
 		this.setChegada(Ponto.informatLocal(chegada));
 		this.setTransporteUsado(transporteUsado);
@@ -112,11 +113,20 @@ public class Trajeto implements Serializable {
 	}
 
 	public Trajeto(String inicio, int posicaoInicio, String chegada, int posicaoChegada, MeioDeTransporte transporteUsado)
-			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException {
+			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		this.setInicio(Ponto.informatLocal(inicio, posicaoInicio));
 		this.setChegada(Ponto.informatLocal(chegada, posicaoChegada));
 		this.setTransporteUsado(transporteUsado);
 		this.setPontos(criarLineString(Ponto.informatLocal(inicio), Ponto.informatLocal(chegada), transporteUsado));
+		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
+	}
+	
+	public Trajeto(long id, Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws JsonParseException, JsonMappingException, IOException {
+		this.setIdTrajeto(id);
+		this.setInicio(inicio);
+		this.setChegada(chegada);
+		this.setTransporteUsado(transporteUsado);
+		this.setPontos(criarLineString(inicio, chegada, transporteUsado));
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
 	}
 
@@ -132,7 +142,7 @@ public class Trajeto implements Serializable {
 		return inicio;
 	}
 
-	public void setInicio(String inicio) throws StatusInvalidoException, NumeroMenorQueZeroException{
+	public void setInicio(String inicio) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 		this.inicio = Ponto.informatLocal(inicio);
 	}
 
