@@ -35,7 +35,7 @@
       <div class="full-box">
         <button type="submit">Salvar</button>
 
-        <a href="Tela InicialOSR.html" id="Voltar">Voltar</a>  
+        <a href="index.jsp" id="Voltar">Voltar</a>  
       </div>
     </form>
   </div>
