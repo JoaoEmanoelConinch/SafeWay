@@ -9,5 +9,7 @@ public interface PontoFavDAO {
 	void deletarPontoFav(PontoFavorito pontoFav);
 	
 	void atualizarPontoFav(PontoFavorito pontoFav);
+	
+	PontoFavorito recuperarPontoFavId(PontoFavorito ponto);
 
 }
