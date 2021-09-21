@@ -162,11 +162,12 @@ public class PontoDAOImpl implements PontoDAO {
 	}
 
 	@Override
-	public List<Ponto> recuperarPontoPorLatLong(Ponto p) {
+	public boolean verificarPonto(Ponto p) {
 
 		this.p = p;
 		Session sessao = null;
 		List<Ponto> ponto = null;
+		boolean isPonto = false;
 
 		try{
 
@@ -204,7 +205,11 @@ public class PontoDAOImpl implements PontoDAO {
 			}
 		}
 		
-		return ponto;
+		if (ponto != null) {
+			isPonto = true;
+		}
+		
+		return isPonto;
 
 	}
 
