@@ -158,6 +158,7 @@ public class Servlet extends HttpServlet {
 		String senha = request.getParameter("senha");
 		String email = request.getParameter("email");
 		usuarioDAO.inserirUsuario(new UsuarioCadastrado(nome, senha, email));
+		response.sendRedirect("mapa");
 	}
 
 	private void atualizarUsuario (HttpServletRequest request, HttpServletResponse response) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException{
