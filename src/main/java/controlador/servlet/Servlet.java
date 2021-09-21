@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
+import modelo.dao.Formulario.FormularioDAO;
 import modelo.dao.Ponto.PontoDAO;
+import modelo.dao.PontoAvaliado.PontoAvaliadoDAO;
 import modelo.dao.Trajeto.TrajetoDAO;
 import modelo.dao.Usuario.UsuarioDAO;
 import modelo.entidade.mapa.Ponto;
@@ -34,6 +36,8 @@ public class Servlet extends HttpServlet {
 	private UsuarioDAO usuarioDAO;
 	private PontoDAO pontoDAO;
 	private TrajetoDAO trajetoDAO;
+	private FormularioDAO formularioDAO;
+	private PontoAvaliadoDAO pontoAvaliadoDAO;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -206,6 +210,30 @@ public class Servlet extends HttpServlet {
 		long id = Long.parseLong(request.getParameter("id"));
 		Trajeto trajeto = trajetoDAO.recuperarTrajeto(new Trajeto(id));
 		trajetoDAO.deletarTrajeto(trajeto);
+	}
+
+	private void inserirAvaliacao (HttpServletRequest request, HttpServletResponse response){
+
+	}
+
+	private void atualizarAvaliacao (HttpServletRequest request, HttpServletResponse response){
+
+	}
+
+	private void deletarAvaliacao (HttpServletRequest request, HttpServletResponse response){
+
+	}
+
+	private void inserirPontoAvaliado (HttpServletRequest request, HttpServletResponse response){
+
+	}
+
+	private void atualizarPontoAvaliado (HttpServletRequest request, HttpServletResponse response){
+
+	}
+
+	private void deletarPontoAvaliado (HttpServletRequest request, HttpServletResponse response){
+
 	}
 
 }
