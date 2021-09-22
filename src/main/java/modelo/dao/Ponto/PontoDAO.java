@@ -14,5 +14,5 @@ public interface PontoDAO {
 	
 	Ponto recuperarPonto(Ponto p);
 	
-	Ponto recuperarPontoPorLatLong(Ponto p);
+	Ponto verificarPonto(Ponto p);
 }

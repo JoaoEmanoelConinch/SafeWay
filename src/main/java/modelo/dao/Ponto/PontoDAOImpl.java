@@ -1,10 +1,12 @@
 package modelo.dao.Ponto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
@@ -160,12 +162,13 @@ public class PontoDAOImpl implements PontoDAO {
 	}
 
 	@Override
-	public Ponto recuperarPontoPorLatLong(Ponto p) {
+	public Ponto verificarPonto(Ponto p) {
+
 		this.p = p;
 		Session sessao = null;
 		Ponto ponto = null;
 
-		try{
+		try {
 
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
@@ -175,18 +178,18 @@ public class PontoDAOImpl implements PontoDAO {
 			CriteriaQuery<Ponto> criteria = construtor.createQuery(Ponto.class);
 			Root<Ponto> raizPonto = criteria.from(Ponto.class);
 
-			ParameterExpression<Double> LatPonto = construtor.parameter(Double.class);
-			ParameterExpression<Double> LongPonto = construtor.parameter(Double.class);
+			List<Predicate> predicates = new ArrayList<Predicate>();
 
-			criteria.where(construtor.equal(raizPonto.get(Ponto_.LATITUDE), LatPonto),
-				construtor.equal(raizPonto.get(Ponto_.LONGITUDE), LongPonto));
+			predicates.add(construtor.equal(raizPonto.get(Ponto_.LATITUDE), p.getLatitude()));
+			predicates.add(construtor.equal(raizPonto.get(Ponto_.LONGITUDE), p.getLongitude()));
 
-			ponto = sessao.createQuery(criteria).setParameter(LatPonto, p.getLatitude()).getSingleResult();
-			ponto = sessao.createQuery(criteria).setParameter(LongPonto, p.getLongitude()).getSingleResult();
+			criteria.select(raizPonto).where(predicates.toArray(new Predicate[] {}));
+
+			ponto = sessao.createQuery(criteria).getSingleResult();
 
 			sessao.getTransaction().commit();
 
-		}catch (Exception sqlException) {
+		} catch (Exception sqlException) {
 
 			sqlException.printStackTrace();
 
@@ -200,6 +203,7 @@ public class PontoDAOImpl implements PontoDAO {
 				sessao.close();
 			}
 		}
+
 		return ponto;
 
 	}
