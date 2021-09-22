@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -25,6 +27,7 @@ public class PontoFavorito extends Ponto{
 	private String nomePonto;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	    @JoinColumn(
 	        name = "id_ponto_favorito",
 	        referencedColumnName = "id_ponto"

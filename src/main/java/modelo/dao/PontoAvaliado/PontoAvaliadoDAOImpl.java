@@ -1,17 +1,21 @@
 package modelo.dao.PontoAvaliado;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoAvaliado_;
+import modelo.entidade.mapa.Ponto_;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
@@ -237,5 +241,50 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 	}
 
+	public PontoAvaliado verificarPontoAvaliado(Ponto p) {
+
+		
+		Session sessao = null;
+		PontoAvaliado pontoAvaliado = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<PontoAvaliado> criteria = construtor.createQuery(PontoAvaliado.class);
+			Root<PontoAvaliado> raizPontoAvaliado = criteria.from(PontoAvaliado.class);
+
+			List<Predicate> predicates = new ArrayList<Predicate>();
+
+			predicates.add(construtor.equal(raizPontoAvaliado.get(PontoAvaliado_.LATITUDE), p.getLatitude()));
+			predicates.add(construtor.equal(raizPontoAvaliado.get(PontoAvaliado_.LONGITUDE), p.getLongitude()));
+
+			criteria.select(raizPontoAvaliado).where(predicates.toArray(new Predicate[] {}));
+
+			pontoAvaliado = sessao.createQuery(criteria).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return pontoAvaliado;
+
+	}
 	
 }
