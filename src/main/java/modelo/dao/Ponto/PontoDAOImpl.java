@@ -162,7 +162,7 @@ public class PontoDAOImpl implements PontoDAO {
 	}
 
 	@Override
-	public boolean verificarPonto(Ponto p) {
+	public Ponto verificarPonto(Ponto p) {
 
 		this.p = p;
 		Session sessao = null;
@@ -204,7 +204,7 @@ public class PontoDAOImpl implements PontoDAO {
 			}
 		}
 
-		return ponto != null;
+		return ponto;
 
 	}
 
