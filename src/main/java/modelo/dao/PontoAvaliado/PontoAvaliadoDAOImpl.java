@@ -173,10 +173,13 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 			CriteriaQuery<PontoAvaliado> criteria = construtor.createQuery(PontoAvaliado.class);
 			Root<PontoAvaliado> raizPonto = criteria.from(PontoAvaliado.class);
 
-			criteria.select(raizPonto).where(construtor.equal(raizPonto.get(PontoAvaliado_.mediaDeAvaliacao), ponto));
+			List<Predicate> predicates = new ArrayList<Predicate>();
+			
+			predicates.add(construtor.equal(raizPonto.get(PontoAvaliado_.mediaDeAvaliacao), ponto.getMediaDeAvaliacao()));
+			
+			criteria.select(raizPonto).where(predicates.toArray(new Predicate[] {}));
 
-			TypedQuery<PontoAvaliado> queryPonto = sessao.createQuery(criteria);
-			pontos = queryPonto.getResultList();
+			pontos = sessao.createQuery(criteria).getResultList();
 
 			sessao.getTransaction().commit();
 
