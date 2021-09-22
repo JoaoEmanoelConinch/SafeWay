@@ -221,7 +221,7 @@ public class Servlet extends HttpServlet {
 		trajetoDAO.deletarTrajeto(trajeto);
 	}
 
-	private void inserirAvaliacao (HttpServletRequest request, HttpServletResponse response){
+	private void inserirAvaliacao (HttpServletRequest request, HttpServletResponse response) throws StatusInvalidoException{
 		boolean lesaoCorporal = Boolean.parseBoolean(request.getParameter("lesaoCorporal"));
 		boolean furto = Boolean.parseBoolean(request.getParameter("furto"));
 		boolean roubo = Boolean.parseBoolean(request.getParameter("roubo"));
@@ -237,12 +237,12 @@ public class Servlet extends HttpServlet {
 		if (pontoDAO.verificarPonto(ponto) == null){
 			pontoDAO.inserirPonto(ponto);
 		}
-		Ponto pontoUsavel = pontoDAO.recuperarPontoPorLatLong(ponto);
+		Ponto pontoUsavel = pontoDAO.verificarPonto(ponto);
 		
-		if(pontoAvaliadoDAO.recuperarPontoPorLatLong(pontoUsavel) == null){
-			pontoAvaliadoDAO.inserirPontoAvaliado(new PontoAvaliado(ponto));
+		if(pontoAvaliadoDAO.verificarPontoAvaliado(pontoUsavel) == null){
+			pontoAvaliadoDAO.verificarPontoAvaliado(new PontoAvaliado(ponto));
 		}
-		PontoAvaliado pontoAvaliado = pontoAvaliadoDAO.recuperarPontoPorLatLong(pontoUsavel);
+		PontoAvaliado pontoAvaliado = pontoAvaliadoDAO.verificarPontoAvaliado(pontoUsavel);
 
 		Formulario avaliacao = new Formulario(lesaoCorporal, furto, roubo, homicidio,
 		latrocinio, comentario, bloqueio, pontoAvaliado, usuario);
