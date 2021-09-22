@@ -14,5 +14,5 @@ public interface PontoDAO {
 	
 	Ponto recuperarPonto(Ponto p);
 	
-	boolean verificarPonto(Ponto p);
+	Ponto verificarPonto(Ponto p);
 }
