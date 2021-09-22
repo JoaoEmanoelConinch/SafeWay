@@ -169,10 +169,11 @@ public class Servlet extends HttpServlet {
 		usuarioDAO.atualizarUsuario(new UsuarioCadastrado(idUsuario, nome, senha, email));
 	}
 
-	private void deletarUsuario (HttpServletRequest request, HttpServletResponse response){
+	private void deletarUsuario (HttpServletRequest request, HttpServletResponse response) throws IOException{
 		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		usuarioDAO.deletarUsuario(usuarioCadastrado);
+		response.sendRedirect("inicio");
 	}
 
 	private void inserirPonto (HttpServletRequest request, HttpServletResponse response) throws StatusInvalidoException{
@@ -206,6 +207,7 @@ public class Servlet extends HttpServlet {
 				}
 		}
 		trajetoDAO.inserirTrajeto(trajeto);
+		response.sendRedirect("mapa");
 	}
 
 	private void atualizarTrajeto (HttpServletRequest request, HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException{
