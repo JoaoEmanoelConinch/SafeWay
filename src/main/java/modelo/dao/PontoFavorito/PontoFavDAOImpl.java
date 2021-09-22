@@ -171,11 +171,11 @@ public class PontoFavDAOImpl implements PontoFavDAO {
 			CriteriaQuery<PontoFavorito> criteria = construtor.createQuery(PontoFavorito.class);
 			Root<PontoFavorito> raizPontoFav = criteria.from(PontoFavorito.class);
 
-			Join<PontoFavorito, UsuarioCadastrado> juncaoPonto = raizPontoFav.join(PontoFavorito_.ID_PONTO);
+			Join<PontoFavorito, UsuarioCadastrado> juncaoUsuario = raizPontoFav.join(PontoFavorito_.usuario);
 
 
 			ParameterExpression<Long> idUsuario = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(juncaoPonto.get(UsuarioCadastrado_.ID), idUsuario));
+			criteria.where(construtor.equal(juncaoUsuario.get(UsuarioCadastrado_.ID), idUsuario));
 
 			pontos = sessao.createQuery(criteria).setParameter(idUsuario, usuario.getId()).getResultList();
 
