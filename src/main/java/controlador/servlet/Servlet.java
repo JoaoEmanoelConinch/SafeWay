@@ -13,12 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
+
 import modelo.dao.Formulario.FormularioDAO;
 import modelo.dao.Ponto.PontoDAO;
 import modelo.dao.PontoAvaliado.PontoAvaliadoDAO;
 import modelo.dao.Trajeto.TrajetoDAO;
 import modelo.dao.Usuario.UsuarioDAO;
+import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
@@ -182,6 +185,7 @@ public class Servlet extends HttpServlet {
 		String senha = request.getParameter("senha");
 		String email = request.getParameter("email");
 		usuarioDAO.atualizarUsuario(new UsuarioCadastrado(idUsuario, nome, senha, email));
+		response.sendRedirect("mapa");
 	}
 
 	private void deletarUsuario (HttpServletRequest request, HttpServletResponse response) throws IOException{
