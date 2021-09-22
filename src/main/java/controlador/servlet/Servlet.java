@@ -171,7 +171,7 @@ public class Servlet extends HttpServlet {
 		response.sendRedirect("mapa");
 	}
 
-	private void atualizarUsuario (HttpServletRequest request, HttpServletResponse response) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException{
+	private void atualizarUsuario (HttpServletRequest request, HttpServletResponse response) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, IOException{
 		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
@@ -198,7 +198,7 @@ public class Servlet extends HttpServlet {
 		//Ponto avaliado!
 		for (int i = 0; i < trajeto.getPontos().size(); i++){
 				Ponto ponto = trajeto.getPontos().get(i);
-				if (pontoDAO.recuperarPontoPorLatLong(ponto) == null){
+				if (pontoDAO.verificarPonto(ponto) == null){
 					pontoDAO.inserirPonto(ponto);
 				}
 		}
@@ -232,9 +232,9 @@ public class Servlet extends HttpServlet {
 		Ponto ponto = (Ponto) request.getAttribute ("ponto");
 
 		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
-		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(idUsuario);
+		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 
-		if (pontoDAO.recuperarPontoPorLatLong(ponto) = null){
+		if (pontoDAO.verificarPonto(ponto) == null){
 			pontoDAO.inserirPonto(ponto);
 		}
 		Ponto pontoUsavel = pontoDAO.recuperarPontoPorLatLong(ponto);
