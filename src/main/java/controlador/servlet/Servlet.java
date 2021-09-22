@@ -94,7 +94,7 @@ public class Servlet extends HttpServlet {
 					break;
 					
 				case "/mapa-trajeto":
-					
+					MostrarMapaTrageto(request, response);
 					break;
 					
 				case "/inserir-Ponto":
@@ -145,6 +145,21 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	private void MostrarMapaTrageto (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaTrajeto.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void MostrarMapaAvaliacoa (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaAvaliacoa.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void MostrarTelaAvaliacoa (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Formulario.jsp");
+		dispatcher.forward(request, response);
+	}
+
 	private void mostrarFormularioEditarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
@@ -176,21 +191,6 @@ public class Servlet extends HttpServlet {
 		response.sendRedirect("inicio");
 	}
 
-	private void inserirPonto (HttpServletRequest request, HttpServletResponse response) throws StatusInvalidoException{
-		double latitude = Double.parseDouble(request.getParameter("latitude"));
-		double longitude = Double.parseDouble(request.getParameter("longitude"));
-		Ponto ponto = new Ponto(latitude, longitude);
-		if (pontoDAO.recuperarPontoPorLatLong(ponto) == null) {
-			pontoDAO.inserirPonto(new Ponto(latitude, longitude));
-		}
-	}
-
-	private void deletarPonto (HttpServletRequest request, HttpServletResponse response) {
-		long idPonto = Long.parseLong(request.getParameter("idPonto"));
-		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(idPonto));		
-		pontoDAO.deletarPonto(ponto);
-	}
-
 	private void inserirTrajeto (HttpServletRequest request, HttpServletResponse response) throws StatusInvalidoException, NumeroMenorQueZeroException, JsonParseException, JsonMappingException, IOException{
 		Ponto partida = (Ponto) request.getAttribute("inicio");
 		Ponto chegada = (Ponto) request.getAttribute("chegada");
@@ -207,6 +207,7 @@ public class Servlet extends HttpServlet {
 				}
 		}
 		trajetoDAO.inserirTrajeto(trajeto);
+		//js
 		response.sendRedirect("mapa");
 	}
 
@@ -225,7 +226,37 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void inserirAvaliacao (HttpServletRequest request, HttpServletResponse response){
+		boolean lesaoCorporal = Boolean.parseBoolean(request.getParameter("lesaoCorporal"));
+		boolean furto = Boolean.parseBoolean(request.getParameter("furto"));
+		boolean roubo = Boolean.parseBoolean(request.getParameter("roubo"));
+		boolean homicidio = Boolean.parseBoolean(request.getParameter("homicidio"));
+		boolean latrocinio = Boolean.parseBoolean(request.getParameter("latrocinio"));
+		boolean bloqueio = Boolean.parseBoolean(request.getParameter("bloqueio"));
+		String comentario = request.getParameter("comentario");
+		Ponto ponto = (Ponto) request.getAttribute ("ponto");
+
+		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(idUsuario);
+
+		if (pontoDAO.recuperarPontoPorLatLong(ponto) = null){
+			pontoDAO.inserirPonto(ponto);
+		}
+		Ponto pontoUsavel = pontoDAO.recuperarPontoPorLatLong(ponto);
 		
+		if(pontoAvaliadoDAO.recuperarPontoPorLatLong(pontoUsavel) == null){
+			pontoAvaliadoDAO.inserirPontoAvaliado(new PontoAvaliado(ponto));
+		}
+		PontoAvaliado pontoAvaliado = pontoAvaliadoDAO.recuperarPontoPorLatLong(pontoUsavel);
+
+		Formulario avaliacao = new Formulario(lesaoCorporal, furto, roubo, homicidio,
+		latrocinio, comentario, bloqueio, pontoAvaliado, usuario);
+
+		formularioDAO.inserirAvaliacao(avaliacao);
+
+		pontoAvaliado.addAvaliacao(avaliacao);
+
+		pontoAvaliadoDAO.atualizarPontoAvaliado(pontoAvaliado);
+
 	}
 
 	private void atualizarAvaliacao (HttpServletRequest request, HttpServletResponse response){
@@ -233,18 +264,6 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void deletarAvaliacao (HttpServletRequest request, HttpServletResponse response){
-
-	}
-
-	private void inserirPontoAvaliado (HttpServletRequest request, HttpServletResponse response){
-
-	}
-
-	private void atualizarPontoAvaliado (HttpServletRequest request, HttpServletResponse response){
-
-	}
-
-	private void deletarPontoAvaliado (HttpServletRequest request, HttpServletResponse response){
 
 	}
 
