@@ -19,6 +19,6 @@ public interface PontoAvaliadoDAO {
 	
 	PontoAvaliado recuperarPontoAvaId(PontoAvaliado ponto);
 	
-	boolean verificarPontoAvaliado(PontoAvaliado p);
+	PontoAvaliado verificarPontoAvaliado(Ponto p);
 
 }
