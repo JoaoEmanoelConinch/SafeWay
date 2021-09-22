@@ -1,0 +1,84 @@
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica, sans-serif;
+
+
+ }
+ /* COMEÇO CABEÇALHO */
+
+header {
+    padding: 15px 0;
+    width: 100%;
+    background-color:#030d31;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+.container-logo {
+  display: flex;
+  align-items: center;
+  }
+
+.logo-imagem {
+}
+
+.logo-texto {
+  color: blanchedalmond;
+  margin-left: 20px;
+  background-color:#486cf0;
+  padding: 10px 10px;
+  border-radius: 15px;
+}
+
+.menu li{
+ display: inline-block;
+ margin: 10px 10px;
+}
+
+.menu li a{
+ color: blanchedalmond;
+ border-radius: 15px;
+ background-color: #486cf0;;
+ padding: 10px 10px;
+ font-size: 20px;
+ text-decoration: none;
+ text-transform: uppercase;
+}
+
+/* FIM CABEÇALHO */
+
+/* COMEÇO RODAPÉ */
+
+footer {
+    width: 100%;
+   justify-content: space-around;
+    position: absolute;
+    bottom: 0;
+    padding: 15px 15px;
+    background-color:#030d31;
+    display:flex;
+    color:#486cf0;
+    text-transform: uppercase;
+    }
+
+.links {
+    width: 190px;
+    background-color: #486cf0;
+    border-radius: 15px;
+    color: blanchedalmond;
+    text-align:center;
+    padding-top: 3px;
+    }
+.links li {
+    display: inline-block;
+
+}
+.links li a {
+    text-decoration: none;
+    color: blanchedalmond;
+}
+    
+/* FIM RODAPÉ */
