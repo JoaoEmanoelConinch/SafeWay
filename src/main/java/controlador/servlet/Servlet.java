@@ -99,14 +99,6 @@ public class Servlet extends HttpServlet {
 				case "/mapa-trajeto":
 					MostrarMapaTrageto(request, response);
 					break;
-					
-				case "/inserir-Ponto":
-					inserirPonto(request, response);
-					break;
-
-				case "/deletar-Ponto":
-					deletarPonto(request, response);
-					break;
 
 				default:
 					mostrarTela404(request, response);
