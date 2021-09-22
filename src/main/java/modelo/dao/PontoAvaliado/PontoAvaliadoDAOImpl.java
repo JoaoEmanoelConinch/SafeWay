@@ -241,7 +241,7 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 	}
 
-	public boolean verificarPontoAvaliado(PontoAvaliado p) {
+	public PontoAvaliado verificarPontoAvaliado(Ponto p) {
 
 		
 		Session sessao = null;
@@ -283,7 +283,7 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 			}
 		}
 
-		return pontoAvaliado != null;
+		return pontoAvaliado;
 
 	}
 	
