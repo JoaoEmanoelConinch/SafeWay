@@ -15,7 +15,9 @@ import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
+import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
@@ -34,6 +36,8 @@ public class Principal {
 		
 		
 		Ponto p1 = new Ponto(-26.456, 12.212);
+		
+		Ponto p2 = new Ponto(-30.456, 22.212);
 		
 		pontoDao.inserirPonto(p1);
 		
@@ -56,24 +60,24 @@ public class Principal {
 		usuario.addFavorito(pontoFav);
 		
 		usuario2.addFavorito(pontoFav2);
-//
-//		Formulario form = new Formulario(true, false, false, false, false, "levei um soco :( mas não tinha bloqueio :)", false, p1, usuario);
-//		formDao.inserirAvaliacao(form);
-//		
-//		Formulario form2 = new Formulario(false, true, false, false, false, "furtaram minha bolsa :(", false, p1, usuario2);
-//		formDao.inserirAvaliacao(form2);
-//		
-//		PontoAvaliado pontoAv = new PontoAvaliado(p1);
-//		
-//	
-//		
-//		pontoAvDao.adicionarPontoAvaliado(pontoAv);
-//		
-//		System.out.println(formDao.recuperarAvaliacoes(pontoAv));
-		
-//		Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.FOOT_WALKING);
 
-//		trajetoDao.inserirTrajeto(trajeto);
+		Formulario form = new Formulario(true, false, false, false, false, "levei um soco :( mas não tinha bloqueio :)", false, p1, usuario);
+		formDao.inserirAvaliacao(form);
+		
+		Formulario form2 = new Formulario(false, true, false, false, false, "furtaram minha bolsa :(", false, p1, usuario2);
+		formDao.inserirAvaliacao(form2);
+		
+    	PontoAvaliado pontoAv = new PontoAvaliado(p1);
+		
+	
+		
+		pontoAvDao.adicionarPontoAvaliado(pontoAv);
+		
+		System.out.println(formDao.recuperarAvaliacoes(pontoAv));
+		
+      	Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.FOOT_WALKING);
+
+		trajetoDao.inserirTrajeto(trajeto);
 
 	}
 }
