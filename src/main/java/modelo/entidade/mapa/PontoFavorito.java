@@ -23,7 +23,7 @@ public class PontoFavorito extends Ponto{
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "nome_ponto_favorito", length = 20, nullable = true )
+	@Column(name = "nome_ponto_favorito", length = 100, nullable = true )
 	private String nomePonto;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
