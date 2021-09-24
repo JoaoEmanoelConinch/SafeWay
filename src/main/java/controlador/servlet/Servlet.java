@@ -102,6 +102,22 @@ public class Servlet extends HttpServlet {
 					deletarAvaliacao(request, response);
 					break;
 
+				case "mapa-Fovolito":
+					mostrarMapaFoviritar(request, response);
+					break;
+
+				case "favoritar":
+					mostrarFormularioFavoritar(request, response);
+					break;
+
+				case "incerir-pontoFavorito":
+					inserirPontoFavorito(request, response);
+					break;
+
+				case "deletar-pontoFavorito":
+					deletarPontoFavorito(request, response);
+					break;
+
 				case "/criar-trajeto":
 					inserirTrajeto(request, response);
 					break;
@@ -131,7 +147,6 @@ public class Servlet extends HttpServlet {
 		request.setAttribute("usuario", usuarioCadastrado);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cabecalho.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
 	private void mostrarTelaInicial (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
@@ -176,6 +191,20 @@ public class Servlet extends HttpServlet {
 		request.setAttribute("usuarioCadastrado", usuarioCadastrado);
 		dispatcher.forward(request, response);
 	}
+
+	private void mostrarMapaFoviritar (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaFovorito.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void mostrarFormularioFavoritar (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		RequestDispatcher dispatcher = request.getRequestDispatcher("telaFovorito.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void inserirPontoFavorito (HttpServletRequest request, HttpServletResponse response){}
+
+	private void deletarPontoFavorito (HttpServletRequest request, HttpServletResponse response){}
 
 	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)throws SQLException, IOException, StringVaziaException, EmailInvalidoException, SenhaPequenaException{
 		String nome = request.getParameter("nome");
@@ -286,5 +315,7 @@ public class Servlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mapa.jpa");
 		dispatcher.forward(request, response);
 	}
+
+
 
 }
