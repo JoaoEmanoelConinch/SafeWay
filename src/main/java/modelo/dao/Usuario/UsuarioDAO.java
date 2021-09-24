@@ -10,6 +10,12 @@ public interface UsuarioDAO {
 	
 	void atualizarUsuario(UsuarioCadastrado usuario);
 	
+	UsuarioCadastrado recuperarUsuarioId(UsuarioCadastrado usuario);
+	
 	UsuarioCadastrado recuperarUsuario(UsuarioCadastrado usuario);
+	
+	boolean verificarUsuarioNome(UsuarioCadastrado usuario);
+	
+	boolean verificarUsuarioEmail(UsuarioCadastrado usuario);
 	
 }

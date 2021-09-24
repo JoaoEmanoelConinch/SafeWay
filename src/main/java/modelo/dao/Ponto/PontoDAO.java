@@ -10,6 +10,8 @@ public interface PontoDAO {
 	
 	void deletarPonto(Ponto ponto);
 	
+	void atualizarPonto(Ponto ponto);
+	
 	List<Ponto> recuperarPontos();
 	
 	Ponto recuperarPonto(Ponto p);

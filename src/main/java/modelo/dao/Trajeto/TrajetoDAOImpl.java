@@ -2,11 +2,14 @@ package modelo.dao.Trajeto;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
+import modelo.entidade.mapa.PontoFavorito;
+import modelo.entidade.mapa.PontoFavorito_;
 import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.mapa.Trajeto_;
 import modelo.factory.conexao.ConexaoFactory;
@@ -150,6 +153,48 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 
 	}
 
-	
+	public List<Trajeto> recuperarTajetosUsuario(UsuarioCadastrado usuario){
+		
+		Session sessao = null;
+		List<Trajeto> trajetos = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Trajeto> criteria = construtor.createQuery(Trajeto.class);
+			Root<Trajeto> raizPontoFav = criteria.from(Trajeto.class);
+
+			Join<Trajeto, UsuarioCadastrado> juncaoUsuario = raizPontoFav.join(Trajeto_.usuariosCadastrados);
+
+
+			ParameterExpression<Long> idUsuario = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoUsuario.get(UsuarioCadastrado_.ID), idUsuario));
+
+			trajetos = sessao.createQuery(criteria).setParameter(idUsuario, usuario.getId()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return trajetos;
+		
+	}
 	
 }

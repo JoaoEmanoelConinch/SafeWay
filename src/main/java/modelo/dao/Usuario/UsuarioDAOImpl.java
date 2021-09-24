@@ -1,11 +1,22 @@
 package modelo.dao.Usuario;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
+
+import modelo.entidade.mapa.PontoAvaliado;
+import modelo.entidade.mapa.PontoAvaliado_;
+import modelo.entidade.mapa.Trajeto;
+import modelo.entidade.mapa.Trajeto_;
 
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.entidade.usuario.UsuarioCadastrado_;
@@ -107,7 +118,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	}
 
-	public UsuarioCadastrado recuperarUsuario(UsuarioCadastrado usuario) {
+	public UsuarioCadastrado recuperarUsuarioId(UsuarioCadastrado usuario) {
 
 		Session sessao = null;
 		UsuarioCadastrado usuario1 = null;
@@ -148,4 +159,138 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	}
 
+	public UsuarioCadastrado recuperarUsuario(UsuarioCadastrado usuario) {
+		
+		Session sessao = null;
+		UsuarioCadastrado usuarioRetornado = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<UsuarioCadastrado> criteria = construtor.createQuery(UsuarioCadastrado.class);
+			Root<UsuarioCadastrado> raizUsuario = criteria.from(UsuarioCadastrado.class);
+
+			List<Predicate> predicates = new ArrayList<Predicate>();
+
+			
+			predicates.add(construtor.equal(raizUsuario.get(UsuarioCadastrado_.EMAIL), usuario.getEmail()));
+			predicates.add(construtor.equal(raizUsuario.get(UsuarioCadastrado_.SENHA), usuario.getSenha()));
+						
+			criteria.select(raizUsuario).where(predicates.toArray(new Predicate[] {}));
+
+			usuarioRetornado = sessao.createQuery(criteria).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return usuarioRetornado;
+		
+	}
+	
+	public boolean verificarUsuarioNome(UsuarioCadastrado usuario) {
+		
+		Session sessao = null;
+		UsuarioCadastrado isUsuario = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<UsuarioCadastrado> criteria = construtor.createQuery(UsuarioCadastrado.class);
+			Root<UsuarioCadastrado> raizUsuario = criteria.from(UsuarioCadastrado.class);
+
+			ParameterExpression<String> nomeUsuario = construtor.parameter(String.class);
+			criteria.where(construtor.equal(raizUsuario.get(UsuarioCadastrado_.NOME), nomeUsuario));
+
+			isUsuario = sessao.createQuery(criteria).setParameter(nomeUsuario, usuario.getNome()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		if(isUsuario != null)
+			return true;
+		
+		return false;
+		
+	}
+
+	public boolean verificarUsuarioEmail(UsuarioCadastrado usuario) {
+		
+		Session sessao = null;
+		UsuarioCadastrado isUsuario = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<UsuarioCadastrado> criteria = construtor.createQuery(UsuarioCadastrado.class);
+			Root<UsuarioCadastrado> raizUsuario = criteria.from(UsuarioCadastrado.class);
+
+			ParameterExpression<String> nomeUsuario = construtor.parameter(String.class);
+			criteria.where(construtor.equal(raizUsuario.get(UsuarioCadastrado_.EMAIL), nomeUsuario));
+
+			isUsuario = sessao.createQuery(criteria).setParameter(nomeUsuario, usuario.getEmail()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		if(isUsuario != null)
+			return true;
+		
+		return false;
+		
+	}
+	
 }
