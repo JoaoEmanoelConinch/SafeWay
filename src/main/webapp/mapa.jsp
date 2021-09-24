@@ -3,6 +3,12 @@
       <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
     <head>
+
+      <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/stylesMaps.css"/>
+    <style> 
+      <%@include file="/resources/css/styles.css"%> 
+    </style>
+
 <link rel="stylesheet" href="js/LineString.js" type="text/js">
         <title></title>
     

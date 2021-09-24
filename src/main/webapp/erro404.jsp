@@ -6,8 +6,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styleErro.css">
-    <title>Tela de Erro</title>
+    <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/styles.css"/>
+    <style> 
+      <%@include file="/resources/css/styles.css"%> 
+    </style>    <title>Tela de Erro</title>
 </head>
 <body>
     <div id="conteudo">

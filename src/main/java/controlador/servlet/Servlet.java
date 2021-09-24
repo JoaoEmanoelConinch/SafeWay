@@ -15,10 +15,15 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
 import modelo.dao.Formulario.FormularioDAO;
+import modelo.dao.Formulario.FormularioDAOImpl;
 import modelo.dao.Ponto.PontoDAO;
+import modelo.dao.Ponto.PontoDAOImpl;
 import modelo.dao.PontoAvaliado.PontoAvaliadoDAO;
+import modelo.dao.PontoAvaliado.PontoAvaliadoDAOImpl;
 import modelo.dao.PontoFavorito.PontoFavDAO;
+import modelo.dao.PontoFavorito.PontoFavDAOImpl;
 import modelo.dao.Trajeto.TrajetoDAO;
+import modelo.dao.Trajeto.TrajetoDAOImpl;
 import modelo.dao.Usuario.UsuarioDAO;
 import modelo.dao.Usuario.UsuarioDAOImpl;
 import modelo.entidade.formulario.Formulario;
@@ -49,6 +54,11 @@ public class Servlet extends HttpServlet {
 	public void init() {
 		
 		usuarioDAO = new UsuarioDAOImpl();
+		pontoDAO = new PontoDAOImpl();
+		trajetoDAO = new TrajetoDAOImpl();
+		formularioDAO = new FormularioDAOImpl();
+		pontoAvaliadoDAO = new PontoAvaliadoDAOImpl();
+		pontoFavDAO = new PontoFavDAOImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
