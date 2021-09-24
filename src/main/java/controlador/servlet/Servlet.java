@@ -203,15 +203,18 @@ public class Servlet extends HttpServlet {
 		trajeto.setInicio(partida);
 		trajeto.setChegada(chegada);
 		trajeto.setTransporteUsado(meioDeTransporte);
+		trajeto.criarLineString();
 		//Ponto avaliado!
 		for (int i = 0; i < trajeto.getPontos().size(); i++){
 				Ponto ponto = trajeto.getPontos().get(i);
 				if (pontoDAO.verificarPonto(ponto) == null){
 					pontoDAO.inserirPonto(ponto);
 				}
+				Ponto pontoBD = pontoDAO.verificarPonto(ponto);
+				trajeto.getPontos().get(i).setId(pontoBD.getId());
 		}
 		trajetoDAO.inserirTrajeto(trajeto);
-		//js
+		//js Yuri...
 		response.sendRedirect("mapa");
 	}
 
