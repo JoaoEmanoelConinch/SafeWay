@@ -99,7 +99,7 @@ public class Trajeto implements Serializable {
 		this.setInicio(inicio);
 		this.setChegada(chegada);
 		this.setTransporteUsado(transporteUsado);
-		this.setPontos(criarLineString(inicio, chegada, transporteUsado));
+		this.setPontos(criarLineString());
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
 	}
 
@@ -108,7 +108,7 @@ public class Trajeto implements Serializable {
 		this.setInicio(Ponto.informatLocal(inicio));
 		this.setChegada(Ponto.informatLocal(chegada));
 		this.setTransporteUsado(transporteUsado);
-		this.setPontos(criarLineString(Ponto.informatLocal(inicio), Ponto.informatLocal(chegada), transporteUsado));
+		this.setPontos(criarLineString());
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
 	}
 
@@ -117,7 +117,7 @@ public class Trajeto implements Serializable {
 		this.setInicio(Ponto.informatLocal(inicio, posicaoInicio));
 		this.setChegada(Ponto.informatLocal(chegada, posicaoChegada));
 		this.setTransporteUsado(transporteUsado);
-		this.setPontos(criarLineString(Ponto.informatLocal(inicio), Ponto.informatLocal(chegada), transporteUsado));
+		this.setPontos(criarLineString());
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
 	}
 	
@@ -126,7 +126,7 @@ public class Trajeto implements Serializable {
 		this.setInicio(inicio);
 		this.setChegada(chegada);
 		this.setTransporteUsado(transporteUsado);
-		this.setPontos(criarLineString(inicio, chegada, transporteUsado));
+		this.setPontos(criarLineString());
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
 	}
 
@@ -182,9 +182,9 @@ public class Trajeto implements Serializable {
 		this.usuariosCadastrados = usuariosCadastrados;
 	}
 
-	public List<Ponto> criarLineString(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado)
+	public List<Ponto> criarLineString()
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
-		 return ConsultaTrajeto.criarLineString(inicio, chegada, transporteUsado);
+		 return ConsultaTrajeto.criarLineString(this.inicio, this.chegada, this.transporteUsado);
 	}
 	
 	public List<PontoAvaliado> pegarPontosAvaliadosDoTrageto(){
