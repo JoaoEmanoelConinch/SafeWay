@@ -204,4 +204,92 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		
 	}
 	
+	public boolean verificarUsuarioNome(UsuarioCadastrado usuario) {
+		
+		Session sessao = null;
+		UsuarioCadastrado isUsuario = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<UsuarioCadastrado> criteria = construtor.createQuery(UsuarioCadastrado.class);
+			Root<UsuarioCadastrado> raizUsuario = criteria.from(UsuarioCadastrado.class);
+
+			ParameterExpression<String> nomeUsuario = construtor.parameter(String.class);
+			criteria.where(construtor.equal(raizUsuario.get(UsuarioCadastrado_.NOME), nomeUsuario));
+
+			isUsuario = sessao.createQuery(criteria).setParameter(nomeUsuario, usuario.getNome()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		if(isUsuario != null)
+			return true;
+		
+		return false;
+		
+	}
+
+	public boolean verificarUsuarioEmail(UsuarioCadastrado usuario) {
+		
+		Session sessao = null;
+		UsuarioCadastrado isUsuario = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<UsuarioCadastrado> criteria = construtor.createQuery(UsuarioCadastrado.class);
+			Root<UsuarioCadastrado> raizUsuario = criteria.from(UsuarioCadastrado.class);
+
+			ParameterExpression<String> nomeUsuario = construtor.parameter(String.class);
+			criteria.where(construtor.equal(raizUsuario.get(UsuarioCadastrado_.EMAIL), nomeUsuario));
+
+			isUsuario = sessao.createQuery(criteria).setParameter(nomeUsuario, usuario.getEmail()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		if(isUsuario != null)
+			return true;
+		
+		return false;
+		
+	}
+	
 }

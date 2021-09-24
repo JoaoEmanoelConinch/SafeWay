@@ -14,4 +14,8 @@ public interface UsuarioDAO {
 	
 	UsuarioCadastrado recuperarUsuario(UsuarioCadastrado usuario);
 	
+	boolean verificarUsuarioNome(UsuarioCadastrado usuario);
+	
+	boolean verificarUsuarioEmail(UsuarioCadastrado usuario);
+	
 }
