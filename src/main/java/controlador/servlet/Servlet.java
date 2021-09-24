@@ -83,15 +83,23 @@ public class Servlet extends HttpServlet {
 				case "/mapa":
 					mostrarMapa(request, response);
 					break;
-//					
-//				case "/procurar-ponto":
-//					MostrarPontosCompativel(request, response);
-//					break;
-//
-//				case "/selecionar-ponto":
-//					selecionarPonto(request, response);
-//					break;
-					
+
+				case "/mapa-avaliação":
+					MostrarMapaAvaliacoa(request, response); 
+					break;
+
+				case "/Avaliacao":
+					MostrarTelaAvaliacoa(request, response);
+					break;
+
+				case "/incerir-Avaliacao":
+					inserirAvaliacao(request, response);
+					break;
+
+				case "deletar-Avaliacao":
+					deletarAvaliacao(request, response);
+					break;
+
 				case "/criar-trajeto":
 					inserirTrajeto(request, response);
 					break;
@@ -255,12 +263,10 @@ public class Servlet extends HttpServlet {
 
 	}
 
-	private void atualizarAvaliacao (HttpServletRequest request, HttpServletResponse response){
-
-	}
-
 	private void deletarAvaliacao (HttpServletRequest request, HttpServletResponse response){
-
+		long idAvaliacao = Long.parseLong(request.getParameter("idAvaliacao"));
+		Formulario formulario = formularioDAO.recuperarAvaliacaoId(new Formulario(idAvaliacao));
+		formularioDAO.deletarAvaliacao(formulario);
 	}
 
 }
