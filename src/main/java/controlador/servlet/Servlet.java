@@ -183,7 +183,7 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void MostrarTelaAvaliacoa (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		RequestDispatcher dispatcher = request.getRequestDispatcher("Formulario.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("formulario.jsp");
 		dispatcher.forward(request, response);
 	}
 
