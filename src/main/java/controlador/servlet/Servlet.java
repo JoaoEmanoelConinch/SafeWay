@@ -86,7 +86,6 @@ public class Servlet extends HttpServlet {
 					
 				case "/mapa":
 					mostrarMapa(request, response);
-					listarPontosAvaliado(request, response);
 					break;
 
 				case "/mapa-avaliação":
@@ -264,7 +263,7 @@ public class Servlet extends HttpServlet {
 		trajeto.setChegada(chegada);
 		trajeto.setTransporteUsado(meioDeTransporte);
 		trajeto.criarLineString();
-		//Ponto avaliado!
+		
 		for (int i = 0; i < trajeto.getPontos().size(); i++){
 				Ponto ponto = trajeto.getPontos().get(i);
 				if (pontoDAO.verificarPonto(ponto) == null){
@@ -274,7 +273,9 @@ public class Servlet extends HttpServlet {
 				trajeto.getPontos().get(i).setId(pontoBD.getId());
 		}
 		trajetoDAO.inserirTrajeto(trajeto);
-		//js Yuri...
+		
+		request.setAttribute("points", trajeto.getPontos());
+		
 		response.sendRedirect("mapa");
 	}
 
