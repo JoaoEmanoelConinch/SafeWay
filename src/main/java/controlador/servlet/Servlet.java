@@ -2,6 +2,7 @@ package controlador.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -82,6 +83,7 @@ public class Servlet extends HttpServlet {
 					
 				case "/mapa":
 					mostrarMapa(request, response);
+					listarPontosAvaliado(request, response);
 					break;
 
 				case "/mapa-avaliação":
@@ -270,6 +272,15 @@ public class Servlet extends HttpServlet {
 		long idAvaliacao = Long.parseLong(request.getParameter("idAvaliacao"));
 		Formulario formulario = formularioDAO.recuperarAvaliacaoId(new Formulario(idAvaliacao));
 		formularioDAO.deletarAvaliacao(formulario);
+	}
+
+	private void listarPontosAvaliado (HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException{
+		
+		List<PontoAvaliado> pontosAvaliados = pontoAvaliadoDAO.recuperarPontosAvaliados();
+		request.setAttribute("pontosAvaliados", pontosAvaliados);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mapa.jpa");
+		dispatcher.forward(request, response);
 	}
 
 }
