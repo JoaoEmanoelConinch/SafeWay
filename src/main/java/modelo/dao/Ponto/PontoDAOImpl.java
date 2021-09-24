@@ -82,6 +82,36 @@ public class PontoDAOImpl implements PontoDAO {
 
 	}
 
+	public void atualizarPonto(Ponto ponto) {
+		
+		Session sessao = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			sessao.update(ponto);
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+		
+	}
+	
 	public List<Ponto> recuperarPontos() {
 
 		Session sessao = null;
