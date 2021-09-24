@@ -61,6 +61,12 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		super(id);
 	}
 
+	public UsuarioCadastrado(String email, String senha) throws StringVaziaException, SenhaPequenaException, EmailInvalidoException {
+		
+		this.setEmail(email);
+		this.setSenha(senha);
+		
+	}
 
 	public UsuarioCadastrado(long idUsuario, String nome, String senha, String email,
 	List<PontoFavorito> favoritos, List<Formulario> formulariosDoUsuario, List<Trajeto> trajetos)
@@ -117,7 +123,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 			throw new SenhaPequenaException("A senha n�o pode ter menos que 8 digitos");
 		}
 
-		if (nome.isEmpty()) {
+		if (senha.isEmpty()) {
 			throw new StringVaziaException("A senha n�o pode ser vazia!");
 		}
 
@@ -129,9 +135,9 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		return email;
 	}
 
-	private void setEmail(String email) throws EmailInvalidoException, StringVaziaException {
+	public void setEmail(String email) throws EmailInvalidoException, StringVaziaException {
 
-		if (nome.isEmpty()) {
+		if (email.isEmpty()) {
 			throw new StringVaziaException("O nome de Usu�rio � inv�lido!");
 		}
 
