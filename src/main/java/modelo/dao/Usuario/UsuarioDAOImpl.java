@@ -1,8 +1,5 @@
 package modelo.dao.Usuario;
 
-import java.util.List;
-
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.ParameterExpression;
@@ -10,11 +7,8 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
-import modelo.entidade.mapa.Trajeto;
-import modelo.entidade.mapa.Trajeto_;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.entidade.usuario.UsuarioCadastrado_;
-import modelo.entidade.usuario.Usuario_;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class UsuarioDAOImpl implements UsuarioDAO {

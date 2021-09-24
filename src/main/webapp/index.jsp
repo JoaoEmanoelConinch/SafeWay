@@ -15,14 +15,14 @@
 
   <div  id="main-container">
     <div class="cadastrar">
-      <a href="TelaCadastroOSR.html"  id="cadastre-se">Cadastre-se<a><br>
+      <a href="cadastro.jsp"  id="cadastre-se">Cadastre-se<a><br>
     </div>
     
     <div class="logar" >
     
 
     
-      <a  href="login.html" id="logar">Logar<br>
+      <a  href="login.jsp" id="logar">Logar<br>
      </div>
      
      <div class="usar-rapido"> 
