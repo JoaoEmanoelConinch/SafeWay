@@ -105,6 +105,10 @@ public class Servlet extends HttpServlet {
 				case "/criar-trajeto":
 					inserirTrajeto(request, response);
 					break;
+
+				case "/deletar-trajeto":
+					deletarTrajeto(request, response);
+					break;
 					
 				case "/mapa-trajeto":
 					MostrarMapaTrageto(request, response);
