@@ -18,11 +18,13 @@ import org.codehaus.jackson.map.JsonMappingException;
 import modelo.dao.Formulario.FormularioDAO;
 import modelo.dao.Ponto.PontoDAO;
 import modelo.dao.PontoAvaliado.PontoAvaliadoDAO;
+import modelo.dao.PontoFavorito.PontoFavDAO;
 import modelo.dao.Trajeto.TrajetoDAO;
 import modelo.dao.Usuario.UsuarioDAO;
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
+import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
@@ -42,6 +44,7 @@ public class Servlet extends HttpServlet {
 	private TrajetoDAO trajetoDAO;
 	private FormularioDAO formularioDAO;
 	private PontoAvaliadoDAO pontoAvaliadoDAO;
+	private PontoFavDAO pontoFavDAO;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -202,9 +205,31 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void inserirPontoFavorito (HttpServletRequest request, HttpServletResponse response){}
+	private void inserirPontoFavorito (HttpServletRequest request, HttpServletResponse response) throws StatusInvalidoException, IOException{
+		
+		String nomeFavorito = request.getParameter("nomePontoFavorito");
+		Ponto ponto = (Ponto) request.getAttribute("ponto");
+		Long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 
-	private void deletarPontoFavorito (HttpServletRequest request, HttpServletResponse response){}
+		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
+
+		if (pontoDAO.verificarPonto(ponto) == null){
+			pontoDAO.inserirPonto(ponto);
+		}
+
+		PontoFavorito pontoFavorito = new PontoFavorito(ponto, nomeFavorito, usuario);
+		usuario.addFavorito(pontoFavorito);
+		usuarioDAO.atualizarUsuario(usuario);
+		
+		pontoFavDAO.inserirPontoFav(pontoFavorito);
+		response.sendRedirect("mapa");
+	}
+
+	private void deletarPontoFavorito (HttpServletRequest request, HttpServletResponse response){
+		long idFavorito = Long.parseLong(request.getParameter("idFavorito"));
+		PontoFavorito pontoFavorito = pontoFavDAO.recuperarPontoFavId(new PontoFavorito(idFavorito));
+		pontoFavDAO.deletarPontoFav(pontoFavorito);
+	}
 
 	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)throws SQLException, IOException, StringVaziaException, EmailInvalidoException, SenhaPequenaException{
 		String nome = request.getParameter("nome");
