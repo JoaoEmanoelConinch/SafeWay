@@ -1,0 +1,185 @@
+/* geral */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Helvetica, sans-serif;
+  color: #323232;
+  border: none;
+}
+
+ /*CABEÇALHO*/
+
+  header {
+    padding: 15px 0;
+    width: 100%;
+    background-color:#030d31;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+.container-logo {
+  display: flex;
+  align-items: center;
+  }
+
+.logo-imagem {
+}
+
+.logo-texto {
+  margin-left: 20px;
+  background-color:#041244;
+  padding: 10px 10px;
+  border-radius: 15px;
+}
+
+.menu li{
+ display: inline-block;
+ margin: 10px 10px;
+}
+
+.menu li a{
+ border-radius: 15px;
+ background-color: #041244;
+ padding: 10px 10px;
+ font-size: 20px;
+ text-decoration: none;
+ text-transform: uppercase;
+}
+ 
+/*FIM CABEÇALHO*/
+input, label {
+  display: block;
+  outline: none;
+  width: 100%;
+}
+
+
+a {
+  color: #323232;
+}
+
+ 
+
+body {
+  padding-top: 0;
+  background-image: url('https://media-manager.noticiasaominuto.com/1920/naom_58273ebc63f5e.jpg');
+  background-size: cover;
+  background-position-y: 0px;
+}
+
+ 
+
+/* form */
+#main-container {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  border-color: #1a63ff;
+  padding: 25px;
+}
+
+ 
+
+#main-container h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.6rem;
+}
+
+ 
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+ 
+
+.full-box {
+  flex: 1 1 100%;
+  position: relative;
+}
+
+ 
+
+.half-box {
+  flex: 1 1 45%;
+  position: relative;
+}
+.half-box-coordenadas{
+  display: flex;
+}
+
+ 
+
+.spacing {
+  margin-right: 2.5%;
+}
+
+ 
+
+.coordenadas{
+  margin-right: 22px;
+}
+
+ 
+
+label {
+  font-weight: bold;
+  font-size: .8rem;
+  margin-bottom: 1rem;
+}
+
+ 
+
+input {
+  border-bottom: 2px solid #030d31;
+  padding: 10px;
+  font-size: .9rem;
+  margin-bottom: 40px;
+}
+
+ 
+/*cor do click*/
+input:focus {
+  border-color: #cfe600;
+}
+
+ 
+
+input[type="submit"] {
+  background-color: #2300e6;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 20px;
+  height: 40px;
+  cursor: pointer;
+}
+
+
+#agreement {
+  margin-right: 5px;
+
+}
+
+button {
+  color:rgb(255, 255, 255);
+margin-bottom: 20px ;
+ margin-left: 400px;
+ background-color: #2300e6;
+
+}
+
+ /*.....*/
+
+
+
+
+
+ 

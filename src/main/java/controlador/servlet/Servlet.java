@@ -2,6 +2,7 @@ package controlador.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,9 +17,14 @@ import org.codehaus.jackson.map.JsonMappingException;
 import modelo.dao.Formulario.FormularioDAO;
 import modelo.dao.Ponto.PontoDAO;
 import modelo.dao.PontoAvaliado.PontoAvaliadoDAO;
+import modelo.dao.PontoFavorito.PontoFavDAO;
 import modelo.dao.Trajeto.TrajetoDAO;
 import modelo.dao.Usuario.UsuarioDAO;
+import modelo.dao.Usuario.UsuarioDAOImpl;
+import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.PontoAvaliado;
+import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
@@ -38,6 +44,12 @@ public class Servlet extends HttpServlet {
 	private TrajetoDAO trajetoDAO;
 	private FormularioDAO formularioDAO;
 	private PontoAvaliadoDAO pontoAvaliadoDAO;
+	private PontoFavDAO pontoFavDAO;
+
+	public void init() {
+		
+		usuarioDAO = new UsuarioDAOImpl();
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -48,104 +60,147 @@ public class Servlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String action = request.getServletPath();
-		
+
 		try {
-			
-			switch(action) {
 
-				case "/inicio":
-					mostrarTelaInicial(request, response);
-					break;
+			switch (action) {
 
-				case "/novo-Usuario":
-					mostrarFormularioDeCadastroDeUsuario(request, response);
-					break;
+			case "/inicio":
+				mostrarTelaInicial(request, response);
+				break;
 
-				case "/inserir-Usuario":
-					inserirUsuario(request, response);
-					break;
+			case "/novo-Usuario":
+				mostrarFormularioDeCadastroDeUsuario(request, response);
+				break;
 
-				case "/atualizar-Usuario":
-					atualizarUsuario(request, response);
-					break;
+			case "/inserir-Usuario":
+				inserirUsuario(request, response);
+				break;
 
-				case "/editar-Usuario":
-					mostrarFormularioEditarUsuario(request, response);
-					break;
+			case "/atualizar-Usuario":
+				atualizarUsuario(request, response);
+				break;
 
-				case "/deletar-Usuario":
-					deletarUsuario(request, response);
-					break;
-					
-				case "/mapa":
-					mostrarMapa(request, response);
-					break;
-//					
-//				case "/procurar-ponto":
-//					MostrarPontosCompativel(request, response);
-//					break;
-//
-//				case "/selecionar-ponto":
-//					selecionarPonto(request, response);
-//					break;
-					
-				case "/criar-trajeto":
-					inserirTrajeto(request, response);
-					break;
-					
-				case "/mapa-trajeto":
-					
-					break;
-					
-				case "/inserir-Ponto":
-					inserirPonto(request, response);
-					break;
+			case "/editar-Usuario":
+				mostrarFormularioEditarUsuario(request, response);
+				break;
 
-				case "/deletar-Ponto":
-					deletarPonto(request, response);
-					break;
+			case "/deletar-Usuario":
+				deletarUsuario(request, response);
+				break;
 
-				default:
-					mostrarTela404(request, response);
-					break;
+			case "/mapa":
+				mostrarMapa(request, response);
+				break;
+
+			case "/mapa-avaliação":
+				MostrarMapaAvaliacoa(request, response);
+				break;
+
+			case "/Avaliacao":
+				MostrarTelaAvaliacoa(request, response);
+				break;
+
+			case "/incerir-Avaliacao":
+				inserirAvaliacao(request, response);
+				break;
+
+			case "deletar-Avaliacao":
+				deletarAvaliacao(request, response);
+				break;
+
+			case "mapa-Fovolito":
+				mostrarMapaFoviritar(request, response);
+				break;
+
+			case "favoritar":
+				mostrarFormularioFavoritar(request, response);
+				break;
+
+			case "incerir-pontoFavorito":
+				inserirPontoFavorito(request, response);
+				break;
+
+			case "deletar-pontoFavorito":
+				deletarPontoFavorito(request, response);
+				break;
+
+			case "/criar-trajeto":
+				inserirTrajeto(request, response);
+				break;
+
+			case "/deletar-trajeto":
+				deletarTrajeto(request, response);
+				break;
+
+			case "/mapa-trajeto":
+				MostrarMapaTrageto(request, response);
+				break;
+
+			default:
+				mostrarTela404(request, response);
+				break;
 			}
 		}
-		
+
 		catch (Exception ex) {
 			throw new ServletException(ex);
-		}	
+		}
 	}
 
-	private void recuperarUsuario (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	private void recuperarUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		request.setAttribute("usuario", usuarioCadastrado);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cabesanho.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cabecalho.jsp");
 		dispatcher.forward(request, response);
-
 	}
 
-	private void mostrarTelaInicial (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	private void mostrarTelaInicial(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
 	}
 
-	private void mostrarTela404 (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	private void mostrarTela404(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("erro404.jsp");
 		dispatcher.forward(request, response);
 	}
-	
-	private void mostrarFormularioDeCadastroDeUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+	private void mostrarFormularioDeCadastroDeUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro.jsp");
 		dispatcher.forward(request, response);
 	}
-	
-	private void mostrarMapa (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	private void mostrarMapa(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mapa.jsp");
 		dispatcher.forward(request, response);
 	}
 
-	private void mostrarFormularioEditarUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	private void MostrarMapaTrageto(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaTrajeto.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void MostrarMapaAvaliacoa(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaAvaliacoa.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void MostrarTelaAvaliacoa(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("formulario.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void mostrarFormularioEditarUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro.jsp");
@@ -153,43 +208,77 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)throws SQLException, IOException, StringVaziaException, EmailInvalidoException, SenhaPequenaException{
+	private void mostrarMapaFoviritar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaFovorito.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void mostrarFormularioFavoritar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("telaFovorito.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void inserirPontoFavorito(HttpServletRequest request, HttpServletResponse response)
+			throws StatusInvalidoException, IOException {
+
+		String nomeFavorito = request.getParameter("nomePontoFavorito");
+		Ponto ponto = (Ponto) request.getAttribute("ponto");
+		Long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+
+		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
+
+		if (pontoDAO.verificarPonto(ponto) == null) {
+			pontoDAO.inserirPonto(ponto);
+		}
+
+		PontoFavorito pontoFavorito = new PontoFavorito(ponto, nomeFavorito, usuario);
+		usuario.addFavorito(pontoFavorito);
+		usuarioDAO.atualizarUsuario(usuario);
+
+		pontoFavDAO.inserirPontoFav(pontoFavorito);
+		response.sendRedirect("mapa");
+	}
+
+	private void deletarPontoFavorito(HttpServletRequest request, HttpServletResponse response) {
+		long idFavorito = Long.parseLong(request.getParameter("idFavorito"));
+		PontoFavorito pontoFavorito = pontoFavDAO.recuperarPontoFavId(new PontoFavorito(idFavorito));
+		pontoFavDAO.deletarPontoFav(pontoFavorito);
+	}
+
+	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, StringVaziaException, EmailInvalidoException, SenhaPequenaException {
+
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String email = request.getParameter("email");
+
 		usuarioDAO.inserirUsuario(new UsuarioCadastrado(nome, senha, email));
+
+		response.sendRedirect("mapa");
 	}
 
-	private void atualizarUsuario (HttpServletRequest request, HttpServletResponse response) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException{
+	private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, IOException {
 		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String email = request.getParameter("email");
 		usuarioDAO.atualizarUsuario(new UsuarioCadastrado(idUsuario, nome, senha, email));
+		response.sendRedirect("mapa");
 	}
 
-	private void deletarUsuario (HttpServletRequest request, HttpServletResponse response){
+	private void deletarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		usuarioDAO.deletarUsuario(usuarioCadastrado);
+		response.sendRedirect("inicio");
 	}
 
-	private void inserirPonto (HttpServletRequest request, HttpServletResponse response) throws StatusInvalidoException{
-		double latitude = Double.parseDouble(request.getParameter("latitude"));
-		double longitude = Double.parseDouble(request.getParameter("longitude"));
-		Ponto ponto = new Ponto(latitude, longitude);
-		if (pontoDAO.recuperarPontoPorLatLong(ponto) == null) {
-			pontoDAO.inserirPonto(new Ponto(latitude, longitude));
-		}
-	}
-
-	private void deletarPonto (HttpServletRequest request, HttpServletResponse response) {
-		long idPonto = Long.parseLong(request.getParameter("idPonto"));
-		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(idPonto));		
-		pontoDAO.deletarPonto(ponto);
-	}
-
-	private void inserirTrajeto (HttpServletRequest request, HttpServletResponse response) throws StatusInvalidoException, NumeroMenorQueZeroException, JsonParseException, JsonMappingException, IOException{
+	private void inserirTrajeto(HttpServletRequest request, HttpServletResponse response)
+			throws StatusInvalidoException, NumeroMenorQueZeroException, JsonParseException, JsonMappingException,
+			IOException {
 		Ponto partida = (Ponto) request.getAttribute("inicio");
 		Ponto chegada = (Ponto) request.getAttribute("chegada");
 		MeioDeTransporte meioDeTransporte = (MeioDeTransporte) request.getAttribute("meioDeTransporte");
@@ -197,17 +286,25 @@ public class Servlet extends HttpServlet {
 		trajeto.setInicio(partida);
 		trajeto.setChegada(chegada);
 		trajeto.setTransporteUsado(meioDeTransporte);
-		//Ponto avaliado!
-		for (int i = 0; i < trajeto.getPontos().size(); i++){
-				Ponto ponto = trajeto.getPontos().get(i);
-				if (pontoDAO.recuperarPontoPorLatLong(ponto) == null){
-					pontoDAO.inserirPonto(ponto);
-				}
+		trajeto.criarLineString();
+
+		for (int i = 0; i < trajeto.getPontos().size(); i++) {
+			Ponto ponto = trajeto.getPontos().get(i);
+			if (pontoDAO.verificarPonto(ponto) == null) {
+				pontoDAO.inserirPonto(ponto);
+			}
+			Ponto pontoBD = pontoDAO.verificarPonto(ponto);
+			trajeto.getPontos().get(i).setId(pontoBD.getId());
 		}
 		trajetoDAO.inserirTrajeto(trajeto);
+
+		request.setAttribute("points", trajeto.getPontos());
+
+		response.sendRedirect("mapa");
 	}
 
-	private void atualizarTrajeto (HttpServletRequest request, HttpServletResponse response) throws JsonParseException, JsonMappingException, IOException{
+	private void atualizarTrajeto(HttpServletRequest request, HttpServletResponse response)
+			throws JsonParseException, JsonMappingException, IOException {
 		long idTrajeto = Long.parseLong(request.getParameter("idTrajeto"));
 		Ponto partida = (Ponto) request.getAttribute("inicio");
 		Ponto chegada = (Ponto) request.getAttribute("chegada");
@@ -215,34 +312,60 @@ public class Servlet extends HttpServlet {
 		trajetoDAO.atualizarTrajeto(new Trajeto(idTrajeto, partida, chegada, meioDeTransporte));
 	}
 
-	private void deletarTrajeto (HttpServletRequest request, HttpServletResponse response){
+	private void deletarTrajeto(HttpServletRequest request, HttpServletResponse response) {
 		long idTrajeto = Long.parseLong(request.getParameter("idTrajeto"));
 		Trajeto trajeto = trajetoDAO.recuperarTrajeto(new Trajeto(idTrajeto));
 		trajetoDAO.deletarTrajeto(trajeto);
 	}
 
-	private void inserirAvaliacao (HttpServletRequest request, HttpServletResponse response){
-		
+	private void inserirAvaliacao(HttpServletRequest request, HttpServletResponse response)
+			throws StatusInvalidoException {
+		boolean lesaoCorporal = Boolean.parseBoolean(request.getParameter("lesaoCorporal"));
+		boolean furto = Boolean.parseBoolean(request.getParameter("furto"));
+		boolean roubo = Boolean.parseBoolean(request.getParameter("roubo"));
+		boolean homicidio = Boolean.parseBoolean(request.getParameter("homicidio"));
+		boolean latrocinio = Boolean.parseBoolean(request.getParameter("latrocinio"));
+		boolean bloqueio = Boolean.parseBoolean(request.getParameter("bloqueio"));
+		String comentario = request.getParameter("comentario");
+		Ponto ponto = (Ponto) request.getAttribute("ponto");
+
+		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
+
+		if (pontoDAO.verificarPonto(ponto) == null) {
+			pontoDAO.inserirPonto(ponto);
+		}
+		Ponto pontoUsavel = pontoDAO.verificarPonto(ponto);
+
+		if (pontoAvaliadoDAO.verificarPontoAvaliado(pontoUsavel) == null) {
+			pontoAvaliadoDAO.verificarPontoAvaliado(new PontoAvaliado(ponto));
+		}
+		PontoAvaliado pontoAvaliado = pontoAvaliadoDAO.verificarPontoAvaliado(pontoUsavel);
+
+		Formulario avaliacao = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueio,
+				pontoAvaliado, usuario);
+
+		formularioDAO.inserirAvaliacao(avaliacao);
+
+		pontoAvaliado.addAvaliacao(avaliacao);
+
+		pontoAvaliadoDAO.atualizarPontoAvaliado(pontoAvaliado);
+
 	}
 
-	private void atualizarAvaliacao (HttpServletRequest request, HttpServletResponse response){
-
+	private void deletarAvaliacao(HttpServletRequest request, HttpServletResponse response) {
+		long idAvaliacao = Long.parseLong(request.getParameter("idAvaliacao"));
+		Formulario formulario = formularioDAO.recuperarAvaliacaoId(new Formulario(idAvaliacao));
+		formularioDAO.deletarAvaliacao(formulario);
 	}
 
-	private void deletarAvaliacao (HttpServletRequest request, HttpServletResponse response){
+	private void listarPontosAvaliado(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	}
-
-	private void inserirPontoAvaliado (HttpServletRequest request, HttpServletResponse response){
-
-	}
-
-	private void atualizarPontoAvaliado (HttpServletRequest request, HttpServletResponse response){
-
-	}
-
-	private void deletarPontoAvaliado (HttpServletRequest request, HttpServletResponse response){
-
+		List<PontoAvaliado> pontosAvaliados = pontoAvaliadoDAO.recuperarPontosAvaliados();
+		request.setAttribute("pontosAvaliados", pontosAvaliados);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mapa.jpa");
+		dispatcher.forward(request, response);
 	}
 
 }
