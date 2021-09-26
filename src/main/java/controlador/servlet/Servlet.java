@@ -83,6 +83,12 @@ public class Servlet extends HttpServlet {
 				mostrarFormularioDeCadastroDeUsuario(request, response);
 				break;
 
+			case "/login":
+				mostrarFormularioDelogin(request, response);
+				break;
+
+			//logar submit...
+
 			case "/inserir-Usuario":
 				inserirUsuario(request, response);
 				break;
@@ -135,6 +141,10 @@ public class Servlet extends HttpServlet {
 				deletarPontoFavorito(request, response);
 				break;
 
+			case "/mapa-trajeto":
+				MostrarMapaTrageto(request, response);
+				break;
+
 			case "/criar-trajeto":
 				inserirTrajeto(request, response);
 				break;
@@ -143,9 +153,7 @@ public class Servlet extends HttpServlet {
 				deletarTrajeto(request, response);
 				break;
 
-			case "/mapa-trajeto":
-				MostrarMapaTrageto(request, response);
-				break;
+			
 
 			default:
 				mostrarTela404(request, response);
@@ -182,6 +190,12 @@ public class Servlet extends HttpServlet {
 	private void mostrarFormularioDeCadastroDeUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void mostrarFormularioDelogin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 		dispatcher.forward(request, response);
 	}
 
