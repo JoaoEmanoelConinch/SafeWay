@@ -207,20 +207,22 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	}
 
 	public void avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-			boolean bloqueioRuas, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario)
+			boolean bloqueioRuas, String comentario, PontoAvaliado idPontoAvaliado, UsuarioCadastrado idUsuario)
 			throws NullPointerException, StatusInvalidoException, Throwable{
 
-		Formulario formulario = new Formulario();
+		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas, idPontoAvaliado, idUsuario);
 
-		if (idPontoAvaliado.getClass().equals("Ponto")) {
-			idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
+		this.addFormulario(formulario);
 
-			formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas,
-					idPontoAvaliado, idUsuario);
+		// if (idPontoAvaliado.getClass().equals("Ponto")) {
+		// 	idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
 
-			((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);
+		// 	formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas,
+		// 			idPontoAvaliado, idUsuario);
 
-		}
+		// 	((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);
+
+		// }
 	}
 
 	public void favoritarENomear(Ponto ponto, String nomePonto)
