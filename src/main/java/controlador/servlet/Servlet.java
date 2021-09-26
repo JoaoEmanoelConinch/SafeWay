@@ -31,6 +31,7 @@ import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
+import modelo.entidade.usuario.Usuario;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
@@ -306,12 +307,9 @@ public class Servlet extends HttpServlet {
 		MeioDeTransporte meioDeTransporte = (MeioDeTransporte) request.getAttribute("meioDeTransporte");
 
 		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
-		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
+		Usuario usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		
 		Trajeto trajeto = usuario.trajeto(partida, chegada, meioDeTransporte);
-
-		usuario.addTrajeto(trajeto);
-		trajeto.addUsuarioCadastrado(usuario);
 
 		for (int i = 0; i < trajeto.getPontos().size(); i++) {
 			Ponto ponto = trajeto.getPontos().get(i);
@@ -335,7 +333,7 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void inserirAvaliacao(HttpServletRequest request, HttpServletResponse response)
-			throws StatusInvalidoException {
+			throws NullPointerException, StatusInvalidoException {
 		boolean lesaoCorporal = Boolean.parseBoolean(request.getParameter("lesaoCorporal"));
 		boolean furto = Boolean.parseBoolean(request.getParameter("furto"));
 		boolean roubo = Boolean.parseBoolean(request.getParameter("roubo"));
@@ -358,12 +356,10 @@ public class Servlet extends HttpServlet {
 		}
 		PontoAvaliado pontoAvaliado = pontoAvaliadoDAO.verificarPontoAvaliado(pontoUsavel);
 
-		Formulario avaliacao = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueio,
-				pontoAvaliado, usuario);
+		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueio, comentario, pontoAvaliado, usuario);
+		
 
 		formularioDAO.inserirAvaliacao(avaliacao);
-
-		pontoAvaliado.addAvaliacao(avaliacao);
 
 		pontoAvaliadoDAO.atualizarPontoAvaliado(pontoAvaliado);
 

@@ -206,13 +206,16 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	}
 
-	public void avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-			boolean bloqueioRuas, String comentario, PontoAvaliado idPontoAvaliado, UsuarioCadastrado idUsuario)
-			throws NullPointerException, StatusInvalidoException, Throwable{
+	public Formulario avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
+			boolean bloqueioRuas, String comentario, PontoAvaliado PontoAvaliado, UsuarioCadastrado idUsuario)
+			throws NullPointerException, StatusInvalidoException{
 
-		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas, idPontoAvaliado, idUsuario);
+		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas, PontoAvaliado, idUsuario);
 
 		this.addFormulario(formulario);
+		PontoAvaliado.addAvaliacao(formulario);
+
+		return formulario;
 
 		// if (idPontoAvaliado.getClass().equals("Ponto")) {
 		// 	idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
