@@ -153,8 +153,6 @@ public class Servlet extends HttpServlet {
 				deletarTrajeto(request, response);
 				break;
 
-			
-
 			default:
 				mostrarTela404(request, response);
 				break;
@@ -306,11 +304,14 @@ public class Servlet extends HttpServlet {
 		Ponto partida = (Ponto) request.getAttribute("inicio");
 		Ponto chegada = (Ponto) request.getAttribute("chegada");
 		MeioDeTransporte meioDeTransporte = (MeioDeTransporte) request.getAttribute("meioDeTransporte");
-		Trajeto trajeto = new Trajeto();
-		trajeto.setInicio(partida);
-		trajeto.setChegada(chegada);
-		trajeto.setTransporteUsado(meioDeTransporte);
-		trajeto.criarLineString();
+
+		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
+		
+		Trajeto trajeto = usuario.trajeto(partida, chegada, meioDeTransporte);
+
+		usuario.addTrajeto(trajeto);
+		trajeto.addUsuarioCadastrado(usuario);
 
 		for (int i = 0; i < trajeto.getPontos().size(); i++) {
 			Ponto ponto = trajeto.getPontos().get(i);
@@ -325,15 +326,6 @@ public class Servlet extends HttpServlet {
 		request.setAttribute("points", trajeto.getPontos());
 
 		response.sendRedirect("mapa");
-	}
-
-	private void atualizarTrajeto(HttpServletRequest request, HttpServletResponse response)
-			throws JsonParseException, JsonMappingException, IOException {
-		long idTrajeto = Long.parseLong(request.getParameter("idTrajeto"));
-		Ponto partida = (Ponto) request.getAttribute("inicio");
-		Ponto chegada = (Ponto) request.getAttribute("chegada");
-		MeioDeTransporte meioDeTransporte = (MeioDeTransporte) request.getAttribute("meioDeTransporte");
-		trajetoDAO.atualizarTrajeto(new Trajeto(idTrajeto, partida, chegada, meioDeTransporte));
 	}
 
 	private void deletarTrajeto(HttpServletRequest request, HttpServletResponse response) {
