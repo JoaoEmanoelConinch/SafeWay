@@ -46,10 +46,7 @@ public abstract class PontoAbstrato implements Serializable {
 	@Type(type = "double")
 	private double longitude;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "ponto_trajeto", joinColumns = @JoinColumn(name = "id_ponto"))
-	@Fetch(FetchMode.JOIN)
-	private List<Trajeto> trajetos;
+	
 
 	public PontoAbstrato() {}
 	
@@ -61,13 +58,12 @@ public abstract class PontoAbstrato implements Serializable {
 		this.setId(idPonto);
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
-		this.setTrajetos(trajetos);
+		
 	}
 
 	public PontoAbstrato(double latitude, double longitude) throws StatusInvalidoException {
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
-		this.setTrajetos(new ArrayList<Trajeto>());
 	}
 
 	public static PontoAbstrato informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException {
@@ -110,14 +106,7 @@ public abstract class PontoAbstrato implements Serializable {
 
 	}
 
-	public void setTrajetos(List<Trajeto> trajetos) {
-		this.trajetos = trajetos;
-	}
-
-	public List<Trajeto> getTrajetos() {
-		return trajetos;
-
-	}
+	
 
 	public ArrayList<Double> transformarPontoEmVetor() {
 		ArrayList<Double> pontoVetro = new ArrayList<Double>(2);
@@ -152,11 +141,5 @@ public abstract class PontoAbstrato implements Serializable {
 		
 	}
 
-	public void addTrajeto(Trajeto trajeto) {
-		trajetos.add(trajeto);
-	}
-
-	public void removeTrajeto(Trajeto trajeto) {
-		trajetos.remove(trajeto);
-	}
+	
 }
