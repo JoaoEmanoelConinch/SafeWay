@@ -5,10 +5,10 @@
 <html lang="pt-br">
 <head>
 
-    <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/styles.css"/>
-    <style> 
-      <%@include file="/resources/css/styles.css"%> 
-    </style>
+<%--     <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/styles.css"/> --%>
+<!--     <style>  -->
+<%--       <%@include file="/resources/css/styles.css"%>  --%>
+<!--     </style> -->
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

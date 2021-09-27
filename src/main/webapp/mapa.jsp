@@ -4,10 +4,10 @@
 <html>
     <head>
 
-      <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/stylesMaps.css"/>
-    <style> 
-      <%@include file="/resources/css/styles.css"%> 
-    </style>
+<%--       <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/stylesMaps.css"/> --%>
+<!--     <style>  -->
+<%--       <%@include file="/resources/css/styles.css"%>  --%>
+<!--     </style> -->
 
 <link rel="stylesheet" href="js/LineString.js" type="text/js">
         <title></title>
