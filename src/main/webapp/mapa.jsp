@@ -33,8 +33,7 @@ var p = points.get[i]
 points[i] = new OpenLayers.LonLat(points.getLongitude, points.getLatitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 points[i] = new OpenLayers.Geometry.Point(points[i].lon,points[i].lat);
 
-      }
-    }
+     
 var linear_String = new OpenLayers.Geometry.LineString(points);
       lineFeature = new OpenLayers.Feature.Vector(
          new OpenLayers.Geometry.MultiLineString([linear_String]), null, style, );
@@ -43,7 +42,8 @@ var linear_String = new OpenLayers.Geometry.LineString(points);
       map.addLayer(lineLayer);
 
  
-     
+      }
+}
      
    
 
