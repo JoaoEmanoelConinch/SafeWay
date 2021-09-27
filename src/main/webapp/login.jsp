@@ -17,7 +17,7 @@
     <h1>Logar em </h1>
     <h1>Open Safe Routes</h1>
 
-    <form id="register-form" action="login">
+    <form id="register-form" action="login" method="POST">
       <div class="full-box">
         <label for="email">Email</label>
         <input type ="text" name="email" id="email" placeholder="Digite seu email" data-required data-min-length="8">
