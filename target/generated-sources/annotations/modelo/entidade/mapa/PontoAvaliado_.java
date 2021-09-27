@@ -8,7 +8,7 @@ import modelo.entidade.formulario.Formulario;
 
 @Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor")
 @StaticMetamodel(PontoAvaliado.class)
-public abstract class PontoAvaliado_ extends modelo.entidade.mapa.Ponto_ {
+public abstract class PontoAvaliado_ extends modelo.entidade.mapa.PontoAbstrato_ {
 
 	public static volatile SingularAttribute<PontoAvaliado, Long> quantidadeLesoesCorporais;
 	public static volatile SingularAttribute<PontoAvaliado, Long> quantidadeRoubos;

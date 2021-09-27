@@ -12,7 +12,7 @@ import modelo.dao.PontoFavorito.PontoFavDAOImpl;
 import modelo.dao.Trajeto.TrajetoDAOImpl;
 import modelo.dao.Usuario.UsuarioDAOImpl;
 import modelo.entidade.formulario.Formulario;
-import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
@@ -35,9 +35,9 @@ public class Principal {
 		TrajetoDAOImpl trajetoDao = new TrajetoDAOImpl();
 		
 		
-		Ponto p1 = new Ponto(-26.456, 12.212);
+		PontoAbstrato p1 = new PontoAbstrato(-26.456, 12.212);
 		
-		Ponto p2 = new Ponto(-30.456, 22.212);
+		PontoAbstrato p2 = new PontoAbstrato(-30.456, 22.212);
 		
 		pontoDao.inserirPonto(p1);
 		
@@ -52,32 +52,32 @@ public class Principal {
 		
 		pontoFavDao.inserirPontoFav(pontoFav);
 		
-		PontoFavorito pontoFav2 = new PontoFavorito(p1, "asddsadasd" , usuario2);
+		PontoFavorito pontoFav2 = new PontoFavorito(p2, "asddsadasd" , usuario2);
 	
 		pontoFavDao.inserirPontoFav(pontoFav2);
 	
 		
-		usuario.addFavorito(pontoFav);
-		
-		usuario2.addFavorito(pontoFav2);
 
 		Formulario form = new Formulario(true, false, false, false, false, "levei um soco :( mas não tinha bloqueio :)", false, p1, usuario);
 		formDao.inserirAvaliacao(form);
 		
+		
 		Formulario form2 = new Formulario(false, true, false, false, false, "furtaram minha bolsa :(", false, p1, usuario2);
 		formDao.inserirAvaliacao(form2);
 		
-    	PontoAvaliado pontoAv = new PontoAvaliado(p1);
 		
-	
+		
+    	PontoAvaliado pontoAv = new PontoAvaliado(p2);
 		
 		pontoAvDao.adicionarPontoAvaliado(pontoAv);
 		
 		System.out.println(formDao.recuperarAvaliacoes(pontoAv));
 		
-      	Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.FOOT_WALKING);
-
-		trajetoDao.inserirTrajeto(trajeto);
+		
+//      	Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.FOOT_WALKING);
+//
+//		trajetoDao.inserirTrajeto(trajeto);
+	
 
 	}
 }

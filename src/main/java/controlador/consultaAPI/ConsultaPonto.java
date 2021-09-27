@@ -7,7 +7,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.PontoAbstrato;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
@@ -15,13 +15,13 @@ public class ConsultaPonto {
 	
 	public ConsultaPonto() {}
 
-	public static Ponto informatLocal(String local)
+	public static PontoAbstrato informatLocal(String local)
 			throws StatusInvalidoException, NumeroMenorQueZeroException{
 		
 		return informatLocal(local, 1);
 	}
 
-	public static Ponto informatLocal(String local, int posicao)
+	public static PontoAbstrato informatLocal(String local, int posicao)
 			throws StatusInvalidoException, NumeroMenorQueZeroException{
 
 		posicao --;
@@ -41,7 +41,7 @@ public class ConsultaPonto {
 		BigDecimal latitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(posicao).getJSONObject("geometry").getJSONArray("coordinates").get(0);
 		BigDecimal longitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(posicao).getJSONObject("geometry").getJSONArray("coordinates").get(1);
 
-		Ponto ponto = new Ponto();
+		PontoAbstrato ponto = new PontoAbstrato();
 
 		ponto.setLatitude(latitude.doubleValue());
 		ponto.setLongitude(longitude.doubleValue());
@@ -49,8 +49,8 @@ public class ConsultaPonto {
 		return ponto;
 	}
 	
-	public static List<Ponto> informatLocais(String local){
-		List<Ponto> pontos = new ArrayList<Ponto>();
+	public static List<PontoAbstrato> informatLocais(String local){
+		List<PontoAbstrato> pontos = new ArrayList<PontoAbstrato>();
 
 		String localParaURL = local.replaceAll(" ", "%20");
 		
@@ -63,7 +63,7 @@ public class ConsultaPonto {
 		JSONArray tamanho = jsonObject.getJSONArray("features");
 
 		for (int i = 0; i < tamanho.length(); i++){
-			Ponto ponto = new Ponto();
+			PontoAbstrato ponto = new PontoAbstrato();
 
 			BigDecimal latitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates").get(0);
 			BigDecimal longitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates").get(1);

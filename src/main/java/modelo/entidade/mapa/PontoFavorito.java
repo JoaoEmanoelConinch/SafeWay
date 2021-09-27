@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.OnDelete;
@@ -15,24 +16,24 @@ import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
-//@PrimaryKeyJoinColumn(name="id_ponto_favorito")
+@PrimaryKeyJoinColumn(name="id_ponto_favorito")
 @Table(name = "ponto_favorito")
 
-public class PontoFavorito extends Ponto{
+public class PontoFavorito extends PontoAbstrato{
 
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "nome_ponto_favorito", length = 20, nullable = true )
 	private String nomePonto;
 
-//	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	@OnDelete(action = OnDeleteAction.NO_ACTION)
-//	    @JoinColumn(
-//	        name = "id_ponto_favorito",
-//	        referencedColumnName = "id_ponto",
-//	        nullable = false
-//	    )
-//	private Ponto ponto;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
+	    @JoinColumn(
+	        name = "id_ponto_favorito",
+	        referencedColumnName = "id_ponto",
+	        nullable = false
+	    )
+	private Ponto ponto;
  
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
@@ -49,12 +50,12 @@ public class PontoFavorito extends Ponto{
 		super(id);
 	}
 
-	public PontoFavorito(Ponto ponto, String nomePonto, UsuarioCadastrado usuario)
+	public PontoFavorito(PontoAbstrato ponto, String nomePonto, UsuarioCadastrado usuario)
 	throws StatusInvalidoException
 {
 		super(ponto.getLatitude(), ponto.getLongitude());
 		
-//		setPonto(ponto);
+		setPonto(ponto);
 		setNomePonto(nomePonto);
 		setUsuario(usuario);
 	}
@@ -68,13 +69,13 @@ public class PontoFavorito extends Ponto{
 
 	}
 
-//	public Ponto getPonto() {
-//		return ponto;
-//	}
-//
-//	public void setPonto(Ponto ponto) {
-//		this.ponto = ponto;
-//	}
+	public Ponto getPonto() {
+		return ponto;
+	}
+
+	public void setPonto(Ponto ponto) {
+		this.ponto = ponto;
+	}
 
 	public UsuarioCadastrado getUsuario() {
 		return usuario;
@@ -84,7 +85,7 @@ public class PontoFavorito extends Ponto{
 		this.usuario = usuario;
 	}
 
-	public static PontoFavorito favoritarPontoENomear(Ponto ponto, String nomePonto, UsuarioCadastrado usuario)
+	public static PontoFavorito favoritarPontoENomear(PontoAbstrato ponto, String nomePonto, UsuarioCadastrado usuario)
 	throws StatusInvalidoException{
 
 		return new PontoFavorito(ponto, nomePonto, usuario);

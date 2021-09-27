@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.usuario.UsuarioCadastrado;
 
@@ -62,7 +62,7 @@ public class Formulario implements Serializable {
 				referencedColumnName = "id_ponto",
 				nullable = false
 			)
-	private Ponto idPontoAvaliado;
+	private PontoAbstrato idPontoAvaliado;
 	
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -115,7 +115,7 @@ public class Formulario implements Serializable {
 	}
 	
 	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
-			boolean latrocinio, boolean bloqueioRuas, double media, String comentario, Ponto idPontoAvaliado,UsuarioCadastrado idUsuario) {
+			boolean latrocinio, boolean bloqueioRuas, double media, String comentario, PontoAbstrato idPontoAvaliado,UsuarioCadastrado idUsuario) {
 
 				setIdFormulario(idFormulario);
 				setLesaoCorporal(lesaoCorporal);
@@ -148,7 +148,7 @@ public class Formulario implements Serializable {
 			}
 
 	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-	 String comentario, boolean bloqueioRuas, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
+	 String comentario, boolean bloqueioRuas, PontoAbstrato idPontoAvaliado, UsuarioCadastrado idUsuario) {
 
 		setLesaoCorporal(lesaoCorporal);
 		setFurto(furto);
@@ -235,11 +235,11 @@ public class Formulario implements Serializable {
 		this.media = media;
 	}
 
-	public Ponto getIdPontoAvaliado() {
+	public PontoAbstrato getIdPontoAvaliado() {
 		return idPontoAvaliado;
 	}
 
-	public void setIdPontoAvaliado(Ponto idPontoAvaliado) {
+	public void setIdPontoAvaliado(PontoAbstrato idPontoAvaliado) {
 		this.idPontoAvaliado = idPontoAvaliado;
 	}
 

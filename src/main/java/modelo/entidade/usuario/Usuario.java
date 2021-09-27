@@ -14,7 +14,7 @@ import javax.persistence.InheritanceType;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
-import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.Trajeto;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
@@ -43,31 +43,31 @@ public abstract class Usuario {
 		this.id = id;
 	}
 
-	public static List<Ponto> informatLocais(String local){
-		return Ponto.informatLocais(local);
+	public static List<PontoAbstrato> informatLocais(String local){
+		return PontoAbstrato.informatLocais(local);
 	} 
 
-	public Ponto DefinirLocal (String local) throws StatusInvalidoException, NumeroMenorQueZeroException{
-		return Ponto.informatLocal(local);
+	public PontoAbstrato DefinirLocal (String local) throws StatusInvalidoException, NumeroMenorQueZeroException{
+		return PontoAbstrato.informatLocal(local);
 	}
 
-	public Ponto DefinirLocal (String local, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException{
-		return Ponto.informatLocal(local, posicao);
+	public PontoAbstrato DefinirLocal (String local, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException{
+		return PontoAbstrato.informatLocal(local, posicao);
 	}
 	
-	public Ponto DefinirPartida(String inicio) throws StatusInvalidoException, NumeroMenorQueZeroException {
+	public PontoAbstrato DefinirPartida(String inicio) throws StatusInvalidoException, NumeroMenorQueZeroException {
 		return DefinirLocal(inicio);
 	}
 
-	public Ponto DefinirDestino(String chegada) throws StatusInvalidoException, NumeroMenorQueZeroException {
+	public PontoAbstrato DefinirDestino(String chegada) throws StatusInvalidoException, NumeroMenorQueZeroException {
 		return DefinirLocal(chegada);
 	}
 
-	public Ponto DefinirPartida(String inicio, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException {
+	public PontoAbstrato DefinirPartida(String inicio, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException {
 		return DefinirLocal(inicio, posicao);
 	}
 
-	public Ponto DefinirDestino(String chegada, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException {
+	public PontoAbstrato DefinirDestino(String chegada, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException {
 		return DefinirLocal(chegada, posicao);
 	}
 

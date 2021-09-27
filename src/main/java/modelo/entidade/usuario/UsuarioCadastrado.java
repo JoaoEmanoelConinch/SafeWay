@@ -17,7 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import modelo.entidade.formulario.Formulario;
-import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
@@ -176,7 +176,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	}
 
 	public void avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-			boolean bloqueioRuas, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario)
+			boolean bloqueioRuas, String comentario, PontoAbstrato idPontoAvaliado, UsuarioCadastrado idUsuario)
 			throws NullPointerException, StatusInvalidoException, Throwable{
 
 		Formulario formulario = new Formulario();
@@ -192,7 +192,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		}
 	}
 
-	public void favoritarENomear(Ponto ponto, String nomePonto)
+	public void favoritarENomear(PontoAbstrato ponto, String nomePonto)
 			throws StatusInvalidoException{
 		PontoFavorito pontoFavorito = PontoFavorito.favoritarPontoENomear(ponto, nomePonto, this);
 		addFavorito(pontoFavorito);
