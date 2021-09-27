@@ -30,9 +30,8 @@ function test(){
 
 var p = points.get[i]
 
-points[i] = new OpenLayers.LonLat(points.getLongitude, points.getLatitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-points[i] = new OpenLayers.Geometry.Point(points[i].lon,points[i].lat);
-
+points[i] = new OpenLayers.LonLat(p.getLongitude, p.getLatitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+points[i] = new OpenLayers.Geometry.Point(p[i].lon,p[i].lat);
      
 var linear_String = new OpenLayers.Geometry.LineString(points);
       lineFeature = new OpenLayers.Feature.Vector(
