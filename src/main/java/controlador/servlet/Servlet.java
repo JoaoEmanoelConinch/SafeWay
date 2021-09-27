@@ -256,8 +256,7 @@ public class Servlet extends HttpServlet {
 			pontoDAO.inserirPonto(ponto);
 		}
 
-		PontoFavorito pontoFavorito = new PontoFavorito(ponto, nomeFavorito, usuario);
-		usuario.addFavorito(pontoFavorito);
+		PontoFavorito pontoFavorito = usuario.favoritarENomear(ponto, nomeFavorito);
 		usuarioDAO.atualizarUsuario(usuario);
 
 		pontoFavDAO.inserirPontoFav(pontoFavorito);
@@ -320,6 +319,7 @@ public class Servlet extends HttpServlet {
 			trajeto.getPontos().get(i).setId(pontoBD.getId());
 		}
 		trajetoDAO.inserirTrajeto(trajeto);
+		usuarioDAO.atualizarUsuario((UsuarioCadastrado)usuario);
 
 		request.setAttribute("points", trajeto.getPontos());
 
@@ -358,7 +358,6 @@ public class Servlet extends HttpServlet {
 
 		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueio, comentario, pontoAvaliado, usuario);
 		
-
 		formularioDAO.inserirAvaliacao(avaliacao);
 
 		pontoAvaliadoDAO.atualizarPontoAvaliado(pontoAvaliado);

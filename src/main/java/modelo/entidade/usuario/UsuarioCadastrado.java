@@ -228,10 +228,12 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		// }
 	}
 
-	public void favoritarENomear(Ponto ponto, String nomePonto)
+	public PontoFavorito favoritarENomear(Ponto ponto, String nomePonto)
 			throws StatusInvalidoException{
 		PontoFavorito pontoFavorito = PontoFavorito.favoritarPontoENomear(ponto, nomePonto, this);
 		addFavorito(pontoFavorito);
+
+		return pontoFavorito;
 	}
 
 	public void desfavoritar(PontoFavorito pontoFavorito) {
