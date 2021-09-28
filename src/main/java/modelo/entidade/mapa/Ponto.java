@@ -118,15 +118,4 @@ public class Ponto extends PontoAbstrato {
 		return true;
 		
 	}
-	
-	public ArrayList<Double> transformarPontoEmVetor() {
-		ArrayList<Double> pontoVetro = new ArrayList<Double>(2);
-		pontoVetro.add(this.getLongitude());
-		pontoVetro.add(this.getLatitude());
-		return pontoVetro;
-	}
-
-	public String TransformarVetorEmString() {
-		return transformarPontoEmVetor().toString();
-	}
 }
