@@ -28,7 +28,7 @@ public class PontoFavDAOImpl implements PontoFavoritoDAO {
 		fabrica = new ConexaoFactory();
 	}
 
-	public void inserirPontoFav(PontoFavorito pontoFav) {
+	public void inserirPontoFavorito(PontoFavorito pontoFavorito) {
 
 		Session sessao = null;
 
@@ -37,7 +37,7 @@ public class PontoFavDAOImpl implements PontoFavoritoDAO {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			sessao.save(pontoFav);
+			sessao.save(pontoFavorito);
 
 			sessao.getTransaction().commit();
 
@@ -57,7 +57,7 @@ public class PontoFavDAOImpl implements PontoFavoritoDAO {
 
 	}
 
-	public void deletarPontoFav(PontoFavorito pontoFav) {
+	public void deletarPontoFavorito(PontoFavorito pontoFavorito) {
 
 		Session sessao = null;
 
@@ -66,7 +66,7 @@ public class PontoFavDAOImpl implements PontoFavoritoDAO {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			sessao.delete(pontoFav);
+			sessao.delete(pontoFavorito);
 
 			sessao.getTransaction().commit();
 
@@ -86,7 +86,7 @@ public class PontoFavDAOImpl implements PontoFavoritoDAO {
 
 	}
 
-	public void atualizarPontoFav(PontoFavorito pontoFav) {
+	public void atualizarPontoFavorito(PontoFavorito pontoFavorito) {
 
 		Session sessao = null;
 
@@ -95,7 +95,7 @@ public class PontoFavDAOImpl implements PontoFavoritoDAO {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			sessao.update(pontoFav);
+			sessao.update(pontoFavorito);
 
 			sessao.getTransaction().commit();
 
@@ -115,10 +115,10 @@ public class PontoFavDAOImpl implements PontoFavoritoDAO {
 
 	}
 
-	public PontoFavorito recuperarPontoFavId(PontoFavorito ponto) {
+	public PontoFavorito recuperarPontoFavoritoId(PontoFavorito pontoFavorito) {
 
 		Session sessao = null;
-		PontoFavorito pontoFav = null;
+		PontoFavorito pontoFavorito1 = null;
 
 		try {
 
@@ -133,7 +133,7 @@ public class PontoFavDAOImpl implements PontoFavoritoDAO {
 			ParameterExpression<Long> idPontoFav = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(raizPontoFav.get(PontoFavorito_.ID_PONTO), idPontoFav));
 
-			pontoFav = sessao.createQuery(criteria).setParameter(idPontoFav, ponto.getId()).getSingleResult();
+			pontoFavorito1 = sessao.createQuery(criteria).setParameter(idPontoFav, pontoFavorito.getId()).getSingleResult();
 
 			sessao.getTransaction().commit();
 
@@ -152,14 +152,14 @@ public class PontoFavDAOImpl implements PontoFavoritoDAO {
 			}
 		}
 
-		return pontoFav;
+		return pontoFavorito1;
 
 	}
 	
 	public List<PontoFavorito> recuperarPontoFavoritoUsuario(UsuarioCadastrado usuario){
 		
 		Session sessao = null;
-		List<PontoFavorito> pontos = null;
+		List<PontoFavorito> pontosFavoritos = null;
 
 		try {
 
@@ -177,7 +177,7 @@ public class PontoFavDAOImpl implements PontoFavoritoDAO {
 			ParameterExpression<Long> idUsuario = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(juncaoUsuario.get(UsuarioCadastrado_.ID), idUsuario));
 
-			pontos = sessao.createQuery(criteria).setParameter(idUsuario, usuario.getId()).getResultList();
+			pontosFavoritos = sessao.createQuery(criteria).setParameter(idUsuario, usuario.getId()).getResultList();
 
 			sessao.getTransaction().commit();
 
@@ -196,7 +196,7 @@ public class PontoFavDAOImpl implements PontoFavoritoDAO {
 			}
 		}
 
-		return pontos;
+		return pontosFavoritos;
 		
 	}
 	

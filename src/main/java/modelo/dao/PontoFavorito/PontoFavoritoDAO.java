@@ -7,13 +7,13 @@ import modelo.entidade.usuario.UsuarioCadastrado;
 
 public interface PontoFavoritoDAO {
 	
-	void inserirPontoFav(PontoFavorito pontoFavorito);
+	void inserirPontoFavorito(PontoFavorito pontoFavorito);
 	
-	void deletarPontoFav(PontoFavorito pontoFavorito);
+	void deletarPontoFavorito(PontoFavorito pontoFavorito);
 	
-	void atualizarPontoFav(PontoFavorito pontoFavorito);
+	void atualizarPontoFavorito(PontoFavorito pontoFavorito);
 	
-	PontoFavorito recuperarPontoFavId(PontoFavorito pontoFavorito);
+	PontoFavorito recuperarPontoFavoritoId(PontoFavorito pontoFavorito);
 	
 	List<PontoFavorito> recuperarPontoFavoritoUsuario(UsuarioCadastrado usuario);
 
