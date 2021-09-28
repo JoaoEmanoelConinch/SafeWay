@@ -20,10 +20,10 @@ public class ConsultaPonto {
 	public static Ponto informatLocal(String local)
 			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 		
-		return informatLocal(local, 1);
+		return informarLocal(local, 1);
 	}
 
-	public static Ponto informatLocal(String local, int posicao)
+	public static Ponto informarLocal(String local, int posicao)
 			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 
 		posicao --;

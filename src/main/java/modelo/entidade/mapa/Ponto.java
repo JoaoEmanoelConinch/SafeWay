@@ -56,9 +56,6 @@ public class Ponto extends PontoAbstrato {
 		this.setTrajetos(new ArrayList<Trajeto>());
 	}
 
-	public void setId(Long id) {
-
-		this.idPonto = id;
 	
 	public Ponto(long id) {
 		super(id);
@@ -68,18 +65,6 @@ public class Ponto extends PontoAbstrato {
 		super();
 	}
 
-	public static Ponto informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		return ConsultaPonto.informatLocal(local);
-	}
-
-	public static Ponto informatLocal(String local, int posicao)
-			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		return ConsultaPonto.informatLocal(local, posicao);
-	}
-
-	public static List<Ponto> informatLocais(String local) {
-		return ConsultaPonto.informatLocais(local);
-	}
 	
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
@@ -108,22 +93,14 @@ public class Ponto extends PontoAbstrato {
 
 	}
 	
-	public void addTrajeto(Trajeto trajeto) {
-		trajetos.add(trajeto);
-	}
-
-	public void removeTrajeto(Trajeto trajeto) {
-		trajetos.remove(trajeto);
-	}
 	
-	
-	public static Ponto informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException {
-		return ConsultaPonto.informatLocal(local);
+	public static Ponto informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+		return ConsultaPonto.informarLocal(local);
 	}
 
 	public static Ponto informatLocal(String local, int posicao)
-			throws StatusInvalidoException, NumeroMenorQueZeroException {
-		return ConsultaPonto.informatLocal(local, posicao);
+			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+		return ConsultaPonto.informarLocal(local, posicao);
 	}
 
 	public static List<Ponto> informatLocais(String local) {

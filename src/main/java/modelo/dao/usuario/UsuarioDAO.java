@@ -1,4 +1,4 @@
-package modelo.dao.Usuario;
+package modelo.dao.usuario;
 
 import modelo.entidade.usuario.UsuarioCadastrado;
 

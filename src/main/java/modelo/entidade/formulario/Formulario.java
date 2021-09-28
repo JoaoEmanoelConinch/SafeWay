@@ -35,7 +35,7 @@ public class Formulario implements Serializable {
 	@Column(name = "media_formulario", scale = 2, precision = 1, nullable = false)
 	private double media;
 	
-	@Column(name = "lesaoCorporal_formulario", nullable = false)
+	@Column(name = "lesao_corporal_formulario", nullable = false)
 	private boolean lesaoCorporal;
 
 	@Column(name = "furto_formulario", nullable = false)
@@ -50,15 +50,15 @@ public class Formulario implements Serializable {
 	@Column(name = "latrocinio_formulario", nullable = false)
 	private boolean latrocinio;
 
-	@Column(name = "bloqueio_Ruas_Formulario", nullable = false)
-	private boolean bloqueioRuas;
+	@Column(name = "bloqueio_rua_formulario", nullable = false)
+	private boolean bloqueioRua;
 	
-	@Column(name = "comentario_Formulario", length = 300, nullable = true)
+	@Column(name = "comentario_formulario", length = 300, nullable = true)
 	private String comentario;
 
 	@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JoinColumn(name = "idPontoAvaliado_id_ponto",
+	@JoinColumn(name = "id_ponto_avaliado",
 				referencedColumnName = "id_ponto",
 				nullable = false
 			)
@@ -212,11 +212,11 @@ public class Formulario implements Serializable {
 	}
 
 	public boolean isBloqueioRuas() {
-		return bloqueioRuas;
+		return bloqueioRua;
 	}
 
-	public void setBloqueioRuas(boolean bloqueioRuas) {
-		this.bloqueioRuas = bloqueioRuas;
+	public void setBloqueioRuas(boolean bloqueioRua) {
+		this.bloqueioRua = bloqueioRua;
 	}
 
 	public String getComentario() {

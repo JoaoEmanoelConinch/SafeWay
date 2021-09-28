@@ -1,4 +1,4 @@
-package controlador.servlet;
+package controle.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,18 +14,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
-import modelo.dao.Formulario.FormularioDAO;
-import modelo.dao.Formulario.FormularioDAOImpl;
-import modelo.dao.Ponto.PontoDAO;
-import modelo.dao.Ponto.PontoDAOImpl;
 import modelo.dao.PontoAvaliado.PontoAvaliadoDAO;
 import modelo.dao.PontoAvaliado.PontoAvaliadoDAOImpl;
-import modelo.dao.PontoFavorito.PontoFavDAO;
+import modelo.dao.PontoFavorito.PontoFavoritoDAO;
 import modelo.dao.PontoFavorito.PontoFavDAOImpl;
-import modelo.dao.Trajeto.TrajetoDAO;
-import modelo.dao.Trajeto.TrajetoDAOImpl;
-import modelo.dao.Usuario.UsuarioDAO;
-import modelo.dao.Usuario.UsuarioDAOImpl;
+import modelo.dao.formulario.FormularioDAO;
+import modelo.dao.formulario.FormularioDAOImpl;
+import modelo.dao.ponto.PontoDAO;
+import modelo.dao.ponto.PontoDAOImpl;
+import modelo.dao.trajeto.TrajetoDAO;
+import modelo.dao.trajeto.TrajetoDAOImpl;
+import modelo.dao.usuario.UsuarioDAO;
+import modelo.dao.usuario.UsuarioDAOImpl;
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
@@ -50,7 +50,7 @@ public class Servlet extends HttpServlet {
 	private TrajetoDAO trajetoDAO;
 	private FormularioDAO formularioDAO;
 	private PontoAvaliadoDAO pontoAvaliadoDAO;
-	private PontoFavDAO pontoFavDAO;
+	private PontoFavoritoDAO pontoFavDAO;
 
 	public void init() {
 		

@@ -1,4 +1,4 @@
-package controlador;
+package controle;
 
 import java.io.IOException;
 import java.util.List;
@@ -6,12 +6,12 @@ import java.util.List;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
-import modelo.dao.Formulario.FormularioDAOImpl;
-import modelo.dao.Ponto.PontoDAOImpl;
 import modelo.dao.PontoAvaliado.PontoAvaliadoDAOImpl;
 import modelo.dao.PontoFavorito.PontoFavDAOImpl;
-import modelo.dao.Trajeto.TrajetoDAOImpl;
-import modelo.dao.Usuario.UsuarioDAOImpl;
+import modelo.dao.formulario.FormularioDAOImpl;
+import modelo.dao.ponto.PontoDAOImpl;
+import modelo.dao.trajeto.TrajetoDAOImpl;
+import modelo.dao.usuario.UsuarioDAOImpl;
 import modelo.entidade.mapa.Ponto;
 
 import modelo.entidade.mapa.PontoAbstrato;

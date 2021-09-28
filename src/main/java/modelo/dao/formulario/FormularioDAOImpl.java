@@ -1,221 +1,69 @@
-package modelo.dao.Ponto;
+package modelo.dao.formulario;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ParameterExpression;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
-import modelo.entidade.mapa.Ponto;
+import modelo.entidade.formulario.Formulario;
+import modelo.entidade.formulario.Formulario_;
+import modelo.entidade.mapa.PontoAbstrato;
+import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.Ponto_;
 import modelo.factory.conexao.ConexaoFactory;
 
-public class PontoDAOImpl implements PontoDAO {
+public class FormularioDAOImpl implements FormularioDAO {
 
 	private ConexaoFactory fabrica;
-	private Ponto p;
 
-	public PontoDAOImpl() {
+	public FormularioDAOImpl() {
 		fabrica = new ConexaoFactory();
 	}
 
-	public void inserirPonto(Ponto ponto) {
-
-		Session sessao = null;
-
-		try {
-
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			sessao.save(ponto);
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception erro) {
-			erro.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-	}
-
-	public void deletarPonto(Ponto ponto) {
-
-		Session sessao = null;
-
-		try {
-
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			sessao.delete(ponto);
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception erro) {
-			erro.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-	}
-
-	public void atualizarPonto(Ponto ponto) {
-		
-		Session sessao = null;
-
-		try {
-
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			sessao.update(ponto);
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-		
-	}
-	
-	public List<Ponto> recuperarPontos() {
-
-		Session sessao = null;
-		List<Ponto> pontos = null;
-
-		try {
-
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Ponto> criteria = construtor.createQuery(Ponto.class);
-			Root<Ponto> raizPonto = criteria.from(Ponto.class);
-
-			criteria.select(raizPonto);
-
-			pontos = sessao.createQuery(criteria).getResultList();
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-		return pontos;
-
-	}
-
-	public Ponto recuperarPonto(Ponto p) {
-		Session sessao = null;
-		Ponto ponto = null;
-
-		try {
-
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Ponto> criteria = construtor.createQuery(Ponto.class);
-			Root<Ponto> raizPonto = criteria.from(Ponto.class);
-
-			ParameterExpression<Long> idPonto = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(raizPonto.get(Ponto_.ID_PONTO), idPonto));
-
-			ponto = sessao.createQuery(criteria).setParameter(idPonto, p.getId()).getSingleResult();
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-		return ponto;
-	}
-
 	@Override
-	public Ponto verificarPonto(Ponto p) {
+	public void inserirAvaliacao(Formulario formulario) {
 
-		this.p = p;
 		Session sessao = null;
-		Ponto ponto = null;
 
 		try {
 
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			sessao.save(formulario);
 
-			CriteriaQuery<Ponto> criteria = construtor.createQuery(Ponto.class);
-			Root<Ponto> raizPonto = criteria.from(Ponto.class);
+			sessao.getTransaction().commit();
 
-			List<Predicate> predicates = new ArrayList<Predicate>();
+		} catch (Exception erro) {
+			erro.printStackTrace();
 
-			predicates.add(construtor.equal(raizPonto.get(Ponto_.LATITUDE), p.getLatitude()));
-			predicates.add(construtor.equal(raizPonto.get(Ponto_.LONGITUDE), p.getLongitude()));
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
 
-			criteria.select(raizPonto).where(predicates.toArray(new Predicate[] {}));
+		} finally {
 
-			ponto = sessao.createQuery(criteria).getSingleResult();
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+	}
+
+	public void deletarAvaliacao(Formulario formulario) {
+
+		Session sessao = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			sessao.delete(formulario);
 
 			sessao.getTransaction().commit();
 
@@ -234,7 +82,119 @@ public class PontoDAOImpl implements PontoDAO {
 			}
 		}
 
-		return ponto;
+	}
+
+	public void atualizarAvaliacao(Formulario formlario) {
+
+		Session sessao = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			sessao.update(formlario);
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+	}
+
+	public List<Formulario> recuperarAvaliacoes(PontoAvaliado ponto) {
+
+		Session sessao = null;
+		List<Formulario> forms = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
+			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
+
+			Join<Formulario, PontoAbstrato> juncaoPonto = raizFormulario.join(Formulario_.idPontoAvaliado);
+
+
+			ParameterExpression<Long> IdPonto = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoPonto.get(Ponto_.ID_PONTO), IdPonto));
+
+			forms = sessao.createQuery(criteria).setParameter(IdPonto, ponto.getId()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return forms;
+	}
+
+	public Formulario recuperarAvaliacaoId(Formulario form) {
+
+		Session sessao = null;
+		Formulario formulario = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
+			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
+
+			ParameterExpression<Long> idForm = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(raizFormulario.get(Formulario_.ID_FORMULARIO), idForm));
+
+			formulario = sessao.createQuery(criteria).setParameter(idForm, form.getIdFormulario()).getSingleResult();
+			
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return formulario;
 
 	}
 

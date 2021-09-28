@@ -262,7 +262,7 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 			List<Predicate> predicates = new ArrayList<Predicate>();
 
-			predicates.add(construtor.equal(raizPontoAvaliado.get(PontoAvaliado_.LATITUDE), p.getLatitude()));
+			predicates.add(construtor.equal(raizPontoAvaliado.get(PontoAvaliado_.), p.getLatitude()));
 			predicates.add(construtor.equal(raizPontoAvaliado.get(PontoAvaliado_.LONGITUDE), p.getLongitude()));
 
 			criteria.select(raizPontoAvaliado).where(predicates.toArray(new Predicate[] {}));

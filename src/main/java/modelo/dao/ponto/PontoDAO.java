@@ -1,4 +1,4 @@
-package modelo.dao.Ponto;
+package modelo.dao.ponto;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public interface PontoDAO {
 	
 	List<Ponto> recuperarPontos();
 	
-	Ponto recuperarPonto(Ponto p);
+	Ponto recuperarPonto(Ponto ponto);
 	
-	Ponto verificarPonto(Ponto p);
+	Ponto verificarPonto(Ponto ponto);
 }

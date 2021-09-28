@@ -1,4 +1,4 @@
-package modelo.dao.Trajeto;
+package modelo.dao.trajeto;
 
 import java.util.List;
 
@@ -11,7 +11,6 @@ public interface TrajetoDAO {
     void deletarTrajeto(Trajeto trajeto);
 
     void atualizarTrajeto(Trajeto trajeto);
-
 
     Trajeto recuperarTrajeto(Trajeto trajeto);
   

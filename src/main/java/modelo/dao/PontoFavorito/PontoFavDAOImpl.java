@@ -20,7 +20,7 @@ import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.entidade.usuario.UsuarioCadastrado_;
 import modelo.factory.conexao.ConexaoFactory;
 
-public class PontoFavDAOImpl implements PontoFavDAO {
+public class PontoFavDAOImpl implements PontoFavoritoDAO {
 
 	private ConexaoFactory fabrica;
 

@@ -1,4 +1,4 @@
-package modelo.dao.Formulario;
+package modelo.dao.trajeto;
 
 import java.util.List;
 
@@ -10,32 +10,30 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
-import modelo.entidade.formulario.Formulario;
-import modelo.entidade.formulario.Formulario_;
-import modelo.entidade.mapa.PontoAbstrato;
-import modelo.entidade.mapa.PontoAvaliado;
-import modelo.entidade.mapa.Ponto_;
+import modelo.entidade.mapa.Trajeto;
+import modelo.entidade.mapa.Trajeto_;
+import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.entidade.usuario.UsuarioCadastrado_;
 import modelo.factory.conexao.ConexaoFactory;
 
-public class FormularioDAOImpl implements FormularioDAO {
+public class TrajetoDAOImpl implements TrajetoDAO {
 
 	private ConexaoFactory fabrica;
 
-	public FormularioDAOImpl() {
+	public TrajetoDAOImpl() {
 		fabrica = new ConexaoFactory();
 	}
 
 	@Override
-	public void inserirAvaliacao(Formulario formulario) {
+	public void inserirTrajeto(Trajeto trajeto) {
 
 		Session sessao = null;
 
 		try {
-
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			sessao.save(formulario);
+			sessao.save(trajeto);
 
 			sessao.getTransaction().commit();
 
@@ -52,9 +50,11 @@ public class FormularioDAOImpl implements FormularioDAO {
 				sessao.close();
 			}
 		}
+
 	}
 
-	public void deletarAvaliacao(Formulario formulario) {
+	@Override
+	public void deletarTrajeto(Trajeto trajeto) {
 
 		Session sessao = null;
 
@@ -63,7 +63,37 @@ public class FormularioDAOImpl implements FormularioDAO {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			sessao.delete(formulario);
+			sessao.delete(trajeto);
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception erro) {
+			erro.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+	}
+
+	@Override
+	public void atualizarTrajeto(Trajeto trajeto) {
+
+		Session sessao = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			sessao.update(trajeto);
 
 			sessao.getTransaction().commit();
 
@@ -84,40 +114,10 @@ public class FormularioDAOImpl implements FormularioDAO {
 
 	}
 
-	public void atualizarAvaliacao(Formulario formlario) {
+	public Trajeto recuperarTrajeto(Trajeto trajeto) {
 
 		Session sessao = null;
-
-		try {
-
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			sessao.update(formlario);
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-	}
-
-	public List<Formulario> recuperarAvaliacoes(PontoAvaliado ponto) {
-
-		Session sessao = null;
-		List<Formulario> forms = null;
+		Trajeto trajeto1 = null;
 
 		try {
 
@@ -126,56 +126,13 @@ public class FormularioDAOImpl implements FormularioDAO {
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
-			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
+			CriteriaQuery<Trajeto> criteria = construtor.createQuery(Trajeto.class);
+			Root<Trajeto> raizTrajeto = criteria.from(Trajeto.class);
 
-			Join<Formulario, PontoAbstrato> juncaoPonto = raizFormulario.join(Formulario_.idPontoAvaliado);
+			ParameterExpression<Long> idTrajeto = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(raizTrajeto.get(Trajeto_.ID_TRAJETO), idTrajeto)); 
 
-
-			ParameterExpression<Long> IdPonto = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(juncaoPonto.get(Ponto_.ID_PONTO), IdPonto));
-
-			forms = sessao.createQuery(criteria).setParameter(IdPonto, ponto.getId()).getResultList();
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-		return forms;
-	}
-
-	public Formulario recuperarAvaliacaoId(Formulario form) {
-
-		Session sessao = null;
-		Formulario formulario = null;
-
-		try {
-
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
-			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
-
-			ParameterExpression<Long> idForm = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(raizFormulario.get(Formulario_.ID_FORMULARIO), idForm));
-
-			formulario = sessao.createQuery(criteria).setParameter(idForm, form.getIdFormulario()).getSingleResult();
+			trajeto1 = sessao.createQuery(criteria).setParameter(idTrajeto, trajeto.getIdTrajeto()).getSingleResult();
 			
 			sessao.getTransaction().commit();
 
@@ -194,8 +151,52 @@ public class FormularioDAOImpl implements FormularioDAO {
 			}
 		}
 
-		return formulario;
+		return trajeto1;
 
 	}
 
+	public List<Trajeto> recuperarTajetosUsuario(UsuarioCadastrado usuario){
+		
+		Session sessao = null;
+		List<Trajeto> trajetos = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Trajeto> criteria = construtor.createQuery(Trajeto.class);
+			Root<Trajeto> raizPontoFav = criteria.from(Trajeto.class);
+
+			Join<Trajeto, UsuarioCadastrado> juncaoUsuario = raizPontoFav.join(Trajeto_.usuariosCadastrados);
+
+
+			ParameterExpression<Long> idUsuario = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoUsuario.get(UsuarioCadastrado_.ID), idUsuario));
+
+			trajetos = sessao.createQuery(criteria).setParameter(idUsuario, usuario.getId()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return trajetos;
+		
+	}
+	
 }

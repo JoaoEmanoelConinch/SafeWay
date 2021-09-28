@@ -1,4 +1,4 @@
-package modelo.dao.Usuario;
+package modelo.dao.usuario;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -27,7 +27,6 @@ import modelo.consultaAPI.ConsultaTrajeto;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import controlador.consultaAPI.ConsultaTrajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
@@ -40,8 +39,6 @@ import modelo.excecao.mapa.StatusInvalidoException;
 public class Trajeto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
