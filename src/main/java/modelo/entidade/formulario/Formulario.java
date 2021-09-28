@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.usuario.UsuarioCadastrado;
@@ -62,7 +63,7 @@ public class Formulario implements Serializable {
 				referencedColumnName = "id_ponto",
 				nullable = false
 			)
-	private PontoAbstrato idPontoAvaliado;
+	private Ponto idPontoAvaliado;
 	
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -81,41 +82,41 @@ public class Formulario implements Serializable {
 		setIdFormulario(idFormulario);
 	}
 
-	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-	 String comentario, boolean bloqueioRuas, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
+//	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
+//	 String comentario, boolean bloqueioRuas, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
+//
+//		setLesaoCorporal(lesaoCorporal);
+//		setFurto(furto);
+//		setRoubo(roubo);
+//		setHomicidio(homicidio);
+//		setLatrocinio(latrocinio);
+//		setComentario(comentario);
+//		setBloqueioRuas(bloqueioRuas);
+//		setMedia(calcularMedia());
+//		setIdPontoAvaliado(idPontoAvaliado);
+//		setIdUsuario(idUsuario);
+//
+//	}
 
-		setLesaoCorporal(lesaoCorporal);
-		setFurto(furto);
-		setRoubo(roubo);
-		setHomicidio(homicidio);
-		setLatrocinio(latrocinio);
-		setComentario(comentario);
-		setBloqueioRuas(bloqueioRuas);
-		setMedia(calcularMedia());
-		setIdPontoAvaliado(idPontoAvaliado);
-		setIdUsuario(idUsuario);
-
-	}
-
-	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
-	boolean latrocinio, boolean bloqueioRuas, double media, String comentario, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
-
-		setIdFormulario(idFormulario);
-		setLesaoCorporal(lesaoCorporal);
-		setFurto(furto);
-		setRoubo(roubo);
-		setHomicidio(homicidio);
-		setLatrocinio(latrocinio);
-		setComentario(comentario);
-		setBloqueioRuas(bloqueioRuas);
-		setMedia(media);
-		setIdPontoAvaliado(idPontoAvaliado);
-		setIdUsuario(idUsuario);
-
-	}
+//	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
+//	boolean latrocinio, boolean bloqueioRuas, double media, String comentario, Ponto idPontoAvaliado,UsuarioCadastrado idUsuario) {
+//
+//		setIdFormulario(idFormulario);
+//		setLesaoCorporal(lesaoCorporal);
+//		setFurto(furto);
+//		setRoubo(roubo);
+//		setHomicidio(homicidio);
+//		setLatrocinio(latrocinio);
+//		setComentario(comentario);
+//		setBloqueioRuas(bloqueioRuas);
+//		setMedia(media);
+//		setIdPontoAvaliado(idPontoAvaliado);
+//		setIdUsuario(idUsuario);
+//
+//	}
 	
 	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
-			boolean latrocinio, boolean bloqueioRuas, double media, String comentario, PontoAbstrato idPontoAvaliado,UsuarioCadastrado idUsuario) {
+			boolean latrocinio, boolean bloqueioRuas, double media, String comentario, Ponto idPontoAvaliado,UsuarioCadastrado idUsuario) {
 
 				setIdFormulario(idFormulario);
 				setLesaoCorporal(lesaoCorporal);
@@ -143,12 +144,12 @@ public class Formulario implements Serializable {
 				setComentario(comentario);
 				setMedia(calcularMedia());
 				setBloqueioRuas(bloqueioRuas);
-				setIdPontoAvaliado(idPontoAvaliado);
+//				setIdPontoAvaliado(idPontoAvaliado);
 
 			}
 
 	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-	 String comentario, boolean bloqueioRuas, PontoAbstrato idPontoAvaliado, UsuarioCadastrado idUsuario) {
+	 String comentario, boolean bloqueioRuas, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
 
 		setLesaoCorporal(lesaoCorporal);
 		setFurto(furto);
@@ -239,7 +240,7 @@ public class Formulario implements Serializable {
 		return idPontoAvaliado;
 	}
 
-	public void setIdPontoAvaliado(PontoAbstrato idPontoAvaliado) {
+	public void setIdPontoAvaliado(Ponto idPontoAvaliado) {
 		this.idPontoAvaliado = idPontoAvaliado;
 	}
 

@@ -47,12 +47,12 @@ public class Trajeto implements Serializable {
 
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(
         name = "id_partida_trajeto",
         referencedColumnName = "id_ponto",
         nullable = false)
-	private PontoAbstrato inicio;
+	private Ponto inicio;
 
 	
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL })
@@ -63,7 +63,7 @@ public class Trajeto implements Serializable {
 	private List<Ponto> pontos;
 
 	@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(
         name = "id_chegada_trajeto",
         referencedColumnName = "id_ponto",
@@ -112,8 +112,8 @@ public class Trajeto implements Serializable {
 
 	public Trajeto(String inicio, String chegada, MeioDeTransporte transporteUsado)
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		this.setInicio(Ponto.informatLocal(inicio));
-		this.setChegada(Ponto.informatLocal(chegada));
+		this.setInicio(Ponto.informarLocal(inicio));
+		this.setChegada(Ponto.informarLocal(chegada));
 		this.setTransporteUsado(transporteUsado);
 		this.setPontos(criarLineString());
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
@@ -121,8 +121,8 @@ public class Trajeto implements Serializable {
 
 	public Trajeto(String inicio, int posicaoInicio, String chegada, int posicaoChegada, MeioDeTransporte transporteUsado)
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		this.setInicio(Ponto.informatLocal(inicio, posicaoInicio));
-		this.setChegada(Ponto.informatLocal(chegada, posicaoChegada));
+		this.setInicio(Ponto.informarLocal(inicio, posicaoInicio));
+		this.setChegada(Ponto.informarLocal(chegada, posicaoChegada));
 		this.setTransporteUsado(transporteUsado);
 		this.setPontos(criarLineString());
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
@@ -150,7 +150,7 @@ public class Trajeto implements Serializable {
 	}
 
 	public void setInicio(String inicio) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
-		this.inicio = Ponto.informatLocal(inicio);
+		this.inicio = Ponto.informarLocal(inicio);
 	}
 
 	public void setInicio(Ponto inicio) {
@@ -239,7 +239,7 @@ public class Trajeto implements Serializable {
 		pontos.add(ponto);
 	}
 
-	public void removePonto (PontoAbstrato ponto){
+	public void removePonto (Ponto ponto){
 		pontos.remove(ponto);
 	}
 
