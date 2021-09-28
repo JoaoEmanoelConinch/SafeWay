@@ -5,19 +5,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.Response;
-
 import org.codehaus.jackson.JsonParseException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAbstrato;
-import modelo.entidade.mapa.PontoAvaliado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
-import modelo.excecao.mapa.StatusInvalidoException;
 
 public class ConsultaTrajeto {
 
@@ -47,7 +41,7 @@ public class ConsultaTrajeto {
 
 		for (int i = 0; i < pontosDaAPI.length();i++){
 
-			PontoAbstrato pontoDoTrajeto = new PontoAbstrato();
+			PontoAbstrato pontoDoTrajeto = new Ponto();
 
 			BigDecimal latitude = (BigDecimal) pontosDaAPI.getJSONArray(i).get(0);
 			BigDecimal longitude = (BigDecimal) pontosDaAPI.getJSONArray(i).get(1);

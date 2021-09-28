@@ -12,12 +12,11 @@ import modelo.dao.PontoFavorito.PontoFavDAOImpl;
 import modelo.dao.Trajeto.TrajetoDAOImpl;
 import modelo.dao.Usuario.UsuarioDAOImpl;
 import modelo.entidade.formulario.Formulario;
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
-import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
-import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
@@ -35,9 +34,9 @@ public class Principal {
 		TrajetoDAOImpl trajetoDao = new TrajetoDAOImpl();
 		
 		
-		PontoAbstrato p1 = new PontoAbstrato(-26.456, 12.212);
+		Ponto p1 = new Ponto(-26.456, 12.212);
 		
-		PontoAbstrato p2 = new PontoAbstrato(-30.456, 22.212);
+		Ponto p2 = new Ponto(-30.456, 22.212);
 		
 		pontoDao.inserirPonto(p1);
 		

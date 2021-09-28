@@ -27,7 +27,7 @@ public class PontoAvaliado extends PontoAbstrato{
 
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany(
+		@OneToMany(
 	        mappedBy = "idPontoAvaliado",
 	        cascade = CascadeType.ALL,
 	        orphanRemoval = true)
@@ -65,7 +65,7 @@ public class PontoAvaliado extends PontoAbstrato{
 	public PontoAvaliado() {}
 	
 
-	public PontoAvaliado(long idPontoAvaliado, PontoAbstrato ponto, ArrayList<Formulario> avaliacoes,
+	public PontoAvaliado(long idPontoAvaliado, Ponto ponto, ArrayList<Formulario> avaliacoes,
 	long quantidadeLezoesCorporais, long quantidadeFurtos, long quantidadeRoubos,
 	long quantidadeHomicidios, long quantidadeLatrocinio, boolean bloqueio,
 	double mediaDeAvaliacao)
@@ -84,7 +84,7 @@ public class PontoAvaliado extends PontoAbstrato{
 		setMediaDeAvaliacao(mediaDeAvaliacao);
 	}
 
-	public PontoAvaliado(PontoAbstrato ponto, Formulario avaliacao)
+	public PontoAvaliado(Ponto ponto, Formulario avaliacao)
 	throws StatusInvalidoException{
 		super(ponto.getLatitude(),ponto.getLongitude());
 		
@@ -93,7 +93,7 @@ public class PontoAvaliado extends PontoAbstrato{
 		this.addAvaliacao(avaliacao);
 	}
 
-	public PontoAvaliado(PontoAbstrato ponto) throws StatusInvalidoException{
+	public PontoAvaliado(Ponto ponto) throws StatusInvalidoException{
 		super(ponto.getLatitude(),ponto.getLongitude());
 
 		this.setAvaliacoes(new ArrayList<Formulario>());
@@ -244,7 +244,7 @@ public class PontoAvaliado extends PontoAbstrato{
 		return media/avaliacoesList.size();
 	}
 
-	public static PontoAvaliado CriarPonto(PontoAbstrato ponto, Formulario avaliacao)
+	public static PontoAvaliado CriarPonto(Ponto ponto, Formulario avaliacao)
 			throws NullPointerException, StatusInvalidoException{
 
 		PontoAvaliado pontoAvaliado = new PontoAvaliado(ponto, avaliacao);
@@ -252,7 +252,7 @@ public class PontoAvaliado extends PontoAbstrato{
 		return pontoAvaliado;
 	}
 
-	public static PontoAvaliado criarPontoAvaliado(PontoAbstrato ponto)
+	public static PontoAvaliado criarPontoAvaliado(Ponto ponto)
 			throws NullPointerException, StatusInvalidoException{
 
 		PontoAvaliado pontoAvaliado = new PontoAvaliado(ponto);

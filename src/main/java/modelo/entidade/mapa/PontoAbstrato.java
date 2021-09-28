@@ -46,8 +46,6 @@ public abstract class PontoAbstrato implements Serializable {
 	@Type(type = "double")
 	private double longitude;
 
-	
-
 	public PontoAbstrato() {}
 	
 	public PontoAbstrato(long id) {

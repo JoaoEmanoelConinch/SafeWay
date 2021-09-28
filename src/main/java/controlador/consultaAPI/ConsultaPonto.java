@@ -7,6 +7,7 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAbstrato;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -41,7 +42,7 @@ public class ConsultaPonto {
 		BigDecimal latitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(posicao).getJSONObject("geometry").getJSONArray("coordinates").get(0);
 		BigDecimal longitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(posicao).getJSONObject("geometry").getJSONArray("coordinates").get(1);
 
-		PontoAbstrato ponto = new PontoAbstrato();
+		PontoAbstrato ponto = new Ponto();
 
 		ponto.setLatitude(latitude.doubleValue());
 		ponto.setLongitude(longitude.doubleValue());
@@ -63,7 +64,7 @@ public class ConsultaPonto {
 		JSONArray tamanho = jsonObject.getJSONArray("features");
 
 		for (int i = 0; i < tamanho.length(); i++){
-			PontoAbstrato ponto = new PontoAbstrato();
+			PontoAbstrato ponto = new Ponto();
 
 			BigDecimal latitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates").get(0);
 			BigDecimal longitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates").get(1);

@@ -29,7 +29,7 @@ public class PontoFavorito extends PontoAbstrato{
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	    @JoinColumn(
-	        name = "id_ponto_favorito",
+	        name = "id_ponto",
 	        referencedColumnName = "id_ponto",
 	        nullable = false
 	    )
@@ -50,7 +50,7 @@ public class PontoFavorito extends PontoAbstrato{
 		super(id);
 	}
 
-	public PontoFavorito(PontoAbstrato ponto, String nomePonto, UsuarioCadastrado usuario)
+	public PontoFavorito(Ponto ponto, String nomePonto, UsuarioCadastrado usuario)
 	throws StatusInvalidoException
 {
 		super(ponto.getLatitude(), ponto.getLongitude());
@@ -85,7 +85,7 @@ public class PontoFavorito extends PontoAbstrato{
 		this.usuario = usuario;
 	}
 
-	public static PontoFavorito favoritarPontoENomear(PontoAbstrato ponto, String nomePonto, UsuarioCadastrado usuario)
+	public static PontoFavorito favoritarPontoENomear(Ponto ponto, String nomePonto, UsuarioCadastrado usuario)
 	throws StatusInvalidoException{
 
 		return new PontoFavorito(ponto, nomePonto, usuario);
