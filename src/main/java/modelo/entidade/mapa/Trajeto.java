@@ -24,6 +24,10 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
 import modelo.consultaAPI.ConsultaTrajeto;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import controlador.consultaAPI.ConsultaTrajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
@@ -38,30 +42,35 @@ public class Trajeto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_trajeto", nullable = false, unique = true)
 	private long idTrajeto;
 
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(
         name = "id_partida_trajeto",
-        referencedColumnName = "id_ponto")
-	private Ponto inicio;
+        referencedColumnName = "id_ponto",
+        nullable = false)
+	private PontoAbstrato inicio;
 
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL })
     @JoinTable(name = "ponto_trajeto",
     joinColumns = @JoinColumn(name = "id_trajeto"),
     inverseJoinColumns = @JoinColumn(name = "id_ponto")
     )
 	private List<Ponto> pontos;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(
         name = "id_chegada_trajeto",
-        referencedColumnName = "id_ponto")
+        referencedColumnName = "id_ponto",
+        nullable = false)
 	private Ponto chegada;
 
 	@Column(name = "Meio_transporte", nullable = false)
@@ -69,12 +78,13 @@ public class Trajeto implements Serializable {
 	private MeioDeTransporte transporteUsado;
 	
 
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL})
 	    @JoinTable(name = "usuario_trajeto",
 	    joinColumns = @JoinColumn(name = "id_trajeto"),
 	    inverseJoinColumns = @JoinColumn(name = "id_usuario")
 	    )
 	private List<UsuarioCadastrado> usuariosCadastrados;
+
 
 	public Trajeto() {
 	}
@@ -138,7 +148,7 @@ public class Trajeto implements Serializable {
 		this.idTrajeto = idTrajeto;
 	}
 
-	public Ponto getInicio() {
+	public PontoAbstrato getInicio() {
 		return inicio;
 	}
 
@@ -147,6 +157,7 @@ public class Trajeto implements Serializable {
 	}
 
 	public void setInicio(Ponto inicio) {
+
 		this.inicio = inicio;
 	}
 
@@ -158,7 +169,7 @@ public class Trajeto implements Serializable {
 		this.pontos = pontos;
 	}
 
-	public Ponto getChegada() {
+	public PontoAbstrato getChegada() {
 		return chegada;
 	}
 
@@ -187,29 +198,7 @@ public class Trajeto implements Serializable {
 		 return ConsultaTrajeto.criarLineString(this.inicio, this.chegada, this.transporteUsado);
 	}
 	
-	public List<PontoAvaliado> pegarPontosAvaliadosDoTrageto(){
-		List<PontoAvaliado> pontosAvaliados = new ArrayList<PontoAvaliado>();
-		List<Ponto> pontos = this.getPontos();
-		
-		for (int i = 0; i < pontos.size(); i++) {
-			if (pontos.get(i).getClass().equals("PontoAvaliado")){
-				pontosAvaliados.add((PontoAvaliado) pontos.get(i));
-			}
-		}
-		
-		return pontosAvaliados;
-	}
-	
-	public List<Double> pegarMediasDosPontosAvaliadosDoTrageto() {
-		List<Double> medias = new ArrayList<Double>();
-		List<PontoAvaliado> pontosAvaliados = pegarPontosAvaliadosDoTrageto();
-		
-		for (int i = 0; i < pontosAvaliados.size(); i++) {
-			medias.add(pontosAvaliados.get(i).getMediaDeAvaliacao());
-		}
-		
-		return medias;
-	}
+
 	
 	public List<Ponto> verificarQuaisPontosExixtemEm(List<Ponto> pontos) {
 		List<Ponto> pontosNaoExistentes = new ArrayList<Ponto>();
@@ -223,11 +212,37 @@ public class Trajeto implements Serializable {
 		return pontosNaoExistentes;
 	}
 
+	
+	
+//	public List<PontoAvaliado> pegarPontosAvaliadosDoTrageto(){
+//		List<PontoAvaliado> pontosAvaliados = new ArrayList<PontoAvaliado>();
+//		List<Ponto> pontos = this.getPontos();
+//		
+//		for (int i = 0; i < pontos.size(); i++) {
+//			if (pontos.get(i).getClass().equals("PontoAvaliado")){
+//				pontosAvaliados.add(pontos.get(i));
+//			}
+//		}
+//		
+//		return pontosAvaliados;
+//	}
+//	
+//	public List<Double> pegarMediasDosPontosAvaliadosDoTrageto() {
+//		List<Double> medias = new ArrayList<Double>();
+//		List<PontoAvaliado> pontosAvaliados = pegarPontosAvaliadosDoTrageto();
+//		
+//		for (int i = 0; i < pontosAvaliados.size(); i++) {
+//			medias.add(pontosAvaliados.get(i).getMediaDeAvaliacao());
+//		}
+//		
+//		return medias;
+//	}
+
 	public void addPonto (Ponto ponto){
 		pontos.add(ponto);
 	}
 
-	public void removePonto (Ponto ponto){
+	public void removePonto (PontoAbstrato ponto){
 		pontos.remove(ponto);
 	}
 

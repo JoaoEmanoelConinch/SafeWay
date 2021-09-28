@@ -1,6 +1,5 @@
 package modelo.entidade.mapa;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
@@ -28,17 +24,11 @@ import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Ponto")
-public class Ponto implements Serializable {
+public class Ponto extends PontoAbstrato {
 
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_ponto", nullable = false, unique = true)
-	private long idPonto;
-
+	
 	@Column(name = "latitude", nullable = false)
 	@Type(type = "double")
 	private double latitude;
@@ -46,29 +36,36 @@ public class Ponto implements Serializable {
 	@Column(name = "longitude", nullable = false)
 	@Type(type = "double")
 	private double longitude;
-
+	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "ponto_trajeto", joinColumns = @JoinColumn(name = "id_ponto"))
 	@Fetch(FetchMode.JOIN)
 	private List<Trajeto> trajetos;
-
-	public Ponto() {}
 	
-	public Ponto(long id) {
-		setId(id);
-	}
-
 	public Ponto(long idPonto, double latitude, double longitude, List<Trajeto> trajetos) {
-		this.setId(idPonto);
+		super(idPonto);
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(trajetos);
 	}
-
+	
 	public Ponto(double latitude, double longitude) throws StatusInvalidoException {
+		super();
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(new ArrayList<Trajeto>());
+	}
+
+	public void setId(Long id) {
+
+		this.idPonto = id;
+	
+	public Ponto(long id) {
+		super(id);
+	}
+	
+	public Ponto(){
+		super();
 	}
 
 	public static Ponto informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
@@ -83,16 +80,7 @@ public class Ponto implements Serializable {
 	public static List<Ponto> informatLocais(String local) {
 		return ConsultaPonto.informatLocais(local);
 	}
-
-	public void setId(Long id) {
-
-		this.idPonto = id;
-	}
-
-	public long getId() {
-		return idPonto;
-	}
-
+	
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
@@ -119,18 +107,31 @@ public class Ponto implements Serializable {
 		return trajetos;
 
 	}
-
-	public ArrayList<Double> transformarPontoEmVetor() {
-		ArrayList<Double> pontoVetro = new ArrayList<Double>(2);
-		pontoVetro.add(this.getLongitude());
-		pontoVetro.add(this.getLatitude());
-		return pontoVetro;
+	
+	public void addTrajeto(Trajeto trajeto) {
+		trajetos.add(trajeto);
 	}
 
-	public String TransformarVetorEmString() {
-		return transformarPontoEmVetor().toString();
+	public void removeTrajeto(Trajeto trajeto) {
+		trajetos.remove(trajeto);
+	}
+	
+	
+	public static Ponto informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException {
+		return ConsultaPonto.informatLocal(local);
 	}
 
+	public static Ponto informatLocal(String local, int posicao)
+			throws StatusInvalidoException, NumeroMenorQueZeroException {
+		return ConsultaPonto.informatLocal(local, posicao);
+	}
+
+	public static List<Ponto> informatLocais(String local) {
+		return ConsultaPonto.informatLocais(local);
+	}
+
+	
+	
 	@Override
 	public boolean equals(Object objeto) {
 		
@@ -153,9 +154,6 @@ public class Ponto implements Serializable {
 		
 	}
 
-	public static Ponto parseUnsignedPonto(java.lang.String s)throws StatusInvalidoException, NumeroMenorQueZeroException{
-		return new Ponto(0, 0);
-	}
 
 	public void addTrajeto(Trajeto trajeto) {
 		trajetos.add(trajeto);
@@ -164,4 +162,5 @@ public class Ponto implements Serializable {
 	public void removeTrajeto(Trajeto trajeto) {
 		trajetos.remove(trajeto);
 	}
+
 }

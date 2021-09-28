@@ -8,11 +8,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import modelo.entidade.formulario.Formulario;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -20,40 +23,42 @@ import modelo.excecao.mapa.StatusInvalidoException;
 @Entity
 @Table(name = "ponto_avaliado")
 @PrimaryKeyJoinColumn(name="id_ponto")
-public class PontoAvaliado extends Ponto{
+public class PontoAvaliado extends PontoAbstrato{
 
 	private static final long serialVersionUID = 1L;
 
-	@OneToMany(
-        mappedBy = "idPontoAvaliado",
-        cascade = CascadeType.ALL,
-        orphanRemoval = true)
-	private List<Formulario> avaliacoes;
+		@OneToMany(
+	        mappedBy = "idPontoAvaliado",
+	        cascade = CascadeType.ALL,
+	        orphanRemoval = true)
+		private List<Formulario> avaliacoes;
 
-	@Column(name = "quantidade_lesoes_corporais_ponto_avaliado", nullable = false)
-	private long quantidadeLesoesCorporais;
-	
-	@Column(name = "quantidade_furtos_ponto_avaliado", nullable = false)
-	private long quantidadeFurtos;
+		@Column(name = "quantidade_lesoes_corporais_ponto_avaliado", nullable = false)
+		private long quantidadeLesoesCorporais;
+		
+		@Column(name = "quantidade_furtos_ponto_avaliado", nullable = false)
+		private long quantidadeFurtos;
 
-	@Column(name = "quantidade_roubos_ponto_avaliado", nullable = false)
-	private long quantidadeRoubos;
+		@Column(name = "quantidade_roubos_ponto_avaliado", nullable = false)
+		private long quantidadeRoubos;
 
-	@Column(name = "quantidade_homicidios_ponto_avaliado", nullable = false)
-	private long quantidadeHomicidios;
+		@Column(name = "quantidade_homicidios_ponto_avaliado", nullable = false)
+		private long quantidadeHomicidios;
 
-	@Column(name = "quantidade_latrocinio_ponto_avaliado", nullable = false)
-	private long quantidadeLatrocinio;
+		@Column(name = "quantidade_latrocinio_ponto_avaliado", nullable = false)
+		private long quantidadeLatrocinio;
 
-	@Column(name = "nivel_Bloqueio_Ponto_Avaliado", nullable = false)
-	private boolean bloqueio;
+		@Column(name = "nivel_Bloqueio_Ponto_Avaliado", nullable = false)
+		private boolean bloqueio;
 
-	@Column(name = "media_Avaliacao_Ponto_Avaliado", nullable = false)
-	private double mediaDeAvaliacao;
+		@Column(name = "media_Avaliacao_Ponto_Avaliado", nullable = false)
+		private double mediaDeAvaliacao;
 
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_ponto")
-	private Ponto ponto;	
+		@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+		@OnDelete(action = OnDeleteAction.NO_ACTION)
+	    @MapsId
+	    @JoinColumn(name = "id_ponto")
+		private Ponto ponto;		
 
 	public PontoAvaliado() {}
 	
@@ -71,7 +76,7 @@ public class PontoAvaliado extends Ponto{
 	long quantidadeHomicidios, long quantidadeLatrocinio, boolean bloqueio,
 	double mediaDeAvaliacao)
 	throws StatusInvalidoException{
-		super(ponto.getLatitude(),ponto.getLongitude());
+		super();
 		
 		setId(idPontoAvaliado);
 		setPonto(ponto);
@@ -87,7 +92,7 @@ public class PontoAvaliado extends Ponto{
 
 	public PontoAvaliado(Ponto ponto, Formulario avaliacao)
 	throws StatusInvalidoException{
-		super(ponto.getLatitude(),ponto.getLongitude());
+		super();
 		
 		setPonto(ponto);
 		this.setAvaliacoes(new ArrayList<Formulario>());
@@ -95,7 +100,7 @@ public class PontoAvaliado extends Ponto{
 	}
 
 	public PontoAvaliado(Ponto ponto) throws StatusInvalidoException{
-		super(ponto.getLatitude(),ponto.getLongitude());
+		super();
 
 		this.setAvaliacoes(new ArrayList<Formulario>());
 		setPonto(ponto);

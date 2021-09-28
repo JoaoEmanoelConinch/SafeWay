@@ -22,6 +22,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
@@ -54,7 +55,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinTable(name = "usuario_trajeto",
-	joinColumns = @JoinColumn(name = "id"),
+	joinColumns = @JoinColumn(name = "id_usuario"),
 	inverseJoinColumns = @JoinColumn(name = "id_trajeto")
 	)
 	private List<Trajeto> trajetos;
@@ -196,6 +197,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	@Override
 	public Trajeto trajeto(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws JsonParseException, JsonMappingException, IOException {
+
 
 		Trajeto trajeto = super.trajeto(inicio, chegada, transporteUsado);
 

@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import modelo.entidade.mapa.Ponto;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
+
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 

@@ -15,6 +15,7 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
 import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.Trajeto;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
@@ -25,10 +26,10 @@ import modelo.excecao.mapa.StatusInvalidoException;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Usuario {
  
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario", nullable = false, unique = true)
-    private long id;	
+	 @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "id_usuario", nullable = false, unique = true)
+	    private long id;	
 	
 	public Usuario(){}
 	

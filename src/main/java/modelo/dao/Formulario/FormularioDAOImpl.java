@@ -2,7 +2,6 @@ package modelo.dao.Formulario;
 
 import java.util.List;
 
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
@@ -11,16 +10,11 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
-
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.formulario.Formulario_;
-import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.Ponto_;
-import modelo.entidade.mapa.Trajeto;
-import modelo.entidade.mapa.Trajeto_;
-import modelo.entidade.usuario.UsuarioCadastrado;
-import modelo.entidade.usuario.UsuarioCadastrado_;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class FormularioDAOImpl implements FormularioDAO {
@@ -135,7 +129,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
 			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
 
-			Join<Formulario, Ponto> juncaoPonto = raizFormulario.join(Formulario_.idPontoAvaliado);
+			Join<Formulario, PontoAbstrato> juncaoPonto = raizFormulario.join(Formulario_.idPontoAvaliado);
 
 
 			ParameterExpression<Long> IdPonto = construtor.parameter(Long.class);

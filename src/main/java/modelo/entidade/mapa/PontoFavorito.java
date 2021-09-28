@@ -12,14 +12,15 @@ import javax.persistence.Table;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
-@PrimaryKeyJoinColumn(name="id_ponto")
+@PrimaryKeyJoinColumn(name="id_ponto_favorito")
 @Table(name = "ponto_favorito")
 
-public class PontoFavorito extends Ponto{
+public class PontoFavorito extends PontoAbstrato{
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,15 +30,18 @@ public class PontoFavorito extends Ponto{
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	    @JoinColumn(
-	        name = "id_ponto_favorito",
-	        referencedColumnName = "id_ponto"
+	        name = "id_ponto",
+	        referencedColumnName = "id_ponto",
+	        nullable = false
 	    )
 	private Ponto ponto;
  
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	    @JoinColumn(
 	        name = "id_usuario",
-	        referencedColumnName = "id_usuario"
+	        referencedColumnName = "id_usuario",
+	        nullable = false
 	    )
 	private UsuarioCadastrado usuario;
 
@@ -50,7 +54,7 @@ public class PontoFavorito extends Ponto{
 	public PontoFavorito(Ponto ponto, String nomePonto, UsuarioCadastrado usuario)
 	throws StatusInvalidoException
 {
-		super(ponto.getLatitude(), ponto.getLongitude());
+		super();
 		
 		setPonto(ponto);
 		setNomePonto(nomePonto);

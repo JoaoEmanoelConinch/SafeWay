@@ -12,8 +12,8 @@ public class UsuarioAnonimo extends Usuario {
 	public UsuarioAnonimo() {
 		super();
 	}
-	
-	public UsuarioAnonimo(long id){
+
+	public UsuarioAnonimo(long id) {
 		super(id);
 	}
 
