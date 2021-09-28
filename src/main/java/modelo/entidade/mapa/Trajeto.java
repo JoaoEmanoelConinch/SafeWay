@@ -143,7 +143,7 @@ public class Trajeto implements Serializable {
 		this.inicio = inicio;
 	}
 
-	public List<PontoAbstrato> getPontos() {
+	public List<Ponto> getPontos() {
 		return pontos;
 	}
 
@@ -159,7 +159,7 @@ public class Trajeto implements Serializable {
 		this.chegada = Ponto.informatLocal(chegada);
 	}
 
-	private void setChegada(PontoAbstrato chegada) {
+	private void setChegada(Ponto chegada) {
 		this.chegada = chegada;
 	}
 
@@ -186,31 +186,31 @@ public class Trajeto implements Serializable {
 	
 	
 	
-	public List<PontoAvaliado> pegarPontosAvaliadosDoTrageto(){
-		List<PontoAvaliado> pontosAvaliados = new ArrayList<PontoAvaliado>();
-		List<PontoAbstrato> pontos = this.getPontos();
-		
-		for (int i = 0; i < pontos.size(); i++) {
-			if (pontos.get(i).getClass().equals("PontoAvaliado")){
-				pontosAvaliados.add((PontoAvaliado) pontos.get(i));
-			}
-		}
-		
-		return pontosAvaliados;
-	}
-	
-	public List<Double> pegarMediasDosPontosAvaliadosDoTrageto() {
-		List<Double> medias = new ArrayList<Double>();
-		List<PontoAvaliado> pontosAvaliados = pegarPontosAvaliadosDoTrageto();
-		
-		for (int i = 0; i < pontosAvaliados.size(); i++) {
-			medias.add(pontosAvaliados.get(i).getMediaDeAvaliacao());
-		}
-		
-		return medias;
-	}
+//	public List<PontoAvaliado> pegarPontosAvaliadosDoTrageto(){
+//		List<PontoAvaliado> pontosAvaliados = new ArrayList<PontoAvaliado>();
+//		List<Ponto> pontos = this.getPontos();
+//		
+//		for (int i = 0; i < pontos.size(); i++) {
+//			if (pontos.get(i).getClass().equals("PontoAvaliado")){
+//				pontosAvaliados.add(pontos.get(i));
+//			}
+//		}
+//		
+//		return pontosAvaliados;
+//	}
+//	
+//	public List<Double> pegarMediasDosPontosAvaliadosDoTrageto() {
+//		List<Double> medias = new ArrayList<Double>();
+//		List<PontoAvaliado> pontosAvaliados = pegarPontosAvaliadosDoTrageto();
+//		
+//		for (int i = 0; i < pontosAvaliados.size(); i++) {
+//			medias.add(pontosAvaliados.get(i).getMediaDeAvaliacao());
+//		}
+//		
+//		return medias;
+//	}
 
-	public void addPonto (PontoAbstrato ponto){
+	public void addPonto (Ponto ponto){
 		pontos.add(ponto);
 	}
 

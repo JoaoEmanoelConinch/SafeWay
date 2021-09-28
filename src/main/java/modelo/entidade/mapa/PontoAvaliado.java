@@ -70,7 +70,7 @@ public class PontoAvaliado extends PontoAbstrato{
 	long quantidadeHomicidios, long quantidadeLatrocinio, boolean bloqueio,
 	double mediaDeAvaliacao)
 	throws StatusInvalidoException{
-		super(ponto.getLatitude(),ponto.getLongitude());
+		super();
 		
 		setId(idPontoAvaliado);
 		setPonto(ponto);
@@ -86,7 +86,7 @@ public class PontoAvaliado extends PontoAbstrato{
 
 	public PontoAvaliado(Ponto ponto, Formulario avaliacao)
 	throws StatusInvalidoException{
-		super(ponto.getLatitude(),ponto.getLongitude());
+		super();
 		
 		setPonto(ponto);
 		this.setAvaliacoes(new ArrayList<Formulario>());
@@ -94,7 +94,7 @@ public class PontoAvaliado extends PontoAbstrato{
 	}
 
 	public PontoAvaliado(Ponto ponto) throws StatusInvalidoException{
-		super(ponto.getLatitude(),ponto.getLongitude());
+		super();
 
 		this.setAvaliacoes(new ArrayList<Formulario>());
 		setPonto(ponto);
