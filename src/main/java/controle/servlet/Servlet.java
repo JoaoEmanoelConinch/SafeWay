@@ -85,7 +85,7 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/login":
-				mostrarFormularioDelogin(request, response);
+				mostrarFormularioDeLogin(request, response);
 				break;
 
 			//logar submit...
@@ -111,14 +111,14 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/mapa-avaliação":
-				MostrarMapaAvaliacoa(request, response);
+				mostrarMapaAvaliacao(request, response);
 				break;
 
 			case "/Avaliacao":
-				MostrarTelaAvaliacoa(request, response);
+				mostrarTelaAvaliacao(request, response);
 				break;
 
-			case "/incerir-Avaliacao":
+			case "/inserir-Avaliacao":
 				inserirAvaliacao(request, response);
 				break;
 
@@ -126,15 +126,15 @@ public class Servlet extends HttpServlet {
 				deletarAvaliacao(request, response);
 				break;
 
-			case "mapa-Fovolito":
-				mostrarMapaFoviritar(request, response);
+			case "mapa-Favorito":
+				mostrarMapaFavoritar(request, response);
 				break;
 
 			case "favoritar":
 				mostrarFormularioFavoritar(request, response);
 				break;
 
-			case "incerir-pontoFavorito":
+			case "inserir-pontoFavorito":
 				inserirPontoFavorito(request, response);
 				break;
 
@@ -143,7 +143,7 @@ public class Servlet extends HttpServlet {
 				break;
 
 			case "/mapa-trajeto":
-				MostrarMapaTrageto(request, response);
+				MostrarMapaTrajeto(request, response);
 				break;
 
 			case "/criar-trajeto":
@@ -192,7 +192,7 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void mostrarFormularioDelogin(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarFormularioDeLogin(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 		dispatcher.forward(request, response);
@@ -204,19 +204,19 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void MostrarMapaTrageto(HttpServletRequest request, HttpServletResponse response)
+	private void MostrarMapaTrajeto(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaTrajeto.jsp");
 		dispatcher.forward(request, response);
 	}
 
-	private void MostrarMapaAvaliacoa(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarMapaAvaliacao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaAvaliacoa.jsp");
 		dispatcher.forward(request, response);
 	}
 
-	private void MostrarTelaAvaliacoa(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarTelaAvaliacao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("formulario.jsp");
 		dispatcher.forward(request, response);
@@ -231,7 +231,7 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void mostrarMapaFoviritar(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarMapaFavoritar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaFovorito.jsp");
 		dispatcher.forward(request, response);
@@ -352,7 +352,7 @@ public class Servlet extends HttpServlet {
 		Ponto pontoUsavel = pontoDAO.verificarPonto(ponto);
 
 		if (pontoAvaliadoDAO.verificarPontoAvaliado(pontoUsavel) == null) {
-			pontoAvaliadoDAO.verificarPontoAvaliado(new PontoAvaliado(ponto));
+			pontoAvaliadoDAO.adicionarPontoAvaliado(new PontoAvaliado(ponto));
 		}
 		PontoAvaliado pontoAvaliado = pontoAvaliadoDAO.verificarPontoAvaliado(pontoUsavel);
 
@@ -375,7 +375,7 @@ public class Servlet extends HttpServlet {
 
 		List<PontoAvaliado> pontosAvaliados = pontoAvaliadoDAO.recuperarPontosAvaliados();
 		request.setAttribute("pontosAvaliados", pontosAvaliados);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mapa.jpa");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mapa.jsp");
 		dispatcher.forward(request, response);
 	}
 
