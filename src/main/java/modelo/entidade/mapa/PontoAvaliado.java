@@ -56,10 +56,8 @@ public class PontoAvaliado extends PontoAbstrato{
 
 		@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 		@OnDelete(action = OnDeleteAction.NO_ACTION)
-	        @MapsId
-	    @JoinColumn(name = "id_ponto",
-	    			referencedColumnName = "id_ponto",
-	    			nullable = false)
+	    @MapsId
+	    @JoinColumn(name = "id_ponto")
 		private Ponto ponto;		
 
 	public PontoAvaliado() {}

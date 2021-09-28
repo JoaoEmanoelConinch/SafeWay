@@ -23,7 +23,6 @@ import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Ponto")
 public class Ponto extends PontoAbstrato {
 
