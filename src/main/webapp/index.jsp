@@ -29,7 +29,7 @@
      </div>
      
      <div class="usar-rapido"> 
-      <a href="" id="usar-rapido" >Usar-Rápido<br>
+      <a href="mapa.jsp" id="usar-rapido" >Usar-Rápido<br>
      </div>
    
 
