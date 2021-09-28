@@ -17,7 +17,7 @@ public class UsuarioAnonimo extends Usuario {
 		super(id);
 	}
 
-	public UsuarioCadastrado cadastrar(UsuarioAnonimo usuarioanonimo, String nome, String senha, String email)
+	public UsuarioCadastrado cadastrar(UsuarioAnonimo usuarioAnonimo, String nome, String senha, String email)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
 
 		UsuarioCadastrado cadastrar = new UsuarioCadastrado(nome, email, senha);

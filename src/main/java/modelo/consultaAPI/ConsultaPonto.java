@@ -17,7 +17,7 @@ public class ConsultaPonto {
 	
 	public ConsultaPonto() {}
 
-	public static Ponto informatLocal(String local)
+	public static Ponto informarLocal(String local)
 			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 		
 		return informarLocal(local, 1);
@@ -57,7 +57,7 @@ public class ConsultaPonto {
 		return ponto;
 	}
 	
-	public static List<Ponto> informatLocais(String local){
+	public static List<Ponto> informarLocais(String local){
 		List<Ponto> pontos = new ArrayList<Ponto>();
 
 		String localParaURL = local.replaceAll(" ", "%20");

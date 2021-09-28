@@ -94,17 +94,17 @@ public class Ponto extends PontoAbstrato {
 	}
 	
 	
-	public static Ponto informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+	public static Ponto informarLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return ConsultaPonto.informarLocal(local);
 	}
 
-	public static Ponto informatLocal(String local, int posicao)
+	public static Ponto informarLocal(String local, int posicao)
 			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return ConsultaPonto.informarLocal(local, posicao);
 	}
 
-	public static List<Ponto> informatLocais(String local) {
-		return ConsultaPonto.informatLocais(local);
+	public static List<Ponto> informarLocais(String local) {
+		return ConsultaPonto.informarLocais(local);
 	}
 
 	
