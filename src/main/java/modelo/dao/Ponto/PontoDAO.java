@@ -2,14 +2,15 @@ package modelo.dao.Ponto;
 
 import java.util.List;
 
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAbstrato;
 
 public interface PontoDAO {
 
-	void inserirPonto(PontoAbstrato ponto);
+	void inserirPonto(Ponto ponto);
 	
-	void deletarPonto(PontoAbstrato ponto);
+	void deletarPonto(Ponto ponto);
 	
-	List<PontoAbstrato> recuperarPontos();
+	List<Ponto> recuperarPontos();
 	
 }

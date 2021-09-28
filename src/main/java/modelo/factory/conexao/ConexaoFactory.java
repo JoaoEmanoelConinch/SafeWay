@@ -13,6 +13,7 @@ public class ConexaoFactory {
 
 		configuracao.addAnnotatedClass(modelo.entidade.formulario.Formulario.class);
 		configuracao.addAnnotatedClass(modelo.entidade.mapa.PontoAbstrato.class);
+		configuracao.addAnnotatedClass(modelo.entidade.mapa.Ponto.class);
 		configuracao.addAnnotatedClass(modelo.entidade.mapa.PontoAvaliado.class);
 		configuracao.addAnnotatedClass(modelo.entidade.mapa.PontoFavorito.class);
 		configuracao.addAnnotatedClass(modelo.entidade.mapa.Trajeto.class);

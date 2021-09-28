@@ -8,7 +8,7 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
-import modelo.entidade.mapa.PontoAbstrato;
+import modelo.entidade.mapa.Ponto;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class PontoDAOImpl implements PontoDAO{
@@ -19,7 +19,7 @@ public class PontoDAOImpl implements PontoDAO{
 		fabrica = new ConexaoFactory();
 	}
 
-	public void inserirPonto(PontoAbstrato ponto) {
+	public void inserirPonto(Ponto ponto) {
 
 		Session sessao = null;
 
@@ -48,7 +48,7 @@ public class PontoDAOImpl implements PontoDAO{
 
 	}
 	
-	public void deletarPonto(PontoAbstrato ponto) {
+	public void deletarPonto(Ponto ponto) {
 		
 		Session sessao = null;
 		
@@ -77,10 +77,10 @@ public class PontoDAOImpl implements PontoDAO{
 		
 	}
 
-	public List<PontoAbstrato> recuperarPontos(){
+	public List<Ponto> recuperarPontos(){
 		
 		Session sessao = null;
-		List<PontoAbstrato> pontos = null;
+		List<Ponto> pontos = null;
 		
 		try {
 			
@@ -89,8 +89,8 @@ public class PontoDAOImpl implements PontoDAO{
 			
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 			
-			CriteriaQuery<PontoAbstrato> criteria = construtor.createQuery(PontoAbstrato.class);
-			Root<PontoAbstrato> raizPonto = criteria.from(PontoAbstrato.class);
+			CriteriaQuery<Ponto> criteria = construtor.createQuery(Ponto.class);
+			Root<Ponto> raizPonto = criteria.from(Ponto.class);
 			
 			criteria.select(raizPonto);
 			
