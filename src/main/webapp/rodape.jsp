@@ -7,10 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rodapé OSR</title>
-    <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/styles.css"/>
-    <style> 
-      <%@include file="/resources/css/styles.css"%> 
-    </style></head>
+<%--     <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/styles.css"/> --%>
+<!--     <style>  -->
+<%--       <%@include file="/resources/css/styles.css"%>  --%>
+<!--     </style> -->
+    </head>
 <body>
     <footer>
         <div class="links">

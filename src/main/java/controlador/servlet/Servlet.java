@@ -31,6 +31,7 @@ import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
+import modelo.entidade.usuario.Usuario;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
@@ -82,6 +83,12 @@ public class Servlet extends HttpServlet {
 			case "/novo-Usuario":
 				mostrarFormularioDeCadastroDeUsuario(request, response);
 				break;
+
+			case "/login":
+				mostrarFormularioDelogin(request, response);
+				break;
+
+			//logar submit...
 
 			case "/inserir-Usuario":
 				inserirUsuario(request, response);
@@ -135,16 +142,16 @@ public class Servlet extends HttpServlet {
 				deletarPontoFavorito(request, response);
 				break;
 
+			case "/mapa-trajeto":
+				MostrarMapaTrageto(request, response);
+				break;
+
 			case "/criar-trajeto":
 				inserirTrajeto(request, response);
 				break;
 
 			case "/deletar-trajeto":
 				deletarTrajeto(request, response);
-				break;
-
-			case "/mapa-trajeto":
-				MostrarMapaTrageto(request, response);
 				break;
 
 			default:
@@ -182,6 +189,12 @@ public class Servlet extends HttpServlet {
 	private void mostrarFormularioDeCadastroDeUsuario(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void mostrarFormularioDelogin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -243,8 +256,7 @@ public class Servlet extends HttpServlet {
 			pontoDAO.inserirPonto(ponto);
 		}
 
-		PontoFavorito pontoFavorito = new PontoFavorito(ponto, nomeFavorito, usuario);
-		usuario.addFavorito(pontoFavorito);
+		PontoFavorito pontoFavorito = usuario.favoritarENomear(ponto, nomeFavorito);
 		usuarioDAO.atualizarUsuario(usuario);
 
 		pontoFavDAO.inserirPontoFav(pontoFavorito);
@@ -292,11 +304,11 @@ public class Servlet extends HttpServlet {
 		Ponto partida = (Ponto) request.getAttribute("inicio");
 		Ponto chegada = (Ponto) request.getAttribute("chegada");
 		MeioDeTransporte meioDeTransporte = (MeioDeTransporte) request.getAttribute("meioDeTransporte");
-		Trajeto trajeto = new Trajeto();
-		trajeto.setInicio(partida);
-		trajeto.setChegada(chegada);
-		trajeto.setTransporteUsado(meioDeTransporte);
-		trajeto.criarLineString();
+
+		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+		Usuario usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
+		
+		Trajeto trajeto = usuario.trajeto(partida, chegada, meioDeTransporte);
 
 		for (int i = 0; i < trajeto.getPontos().size(); i++) {
 			Ponto ponto = trajeto.getPontos().get(i);
@@ -307,19 +319,11 @@ public class Servlet extends HttpServlet {
 			trajeto.getPontos().get(i).setId(pontoBD.getId());
 		}
 		trajetoDAO.inserirTrajeto(trajeto);
+		usuarioDAO.atualizarUsuario((UsuarioCadastrado)usuario);
 
 		request.setAttribute("points", trajeto.getPontos());
 
 		response.sendRedirect("mapa");
-	}
-
-	private void atualizarTrajeto(HttpServletRequest request, HttpServletResponse response)
-			throws JsonParseException, JsonMappingException, IOException {
-		long idTrajeto = Long.parseLong(request.getParameter("idTrajeto"));
-		Ponto partida = (Ponto) request.getAttribute("inicio");
-		Ponto chegada = (Ponto) request.getAttribute("chegada");
-		MeioDeTransporte meioDeTransporte = (MeioDeTransporte) request.getAttribute("meioDeTransporte");
-		trajetoDAO.atualizarTrajeto(new Trajeto(idTrajeto, partida, chegada, meioDeTransporte));
 	}
 
 	private void deletarTrajeto(HttpServletRequest request, HttpServletResponse response) {
@@ -329,7 +333,7 @@ public class Servlet extends HttpServlet {
 	}
 
 	private void inserirAvaliacao(HttpServletRequest request, HttpServletResponse response)
-			throws StatusInvalidoException {
+			throws NullPointerException, StatusInvalidoException {
 		boolean lesaoCorporal = Boolean.parseBoolean(request.getParameter("lesaoCorporal"));
 		boolean furto = Boolean.parseBoolean(request.getParameter("furto"));
 		boolean roubo = Boolean.parseBoolean(request.getParameter("roubo"));
@@ -352,12 +356,9 @@ public class Servlet extends HttpServlet {
 		}
 		PontoAvaliado pontoAvaliado = pontoAvaliadoDAO.verificarPontoAvaliado(pontoUsavel);
 
-		Formulario avaliacao = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueio,
-				pontoAvaliado, usuario);
-
+		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueio, comentario, pontoAvaliado, usuario);
+		
 		formularioDAO.inserirAvaliacao(avaliacao);
-
-		pontoAvaliado.addAvaliacao(avaliacao);
 
 		pontoAvaliadoDAO.atualizarPontoAvaliado(pontoAvaliado);
 

@@ -88,4 +88,16 @@ public abstract class Usuario {
 		return new Trajeto(DefinirPartida(inicio, posicaoInicio), DefinirDestino(chegada, posicaoChegada),DefinirTransporte(transporte));
 	}
 
+	public Trajeto trajeto(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws JsonParseException, JsonMappingException, IOException{
+
+		Trajeto trajeto = new Trajeto();
+		trajeto.setInicio(inicio);
+		trajeto.setChegada(chegada);
+		trajeto.setTransporteUsado(transporteUsado);
+		trajeto.criarLineString();
+
+		return trajeto;
+
+	}
+
 }

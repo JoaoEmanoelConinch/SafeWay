@@ -1,5 +1,6 @@
 package modelo.entidade.usuario;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +17,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
+import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
@@ -189,27 +194,46 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		return isEmailValid;
 	}
 
-	public void avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-			boolean bloqueioRuas, String comentario, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario)
-			throws NullPointerException, StatusInvalidoException, Throwable{
+	@Override
+	public Trajeto trajeto(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws JsonParseException, JsonMappingException, IOException {
 
-		Formulario formulario = new Formulario();
+		Trajeto trajeto = super.trajeto(inicio, chegada, transporteUsado);
 
-		if (idPontoAvaliado.getClass().equals("Ponto")) {
-			idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
+		this.addTrajeto(trajeto);
+		trajeto.addUsuarioCadastrado(this);
 
-			formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas,
-					idPontoAvaliado, idUsuario);
+		return trajeto;
 
-			((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);
-
-		}
 	}
 
-	public void favoritarENomear(Ponto ponto, String nomePonto)
+	public Formulario avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
+			boolean bloqueioRuas, String comentario, PontoAvaliado PontoAvaliado, UsuarioCadastrado idUsuario)
+			throws NullPointerException, StatusInvalidoException{
+
+		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas, PontoAvaliado, idUsuario);
+
+		this.addFormulario(formulario);
+		PontoAvaliado.addAvaliacao(formulario);
+
+		return formulario;
+
+		// if (idPontoAvaliado.getClass().equals("Ponto")) {
+		// 	idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
+
+		// 	formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas,
+		// 			idPontoAvaliado, idUsuario);
+
+		// 	((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);
+
+		// }
+	}
+
+	public PontoFavorito favoritarENomear(Ponto ponto, String nomePonto)
 			throws StatusInvalidoException{
 		PontoFavorito pontoFavorito = PontoFavorito.favoritarPontoENomear(ponto, nomePonto, this);
 		addFavorito(pontoFavorito);
+
+		return pontoFavorito;
 	}
 
 	public void desfavoritar(PontoFavorito pontoFavorito) {

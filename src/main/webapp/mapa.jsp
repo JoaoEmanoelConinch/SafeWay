@@ -9,7 +9,12 @@
     <script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAjpkAC9ePGem0lIq5XcMiuhR_wWLPFku8Ix9i2SXYRVK3e45q1BQUd_beF8dtzKET_EteAjPdGDwqpQ'></script> 
 <script src="https://openlayers.org/en/latest/examples/line-arrows.html"></script>
 
-  <script type="text/javascript">    
+
+<%--       <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/stylesMaps.css"/> --%>
+<!--     <style>  -->
+<%--       <%@include file="/resources/css/styles.css"%>  --%>
+<!--     </style> -->
+
 
 var map;
 var lineLayer;
