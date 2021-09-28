@@ -259,14 +259,14 @@ public class Servlet extends HttpServlet {
 		PontoFavorito pontoFavorito = usuario.favoritarENomear(ponto, nomeFavorito);
 		usuarioDAO.atualizarUsuario(usuario);
 
-		pontoFavDAO.inserirPontoFav(pontoFavorito);
+		pontoFavDAO.inserirPontoFavorito(pontoFavorito);
 		response.sendRedirect("mapa");
 	}
 
 	private void deletarPontoFavorito(HttpServletRequest request, HttpServletResponse response) {
 		long idFavorito = Long.parseLong(request.getParameter("idFavorito"));
-		PontoFavorito pontoFavorito = pontoFavDAO.recuperarPontoFavId(new PontoFavorito(idFavorito));
-		pontoFavDAO.deletarPontoFav(pontoFavorito);
+		PontoFavorito pontoFavorito = pontoFavDAO.recuperarPontoFavoritoId(new PontoFavorito(idFavorito));
+		pontoFavDAO.deletarPontoFavorito(pontoFavorito);
 	}
 
 	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -352,7 +352,7 @@ public class Servlet extends HttpServlet {
 		Ponto pontoUsavel = pontoDAO.verificarPonto(ponto);
 
 		if (pontoAvaliadoDAO.verificarPontoAvaliado(pontoUsavel) == null) {
-			pontoAvaliadoDAO.adicionarPontoAvaliado(new PontoAvaliado(ponto));
+			pontoAvaliadoDAO.inserirPontoAvaliado(new PontoAvaliado(ponto));
 		}
 		PontoAvaliado pontoAvaliado = pontoAvaliadoDAO.verificarPontoAvaliado(pontoUsavel);
 

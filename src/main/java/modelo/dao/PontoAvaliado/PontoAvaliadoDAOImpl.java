@@ -27,7 +27,7 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 	}
 
 	@Override
-	public void adicionarPontoAvaliado(PontoAvaliado pontoAvaliado) {
+	public void inserirPontoAvaliado(PontoAvaliado pontoAvaliado) {
 		Session sessao = null;
 
 		try {
@@ -158,10 +158,10 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 	}
 
 	@Override
-	public List<PontoAvaliado> recuperarPontoAvaliadoMediaIgual(PontoAvaliado ponto) {
+	public List<PontoAvaliado> recuperarPontoAvaliadoMediaIgual(PontoAvaliado pontoAvaliado) {
 
 		Session sessao = null;
-		List<PontoAvaliado> pontos = null;
+		List<PontoAvaliado> pontosAvaliados = null;
 
 		try {
 
@@ -175,11 +175,11 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 			List<Predicate> predicates = new ArrayList<Predicate>();
 			
-			predicates.add(construtor.equal(raizPonto.get(PontoAvaliado_.mediaDeAvaliacao), ponto.getMediaDeAvaliacao()));
+			predicates.add(construtor.equal(raizPonto.get(PontoAvaliado_.mediaDeAvaliacao), pontoAvaliado.getMediaDeAvaliacao()));
 			
 			criteria.select(raizPonto).where(predicates.toArray(new Predicate[] {}));
 
-			pontos = sessao.createQuery(criteria).getResultList();
+			pontosAvaliados = sessao.createQuery(criteria).getResultList();
 
 			sessao.getTransaction().commit();
 
@@ -198,15 +198,15 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 			}
 		}
 
-		return pontos;
+		return pontosAvaliados;
 
 	}
 
 	@Override
-	public PontoAvaliado recuperarPontoAvaId(PontoAvaliado ponto) {
+	public PontoAvaliado recuperarPontoAvaId(PontoAvaliado pontoAvaliado) {
 
 		Session sessao = null;
-		PontoAvaliado pontoAv = null;
+		PontoAvaliado pontoAvaliado1 = null;
 
 		try {
 
@@ -221,7 +221,7 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 			ParameterExpression<Long> idPontoAv = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(raizPontoAv.get(PontoAvaliado_.ID_PONTO), idPontoAv));
 
-			pontoAv = sessao.createQuery(criteria).setParameter(idPontoAv, ponto.getId()).getSingleResult();
+			pontoAvaliado1 = sessao.createQuery(criteria).setParameter(idPontoAv, pontoAvaliado.getId()).getSingleResult();
 
 			sessao.getTransaction().commit();
 
@@ -240,11 +240,11 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 			}
 		}
 
-		return pontoAv;
+		return pontoAvaliado1;
 
 	}
 
-	public PontoAvaliado verificarPontoAvaliado(Ponto p) {
+	public PontoAvaliado verificarPontoAvaliado(Ponto ponto) {
 
 		
 		Session sessao = null;
@@ -262,8 +262,8 @@ public class PontoAvaliadoDAOImpl implements PontoAvaliadoDAO {
 
 			List<Predicate> predicates = new ArrayList<Predicate>();
 
-			predicates.add(construtor.equal(raizPontoAvaliado.get(PontoAvaliado_.), p.getLatitude()));
-			predicates.add(construtor.equal(raizPontoAvaliado.get(PontoAvaliado_.LONGITUDE), p.getLongitude()));
+			predicates.add(construtor.equal(raizPontoAvaliado.get(PontoAvaliado_.), ponto.getLatitude()));
+			predicates.add(construtor.equal(raizPontoAvaliado.get(PontoAvaliado_.LONGITUDE), ponto.getLongitude()));
 
 			criteria.select(raizPontoAvaliado).where(predicates.toArray(new Predicate[] {}));
 
