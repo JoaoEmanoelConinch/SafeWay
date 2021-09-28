@@ -43,19 +43,6 @@ public abstract class PontoAbstrato implements Serializable {
 		setId(id);
 	}
 
-	public static PontoAbstrato informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException {
-		return ConsultaPonto.informatLocal(local);
-	}
-
-	public static PontoAbstrato informatLocal(String local, int posicao)
-			throws StatusInvalidoException, NumeroMenorQueZeroException {
-		return ConsultaPonto.informatLocal(local, posicao);
-	}
-
-	public static List<PontoAbstrato> informatLocais(String local) {
-		return ConsultaPonto.informatLocais(local);
-	}
-
 	public void setId(Long id) {
 
 		this.idPonto = id;

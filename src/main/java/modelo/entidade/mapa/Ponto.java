@@ -18,6 +18,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
+import controlador.consultaAPI.ConsultaPonto;
+import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
@@ -96,6 +98,22 @@ public class Ponto extends PontoAbstrato {
 	public void removeTrajeto(Trajeto trajeto) {
 		trajetos.remove(trajeto);
 	}
+	
+	
+	public static PontoAbstrato informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException {
+		return ConsultaPonto.informatLocal(local);
+	}
+
+	public static PontoAbstrato informatLocal(String local, int posicao)
+			throws StatusInvalidoException, NumeroMenorQueZeroException {
+		return ConsultaPonto.informatLocal(local, posicao);
+	}
+
+	public static List<PontoAbstrato> informatLocais(String local) {
+		return ConsultaPonto.informatLocais(local);
+	}
+
+	
 	
 	@Override
 	public boolean equals(Object objeto) {
