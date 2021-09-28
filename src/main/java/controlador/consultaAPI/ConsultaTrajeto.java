@@ -15,10 +15,10 @@ import modelo.enumeracao.mapa.MeioDeTransporte;
 
 public class ConsultaTrajeto {
 
-	public static List<PontoAbstrato> criarLineString(PontoAbstrato inicio, PontoAbstrato chegada, MeioDeTransporte transporte)
+	public static List<Ponto> criarLineString(Ponto inicio, Ponto chegada, MeioDeTransporte transporte)
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
 
-		List<PontoAbstrato> pontosDoTrajeto = new ArrayList<PontoAbstrato>();
+		List<Ponto> pontosDoTrajeto = new ArrayList<Ponto>();
 //
 //		Client client = ClientBuilder.newClient();
 //		Entity<String> payload = Entity.json("{\"coordinates\":[" + inicio.TransformarVetorEmString() + ","
@@ -41,7 +41,7 @@ public class ConsultaTrajeto {
 
 		for (int i = 0; i < pontosDaAPI.length();i++){
 
-			PontoAbstrato pontoDoTrajeto = new Ponto();
+			Ponto pontoDoTrajeto = new Ponto();
 
 			BigDecimal latitude = (BigDecimal) pontosDaAPI.getJSONArray(i).get(0);
 			BigDecimal longitude = (BigDecimal) pontosDaAPI.getJSONArray(i).get(1);

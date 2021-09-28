@@ -16,13 +16,13 @@ public class ConsultaPonto {
 	
 	public ConsultaPonto() {}
 
-	public static PontoAbstrato informatLocal(String local)
+	public static Ponto informatLocal(String local)
 			throws StatusInvalidoException, NumeroMenorQueZeroException{
 		
 		return informatLocal(local, 1);
 	}
 
-	public static PontoAbstrato informatLocal(String local, int posicao)
+	public static Ponto informatLocal(String local, int posicao)
 			throws StatusInvalidoException, NumeroMenorQueZeroException{
 
 		posicao --;
@@ -42,7 +42,7 @@ public class ConsultaPonto {
 		BigDecimal latitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(posicao).getJSONObject("geometry").getJSONArray("coordinates").get(0);
 		BigDecimal longitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(posicao).getJSONObject("geometry").getJSONArray("coordinates").get(1);
 
-		PontoAbstrato ponto = new Ponto();
+		Ponto ponto = new Ponto();
 
 		ponto.setLatitude(latitude.doubleValue());
 		ponto.setLongitude(longitude.doubleValue());
@@ -50,8 +50,8 @@ public class ConsultaPonto {
 		return ponto;
 	}
 	
-	public static List<PontoAbstrato> informatLocais(String local){
-		List<PontoAbstrato> pontos = new ArrayList<PontoAbstrato>();
+	public static List<Ponto> informatLocais(String local){
+		List<Ponto> pontos = new ArrayList<Ponto>();
 
 		String localParaURL = local.replaceAll(" ", "%20");
 		
@@ -64,7 +64,7 @@ public class ConsultaPonto {
 		JSONArray tamanho = jsonObject.getJSONArray("features");
 
 		for (int i = 0; i < tamanho.length(); i++){
-			PontoAbstrato ponto = new Ponto();
+			Ponto ponto = new Ponto();
 
 			BigDecimal latitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates").get(0);
 			BigDecimal longitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(i).getJSONObject("geometry").getJSONArray("coordinates").get(1);

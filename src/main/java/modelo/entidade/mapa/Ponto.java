@@ -100,16 +100,16 @@ public class Ponto extends PontoAbstrato {
 	}
 	
 	
-	public static PontoAbstrato informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException {
+	public static Ponto informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException {
 		return ConsultaPonto.informatLocal(local);
 	}
 
-	public static PontoAbstrato informatLocal(String local, int posicao)
+	public static Ponto informatLocal(String local, int posicao)
 			throws StatusInvalidoException, NumeroMenorQueZeroException {
 		return ConsultaPonto.informatLocal(local, posicao);
 	}
 
-	public static List<PontoAbstrato> informatLocais(String local) {
+	public static List<Ponto> informatLocais(String local) {
 		return ConsultaPonto.informatLocais(local);
 	}
 
