@@ -28,7 +28,6 @@ import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "Ponto")
 public abstract class PontoAbstrato implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -38,30 +37,10 @@ public abstract class PontoAbstrato implements Serializable {
 	@Column(name = "id_ponto", nullable = false, unique = true)
 	private long idPonto;
 
-	@Column(name = "latitude", nullable = false)
-	@Type(type = "double")
-	private double latitude;
-
-	@Column(name = "longitude", nullable = false)
-	@Type(type = "double")
-	private double longitude;
-
 	public PontoAbstrato() {}
 	
 	public PontoAbstrato(long id) {
 		setId(id);
-	}
-
-	public PontoAbstrato(long idPonto, double latitude, double longitude, List<Trajeto> trajetos) {
-		this.setId(idPonto);
-		this.setLatitude(latitude);
-		this.setLongitude(longitude);
-		
-	}
-
-	public PontoAbstrato(double latitude, double longitude) throws StatusInvalidoException {
-		this.setLatitude(latitude);
-		this.setLongitude(longitude);
 	}
 
 	public static PontoAbstrato informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException {
@@ -86,26 +65,6 @@ public abstract class PontoAbstrato implements Serializable {
 		return idPonto;
 	}
 
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-
-	public double getLatitude() {
-		return this.latitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
-		;
-	}
-
-	public double getLongitude() {
-		return this.longitude;
-
-	}
-
-	
-
 	public ArrayList<Double> transformarPontoEmVetor() {
 		ArrayList<Double> pontoVetro = new ArrayList<Double>(2);
 		pontoVetro.add(this.getLongitude());
@@ -117,27 +76,7 @@ public abstract class PontoAbstrato implements Serializable {
 		return transformarPontoEmVetor().toString();
 	}
 
-	@Override
-	public boolean equals(Object objeto) {
-		
-		if (this == objeto)
-			return true;
-
-		if (objeto == null)
-			return false;
-
-		if (getClass() != objeto.getClass())
-			return false;
-		
-		PontoAbstrato ponto = (PontoAbstrato) objeto;
-		
-		if (!(this.getLatitude() == ponto.getLatitude())||!(this.getLongitude() == ponto.getLongitude())) {
-			return false;
-		}
-		
-		return true;
-		
-	}
+	
 
 	
 }

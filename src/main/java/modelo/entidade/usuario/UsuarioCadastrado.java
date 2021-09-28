@@ -17,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import modelo.entidade.formulario.Formulario;
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
@@ -192,7 +193,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		}
 	}
 
-	public void favoritarENomear(PontoAbstrato ponto, String nomePonto)
+	public void favoritarENomear(Ponto ponto, String nomePonto)
 			throws StatusInvalidoException{
 		PontoFavorito pontoFavorito = PontoFavorito.favoritarPontoENomear(ponto, nomePonto, this);
 		addFavorito(pontoFavorito);
