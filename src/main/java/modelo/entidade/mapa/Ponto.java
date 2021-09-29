@@ -27,7 +27,7 @@ import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
-@Table(name = "Ponto")
+@Table(name = "ponto")
 public class Ponto {
 
 	private static final long serialVersionUID = 1L;
@@ -50,7 +50,7 @@ public class Ponto {
 	@Fetch(FetchMode.JOIN)
 	private List<Trajeto> trajetos;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Ponto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idPonto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Formulario> avaliacoes;
 	
 	public Ponto(long idPonto, double latitude, double longitude, List<Trajeto> trajetos, List<Formulario> avaliacoes) {
