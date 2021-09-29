@@ -18,8 +18,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import modelo.entidade.mapa.Ponto;
-import modelo.entidade.mapa.PontoAbstrato;
-import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.usuario.UsuarioCadastrado;
 
 @Entity
