@@ -59,11 +59,11 @@ public class Formulario implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JoinColumn(name = "id_ponto_avaliado",
+	@JoinColumn(name = "id_ponto",
 				referencedColumnName = "id_ponto",
 				nullable = false
 			)
-	private Ponto idPontoAvaliado;
+	private Ponto idPonto;
 	
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -236,12 +236,8 @@ public class Formulario implements Serializable {
 		this.media = media;
 	}
 
-	public PontoAbstrato getIdPontoAvaliado() {
-		return idPontoAvaliado;
-	}
-
 	public void setIdPontoAvaliado(Ponto idPontoAvaliado) {
-		this.idPontoAvaliado = idPontoAvaliado;
+		this.idPonto = idPontoAvaliado;
 	}
 
 	public UsuarioCadastrado getIdUsuario() {
