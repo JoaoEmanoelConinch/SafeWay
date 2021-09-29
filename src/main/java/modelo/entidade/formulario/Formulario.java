@@ -56,7 +56,7 @@ public class Formulario implements Serializable {
 	private String comentario;
 
 	@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
 	@JoinColumn(name = "id_ponto",
 				referencedColumnName = "id_ponto",
 				nullable = false
