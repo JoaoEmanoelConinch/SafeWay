@@ -101,15 +101,15 @@ div.absolute {
       </div>
       <div class="half-box">
         <select id="MeioDeTransporte" name="meio-transporte">
-          <option value="driving-car">Carro/Moto</option>
-							<option value="driving-hgv">Veiculo pesado</option>
-							<option value="cycling-regular">Ciclismo regular</option>
-							<option value="cycling-road">Ciclovia</option>
-							<option value="cycling-mountain">Mountainbike</option>
-							<option value="cycling-electric">Bicicleta Eletrica</option>
-							<option value="foot-walking">Andando a pé</option>
-							<option value="foot-hiking">trilha</option>
-							<option value="wheelchair">Cadeira de rodas</option>
+                            <option value=0>Carro/Moto</option>
+							<option value=1>Veiculo pesado</option>
+							<option value=2>Ciclismo regular</option>
+							<option value=3>Ciclovia</option>
+							<option value=4>Mountainbike</option>
+							<option value=5>Bicicleta Eletrica</option>
+							<option value=6>Andando a pé</option>
+							<option value=7>trilha</option>
+							<option value=8>Cadeira de rodas</option>
           
         </select>
       </div>

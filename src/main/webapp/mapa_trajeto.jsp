@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
       <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
     <head>
@@ -9,12 +7,7 @@
     <script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAjpkAC9ePGem0lIq5XcMiuhR_wWLPFku8Ix9i2SXYRVK3e45q1BQUd_beF8dtzKET_EteAjPdGDwqpQ'></script> 
 <script src="https://openlayers.org/en/latest/examples/line-arrows.html"></script>
 
-
-<%--       <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/stylesMaps.css"/> --%>
-<!--     <style>  -->
-<%--       <%@include file="/resources/css/styles.css"%>  --%>
-<!--     </style> -->
-
+  <script type="text/javascript">    
 
 var map;
 var lineLayer;
@@ -35,19 +28,20 @@ function test(){
 
 var p = points.get[i]
 
-points[i] = new OpenLayers.LonLat(p.getLongitude, p.getLatitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-points[i] = new OpenLayers.Geometry.Point(p[i].lon,p[i].lat);
-     
+points[i] = new OpenLayers.LonLat(points.getLongitude, points.getLatitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+points[i] = new OpenLayers.Geometry.Point(points[i].lon,points[i].lat);
+
+      }
+    }
 var linear_String = new OpenLayers.Geometry.LineString(points);
       lineFeature = new OpenLayers.Feature.Vector(
-         new OpenLayers.Geometry.MultiLineString([linear_String]), null, style, );
+         new OpenLayers.Geometry.MultiLineString([linear_String]), null, style );
          lineLayer.addFeatures([lineFeature]);
 
       map.addLayer(lineLayer);
 
  
-      }
-}
+     
      
    
 
