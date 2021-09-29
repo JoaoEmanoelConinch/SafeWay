@@ -12,9 +12,9 @@ import modelo.dao.formulario.FormularioDAOImpl;
 import modelo.dao.ponto.PontoDAOImpl;
 import modelo.dao.trajeto.TrajetoDAOImpl;
 import modelo.dao.usuario.UsuarioDAOImpl;
+import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
 
-import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.PontoAvaliado;
 
 import modelo.entidade.mapa.PontoFavorito;
@@ -29,14 +29,12 @@ public class Principal {
 
 	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException, JsonParseException, JsonMappingException, IOException{
 		
-		PontoDAOImpl pontoDao                 = new PontoDAOImpl();
+		PontoDAOImpl pontoDao = new PontoDAOImpl();
 		UsuarioDAOImpl usuarioDao = new UsuarioDAOImpl();
 		TrajetoDAOImpl trajetoDao = new TrajetoDAOImpl();
 		PontoFavDAOImpl pontoFavDao = new PontoFavDAOImpl();
 		FormularioDAOImpl formularioDao = new FormularioDAOImpl();
 		PontoAvaliadoDAOImpl pontoAvaliadoDao = new PontoAvaliadoDAOImpl();
-		
-
 		
 		Ponto p1 = new Ponto(-26.456, 12.212);
 		
@@ -59,23 +57,17 @@ public class Principal {
 		PontoFavorito pontoFav2 = new PontoFavorito(p2, "asddsadasd" , usuario2);
 	
 		pontoFavDao.inserirPontoFav(pontoFav2);
-	
-		
 
 		List<PontoFavorito> pontos = pontoFavDao.recuperarPontoFavoritoUsuario(new UsuarioCadastrado(4));
 		
-
-		
 		Formulario form2 = new Formulario(false, true, false, false, false, "furtaram minha bolsa :(", false, p1, usuario2);
-		formDao.inserirAvaliacao(form2);
-		
-		
+		formularioDao.inserirAvaliacao(form2);
 		
     	PontoAvaliado pontoAv = new PontoAvaliado(p2);
 		
-		pontoAvDao.adicionarPontoAvaliado(pontoAv);
+		pontoAvaliadoDao.adicionarPontoAvaliado(pontoAv);
 		
-		System.out.println(formDao.recuperarAvaliacoes(pontoAv));
+		System.out.println(formularioDao.recuperarAvaliacoes(pontoAv));
 		
 		
 //      	Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.FOOT_WALKING);

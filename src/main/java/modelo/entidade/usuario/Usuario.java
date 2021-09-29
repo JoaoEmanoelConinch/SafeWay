@@ -15,7 +15,6 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
 import modelo.entidade.mapa.Ponto;
-import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.Trajeto;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
