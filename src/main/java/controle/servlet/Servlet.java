@@ -16,8 +16,8 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 import modelo.dao.PontoAvaliado.PontoAvaliadoDAO;
 import modelo.dao.PontoAvaliado.PontoAvaliadoDAOImpl;
-import modelo.dao.PontoFavorito.PontoFavoritoDAO;
 import modelo.dao.PontoFavorito.PontoFavDAOImpl;
+import modelo.dao.PontoFavorito.PontoFavoritoDAO;
 import modelo.dao.formulario.FormularioDAO;
 import modelo.dao.formulario.FormularioDAOImpl;
 import modelo.dao.ponto.PontoDAO;
@@ -34,6 +34,7 @@ import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.usuario.Usuario;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
+import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
@@ -146,8 +147,12 @@ public class Servlet extends HttpServlet {
 				MostrarMapaTrajeto(request, response);
 				break;
 
-			case "/criar-trajeto":
-				inserirTrajeto(request, response);
+			case "/criar-trajeto-pontos":
+				inserirTrajetoComPontos(request, response);
+				break;
+				
+			case "/criar-trajeto-Locais":
+				inserirTrajetoComLocais(request, response);
 				break;
 
 			case "/deletar-trajeto":
@@ -298,7 +303,7 @@ public class Servlet extends HttpServlet {
 		response.sendRedirect("inicio");
 	}
 
-	private void inserirTrajeto(HttpServletRequest request, HttpServletResponse response)
+	private void inserirTrajetoComPontos(HttpServletRequest request, HttpServletResponse response)
 			throws StatusInvalidoException, NumeroMenorQueZeroException, JsonParseException, JsonMappingException,
 			IOException {
 		Ponto partida = (Ponto) request.getAttribute("inicio");
@@ -325,7 +330,20 @@ public class Servlet extends HttpServlet {
 
 		response.sendRedirect("mapa");
 	}
-
+	
+	private void inserirTrajetoComLocais(HttpServletRequest request, HttpServletResponse response) 
+			throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+		
+		String partida = request.getParameter("inicio");
+		String chegada = request.getParameter("chegada");
+		int meioDeTransporte = Integer.parseInt(request.getParameter("MeioDeTransporte"));
+		
+		MeioDeTransporte meio = MeioDeTransporte.values()[meioDeTransporte];
+		
+		Trajeto trajeto = new Trajeto(partida, chegada, meio);
+		
+	}
+	
 	private void deletarTrajeto(HttpServletRequest request, HttpServletResponse response) {
 		long idTrajeto = Long.parseLong(request.getParameter("idTrajeto"));
 		Trajeto trajeto = trajetoDAO.recuperarTrajeto(new Trajeto(idTrajeto));
