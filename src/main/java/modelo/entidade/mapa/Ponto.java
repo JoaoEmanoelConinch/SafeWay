@@ -139,5 +139,13 @@ public class Ponto extends PontoAbstrato {
 	public void removeTrajeto(Trajeto trajeto) {
 		trajetos.remove(trajeto);
 	}
-
+	
+	public List<Double> criarVetor(){
+		List<Double> pontoVetor = new ArrayList<Double>(2);
+		
+		pontoVetor.add(this.getLongitude());
+		pontoVetor.add(this.getLatitude());
+		
+		return pontoVetor;
+	}
 }
