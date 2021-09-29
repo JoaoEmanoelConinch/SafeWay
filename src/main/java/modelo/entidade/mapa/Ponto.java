@@ -7,11 +7,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
@@ -19,16 +21,22 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import modelo.consultaAPI.ConsultaPonto;
+import modelo.entidade.formulario.Formulario;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
 @Table(name = "Ponto")
-public class Ponto extends PontoAbstrato {
+public class Ponto {
 
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_ponto", nullable = false, unique = true)
+	private long id_ponto;
+	 
 	@Column(name = "latitude", nullable = false)
 	@Type(type = "double")
 	private double latitude;
@@ -42,15 +50,20 @@ public class Ponto extends PontoAbstrato {
 	@Fetch(FetchMode.JOIN)
 	private List<Trajeto> trajetos;
 	
-	public Ponto(long idPonto, double latitude, double longitude, List<Trajeto> trajetos) {
-		super(idPonto);
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Ponto", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Formulario> avaliacoes;
+	
+	public Ponto(long idPonto, double latitude, double longitude, List<Trajeto> trajetos, List<Formulario> avaliacoes) {
+		this.setIdPonto(idPonto);
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(trajetos);
+		this.setAvaliacoes(avaliacoes);
+		
 	}
 	
 	public Ponto(double latitude, double longitude) throws StatusInvalidoException {
-		super();
+		
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(new ArrayList<Trajeto>());
@@ -58,13 +71,18 @@ public class Ponto extends PontoAbstrato {
 
 	
 	public Ponto(long id) {
-		super(id);
+		setIdPonto(id);
 	}
 	
-	public Ponto(){
-		super();
-	}
+	public Ponto(){}
 
+	public long getIdPonto() {
+		return id_ponto;
+	}
+	
+	public void setIdPonto(long idPonto) {
+		this.id_ponto = idPonto;
+	}
 	
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
@@ -93,6 +111,13 @@ public class Ponto extends PontoAbstrato {
 
 	}
 	
+	public List<Formulario> getAvaliacoes(){
+		return avaliacoes;
+	}
+	
+	public void setAvaliacoes(List<Formulario> avaliacoes) {
+		this.avaliacoes = avaliacoes;
+	}
 	
 	public static Ponto informarLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return ConsultaPonto.informarLocal(local);
@@ -139,5 +164,13 @@ public class Ponto extends PontoAbstrato {
 	public void removeTrajeto(Trajeto trajeto) {
 		trajetos.remove(trajeto);
 	}
+	
+	public void addAvaliacao(Formulario form) {
+		avaliacoes.add(form);
+	}
 
+	public void removeAvaliacao(Formulario form) {
+		avaliacoes.remove(form);
+	}
+	
 }

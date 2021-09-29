@@ -152,9 +152,9 @@ public class PontoDAOImpl implements PontoDAO {
 
 	}
 
-	public Ponto recuperarPonto(Ponto p) {
+	public Ponto recuperarPonto(Ponto ponto) {
 		Session sessao = null;
-		Ponto ponto = null;
+		Ponto ponto1 = null;
 
 		try {
 
@@ -169,7 +169,7 @@ public class PontoDAOImpl implements PontoDAO {
 			ParameterExpression<Long> idPonto = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(raizPonto.get(Ponto_.ID_PONTO), idPonto));
 
-			ponto = sessao.createQuery(criteria).setParameter(idPonto, p.getId()).getSingleResult();
+			ponto1 = sessao.createQuery(criteria).setParameter(idPonto, ponto.getIdPonto()).getSingleResult();
 
 			sessao.getTransaction().commit();
 
@@ -188,15 +188,15 @@ public class PontoDAOImpl implements PontoDAO {
 			}
 		}
 
-		return ponto;
+		return ponto1;
 	}
 
 	@Override
-	public Ponto verificarPonto(Ponto p) {
+	public Ponto verificarPonto(Ponto ponto) {
 
-		this.p = p;
+		this.p = ponto;
 		Session sessao = null;
-		Ponto ponto = null;
+		Ponto ponto1 = null;
 
 		try {
 
@@ -210,12 +210,12 @@ public class PontoDAOImpl implements PontoDAO {
 
 			List<Predicate> predicates = new ArrayList<Predicate>();
 
-			predicates.add(construtor.equal(raizPonto.get(Ponto_.LATITUDE), p.getLatitude()));
-			predicates.add(construtor.equal(raizPonto.get(Ponto_.LONGITUDE), p.getLongitude()));
+			predicates.add(construtor.equal(raizPonto.get(Ponto_.LATITUDE), ponto.getLatitude()));
+			predicates.add(construtor.equal(raizPonto.get(Ponto_.LONGITUDE), ponto.getLongitude()));
 
 			criteria.select(raizPonto).where(predicates.toArray(new Predicate[] {}));
 
-			ponto = sessao.createQuery(criteria).getSingleResult();
+			ponto1 = sessao.createQuery(criteria).getSingleResult();
 
 			sessao.getTransaction().commit();
 
@@ -234,7 +234,7 @@ public class PontoDAOImpl implements PontoDAO {
 			}
 		}
 
-		return ponto;
+		return ponto1;
 
 	}
 
