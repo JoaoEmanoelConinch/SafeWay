@@ -134,7 +134,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 			ParameterExpression<Long> IdPonto = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(juncaoPonto.get(Ponto_.ID_PONTO), IdPonto));
 
-			forms = sessao.createQuery(criteria).setParameter(IdPonto, ponto.getId()).getResultList();
+			forms = sessao.createQuery(criteria).setParameter(IdPonto, ponto.getIdPonto()).getResultList();
 
 			sessao.getTransaction().commit();
 
