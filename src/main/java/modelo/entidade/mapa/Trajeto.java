@@ -47,12 +47,12 @@ public class Trajeto implements Serializable {
 
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(
         name = "id_partida_trajeto",
         referencedColumnName = "id_ponto",
         nullable = false)
-	private PontoAbstrato inicio;
+	private Ponto inicio;
 
 	
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL })
@@ -63,7 +63,7 @@ public class Trajeto implements Serializable {
 	private List<Ponto> pontos;
 
 	@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
-	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(
         name = "id_chegada_trajeto",
         referencedColumnName = "id_ponto",
@@ -239,7 +239,7 @@ public class Trajeto implements Serializable {
 		pontos.add(ponto);
 	}
 
-	public void removePonto (PontoAbstrato ponto){
+	public void removePonto (Ponto ponto){
 		pontos.remove(ponto);
 	}
 

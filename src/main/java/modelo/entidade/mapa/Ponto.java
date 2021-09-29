@@ -103,8 +103,8 @@ public class Ponto extends PontoAbstrato {
 		return ConsultaPonto.informarLocal(local, posicao);
 	}
 
-	public static List<Ponto> informatLocais(String local) {
-		return ConsultaPonto.informatLocais(local);
+	public static List<Ponto> informarLocais(String local) {
+		return ConsultaPonto.informarLocais(local);
 	}
 
 	

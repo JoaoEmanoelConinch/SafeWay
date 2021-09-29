@@ -7,7 +7,7 @@ import modelo.entidade.mapa.PontoAvaliado;
 
 public interface PontoAvaliadoDAO {
 	
-	void adicionarPontoAvaliado(PontoAvaliado pontoAvaliado);
+	void inserirPontoAvaliado(PontoAvaliado pontoAvaliado);
 	
 	void deletarPontoAvaliado(PontoAvaliado pontoAvaliado);
 	
@@ -15,9 +15,9 @@ public interface PontoAvaliadoDAO {
 	
 	List<PontoAvaliado> recuperarPontosAvaliados();
 	
-	List<PontoAvaliado> recuperarPontoAvaliadoMediaIgual(PontoAvaliado ponto);
+	List<PontoAvaliado> recuperarPontoAvaliadoMediaIgual(PontoAvaliado pontoAvaliado);
 	
-	PontoAvaliado recuperarPontoAvaId(PontoAvaliado ponto);
+	PontoAvaliado recuperarPontoAvaId(PontoAvaliado pontoAvaliado);
 	
 	PontoAvaliado verificarPontoAvaliado(Ponto ponto);
 

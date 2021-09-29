@@ -22,7 +22,6 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
-import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
@@ -242,7 +241,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		favoritos.remove(pontoFavorito);
 	}
 
-	public void removeFavorito(PontoFavorito pontoFavorito) {
+	public void removerFavorito(PontoFavorito pontoFavorito) {
 		favoritos.remove(pontoFavorito);
 	}
 
@@ -254,7 +253,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		formulariosDoUsuario.add(formulario);
 	}
 
-	public void remuveFormulario(Formulario formulario) {
+	public void removerFormulario(Formulario formulario) {
 
 		formulariosDoUsuario.remove(formulario);
 	}
@@ -263,7 +262,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		trajetos.add(trajeto);
 	}
 
-	public void RemuveTrajeto(Trajeto trajeto) {
+	public void removerTrajeto(Trajeto trajeto) {
 		trajetos.remove(trajeto);
 	}
 }

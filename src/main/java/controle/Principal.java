@@ -73,7 +73,7 @@ public class Principal {
 		
     	PontoAvaliado pontoAv = new PontoAvaliado(p2);
 		
-		pontoAvDao.adicionarPontoAvaliado(pontoAv);
+		pontoAvDao.inserirPontoAvaliado(pontoAv);
 		
 		System.out.println(formDao.recuperarAvaliacoes(pontoAv));
 		

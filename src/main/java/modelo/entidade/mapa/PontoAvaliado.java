@@ -54,7 +54,7 @@ public class PontoAvaliado extends PontoAbstrato{
 		@Column(name = "media_Avaliacao_Ponto_Avaliado", nullable = false)
 		private double mediaDeAvaliacao;
 
-		@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+		@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 		@OnDelete(action = OnDeleteAction.NO_ACTION)
 	    @MapsId
 	    @JoinColumn(name = "id_ponto")
@@ -250,7 +250,7 @@ public class PontoAvaliado extends PontoAbstrato{
 		return media/avaliacoesList.size();
 	}
 
-	public static PontoAvaliado CriarPonto(Ponto ponto, Formulario avaliacao)
+	public static PontoAvaliado criarPonto(Ponto ponto, Formulario avaliacao)
 			throws NullPointerException, StatusInvalidoException{
 
 		PontoAvaliado pontoAvaliado = new PontoAvaliado(ponto, avaliacao);
