@@ -17,7 +17,7 @@ public class ConsultaPonto {
 	
 	public ConsultaPonto() {}
 
-	public static Ponto informatLocal(String local)
+	public static Ponto informarLocal(String local)
 			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 		
 		return informarLocal(local, 1);

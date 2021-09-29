@@ -7,8 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -90,11 +88,9 @@ public class Ponto extends PontoAbstrato {
 
 	public List<Trajeto> getTrajetos() {
 		return trajetos;
-
 	}
 	
-	
-	public static Ponto informatLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+	public static Ponto informarLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return ConsultaPonto.informarLocal(local);
 	}
 
@@ -106,8 +102,6 @@ public class Ponto extends PontoAbstrato {
 	public static List<Ponto> informatLocais(String local) {
 		return ConsultaPonto.informatLocais(local);
 	}
-
-	
 	
 	@Override
 	public boolean equals(Object objeto) {

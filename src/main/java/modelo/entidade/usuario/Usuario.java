@@ -50,7 +50,7 @@ public abstract class Usuario {
 	} 
 
 	public Ponto DefinirLocal (String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
-		return Ponto.informatLocal(local);
+		return Ponto.informarLocal(local);
 	}
 
 	public Ponto DefinirLocal (String local, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{

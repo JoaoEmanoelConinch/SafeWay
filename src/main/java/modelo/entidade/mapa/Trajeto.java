@@ -52,7 +52,7 @@ public class Trajeto implements Serializable {
         name = "id_partida_trajeto",
         referencedColumnName = "id_ponto",
         nullable = false)
-	private PontoAbstrato inicio;
+	private Ponto inicio;
 
 	
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL })
@@ -112,8 +112,8 @@ public class Trajeto implements Serializable {
 
 	public Trajeto(String inicio, String chegada, MeioDeTransporte transporteUsado)
 			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		this.setInicio(Ponto.informatLocal(inicio));
-		this.setChegada(Ponto.informatLocal(chegada));
+		this.setInicio(Ponto.informarLocal(inicio));
+		this.setChegada(Ponto.informarLocal(chegada));
 		this.setTransporteUsado(transporteUsado);
 		this.setPontos(criarLineString());
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
@@ -150,7 +150,7 @@ public class Trajeto implements Serializable {
 	}
 
 	public void setInicio(String inicio) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
-		this.inicio = Ponto.informatLocal(inicio);
+		this.inicio = Ponto.informarLocal(inicio);
 	}
 
 	public void setInicio(Ponto inicio) {

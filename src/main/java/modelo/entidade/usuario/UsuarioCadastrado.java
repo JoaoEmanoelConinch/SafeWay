@@ -22,7 +22,6 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
-import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
