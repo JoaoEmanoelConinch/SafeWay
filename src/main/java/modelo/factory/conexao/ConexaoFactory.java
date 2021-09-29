@@ -12,14 +12,10 @@ public class ConexaoFactory {
 		Configuration configuracao = new Configuration();
 
 		configuracao.addAnnotatedClass(modelo.entidade.formulario.Formulario.class);
-		configuracao.addAnnotatedClass(modelo.entidade.mapa.PontoAbstrato.class);
 		configuracao.addAnnotatedClass(modelo.entidade.mapa.Ponto.class);
-		configuracao.addAnnotatedClass(modelo.entidade.mapa.PontoAvaliado.class);
-		configuracao.addAnnotatedClass(modelo.entidade.mapa.PontoFavorito.class);
 		configuracao.addAnnotatedClass(modelo.entidade.mapa.Trajeto.class);
 		configuracao.addAnnotatedClass(modelo.entidade.usuario.UsuarioCadastrado.class);
-		configuracao.addAnnotatedClass(modelo.entidade.usuario.Usuario.class);
-		configuracao.addAnnotatedClass(modelo.entidade.usuario.UsuarioAnonimo.class);
+
 
 		configuracao.configure("hibernate.cfg.xml");
 
