@@ -1,7 +1,5 @@
 package modelo.dao.trajeto;
 
-import java.util.List;
-
 import modelo.entidade.mapa.Trajeto;
 
 public interface TrajetoDAO {
