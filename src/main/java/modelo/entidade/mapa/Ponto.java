@@ -188,3 +188,4 @@ public class Ponto {
 		return ConsultaPonto.informarLatLong(this);
 	
 }
+}
