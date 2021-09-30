@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -165,6 +166,7 @@ public class Ponto {
 		trajetos.remove(trajeto);
 	}
 	
+	
 	public void addAvaliacao(Formulario form) {
 		avaliacoes.add(form);
 	}
@@ -172,5 +174,17 @@ public class Ponto {
 	public void removeAvaliacao(Formulario form) {
 		avaliacoes.remove(form);
 	}
+  
+  public List<Double> criarVetor(){
+		List<Double> pontoVetor = new ArrayList<Double>(2);
+		
+		pontoVetor.add(this.getLongitude());
+		pontoVetor.add(this.getLatitude());
+		
+		return pontoVetor;
+	}
+
+	public String informarLatLong() {
+		return ConsultaPonto.informarLatLong(this);
 	
 }

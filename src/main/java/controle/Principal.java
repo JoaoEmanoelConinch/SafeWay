@@ -12,11 +12,9 @@ import modelo.dao.formulario.FormularioDAOImpl;
 import modelo.dao.ponto.PontoDAOImpl;
 import modelo.dao.trajeto.TrajetoDAOImpl;
 import modelo.dao.usuario.UsuarioDAOImpl;
+import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
-
-import modelo.entidade.mapa.PontoAbstrato;
 import modelo.entidade.mapa.PontoAvaliado;
-
 import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -73,7 +71,7 @@ public class Principal {
 		
     	PontoAvaliado pontoAv = new PontoAvaliado(p2);
 		
-		pontoAvDao.inserirPontoAvaliado(pontoAv);
+		pontoAvDao.adicionarPontoAvaliado(pontoAv);
 		
 		System.out.println(formDao.recuperarAvaliacoes(pontoAv));
 		
