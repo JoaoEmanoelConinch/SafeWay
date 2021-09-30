@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.JsonArray;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -86,14 +88,20 @@ public class ConsultaPonto {
 		return pontos;
 	}
 
-	public static String imformarLatLong(Ponto ponto) {
+	public static String informarLatLong(Ponto ponto) {
+
+		JSONpontoDAO JSONpontoDAO = new JSONpontoDAOImpl();
 	
 		JSONObject jsonObject = JSONpontoDAO.readJsonFromUrl(
 			"https://api.openrouteservice.org/geocode/reverse?api_key=5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110&"+
-			"point.lon="+ponto.getLongitude().toString()+
-			"&point.lat="+ponto.getLatitude().toString()+
+			"point.lon="+ponto.getLongitude()+"&point.lat="+ponto.getLatitude()+
 			"&size=1&layers=street,neighbourhood,venue");
-	
+
+		JSONObject LocalData = jsonObject.getJSONArray("features").getJSONObject(0).getJSONObject("properties");
+		
+		String label = (String) LocalData.get("label");
+
+		return label;
 	}
 	
 }
