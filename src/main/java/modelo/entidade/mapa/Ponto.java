@@ -53,6 +53,24 @@ public class Ponto {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idPonto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Formulario> avaliacoes;
+
+	@Column(name = "quantidade_lesoes_corporais_ponto_avaliado", nullable = false)
+	private long quantidadeLesoesCorporais;
+	
+	@Column(name = "quantidade_furtos_ponto_avaliado", nullable = false)
+	private long quantidadeFurtos;
+
+	@Column(name = "quantidade_roubos_ponto_avaliado", nullable = false)
+	private long quantidadeRoubos;
+
+	@Column(name = "quantidade_homicidios_ponto_avaliado", nullable = false)
+	private long quantidadeHomicidios;
+
+	@Column(name = "quantidade_latrocinio_ponto_avaliado", nullable = false)
+	private long quantidadeLatrocinio;
+
+	@Column(name = "nivel_Bloqueio_Ponto_Avaliado", nullable = false)
+	private boolean bloqueio;
 	
 	public Ponto(long idPonto, double latitude, double longitude, List<Trajeto> trajetos, List<Formulario> avaliacoes) {
 		this.setIdPonto(idPonto);
@@ -120,6 +138,46 @@ public class Ponto {
 		this.avaliacoes = avaliacoes;
 	}
 	
+	public long getQuantidadeLatrocinio() {
+		return quantidadeLatrocinio;
+	}
+
+	public void setQuantidadeLatrocinio(long quantidadeLatrocinio) {
+		this.quantidadeLatrocinio = quantidadeLatrocinio;
+	}
+
+	public long getQuantidadeHomicidios() {
+		return quantidadeHomicidios;
+	}
+
+	public void setQuantidadeHomicidios(long quantidadeHomicidios) {
+		this.quantidadeHomicidios = quantidadeHomicidios;
+	}
+
+	public long getQuantidadeRoubos() {
+		return quantidadeRoubos;
+	}
+
+	public void setQuantidadeRoubos(long quantidadeRoubos) {
+		this.quantidadeRoubos = quantidadeRoubos;
+	}
+
+	public long getQuantidadeFurtos() {
+		return quantidadeFurtos;
+	}
+
+	public void setQuantidadeFurtos(long quantidadeFurtos) {
+		this.quantidadeFurtos = quantidadeFurtos;
+	}
+
+	public long getQuantidadeLesoesCorporais() {
+		return quantidadeLesoesCorporais;
+	}
+
+	public void setQuantidadeLesoesCorporais(long quantidadeLezoesCorporais) {
+		this.quantidadeLesoesCorporais = quantidadeLezoesCorporais;
+	}
+	
 	public static Ponto informarLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return ConsultaPonto.informarLocal(local);
 	}
@@ -157,6 +215,9 @@ public class Ponto {
 		
 	}
 
+	private void verificarBloqueio() {
+		this.bloqueio = getAvaliacoes().get((getAvaliacoes().size()-1)).isBloqueioRuas();
+	}
 
 	public void addTrajeto(Trajeto trajeto) {
 		trajetos.add(trajeto);
@@ -167,12 +228,67 @@ public class Ponto {
 	}
 	
 	
-	public void addAvaliacao(Formulario form) {
-		avaliacoes.add(form);
+	// public void addAvaliacao(Formulario form) {
+	// 	avaliacoes.add(form);
+	// }
+
+	// public void removeAvaliacao(Formulario form) {
+	// 	avaliacoes.remove(form);
+	// }
+
+	public void addAvaliacao(Formulario avaliacao) throws NullPointerException {
+
+		if (avaliacao == null) {
+			throw new NullPointerException();
+		}
+		this.avaliacoes.add(avaliacao);
+		
+		if (avaliacao.isLesaoCorporal()){
+			setQuantidadeLesoesCorporais(getQuantidadeLesoesCorporais()+1);
+		}
+		if (avaliacao.isFurto()){
+			setQuantidadeFurtos(getQuantidadeFurtos()+1);
+		}
+		if (avaliacao.isRoubo()){
+			setQuantidadeRoubos(getQuantidadeRoubos()+1);
+		}
+		if (avaliacao.isHomicidio()){
+			setQuantidadeHomicidios(getQuantidadeHomicidios()+1);
+		}
+		if (avaliacao.isLatrocinio()){
+			setQuantidadeLatrocinio(getQuantidadeLatrocinio()+1);
+		}
+		this.verificarBloqueio();
+
 	}
 
-	public void removeAvaliacao(Formulario form) {
-		avaliacoes.remove(form);
+	public void removeAvaliacao(Formulario avaliacao) throws NullPointerException {
+
+		if (avaliacao == null) {
+			throw new NullPointerException();
+		}
+
+		this.avaliacoes.remove(avaliacao);
+
+		if (getAvaliacoes().size() > 0) {
+			
+			if (avaliacao.isLesaoCorporal()){
+				setQuantidadeLesoesCorporais(getQuantidadeLesoesCorporais()-1);
+			}
+			if (avaliacao.isFurto()){
+				setQuantidadeFurtos(getQuantidadeFurtos()-1);
+			}
+			if (avaliacao.isRoubo()){
+				setQuantidadeRoubos(getQuantidadeRoubos()-1);
+			}
+			if (avaliacao.isHomicidio()){
+				setQuantidadeHomicidios(getQuantidadeHomicidios()-1);
+			}
+			if (avaliacao.isLatrocinio()){
+				setQuantidadeLatrocinio(getQuantidadeLatrocinio()-1);
+			}
+			this.verificarBloqueio();
+		}
 	}
   
   public List<Double> criarVetor(){
