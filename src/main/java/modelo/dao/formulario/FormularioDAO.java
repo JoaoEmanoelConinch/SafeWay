@@ -3,7 +3,7 @@ package modelo.dao.formulario;
 import java.util.List;
 
 import modelo.entidade.formulario.Formulario;
-import modelo.entidade.mapa.PontoAvaliado;
+import modelo.entidade.mapa.Ponto;
 
 public interface FormularioDAO {
 	
@@ -13,7 +13,7 @@ public interface FormularioDAO {
 	
 	void atualizarAvaliacao(Formulario formulario);
 	
-	List<Formulario> recuperarAvaliacoes(PontoAvaliado ponto);
+	List<Formulario> recuperarAvaliacoes(Ponto ponto);
 	
 	Formulario recuperarAvaliacaoId(Formulario form);
 
