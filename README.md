@@ -1,1 +1,1 @@
-# OpenSafeRoutes-OSR
+# SafeWay
