@@ -85,5 +85,15 @@ public class ConsultaPonto {
 
 		return pontos;
 	}
+
+	public static String imformarLatLong(Ponto ponto) {
+	
+		JSONObject jsonObject = JSONpontoDAO.readJsonFromUrl(
+			"https://api.openrouteservice.org/geocode/reverse?api_key=5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110&"+
+			"point.lon="+ponto.getLongitude().toString()+
+			"&point.lat="+ponto.getLatitude().toString()+
+			"&size=1&layers=street,neighbourhood,venue");
+	
+	}
 	
 }
