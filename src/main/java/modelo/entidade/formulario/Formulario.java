@@ -18,8 +18,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import modelo.entidade.mapa.Ponto;
-import modelo.entidade.mapa.PontoAbstrato;
-import modelo.entidade.mapa.PontoAvaliado;
 import modelo.entidade.usuario.UsuarioCadastrado;
 
 @Entity
@@ -58,12 +56,12 @@ public class Formulario implements Serializable {
 	private String comentario;
 
 	@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
-	@OnDelete(action = OnDeleteAction.CASCADE)
-	@JoinColumn(name = "id_ponto_avaliado",
+	@OnDelete(action = OnDeleteAction.NO_ACTION)
+	@JoinColumn(name = "id_ponto",
 				referencedColumnName = "id_ponto",
 				nullable = false
 			)
-	private Ponto idPontoAvaliado;
+	private Ponto idPonto;
 	
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -236,12 +234,8 @@ public class Formulario implements Serializable {
 		this.media = media;
 	}
 
-	public PontoAbstrato getIdPontoAvaliado() {
-		return idPontoAvaliado;
-	}
-
 	public void setIdPontoAvaliado(Ponto idPontoAvaliado) {
-		this.idPontoAvaliado = idPontoAvaliado;
+		this.idPonto = idPontoAvaliado;
 	}
 
 	public UsuarioCadastrado getIdUsuario() {

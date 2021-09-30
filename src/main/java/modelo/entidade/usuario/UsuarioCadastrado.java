@@ -11,6 +11,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -22,10 +25,10 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
-import modelo.entidade.mapa.PontoAvaliado;
-import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
 import modelo.enumeracao.mapa.MeioDeTransporte;
+import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
+import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
@@ -33,10 +36,15 @@ import modelo.excecao.usuario.StringVaziaException;
 
 @Entity
 @Table(name = "UsuarioCadastrado")
-public class UsuarioCadastrado extends Usuario implements Serializable {
+public class UsuarioCadastrado implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario", nullable = false, unique = true)
+    private long id;
+	
 	@Column(name = "nome_usuario", length = 45, nullable = false, unique = true)
 	private String nome;
 
@@ -45,9 +53,6 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	@Column(name = "email_usuario", length = 45, nullable = false, unique = true)
 	private String email;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<PontoFavorito> favoritos;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Formulario> formulariosDoUsuario;
@@ -63,7 +68,7 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	}
 	
 	public UsuarioCadastrado(long id) {
-		super(id);
+		this.setId(id);
 	}
 
 	public UsuarioCadastrado(String email, String senha) throws StringVaziaException, SenhaPequenaException, EmailInvalidoException {
@@ -73,15 +78,12 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		
 	}
 
-	public UsuarioCadastrado(long idUsuario, String nome, String senha, String email,
-	List<PontoFavorito> favoritos, List<Formulario> formulariosDoUsuario, List<Trajeto> trajetos)
+	public UsuarioCadastrado(long idUsuario, String nome, String senha, String email, List<Formulario> formulariosDoUsuario, List<Trajeto> trajetos)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
-		super(idUsuario);
-
+		this.setId(idUsuario);
 		this.setNome(nome);
 		this.setSenha(senha);
 		this.setEmail(email);
-		this.setFavoritos(favoritos);
 		this.setFormulariosDoUsuario(formulariosDoUsuario);
 		this.setTrajetos(trajetos);
 	}
@@ -96,15 +98,22 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	public UsuarioCadastrado(String nome, String senha, String email)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
-		super();
+		
 		this.setNome(nome);
 		this.setSenha(senha);
 		this.setEmail(email);
-		this.setFavoritos(new ArrayList<PontoFavorito>());
 		this.setFormulariosDoUsuario(new ArrayList<Formulario>());
 		this.setTrajetos(new ArrayList<Trajeto>());
 	}
 
+	public long getId() {
+		return id;
+	}
+	
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 	public String getNome() {
 		return nome;
 	}
@@ -154,14 +163,6 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 
 	}
 
-	public List<PontoFavorito> getFavoritos() {
-		return favoritos;
-	}
-
-	public void setFavoritos(List<PontoFavorito> favoritos) {
-		this.favoritos = favoritos;
-	}
-
 	public void setFormulariosDoUsuario(List<Formulario> formulariosDoUsuario) {
 		this.formulariosDoUsuario = formulariosDoUsuario;
 	}
@@ -194,11 +195,10 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 		return isEmailValid;
 	}
 
-	@Override
-	public Trajeto trajeto(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws JsonParseException, JsonMappingException, IOException {
+	public Trajeto trajeto(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException {
 
 
-		Trajeto trajeto = super.trajeto(inicio, chegada, transporteUsado);
+		Trajeto trajeto = new Trajeto(inicio, chegada, transporteUsado);
 
 		this.addTrajeto(trajeto);
 		trajeto.addUsuarioCadastrado(this);
@@ -208,45 +208,16 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	}
 
 	public Formulario avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-			boolean bloqueioRuas, String comentario, PontoAvaliado PontoAvaliado, UsuarioCadastrado idUsuario)
+			boolean bloqueioRuas, String comentario, Ponto Ponto, UsuarioCadastrado idUsuario)
 			throws NullPointerException, StatusInvalidoException{
 
-		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas, PontoAvaliado, idUsuario);
+		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas, Ponto, idUsuario);
 
 		this.addFormulario(formulario);
-		PontoAvaliado.addAvaliacao(formulario);
+		Ponto.addAvaliacao(formulario);
 
 		return formulario;
 
-		// if (idPontoAvaliado.getClass().equals("Ponto")) {
-		// 	idPontoAvaliado = PontoAvaliado.criarPontoAvaliado(idPontoAvaliado);
-
-		// 	formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas,
-		// 			idPontoAvaliado, idUsuario);
-
-		// 	((PontoAvaliado) idPontoAvaliado).addAvaliacao(formulario);
-
-		// }
-	}
-
-	public PontoFavorito favoritarENomear(Ponto ponto, String nomePonto)
-			throws StatusInvalidoException{
-		PontoFavorito pontoFavorito = PontoFavorito.favoritarPontoENomear(ponto, nomePonto, this);
-		addFavorito(pontoFavorito);
-
-		return pontoFavorito;
-	}
-
-	public void desfavoritar(PontoFavorito pontoFavorito) {
-		favoritos.remove(pontoFavorito);
-	}
-
-	public void removerFavorito(PontoFavorito pontoFavorito) {
-		favoritos.remove(pontoFavorito);
-	}
-
-	public void addFavorito(PontoFavorito pontoFavorito) {
-		favoritos.add(pontoFavorito);
 	}
 
 	public void addFormulario(Formulario formulario) {
@@ -265,4 +236,49 @@ public class UsuarioCadastrado extends Usuario implements Serializable {
 	public void removerTrajeto(Trajeto trajeto) {
 		trajetos.remove(trajeto);
 	}
+	
+	public static List<Ponto> informarLocais(String local){
+		return Ponto.informarLocais(local);
+	} 
+
+	public Ponto DefinirLocal (String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
+		return Ponto.informarLocal(local);
+	}
+
+	public Ponto DefinirLocal (String local, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
+		return Ponto.informarLocal(local, posicao);
+	}
+	
+	public Ponto DefinirPartida(String inicio) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+		return DefinirLocal(inicio);
+	}
+
+	public Ponto DefinirDestino(String chegada) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+		return DefinirLocal(chegada);
+	}
+
+	public Ponto DefinirPartida(String inicio, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+		return DefinirLocal(inicio, posicao);
+	}
+
+	public Ponto DefinirDestino(String chegada, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+		return DefinirLocal(chegada, posicao);
+	}
+
+	public MeioDeTransporte DefinirTransporte(MeioDeTransporte transporte) {
+		return transporte;
+	}
+
+	public Trajeto trajeto(String inicio, String chegada, MeioDeTransporte transporte)
+			throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
+
+		return new Trajeto(DefinirPartida(inicio), DefinirDestino(chegada), DefinirTransporte(transporte));
+	}
+
+	public Trajeto trajeto(String inicio, int posicaoInicio, String chegada, int posicaoChegada, MeioDeTransporte transporte)
+			throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
+
+		return new Trajeto(DefinirPartida(inicio, posicaoInicio), DefinirDestino(chegada, posicaoChegada),DefinirTransporte(transporte));
+	}
+	
 }

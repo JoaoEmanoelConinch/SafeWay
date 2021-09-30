@@ -12,8 +12,7 @@ import org.hibernate.Session;
 
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.formulario.Formulario_;
-import modelo.entidade.mapa.PontoAbstrato;
-import modelo.entidade.mapa.PontoAvaliado;
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Ponto_;
 import modelo.factory.conexao.ConexaoFactory;
 
@@ -114,7 +113,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 
 	}
 
-	public List<Formulario> recuperarAvaliacoes(PontoAvaliado ponto) {
+	public List<Formulario> recuperarAvaliacoes(Ponto ponto) {
 
 		Session sessao = null;
 		List<Formulario> forms = null;
@@ -129,13 +128,13 @@ public class FormularioDAOImpl implements FormularioDAO {
 			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
 			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
 
-			Join<Formulario, PontoAbstrato> juncaoPonto = raizFormulario.join(Formulario_.idPontoAvaliado);
+			Join<Formulario, Ponto> juncaoPonto = raizFormulario.join(Formulario_.idPonto);
 
 
 			ParameterExpression<Long> IdPonto = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(juncaoPonto.get(Ponto_.ID_PONTO), IdPonto));
 
-			forms = sessao.createQuery(criteria).setParameter(IdPonto, ponto.getId()).getResultList();
+			forms = sessao.createQuery(criteria).setParameter(IdPonto, ponto.getIdPonto()).getResultList();
 
 			sessao.getTransaction().commit();
 
