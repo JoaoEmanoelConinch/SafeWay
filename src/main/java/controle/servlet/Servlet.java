@@ -15,10 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
-import modelo.dao.PontoAvaliado.PontoAvaliadoDAO;
-import modelo.dao.PontoAvaliado.PontoAvaliadoDAOImpl;
-import modelo.dao.PontoFavorito.PontoFavDAOImpl;
-import modelo.dao.PontoFavorito.PontoFavoritoDAO;
 import modelo.dao.formulario.FormularioDAO;
 import modelo.dao.formulario.FormularioDAOImpl;
 import modelo.dao.ponto.PontoDAO;
@@ -29,10 +25,7 @@ import modelo.dao.usuario.UsuarioDAO;
 import modelo.dao.usuario.UsuarioDAOImpl;
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
-import modelo.entidade.mapa.PontoAvaliado;
-import modelo.entidade.mapa.PontoFavorito;
 import modelo.entidade.mapa.Trajeto;
-import modelo.entidade.usuario.Usuario;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
@@ -51,8 +44,6 @@ public class Servlet extends HttpServlet {
 	private PontoDAO pontoDAO;
 	private TrajetoDAO trajetoDAO;
 	private FormularioDAO formularioDAO;
-	private PontoAvaliadoDAO pontoAvaliadoDAO;
-	private PontoFavoritoDAO pontoFavDAO;
 
 	public void init() {
 		
@@ -60,8 +51,6 @@ public class Servlet extends HttpServlet {
 		pontoDAO = new PontoDAOImpl();
 		trajetoDAO = new TrajetoDAOImpl();
 		formularioDAO = new FormularioDAOImpl();
-		pontoAvaliadoDAO = new PontoAvaliadoDAOImpl();
-		pontoFavDAO = new PontoFavDAOImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -108,14 +97,6 @@ public class Servlet extends HttpServlet {
 				deletarUsuario(request, response);
 				break;
 
-			case "/mapa":
-				mostrarMapa(request, response);
-				break;
-
-			case "/mapa-avaliação":
-				mostrarMapaAvaliacao(request, response);
-				break;
-
 			case "/Avaliacao":
 				mostrarTelaAvaliacao(request, response);
 				break;
@@ -124,28 +105,8 @@ public class Servlet extends HttpServlet {
 				inserirAvaliacao(request, response);
 				break;
 
-			case "deletar-Avaliacao":
+			case "/deletar-Avaliacao":
 				deletarAvaliacao(request, response);
-				break;
-
-			case "mapa-Favorito":
-				mostrarMapaFavoritar(request, response);
-				break;
-
-			case "favoritar":
-				mostrarFormularioFavoritar(request, response);
-				break;
-
-			case "inserir-pontoFavorito":
-				inserirPontoFavorito(request, response);
-				break;
-
-			case "deletar-pontoFavorito":
-				deletarPontoFavorito(request, response);
-				break;
-
-			case "/mapa-trajeto":
-				MostrarMapaTrajeto(request, response);
 				break;
 
 			case "/criar-trajeto-pontos":
@@ -204,23 +165,7 @@ public class Servlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	private void mostrarMapa(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mapa.jsp");
-		dispatcher.forward(request, response);
-	}
-
-	private void MostrarMapaTrajeto(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaTrajeto.jsp");
-		dispatcher.forward(request, response);
-	}
-
-	private void mostrarMapaAvaliacao(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaAvaliacoa.jsp");
-		dispatcher.forward(request, response);
-	}
+	// mapa que ñ é mapa, é tabela
 
 	private void mostrarTelaAvaliacao(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -235,44 +180,6 @@ public class Servlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro.jsp");
 		request.setAttribute("usuarioCadastrado", usuarioCadastrado);
 		dispatcher.forward(request, response);
-	}
-
-	private void mostrarMapaFavoritar(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaFovorito.jsp");
-		dispatcher.forward(request, response);
-	}
-
-	private void mostrarFormularioFavoritar(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("telaFovorito.jsp");
-		dispatcher.forward(request, response);
-	}
-
-	private void inserirPontoFavorito(HttpServletRequest request, HttpServletResponse response)
-			throws StatusInvalidoException, IOException {
-
-		String nomeFavorito = request.getParameter("nomePontoFavorito");
-		Ponto ponto = (Ponto) request.getAttribute("ponto");
-		Long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
-
-		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
-
-		if (pontoDAO.verificarPonto(ponto) == null) {
-			pontoDAO.inserirPonto(ponto);
-		}
-
-		PontoFavorito pontoFavorito = usuario.favoritarENomear(ponto, nomeFavorito);
-		usuarioDAO.atualizarUsuario(usuario);
-
-		pontoFavDAO.inserirPontoFavorito(pontoFavorito);
-		response.sendRedirect("mapa");
-	}
-
-	private void deletarPontoFavorito(HttpServletRequest request, HttpServletResponse response) {
-		long idFavorito = Long.parseLong(request.getParameter("idFavorito"));
-		PontoFavorito pontoFavorito = pontoFavDAO.recuperarPontoFavoritoId(new PontoFavorito(idFavorito));
-		pontoFavDAO.deletarPontoFavorito(pontoFavorito);
 	}
 
 	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)
@@ -312,7 +219,7 @@ public class Servlet extends HttpServlet {
 		MeioDeTransporte meioDeTransporte = (MeioDeTransporte) request.getAttribute("meioDeTransporte");
 
 		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
-		Usuario usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
+		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		
 		Trajeto trajeto = usuario.trajeto(partida, chegada, meioDeTransporte);
 
@@ -322,7 +229,7 @@ public class Servlet extends HttpServlet {
 				pontoDAO.inserirPonto(ponto);
 			}
 			Ponto pontoBD = pontoDAO.verificarPonto(ponto);
-			trajeto.getPontos().get(i).setId(pontoBD.getId());
+			trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
 		}
 		trajetoDAO.inserirTrajeto(trajeto);
 		usuarioDAO.atualizarUsuario((UsuarioCadastrado)usuario);
@@ -350,7 +257,7 @@ public class Servlet extends HttpServlet {
 				pontoDAO.inserirPonto(ponto);
 			}
 			Ponto pontoBD = pontoDAO.verificarPonto(ponto);
-			trajeto.getPontos().get(i).setId(pontoBD.getId());
+			trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
 		}
 		trajetoDAO.inserirTrajeto(trajeto);
 
@@ -391,16 +298,13 @@ public class Servlet extends HttpServlet {
 		}
 		Ponto pontoUsavel = pontoDAO.verificarPonto(ponto);
 
-		if (pontoAvaliadoDAO.verificarPontoAvaliado(pontoUsavel) == null) {
-			pontoAvaliadoDAO.inserirPontoAvaliado(new PontoAvaliado(ponto));
-		}
-		PontoAvaliado pontoAvaliado = pontoAvaliadoDAO.verificarPontoAvaliado(pontoUsavel);
-
-		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueio, comentario, pontoAvaliado, usuario);
+		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueio, comentario, pontoUsavel, usuario);
 		
 		formularioDAO.inserirAvaliacao(avaliacao);
 
-		pontoAvaliadoDAO.atualizarPontoAvaliado(pontoAvaliado);
+		pontoUsavel.addAvaliacao(avaliacao);
+
+		pontoDAO.atualizarPonto(pontoUsavel);
 
 	}
 
@@ -410,13 +314,6 @@ public class Servlet extends HttpServlet {
 		formularioDAO.deletarAvaliacao(formulario);
 	}
 
-	private void listarPontosAvaliado(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		List<PontoAvaliado> pontosAvaliados = pontoAvaliadoDAO.recuperarPontosAvaliados();
-		request.setAttribute("pontosAvaliados", pontosAvaliados);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mapa.jsp");
-		dispatcher.forward(request, response);
-	}
+	
 
 }
