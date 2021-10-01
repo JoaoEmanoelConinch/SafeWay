@@ -280,5 +280,5 @@ public class UsuarioCadastrado implements Serializable {
 
 		return new Trajeto(DefinirPartida(inicio, posicaoInicio), DefinirDestino(chegada, posicaoChegada),DefinirTransporte(transporte));
 	}
-	
+
 }
