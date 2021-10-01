@@ -81,6 +81,7 @@ public class Ponto {
 		this.setLongitude(longitude);
 		this.setTrajetos(trajetos);
 		this.setAvaliacoes(avaliacoes);
+		this.setEndereco(this.informarLatLong());
 		
 	}
 	
@@ -89,6 +90,7 @@ public class Ponto {
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(new ArrayList<Trajeto>());
+		this.setEndereco(this.informarLatLong());
 	}
 
 	
