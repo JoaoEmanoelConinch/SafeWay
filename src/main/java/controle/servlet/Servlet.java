@@ -314,6 +314,4 @@ public class Servlet extends HttpServlet {
 		formularioDAO.deletarAvaliacao(formulario);
 	}
 
-	
-
 }
