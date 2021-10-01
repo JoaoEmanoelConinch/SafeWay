@@ -187,7 +187,7 @@ public class ServletSafeWay extends HttpServlet{
     }
 
     private void mostrarFormularioTrajeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioTrageto.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioTrajeto.jsp");
 		dispatcher.forward(request, response);
     }
 
@@ -214,17 +214,9 @@ public class ServletSafeWay extends HttpServlet{
 			trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
 		}
 		trajetoDAO.inserirTrajeto(trajeto);
-		usuarioDAO.atualizarUsuario((UsuarioCadastrado)usuario);
+		usuarioDAO.atualizarUsuario(usuario);
 
-		request.setAttribute("idTrajeto", trajeto.getIdTrajeto());
-
-		response.sendRedirect("trajeto");
-    }
-
-    private void mostrarTrajeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        long idTrajeto = Long.parseLong(request.getParameter("idTrajeto"));
-
-        List<Ponto> pontos = trajetoDAO.recuperarTrajeto(new Trajeto(idTrajeto)).getPontos();
+        List<Ponto> pontos = trajetoDAO.recuperarTrajeto(trajeto).getPontos();
         request.setAttribute("pontos", pontos);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("trajeto.jsp");
 		dispatcher.forward(request, response);

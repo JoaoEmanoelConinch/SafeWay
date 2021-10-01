@@ -71,6 +71,9 @@ public class Ponto {
 
 	@Column(name = "nivel_Bloqueio_Ponto_Avaliado", nullable = false)
 	private boolean bloqueio;
+
+	@Column(name = "endereco", nullable = false, length = 100)
+	private String endereco;
 	
 	public Ponto(long idPonto, double latitude, double longitude, List<Trajeto> trajetos, List<Formulario> avaliacoes) {
 		this.setIdPonto(idPonto);
@@ -177,6 +180,14 @@ public class Ponto {
 	public void setQuantidadeLesoesCorporais(long quantidadeLezoesCorporais) {
 		this.quantidadeLesoesCorporais = quantidadeLezoesCorporais;
 	}
+
+	public void setEndereco(String endereco) {
+		this.Endereco = endereco;
+	}
+
+	public String getEndereco() {
+		return this.Endereco;
+	}
 	
 	public static Ponto informarLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return ConsultaPonto.informarLocal(local);
@@ -191,8 +202,6 @@ public class Ponto {
 		return ConsultaPonto.informarLocais(local);
 	}
 
-	
-	
 	@Override
 	public boolean equals(Object objeto) {
 		
