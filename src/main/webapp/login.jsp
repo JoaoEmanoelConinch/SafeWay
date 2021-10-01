@@ -15,7 +15,7 @@
 <body>
   <div id="main-container">
     <h1>Logar em </h1>
-    <h1>Open Safe Routes</h1>
+    <h1>SafeWay</h1>
 
     <form id="register-form" action="login" method="POST">
       <div class="full-box">

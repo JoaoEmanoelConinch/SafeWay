@@ -18,7 +18,7 @@
         <div class="container-logo">
             <div class="logo-imagem"></div>
             <div class="logo-texto">
-              <h2>OPEN SAFE ROTES</h2>
+              <h2>SafeWay</h2>
             </div>
           </div>
 			<%-- Os links serão mudados para icones posteriomente --%>

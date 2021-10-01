@@ -11,8 +11,8 @@
 </head>
 <body>
 	<div id="main-container">
-		<h1>Cadastre-se para acessar</h1>
-		<h1>Open Safe Routes</h1>
+		<h1>Cadastre-se para acessar no</h1>
+		<h1>SafeWay</h1>
 
 		<form id="register-form" action="inserir-Usuario" method="POST">
 			<div class="full-box">
