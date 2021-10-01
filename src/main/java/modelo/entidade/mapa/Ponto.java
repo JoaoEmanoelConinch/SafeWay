@@ -182,11 +182,11 @@ public class Ponto {
 	}
 
 	public void setEndereco(String endereco) {
-		this.Endereco = endereco;
+		this.endereco = endereco;
 	}
 
 	public String getEndereco() {
-		return this.Endereco;
+		return this.endereco;
 	}
 	
 	public static Ponto informarLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
