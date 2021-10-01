@@ -26,8 +26,7 @@ public class Principal {
 		Ponto p =  Ponto.informarLocal("Senac, Blumenau, SC, Brazil",1);
 		
 		System.out.println(p.getLatitude());
-		System.out.println(p.getLongitude()
-				);
+		System.out.println(p.getLongitude());
 		
 		p.setEndereco(p.informarLatLong());
 		
