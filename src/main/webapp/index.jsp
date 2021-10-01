@@ -18,7 +18,7 @@
 
   <div  id="main-container">
     <div class="cadastrar">
-      <a href="cadastro.jsp"  id="cadastre-se">Cadastre-se<a><br>
+      <a href="cadastro-usuario.jsp"  id="cadastre-se">Cadastre-se<a><br>
     </div>
     
     <div class="logar" >

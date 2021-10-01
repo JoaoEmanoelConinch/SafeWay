@@ -72,7 +72,7 @@ public class Ponto {
 	@Column(name = "nivel_Bloqueio_Ponto_Avaliado", nullable = false)
 	private boolean bloqueio;
 
-	@Column(name = "endereco", nullable = false, length = 100)
+	@Column(name = "endereco", nullable = true, length = 100)
 	private String endereco;
 	
 	public Ponto(long idPonto, double latitude, double longitude, List<Trajeto> trajetos, List<Formulario> avaliacoes) {
@@ -81,6 +81,7 @@ public class Ponto {
 		this.setLongitude(longitude);
 		this.setTrajetos(trajetos);
 		this.setAvaliacoes(avaliacoes);
+		//this.setEndereco(informarLatLong());
 		
 	}
 	
@@ -89,6 +90,7 @@ public class Ponto {
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(new ArrayList<Trajeto>());
+		//this.setEndereco(informarLatLong());
 	}
 
 	
