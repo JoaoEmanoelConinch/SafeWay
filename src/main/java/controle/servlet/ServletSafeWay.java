@@ -1,8 +1,6 @@
 package controle.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -254,11 +252,9 @@ public class ServletSafeWay extends HttpServlet{
 			pontoDAO.inserirPonto(ponto);
 		}
 		Ponto pontoUsavel = pontoDAO.verificarPonto(ponto);
-
 		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueio, comentario, pontoUsavel, usuario);
 		
 		formularioDAO.inserirAvaliacao(avaliacao);
-
 		pontoUsavel.addAvaliacao(avaliacao);
 
 		pontoDAO.atualizarPonto(pontoUsavel);
