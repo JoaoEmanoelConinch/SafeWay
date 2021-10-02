@@ -11,13 +11,8 @@
 		<property name="show_sql">true</property>
 		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
 		<mapping class="modelo.entidade.formulario.Formulario" />
-		<mapping class="modelo.entidade.mapa.PontoAbstrato" />
 		<mapping class="modelo.entidade.mapa.Ponto" />
-		<mapping class="modelo.entidade.mapa.PontoAvaliado" />
-		<mapping class="modelo.entidade.mapa.PontoFavorito" />
 		<mapping class="modelo.entidade.mapa.Trajeto" />
 		<mapping class="modelo.entidade.usuario.UsuarioCadastrado" />
-		<mapping class="modelo.entidade.usuario.Usuario" />
-		<mapping class="modelo.entidade.usuario.UsuarioAnonimo" />
 	</session-factory>
 </hibernate-configuration>

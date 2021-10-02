@@ -107,9 +107,9 @@ public class ServletSafeWay extends HttpServlet{
                     criarTrajeto(request, response);
                     break;
 
-            // case "/trajeto":
-            //     mostrarTrajeto(request, response);
-            //     break;
+//                case "/trajeto":
+//                    mostrarTrajeto(request, response);
+//                    break;
 
                 case "/formolario-denuncia":
                     mostrarFormularioDenuncia(request, response);
@@ -138,7 +138,7 @@ public class ServletSafeWay extends HttpServlet{
     }
 
     private void mostrarTelaCadastro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-usuario.jsp");
 		dispatcher.forward(request, response);
     }
 
