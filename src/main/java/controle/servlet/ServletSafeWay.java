@@ -107,9 +107,9 @@ public class ServletSafeWay extends HttpServlet{
                     criarTrajeto(request, response);
                     break;
 
-                case "/trajeto":
-                    mostrarTrajeto(request, response);
-                    break;
+            // case "/trajeto":
+            //     mostrarTrajeto(request, response);
+            //     break;
 
                 case "/formolario-denuncia":
                     mostrarFormularioDenuncia(request, response);
@@ -192,7 +192,7 @@ public class ServletSafeWay extends HttpServlet{
     }
 
     private void criarTrajeto(HttpServletRequest request, HttpServletResponse response) 
-            throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+            throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException, ServletException {
 		String partida = request.getParameter("inicio");
 		String chegada = request.getParameter("chegada");
 		int meioDeTransporte = Integer.parseInt(request.getParameter("MeioDeTransporte"));
