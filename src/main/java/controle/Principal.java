@@ -23,14 +23,9 @@ public class Principal {
 		
 		PontoDAO pontoDao = new PontoDAOImpl();
 		
-		Ponto p =  Ponto.informarLocal("Senac, Blumenau, SC, Brazil",1);
+		Ponto p =  Ponto.informarLocal("");
 		
-		System.out.println(p.getLatitude());
-		System.out.println(p.getLongitude());
-		
-		p.setEndereco(p.informarLatLong());
-		
-		System.out.println(p.getEndereco());
+		pontoDao.inserirPonto(p);
 		
 	}
 }

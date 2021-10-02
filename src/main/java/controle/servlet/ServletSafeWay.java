@@ -209,7 +209,6 @@ public class ServletSafeWay extends HttpServlet{
 		
         MeioDeTransporte meio = MeioDeTransporte.values()[meioDeTransporte];
 		
-		
 		Trajeto trajeto = new Trajeto(partida, chegada, meio);
 
 		for (int i = 0; i < trajeto.getPontos().size(); i++) {

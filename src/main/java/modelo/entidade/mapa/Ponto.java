@@ -81,7 +81,7 @@ public class Ponto {
 		this.setLongitude(longitude);
 		this.setTrajetos(trajetos);
 		this.setAvaliacoes(avaliacoes);
-		//this.setEndereco(informarLatLong());
+		this.setEndereco(informarLatLong());
 		
 	}
 	
@@ -90,7 +90,7 @@ public class Ponto {
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(new ArrayList<Trajeto>());
-		//this.setEndereco(informarLatLong());
+		this.setEndereco(informarLatLong());
 	}
 
 	
@@ -200,7 +200,7 @@ public class Ponto {
 		return ConsultaPonto.informarLocal(local, posicao);
 	}
 
-	public static List<Ponto> informarLocais(String local) {
+	public static List<Ponto> informarLocais(String local) throws StatusInvalidoException {
 		return ConsultaPonto.informarLocais(local);
 	}
 
