@@ -95,9 +95,9 @@ public class ServletSafeWay extends HttpServlet{
                     logarUsuario(request, response);
                     break;
 
-                case "/menu":
-                    mostrarMenu(request, response);
-                    break;
+                // case "/menu":
+                //     mostrarMenu(request, response);
+                //     break;
 
                 case "/formulario-trageto":
                     mostrarFormularioTrajeto(request, response);
@@ -143,26 +143,35 @@ public class ServletSafeWay extends HttpServlet{
     }
 
     private void inserirUsuario(HttpServletRequest request, HttpServletResponse response) 
-            throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, IOException {
+            throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, IOException, ServletException {
 
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String email = request.getParameter("email");
 
-		usuarioDAO.inserirUsuario(new UsuarioCadastrado(nome, senha, email));
+        UsuarioCadastrado usuario = new UsuarioCadastrado(nome, senha, email);
+		usuarioDAO.inserirUsuario(usuario);
 
-		response.sendRedirect("menu");
+        request.setAttribute("usuario", usuario);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trageto.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
-            throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, IOException {
+            throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, IOException, ServletException {
         long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String email = request.getParameter("email");
-		usuarioDAO.atualizarUsuario(new UsuarioCadastrado(idUsuario, nome, senha, email));
-		response.sendRedirect("menu");
+		
+        UsuarioCadastrado usuario = new UsuarioCadastrado(idUsuario, nome, senha, email);
+		usuarioDAO.inserirUsuario(usuario);
+
+        request.setAttribute("usuario", usuario);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trageto.jsp");
+        dispatcher.forward(request, response);
     }
+
 
     private void deletarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
         long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
@@ -172,7 +181,7 @@ public class ServletSafeWay extends HttpServlet{
     }
 
     private void mostrarTelaLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("erro404.jsp");
 		dispatcher.forward(request, response);
     }
 
@@ -181,10 +190,10 @@ public class ServletSafeWay extends HttpServlet{
         response.sendRedirect("erro");
     }
 
-    private void mostrarMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("menu.jsp");
-		dispatcher.forward(request, response);
-    }
+    // private void mostrarMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //     RequestDispatcher dispatcher = request.getRequestDispatcher("menu.jsp");
+	// 	dispatcher.forward(request, response);
+    // }
 
     private void mostrarFormularioTrajeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioTrajeto.jsp");
