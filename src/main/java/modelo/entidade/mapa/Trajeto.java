@@ -128,7 +128,7 @@ public class Trajeto implements Serializable {
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
 	}
 	
-	public Trajeto(long id, Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws JsonParseException, JsonMappingException, IOException {
+	public Trajeto(long id, Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException {
 		this.setIdTrajeto(id);
 		this.setInicio(inicio);
 		this.setChegada(chegada);
@@ -183,7 +183,7 @@ public class Trajeto implements Serializable {
 	}
 
 	public List<Ponto> criarLineString()
-			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
+			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException, StatusInvalidoException {
 		 return ConsultaTrajeto.criarLineString(this.inicio, this.chegada, this.transporteUsado);
 	}
 	
