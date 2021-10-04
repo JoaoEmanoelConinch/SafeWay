@@ -28,10 +28,10 @@ public class Principal {
 		PontoDAO pontoDAO = new PontoDAOImpl();
 		TrajetoDAO trajetoDAO = new TrajetoDAOImpl();
 		
-		pontoDAO.inserirPonto(Ponto.informarLocal("Rua República Argentina, 269 Blumenau, SC, Brasil"));
+		pontoDAO.inserirPonto(Ponto.informarLocal("Avenida Brasil, 514 Blumenau, SC, Brasil"));
 
-		// Ponto ponto1 = pontoDAO.recuperarPonto(new Ponto(4));
-		// Ponto ponto2 = pontoDAO.recuperarPonto(new Ponto(3));
+		// Ponto ponto1 = pontoDAO.recuperarPonto(new Ponto(1));
+		// Ponto ponto2 = pontoDAO.recuperarPonto(new Ponto(2));
 
 		// Trajeto trajeto = new Trajeto(ponto1, ponto2, MeioDeTransporte.DRIVING_CAR);
 
