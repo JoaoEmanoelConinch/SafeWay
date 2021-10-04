@@ -133,8 +133,8 @@ public class ServletSafeWay extends HttpServlet{
     private void mostrarTelaInicial(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
+		
     }
-
     private void mostrarTelaCadastro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-usuario.jsp");
 		dispatcher.forward(request, response);
@@ -151,7 +151,7 @@ public class ServletSafeWay extends HttpServlet{
 		usuarioDAO.inserirUsuario(usuario);
 
         request.setAttribute("usuario", usuario);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trageto.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trajeto.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -166,7 +166,7 @@ public class ServletSafeWay extends HttpServlet{
 		usuarioDAO.inserirUsuario(usuario);
 
         request.setAttribute("usuario", usuario);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trageto.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trajeto.jsp");
         dispatcher.forward(request, response);
     }
 
