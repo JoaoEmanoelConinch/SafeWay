@@ -12,7 +12,7 @@
 
     <h1>Digite as coordenadas</h1>
     
-    <form id="register-form" action="criar-trajeto-Locais">
+    <form id="register-form" action="criar-trajeto">
      
       <div class="half-box">
         <label for="inicio">Inicio</label>
