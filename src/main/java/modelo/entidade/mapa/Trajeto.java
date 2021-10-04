@@ -55,23 +55,21 @@ public class Trajeto implements Serializable {
 	private Ponto inicio;
 
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL })
-    @JoinTable(name = "ponto_trajeto",
-    joinColumns = @JoinColumn(name = "id_trajeto"),
-    inverseJoinColumns = @JoinColumn(name = "id_ponto")
-    )
+	// @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL })
+    // @JoinTable(name = "ponto_trajeto",
+    // joinColumns = @JoinColumn(name = "id_trajeto"),
+    // inverseJoinColumns = @JoinColumn(name = "id_ponto")
+    // )
+	@ManyToMany(cascade = {
+		CascadeType.PERSIST,
+		CascadeType.MERGE
+	})
+	@JoinTable(name = "ponto_trajeto",
+		joinColumns = @JoinColumn(name = "id_trajeto"),
+		inverseJoinColumns = @JoinColumn(name = "id_ponto")
+	)
 	private List<Ponto> pontos;
 	
-//	@ManyToMany(cascade = {
-//	        CascadeType.PERSIST,
-//	        CascadeType.MERGE
-//	    })
-//	    @JoinTable(name = "post_tag",
-//	        joinColumns = @JoinColumn(name = "post_id"),
-//	        inverseJoinColumns = @JoinColumn(name = "tag_id")
-//	    )
-//	    private List<Tag> tags = new ArrayList<>();
-
 	@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(

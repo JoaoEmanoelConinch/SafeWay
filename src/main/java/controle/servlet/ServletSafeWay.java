@@ -204,8 +204,8 @@ public class ServletSafeWay extends HttpServlet{
 		String p2 = request.getParameter("chegada");
 		int meioDeTransporte = Integer.parseInt(request.getParameter("MeioDeTransporte"));
 
-//		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
-//		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
+		// long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+		// UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		
         MeioDeTransporte meio = MeioDeTransporte.values()[meioDeTransporte];
 		
@@ -222,12 +222,17 @@ public class ServletSafeWay extends HttpServlet{
         Ponto chegadaTrajeto = pontoDAO.verificarPonto(partida);
         
 		Trajeto trajeto = new Trajeto(partidaTrajeto, chegadaTrajeto, meio);
-		for (int i = 0; i < trajeto.getPontos().size(); i++) {
+        for (int i = 0; i < trajeto.getPontos().size(); i++) {
 			Ponto ponto = trajeto.getPontos().get(i);
-			if (pontoDAO.verificarPonto(ponto) != null) {
-				trajeto.getPontos().set(i, ponto);
+			if (pontoDAO.verificarPonto(ponto) == null) {
+				pontoDAO.inserirPonto(ponto);
 			}
+			Ponto pontoBD = pontoDAO.verificarPonto(ponto);
+			trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
 		}
+		trajetoDAO.inserirTrajeto(trajeto);
+		// usuarioDAO.atualizarUsuario(usuario);
+
 		trajetoDAO.inserirTrajeto(trajeto);
 //		usuarioDAO.atualizarUsuario(usuario);
 
