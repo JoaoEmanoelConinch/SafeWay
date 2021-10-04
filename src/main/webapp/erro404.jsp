@@ -17,7 +17,7 @@
         <h1>404 ERRO</h1>
         <h2>ESSA AÇÃO NÃO ESTÁ DISPONÍVEL NO MOMENTO, SENTIMOS MUITO!</h2><br>
         <h2>POR GENTILEZA CLIQUE ABAIXO PARA VOLTAR A TELA INICIAL</h2><br>
-        <a href="index.jsp">Voltar</a>
+        <a  href="<%=request.getContextPath()%>/inicio">Voltar</a>
     </div >
 
 </body>
