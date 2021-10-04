@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%><html>
+
 <!doctype html>
 <head>
-<title>trajeto</title>
+<title>Trajeto</title>
 </head>
 <body>
 	
@@ -16,7 +17,7 @@
 			<table>
                 <tr>
                     <th>Pontos</th>
-                    
+                    <th>Ações</th>
                 </tr>
 				
 				<tbody>
@@ -25,15 +26,20 @@
                             
 							<td><c:out value="${ponto.pontos}" /></td>
                             
-							
+                           
+                    <td> 
+                        
+                        <a href="<%=request.getContextPath()%>/formolario-denuncia">Adicionar Avaliação</a>
+                    
+                    
+                    </td>
+                            
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
          <br>
-            <div>
-				<a href="<%=request.getContextPath()%>/formolario-denuncia">Adicionar Avaliação</a>
-			</div>
+           
 		</div>
 	</div>
 </body>
