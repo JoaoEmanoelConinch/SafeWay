@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
+
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.formulario.Formulario_;
 import modelo.entidade.mapa.Ponto;
@@ -254,14 +255,14 @@ public class PontoDAOImpl implements PontoDAO {
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
 			CriteriaQuery<Ponto> criteria = construtor.createQuery(Ponto.class);
-			Root<Ponto> raizPonto = criteria.from(Ponto.class);
+			Root<Ponto> raizContato = criteria.from(Ponto.class);
 
-			Join<Ponto, Formulario> juncaoFormulario = raizPonto.join(Ponto_.avaliacoes);
-			
-			ParameterExpression<Long> idPonto = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(juncaoFormulario.get(Formulario_.ID_PONTO), idPonto));
+			Join<Ponto, Cliente> juncaoCliente = raizContato.join(Ponto_.cliente);
 
-			ponto1 = sessao.createQuery(criteria).setParameter(idPonto, ponto.getIdPonto()).getSingleResult();
+			ParameterExpression<Long> cpfCliente = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoCliente.get(Formulario_.ID_PONTO), cpfCliente));
+
+			ponto1 = sessao.createQuery(criteria).setParameter(cpfCliente, cliente.getCpf()).getSingleResult();
 
 			sessao.getTransaction().commit();
 
