@@ -51,6 +51,9 @@ public class Ponto {
 	@Fetch(FetchMode.JOIN)
 	private List<Trajeto> trajetos;
 	
+//	@ManyToMany(mappedBy = "tags")
+//    private List<Post> posts = new ArrayList<>();
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idPonto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Formulario> avaliacoes;
 
