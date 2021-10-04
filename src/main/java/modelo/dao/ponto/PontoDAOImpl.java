@@ -5,12 +5,15 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
+import modelo.entidade.formulario.Formulario;
+import modelo.entidade.formulario.Formulario_;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Ponto_;
 import modelo.factory.conexao.ConexaoFactory;
@@ -238,4 +241,47 @@ public class PontoDAOImpl implements PontoDAO {
 
 	}
 
+	public Ponto recuperarPontoAvaliacoes(Ponto ponto) {
+		
+		Session sessao = null;
+		Ponto ponto1 = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Ponto> criteria = construtor.createQuery(Ponto.class);
+			Root<Ponto> raizPonto = criteria.from(Ponto.class);
+
+			Join<Ponto, Formulario> juncaoFormulario = raizPonto.join(Ponto_.avaliacoes);
+			
+			ParameterExpression<Long> idPonto = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoFormulario.get(Formulario_.ID_PONTO), idPonto));
+
+			ponto1 = sessao.createQuery(criteria).setParameter(idPonto, ponto.getIdPonto()).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return ponto1;
+		
+	}
+	
 }
