@@ -29,22 +29,16 @@ public class Principal {
 		TrajetoDAO trajetoDAO = new TrajetoDAOImpl();
 		
 		pontoDAO.inserirPonto(Ponto.informarLocal("Avenida Brasil, 514 Blumenau, SC, Brasil"));
+		pontoDAO.inserirPonto(Ponto.informarLocal("Rua 7 de Setembro, 1213 Blumenau, SC, Brasil"));
 
-		// Ponto ponto1 = pontoDAO.recuperarPonto(new Ponto(1));
-		// Ponto ponto2 = pontoDAO.recuperarPonto(new Ponto(2));
+		
+		 Ponto ponto1 = pontoDAO.recuperarPonto(new Ponto(1));
+		 Ponto ponto2 = pontoDAO.recuperarPonto(new Ponto(2));
 
-		// Trajeto trajeto = new Trajeto(ponto1, ponto2, MeioDeTransporte.DRIVING_CAR);
+		 Trajeto trajeto = new Trajeto(ponto1, ponto2, MeioDeTransporte.DRIVING_CAR);
+		 System.out.println(trajeto.getPontos());
 
-		// for (int i = 0; i < trajeto.getPontos().size(); i++) {
-		// 	Ponto ponto = trajeto.getPontos().get(i);
-		// 	if (pontoDAO.verificarPonto(ponto) == null) {
-		// 		pontoDAO.inserirPonto(ponto);
-		// 	}
-		// 	Ponto pontoBD = pontoDAO.verificarPonto(ponto);
-		// 	trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
-		// }
-
-		// trajetoDAO.inserirTrajeto(trajeto);
+		 trajetoDAO.inserirTrajeto(trajeto);
 
 	}
 }
