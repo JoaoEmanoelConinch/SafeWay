@@ -200,19 +200,29 @@ public class ServletSafeWay extends HttpServlet{
 
     private void criarTrajeto(HttpServletRequest request, HttpServletResponse response) 
             throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException, ServletException {
-		String partida = request.getParameter("inicio");
-		String chegada = request.getParameter("chegada");
+		String p1 = request.getParameter("inicio");
+		String p2 = request.getParameter("chegada");
 		int meioDeTransporte = Integer.parseInt(request.getParameter("MeioDeTransporte"));
 
-		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
-		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
+		// long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+		// UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		
         MeioDeTransporte meio = MeioDeTransporte.values()[meioDeTransporte];
 		
-		
-		Trajeto trajeto = new Trajeto(partida, chegada, meio);
-
-		for (int i = 0; i < trajeto.getPontos().size(); i++) {
+        Ponto partida = Ponto.informarLocal(p1);
+        if (pontoDAO.verificarPonto(partida)==null){
+        	pontoDAO.inserirPonto(partida);
+        }
+        Ponto partidaTrajeto = pontoDAO.verificarPonto(partida);
+        
+        Ponto chegada = Ponto.informarLocal(p2);
+        if (pontoDAO.verificarPonto(chegada)==null){
+        	pontoDAO.inserirPonto(chegada);
+        }
+        Ponto chegadaTrajeto = pontoDAO.verificarPonto(partida);
+        
+		Trajeto trajeto = new Trajeto(partidaTrajeto, chegadaTrajeto, meio);
+        for (int i = 0; i < trajeto.getPontos().size(); i++) {
 			Ponto ponto = trajeto.getPontos().get(i);
 			if (pontoDAO.verificarPonto(ponto) == null) {
 				pontoDAO.inserirPonto(ponto);
@@ -221,7 +231,10 @@ public class ServletSafeWay extends HttpServlet{
 			trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
 		}
 		trajetoDAO.inserirTrajeto(trajeto);
-		usuarioDAO.atualizarUsuario(usuario);
+		// usuarioDAO.atualizarUsuario(usuario);
+
+		trajetoDAO.inserirTrajeto(trajeto);
+//		usuarioDAO.atualizarUsuario(usuario);
 
         List<Ponto> pontos = trajetoDAO.recuperarTrajeto(trajeto).getPontos();
         request.setAttribute("pontos", pontos);
