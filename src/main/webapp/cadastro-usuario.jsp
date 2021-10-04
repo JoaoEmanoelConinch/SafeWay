@@ -14,7 +14,7 @@
 		<h1>Cadastre-se para acessar no</h1>
 		<h1>SafeWay</h1>
 
-		<form id="register-form" action="inserir-Usuario" method="POST">
+		<form id="register-form" action="inserir-usuario" method="POST">
 			<div class="full-box">
 				<label for="name">Nome</label> <input type="text" name="nome"
 					id="nome" placeholder="Digite seu nome" data-required
