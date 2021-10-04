@@ -25,13 +25,22 @@ public class Principal {
 	public static void main(String[] args) 
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException, JsonParseException, JsonMappingException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 		
-		PontoDAO pontoDao = new PontoDAOImpl();
+		PontoDAO pontoDAO = new PontoDAOImpl();
 		TrajetoDAO trajetoDAO = new TrajetoDAOImpl();
 		
-		Ponto ponto1 = pontoDao.recuperarPonto(new Ponto(4));
-		Ponto ponto2 = pontoDao.recuperarPonto(new Ponto(3));
+		Ponto ponto1 = pontoDAO.recuperarPonto(new Ponto(4));
+		Ponto ponto2 = pontoDAO.recuperarPonto(new Ponto(3));
 
 		Trajeto trajeto = new Trajeto(ponto1, ponto2, MeioDeTransporte.DRIVING_CAR);
+
+		for (int i = 0; i < trajeto.getPontos().size(); i++) {
+			Ponto ponto = trajeto.getPontos().get(i);
+			if (pontoDAO.verificarPonto(ponto) == null) {
+				pontoDAO.inserirPonto(ponto);
+			}
+			Ponto pontoBD = pontoDAO.verificarPonto(ponto);
+			trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
+		}
 
 		trajetoDAO.inserirTrajeto(trajeto);
 

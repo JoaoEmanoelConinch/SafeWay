@@ -37,6 +37,8 @@ public class ConsultaTrajeto {
 			Ponto pontoDoTrajeto = new Ponto(latitude.doubleValue(),longitude.doubleValue());
 			
 			pontosDoTrajeto.add(pontoDoTrajeto);
+
+			System.out.println(i);
 			
 		}
 
