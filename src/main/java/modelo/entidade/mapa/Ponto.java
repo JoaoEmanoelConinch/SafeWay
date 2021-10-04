@@ -36,7 +36,7 @@ public class Ponto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ponto", nullable = false, unique = true)
-	private long id_ponto;
+	private Long id_ponto;
 	 
 	@Column(name = "latitude", nullable = false)
 	@Type(type = "double")
@@ -75,7 +75,7 @@ public class Ponto {
 	@Column(name = "endereco", nullable = false, length = 100)
 	private String endereco;
 	
-	public Ponto(long idPonto, double latitude, double longitude, List<Trajeto> trajetos, List<Formulario> avaliacoes) {
+	public Ponto(Long idPonto, double latitude, double longitude, List<Trajeto> trajetos, List<Formulario> avaliacoes) {
 		this.setIdPonto(idPonto);
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
@@ -92,17 +92,17 @@ public class Ponto {
 	}
 
 	
-	public Ponto(long id) {
+	public Ponto(Long id) {
 		setIdPonto(id);
 	}
 	
 	public Ponto(){}
 
-	public long getIdPonto() {
+	public Long getIdPonto() {
 		return id_ponto;
 	}
 	
-	public void setIdPonto(long idPonto) {
+	public void setIdPonto(Long idPonto) {
 		this.id_ponto = idPonto;
 	}
 	
