@@ -28,21 +28,23 @@ public class Principal {
 		PontoDAO pontoDAO = new PontoDAOImpl();
 		TrajetoDAO trajetoDAO = new TrajetoDAOImpl();
 		
-		Ponto ponto1 = pontoDAO.recuperarPonto(new Ponto(4));
-		Ponto ponto2 = pontoDAO.recuperarPonto(new Ponto(3));
+		pontoDAO.inserirPonto(Ponto.informarLocal("Rua República Argentina, 269 Blumenau, SC, Brasil"));
 
-		Trajeto trajeto = new Trajeto(ponto1, ponto2, MeioDeTransporte.DRIVING_CAR);
+		// Ponto ponto1 = pontoDAO.recuperarPonto(new Ponto(4));
+		// Ponto ponto2 = pontoDAO.recuperarPonto(new Ponto(3));
 
-		for (int i = 0; i < trajeto.getPontos().size(); i++) {
-			Ponto ponto = trajeto.getPontos().get(i);
-			if (pontoDAO.verificarPonto(ponto) == null) {
-				pontoDAO.inserirPonto(ponto);
-			}
-			Ponto pontoBD = pontoDAO.verificarPonto(ponto);
-			trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
-		}
+		// Trajeto trajeto = new Trajeto(ponto1, ponto2, MeioDeTransporte.DRIVING_CAR);
 
-		trajetoDAO.inserirTrajeto(trajeto);
+		// for (int i = 0; i < trajeto.getPontos().size(); i++) {
+		// 	Ponto ponto = trajeto.getPontos().get(i);
+		// 	if (pontoDAO.verificarPonto(ponto) == null) {
+		// 		pontoDAO.inserirPonto(ponto);
+		// 	}
+		// 	Ponto pontoBD = pontoDAO.verificarPonto(ponto);
+		// 	trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
+		// }
+
+		// trajetoDAO.inserirTrajeto(trajeto);
 
 	}
 }
