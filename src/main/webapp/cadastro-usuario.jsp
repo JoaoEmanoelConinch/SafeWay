@@ -39,7 +39,7 @@
 			<div class="full-box">
 				<button type="submit">Salvar</button>
 
-				<a href="index.jsp" id="Voltar">Voltar</a>
+				<a  href="<%=request.getContextPath()%>/inicio" id="Voltar">Voltar</a>
 			</div>
 		</form>
 	</div>

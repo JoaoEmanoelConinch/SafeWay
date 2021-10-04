@@ -18,20 +18,12 @@
 
   <div  id="main-container">
     <div class="cadastrar">
-      <a href="cadastro-usuario.jsp"  id="cadastre-se">Cadastre-se<a><br>
+      <a href="<%=request.getContextPath()%>/cadastro"  id="cadastre-se">Cadastre-se<a><br>
     </div>
     
     <div class="logar" >
-    
-
-    
-      <a  href="login.jsp" id="logar">Logar<br>
+      <a  href="<%=request.getContextPath()%>/login" id="logar">Logar<br>
      </div>
-     
-     <div class="usar-rapido"> 
-      <a href="mapa.jsp" id="usar-rapido" >Usar-Rápido<br>
-     </div>
-   
 
  </div>    
 </body>
