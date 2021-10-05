@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 import modelo.consultaAPI.ConsultaPonto;
-import modelo.entidade.formulario.Formulario;
+import modelo.entidade.formulario.Denuncia;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -50,7 +50,7 @@ public class Ponto {
 	private List<Trajeto> trajetos;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idPonto", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Formulario> avaliacoes;
+	private List<Denuncia> denuncia;
 
 	@Column(name = "quantidade_lesoes_corporais_ponto_avaliado", nullable = false)
 	private long quantidadeLesoesCorporais;
@@ -73,13 +73,13 @@ public class Ponto {
 	@Column(name = "endereco", nullable = true, length = 100)
 	private String endereco;
 	
-	public Ponto(long idPonto, double latitude, double longitude, List<Trajeto> trajetos, List<Formulario> avaliacoes) {
+	public Ponto(long idPonto, double latitude, double longitude, List<Trajeto> trajetos, List<Denuncia> denuncia) {
 		this.setIdPonto(idPonto);
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(trajetos);
-		this.setAvaliacoes(avaliacoes);
-		// this.setEndereco(informarLatLong());
+		this.setDenuncia(denuncia);
+		this.setEndereco(informarLatLong());
 		
 	}
 	
@@ -88,7 +88,7 @@ public class Ponto {
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(new ArrayList<Trajeto>());
-		// this.setEndereco(informarLatLong());
+		this.setEndereco(informarLatLong());
 	}
 
 	
@@ -133,12 +133,12 @@ public class Ponto {
 
 	}
 	
-	public List<Formulario> getAvaliacoes(){
-		return avaliacoes;
+	public List<Denuncia> getDenuncia(){
+		return denuncia;
 	}
 	
-	public void setAvaliacoes(List<Formulario> avaliacoes) {
-		this.avaliacoes = avaliacoes;
+	public void setDenuncia(List<Denuncia> denuncia) {
+		this.denuncia = denuncia;
 	}
 	
 	public long getQuantidadeLatrocinio() {
@@ -225,7 +225,7 @@ public class Ponto {
 	}
 
 	private void verificarBloqueio() {
-		this.bloqueio = getAvaliacoes().get((getAvaliacoes().size()-1)).isBloqueioRuas();
+		this.bloqueio = getDenuncia().get((getDenuncia().size()-1)).isBloqueioRuas();
 	}
 
 	public void addTrajeto(Trajeto trajeto) {
@@ -245,41 +245,41 @@ public class Ponto {
 	// 	avaliacoes.remove(form);
 	// }
 
-	public void addAvaliacao(Formulario avaliacao) throws NullPointerException {
+	public void addDenuncia(Denuncia denuncia) throws NullPointerException {
 
-		if (avaliacao == null) {
+		if (denuncia == null) {
 			throw new NullPointerException();
 		}
-		this.avaliacoes.add(avaliacao);
+		this.denuncia.add(denuncia);
 		
-		if (avaliacao.isLesaoCorporal()){
+		if (denuncia.isLesaoCorporal()){
 			setQuantidadeLesoesCorporais(getQuantidadeLesoesCorporais()+1);
 		}
-		if (avaliacao.isFurto()){
+		if (denuncia.isFurto()){
 			setQuantidadeFurtos(getQuantidadeFurtos()+1);
 		}
-		if (avaliacao.isRoubo()){
+		if (denuncia.isRoubo()){
 			setQuantidadeRoubos(getQuantidadeRoubos()+1);
 		}
-		if (avaliacao.isHomicidio()){
+		if (denuncia.isHomicidio()){
 			setQuantidadeHomicidios(getQuantidadeHomicidios()+1);
 		}
-		if (avaliacao.isLatrocinio()){
+		if (denuncia.isLatrocinio()){
 			setQuantidadeLatrocinio(getQuantidadeLatrocinio()+1);
 		}
 		this.verificarBloqueio();
 
 	}
 
-	public void removeAvaliacao(Formulario avaliacao) throws NullPointerException {
+	public void removeDenuncia(Denuncia avaliacao) throws NullPointerException {
 
 		if (avaliacao == null) {
 			throw new NullPointerException();
 		}
 
-		this.avaliacoes.remove(avaliacao);
+		this.denuncia.remove(avaliacao);
 
-		if (getAvaliacoes().size() > 0) {
+		if (getDenuncia().size() > 0) {
 			
 			if (avaliacao.isLesaoCorporal()){
 				setQuantidadeLesoesCorporais(getQuantidadeLesoesCorporais()-1);

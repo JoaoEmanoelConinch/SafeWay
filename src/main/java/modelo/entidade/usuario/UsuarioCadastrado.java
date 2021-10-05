@@ -23,7 +23,7 @@ import javax.persistence.Table;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
-import modelo.entidade.formulario.Formulario;
+import modelo.entidade.formulario.Denuncia;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Trajeto;
 import modelo.enumeracao.mapa.MeioDeTransporte;
@@ -55,7 +55,7 @@ public class UsuarioCadastrado implements Serializable {
 	private String email;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Formulario> formulariosDoUsuario;
+	private List<Denuncia> denunciasDoUsuario;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinTable(name = "usuario_trajeto",
@@ -78,13 +78,13 @@ public class UsuarioCadastrado implements Serializable {
 		
 	}
 
-	public UsuarioCadastrado(long idUsuario, String nome, String senha, String email, List<Formulario> formulariosDoUsuario, List<Trajeto> trajetos)
+	public UsuarioCadastrado(long idUsuario, String nome, String senha, String email, List<Denuncia> denunciasDoUsuario, List<Trajeto> trajetos)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
 		this.setId(idUsuario);
 		this.setNome(nome);
 		this.setSenha(senha);
 		this.setEmail(email);
-		this.setFormulariosDoUsuario(formulariosDoUsuario);
+		this.setDenunciasDoUsuario(denunciasDoUsuario);
 		this.setTrajetos(trajetos);
 	}
 
@@ -102,7 +102,7 @@ public class UsuarioCadastrado implements Serializable {
 		this.setNome(nome);
 		this.setSenha(senha);
 		this.setEmail(email);
-		this.setFormulariosDoUsuario(new ArrayList<Formulario>());
+		this.setDenunciasDoUsuario(new ArrayList<Denuncia>());
 		this.setTrajetos(new ArrayList<Trajeto>());
 	}
 
@@ -163,12 +163,12 @@ public class UsuarioCadastrado implements Serializable {
 
 	}
 
-	public void setFormulariosDoUsuario(List<Formulario> formulariosDoUsuario) {
-		this.formulariosDoUsuario = formulariosDoUsuario;
+	public void setDenunciasDoUsuario(List<Denuncia> formulariosDoUsuario) {
+		this.denunciasDoUsuario = formulariosDoUsuario;
 	}
 
-	public List<Formulario> getFormulariosDoUsuario() {
-		return formulariosDoUsuario;
+	public List<Denuncia> getDenunciasDoUsuario() {
+		return denunciasDoUsuario;
 	}
 
 	public List<Trajeto> getTrajetos() {
@@ -207,26 +207,26 @@ public class UsuarioCadastrado implements Serializable {
 
 	}
 
-	public Formulario avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
+	public Denuncia denunciar(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
 			boolean bloqueioRuas, String comentario, Ponto Ponto, UsuarioCadastrado idUsuario)
 			throws NullPointerException, StatusInvalidoException{
 
-		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas, Ponto, idUsuario);
+		Denuncia formulario = new Denuncia(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas, Ponto, idUsuario);
 
-		this.addFormulario(formulario);
-		Ponto.addAvaliacao(formulario);
+		this.addDenuncia(formulario);
+		Ponto.addDenuncia(formulario);
 
 		return formulario;
 
 	}
 
-	public void addFormulario(Formulario formulario) {
-		formulariosDoUsuario.add(formulario);
+	public void addDenuncia(Denuncia formulario) {
+		denunciasDoUsuario.add(formulario);
 	}
 
-	public void removerFormulario(Formulario formulario) {
+	public void removerFormulario(Denuncia formulario) {
 
-		formulariosDoUsuario.remove(formulario);
+		denunciasDoUsuario.remove(formulario);
 	}
 
 	public void addTrajeto(Trajeto trajeto) {

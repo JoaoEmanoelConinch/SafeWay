@@ -10,22 +10,21 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
-import modelo.entidade.formulario.Formulario;
-import modelo.entidade.formulario.Formulario_;
+import modelo.entidade.formulario.Denuncia;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Ponto_;
 import modelo.factory.conexao.ConexaoFactory;
 
-public class FormularioDAOImpl implements FormularioDAO {
+public class DenunciaDAOImpl implements DenunciaDAO {
 
 	private ConexaoFactory fabrica;
 
-	public FormularioDAOImpl() {
+	public DenunciaDAOImpl() {
 		fabrica = new ConexaoFactory();
 	}
 
 	@Override
-	public void inserirAvaliacao(Formulario formulario) {
+	public void inserirDenuncia(Denuncia denuncia) {
 
 		Session sessao = null;
 
@@ -34,7 +33,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			sessao.save(formulario);
+			sessao.save(denuncia);
 
 			sessao.getTransaction().commit();
 
@@ -53,7 +52,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 		}
 	}
 
-	public void deletarAvaliacao(Formulario formulario) {
+	public void deletarDenuncia(Denuncia denuncia) {
 
 		Session sessao = null;
 
@@ -62,7 +61,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			sessao.delete(formulario);
+			sessao.delete(denuncia);
 
 			sessao.getTransaction().commit();
 
@@ -83,7 +82,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 
 	}
 
-	public void atualizarAvaliacao(Formulario formlario) {
+	public void atualizarDenuncia(Denuncia denuncia) {
 
 		Session sessao = null;
 
@@ -92,7 +91,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			sessao.update(formlario);
+			sessao.update(denuncia);
 
 			sessao.getTransaction().commit();
 
@@ -113,10 +112,10 @@ public class FormularioDAOImpl implements FormularioDAO {
 
 	}
 
-	public List<Formulario> recuperarAvaliacoes(Ponto ponto) {
+	public List<Denuncia> recuperarDenuncias(Ponto ponto) {
 
 		Session sessao = null;
-		List<Formulario> forms = null;
+		List<Denuncia> forms = null;
 
 		try {
 
@@ -125,10 +124,10 @@ public class FormularioDAOImpl implements FormularioDAO {
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
-			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
+			CriteriaQuery<Denuncia> criteria = construtor.createQuery(Denuncia.class);
+			Root<Denuncia> raizDenuncia = criteria.from(Denuncia.class);
 
-			Join<Formulario, Ponto> juncaoPonto = raizFormulario.join(Formulario_.idPonto);
+			Join<Denuncia, Ponto> juncaoPonto = raizDenuncia.join(Denuncia_.idPonto);
 
 
 			ParameterExpression<Long> IdPonto = construtor.parameter(Long.class);
@@ -156,10 +155,10 @@ public class FormularioDAOImpl implements FormularioDAO {
 		return forms;
 	}
 
-	public Formulario recuperarAvaliacaoId(Formulario form) {
+	public Denuncia recuperarDenuncia(Denuncia denuncia) {
 
 		Session sessao = null;
-		Formulario formulario = null;
+		Denuncia denunciaR = null;
 
 		try {
 
@@ -168,13 +167,13 @@ public class FormularioDAOImpl implements FormularioDAO {
 
 			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
 
-			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
-			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
+			CriteriaQuery<Denuncia> criteria = construtor.createQuery(Denuncia.class);
+			Root<Denuncia> raizDenuncia = criteria.from(Denuncia.class);
 
 			ParameterExpression<Long> idForm = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(raizFormulario.get(Formulario_.ID_FORMULARIO), idForm));
+			criteria.where(construtor.equal(raizDenuncia.get(Denuncia_.ID_Denuncia), idForm));
 
-			formulario = sessao.createQuery(criteria).setParameter(idForm, form.getIdFormulario()).getSingleResult();
+			denunciaR = sessao.createQuery(criteria).setParameter(idForm, denuncia.getIdFormulario()).getSingleResult();
 			
 			sessao.getTransaction().commit();
 
@@ -193,7 +192,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 			}
 		}
 
-		return formulario;
+		return denunciaR;
 
 	}
 

@@ -21,8 +21,8 @@ import modelo.entidade.mapa.Ponto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 
 @Entity
-@Table(name = "Formulario")
-public class Formulario implements Serializable {
+@Table(name = "Denuncia")
+public class Denuncia implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -72,11 +72,11 @@ public class Formulario implements Serializable {
 		    )
 	private UsuarioCadastrado usuario;
 	
-	public Formulario() {
+	public Denuncia() {
 		setMedia(calcularMedia());
 	}
 	
-	public Formulario(long idFormulario) {
+	public Denuncia(long idFormulario) {
 		setIdFormulario(idFormulario);
 	}
 
@@ -113,7 +113,7 @@ public class Formulario implements Serializable {
 //
 //	}
 	
-	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
+	public Denuncia(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
 			boolean latrocinio, boolean bloqueioRuas, double media, String comentario, Ponto idPontoAvaliado,UsuarioCadastrado idUsuario) {
 
 				setIdFormulario(idFormulario);
@@ -130,7 +130,7 @@ public class Formulario implements Serializable {
 
 			}
 	
-	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
+	public Denuncia(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
 			boolean latrocinio, boolean bloqueioRuas, String comentario) {
 
 				setIdFormulario(idFormulario);
@@ -146,7 +146,7 @@ public class Formulario implements Serializable {
 
 			}
 
-	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
+	public Denuncia(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
 	 String comentario, boolean bloqueioRuas, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
 
 		setLesaoCorporal(lesaoCorporal);

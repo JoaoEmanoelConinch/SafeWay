@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
-import modelo.dao.formulario.FormularioDAO;
-import modelo.dao.formulario.FormularioDAOImpl;
+import modelo.dao.formulario.DenunciaDAO;
+import modelo.dao.formulario.DenunciaDAOImpl;
 import modelo.dao.ponto.PontoDAO;
 import modelo.dao.ponto.PontoDAOImpl;
 import modelo.dao.trajeto.TrajetoDAO;
 import modelo.dao.trajeto.TrajetoDAOImpl;
 import modelo.dao.usuario.UsuarioDAO;
 import modelo.dao.usuario.UsuarioDAOImpl;
-import modelo.entidade.formulario.Formulario;
+import modelo.entidade.formulario.Denuncia;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
@@ -41,14 +41,14 @@ public class ServletSafeWay extends HttpServlet{
 	private UsuarioDAO usuarioDAO;
 	private PontoDAO pontoDAO;
 	private TrajetoDAO trajetoDAO;
-	private FormularioDAO formularioDAO;
+	private DenunciaDAO denunciaDAO;
 
 	public void init() {
 		
 		usuarioDAO = new UsuarioDAOImpl();
 		pontoDAO = new PontoDAOImpl();
 		trajetoDAO = new TrajetoDAOImpl();
-		formularioDAO = new FormularioDAOImpl();
+		denunciaDAO = new DenunciaDAOImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -265,10 +265,10 @@ public class ServletSafeWay extends HttpServlet{
 			pontoDAO.inserirPonto(ponto);
 		}
 		Ponto pontoUsavel = pontoDAO.verificarPonto(ponto);
-		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueio, comentario, pontoUsavel, usuario);
+		Denuncia denuncia = usuario.denunciar(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueio, comentario, pontoUsavel, usuario);
 		
-		formularioDAO.inserirAvaliacao(avaliacao);
-		pontoUsavel.addAvaliacao(avaliacao);
+		denunciaDAO.inserirDenuncia(denuncia);
+		pontoUsavel.addDenuncia(denuncia);
 
 		pontoDAO.atualizarPonto(pontoUsavel);
     }
