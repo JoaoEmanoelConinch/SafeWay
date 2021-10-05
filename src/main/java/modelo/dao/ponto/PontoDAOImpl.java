@@ -157,6 +157,7 @@ public class PontoDAOImpl implements PontoDAO {
 	}
 
 	public Ponto recuperarPonto(Ponto ponto) {
+		
 		Session sessao = null;
 		Ponto ponto1 = null;
 
@@ -284,6 +285,5 @@ public class PontoDAOImpl implements PontoDAO {
 		return ponto1;
 		
 	}
-
 	
 }
