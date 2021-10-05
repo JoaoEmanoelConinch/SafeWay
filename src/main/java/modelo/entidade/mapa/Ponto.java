@@ -11,14 +11,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import modelo.consultaAPI.ConsultaPonto;
@@ -46,9 +42,11 @@ public class Ponto {
 	@Type(type = "double")
 	private double longitude;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "ponto_trajeto", joinColumns = @JoinColumn(name = "id_ponto"))
-	@Fetch(FetchMode.JOIN)
+	// @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	// @JoinTable(name = "ponto_trajeto", joinColumns = @JoinColumn(name = "id_ponto"))
+	// @Fetch(FetchMode.JOIN)
+
+	@ManyToMany(mappedBy = "pontos")
 	private List<Trajeto> trajetos;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idPonto", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -81,7 +79,7 @@ public class Ponto {
 		this.setLongitude(longitude);
 		this.setTrajetos(trajetos);
 		this.setAvaliacoes(avaliacoes);
-		//this.setEndereco(informarLatLong());
+		this.setEndereco(informarLatLong());
 		
 	}
 	
@@ -90,7 +88,7 @@ public class Ponto {
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(new ArrayList<Trajeto>());
-		//this.setEndereco(informarLatLong());
+		this.setEndereco(informarLatLong());
 	}
 
 	
@@ -200,7 +198,7 @@ public class Ponto {
 		return ConsultaPonto.informarLocal(local, posicao);
 	}
 
-	public static List<Ponto> informarLocais(String local) {
+	public static List<Ponto> informarLocais(String local) throws StatusInvalidoException {
 		return ConsultaPonto.informarLocais(local);
 	}
 

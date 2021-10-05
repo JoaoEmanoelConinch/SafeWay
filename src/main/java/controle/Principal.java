@@ -7,7 +7,11 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 import modelo.dao.ponto.PontoDAO;
 import modelo.dao.ponto.PontoDAOImpl;
+import modelo.dao.trajeto.TrajetoDAO;
+import modelo.dao.trajeto.TrajetoDAOImpl;
 import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.Trajeto;
+import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -21,16 +25,16 @@ public class Principal {
 	public static void main(String[] args) 
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException, JsonParseException, JsonMappingException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 		
-		PontoDAO pontoDao = new PontoDAOImpl();
+		PontoDAO pontoDAO = new PontoDAOImpl();
+		TrajetoDAO trajetoDAO = new TrajetoDAOImpl();
 		
-		Ponto p =  Ponto.informarLocal("Senac, Blumenau, SC, Brazil",1);
-		
-		System.out.println(p.getLatitude());
-		System.out.println(p.getLongitude());
-		
-		p.setEndereco(p.informarLatLong());
-		
-		System.out.println(p.getEndereco());
-		
+		 Ponto ponto1 = pontoDAO.recuperarPonto(new Ponto(1));
+		 Ponto ponto2 = pontoDAO.recuperarPonto(new Ponto(2));
+
+		 Trajeto trajeto = new Trajeto(ponto1, ponto2, MeioDeTransporte.DRIVING_CAR);
+
+		 System.out.println(trajeto.getPontos().size());
+
+
 	}
 }
