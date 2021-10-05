@@ -20,5 +20,4 @@ public interface PontoDAO {
 	
 	Ponto recuperarPontoAvaliacoes(Ponto ponto);
 	
-	
 }
