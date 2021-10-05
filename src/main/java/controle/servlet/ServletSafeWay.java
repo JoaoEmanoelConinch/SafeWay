@@ -33,6 +33,8 @@ import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
 import modelo.excecao.usuario.StringVaziaException;
 
+
+
 @WebServlet("/")
 public class ServletSafeWay extends HttpServlet{
     

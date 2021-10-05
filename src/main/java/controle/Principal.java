@@ -31,27 +31,7 @@ import modelo.excecao.usuario.StringVaziaException;
 public class Principal {
 
 
-	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException, JsonParseException, JsonMappingException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
-		
-		PontoDAO pontoDao = new PontoDAOImpl();
-		UsuarioDAO usuarioDao = new UsuarioDAOImpl();
-		FormularioDAO formDao = new FormularioDAOImpl();
-		
-		
-
-//		
-		Ponto p1 = pontoDao.recuperarPonto(new Ponto(2));
-
-		
-		
-		Formulario form = new Formulario(true, true, true, true, true, "asf", false, p1, usuarioDao.recuperarUsuarioId(new UsuarioCadastrado(1)));
-		formDao.inserirAvaliacao(form);
-		
-		p1.addAvaliacao(form);
-		pontoDao.atualizarPonto(p1);
-		
-		System.out.println(p1.getAvaliacoes().get(0).getComentario()+" "+p1.getAvaliacoes().get(0).getIdUsuario().getNome());
-		
+	public static void main(String[] args) {
 		
 	}
 }
