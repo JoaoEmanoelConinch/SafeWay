@@ -5,12 +5,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>Senac</groupId>
-  <artifactId>OpenSafeRoutes_OSR</artifactId>
+  <artifactId>SafeWay</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>OpenSafeRoutes_OSR Maven Webapp</name>
-  <url>http://www.OpenSafeRoutes_OSR.com</url>
+  <name>SafeWay Maven Webapp</name>
+  <url>http://www.safeway.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -120,7 +120,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>OpenSafeRoutes_OSR</finalName>
+		<finalName>SafeWay</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>
