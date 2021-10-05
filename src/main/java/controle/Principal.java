@@ -5,6 +5,15 @@ import java.io.IOException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
+import modelo.dao.formulario.FormularioDAO;
+import modelo.dao.formulario.FormularioDAOImpl;
+import modelo.dao.ponto.PontoDAO;
+import modelo.dao.ponto.PontoDAOImpl;
+import modelo.dao.usuario.UsuarioDAO;
+import modelo.dao.usuario.UsuarioDAOImpl;
+import modelo.entidade.formulario.Formulario;
+import modelo.entidade.mapa.Ponto;
+import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.dao.ponto.PontoDAO;
 import modelo.dao.ponto.PontoDAOImpl;
 import modelo.dao.trajeto.TrajetoDAO;
@@ -22,19 +31,27 @@ import modelo.excecao.usuario.StringVaziaException;
 public class Principal {
 
 
-	public static void main(String[] args) 
-			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException, JsonParseException, JsonMappingException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
+	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException, JsonParseException, JsonMappingException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 		
-		PontoDAO pontoDAO = new PontoDAOImpl();
-		TrajetoDAO trajetoDAO = new TrajetoDAOImpl();
+		PontoDAO pontoDao = new PontoDAOImpl();
+		UsuarioDAO usuarioDao = new UsuarioDAOImpl();
+		FormularioDAO formDao = new FormularioDAOImpl();
 		
-		 Ponto ponto1 = pontoDAO.recuperarPonto(new Ponto(1));
-		 Ponto ponto2 = pontoDAO.recuperarPonto(new Ponto(2));
+		
 
-		 Trajeto trajeto = new Trajeto(ponto1, ponto2, MeioDeTransporte.DRIVING_CAR);
+//		
+		Ponto p1 = pontoDao.recuperarPonto(new Ponto(2));
 
-		 System.out.println(trajeto.getPontos().size());
-
-
+		
+		
+		Formulario form = new Formulario(true, true, true, true, true, "asf", false, p1, usuarioDao.recuperarUsuarioId(new UsuarioCadastrado(1)));
+		formDao.inserirAvaliacao(form);
+		
+		p1.addAvaliacao(form);
+		pontoDao.atualizarPonto(p1);
+		
+		System.out.println(p1.getAvaliacoes().get(0).getComentario()+" "+p1.getAvaliacoes().get(0).getIdUsuario().getNome());
+		
+		
 	}
 }

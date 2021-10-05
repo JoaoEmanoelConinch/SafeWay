@@ -49,7 +49,7 @@ public class Ponto {
 	@ManyToMany(mappedBy = "pontos")
 	private List<Trajeto> trajetos;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idPonto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "idPonto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Formulario> avaliacoes;
 
 	@Column(name = "quantidade_lesoes_corporais_ponto_avaliado", nullable = false)
