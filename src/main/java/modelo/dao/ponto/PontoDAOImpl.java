@@ -257,12 +257,12 @@ public class PontoDAOImpl implements PontoDAO {
 			CriteriaQuery<Ponto> criteria = construtor.createQuery(Ponto.class);
 			Root<Ponto> raizContato = criteria.from(Ponto.class);
 
-			Join<Ponto, Cliente> juncaoCliente = raizContato.join(Ponto_.cliente);
+			Join<Ponto, Formulario> juncaoCliente = raizContato.join(Ponto_.avaliacoes);
 
-			ParameterExpression<Long> cpfCliente = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(juncaoCliente.get(Formulario_.ID_PONTO), cpfCliente));
+			ParameterExpression<Long> idPonto = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoCliente.get(Formulario_.ID_PONTO), idPonto));
 
-			ponto1 = sessao.createQuery(criteria).setParameter(cpfCliente, cliente.getCpf()).getSingleResult();
+			ponto1 = sessao.createQuery(criteria).setParameter(idPonto, ponto.getIdPonto()).getSingleResult();
 
 			sessao.getTransaction().commit();
 
