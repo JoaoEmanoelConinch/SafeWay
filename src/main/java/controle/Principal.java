@@ -41,7 +41,7 @@ public class Principal {
 		UsuarioCadastrado usuario = usuarioDao.recuperarUsuarioId(new UsuarioCadastrado(1));
 		Ponto p1 = pontoDao.recuperarPonto(new Ponto(2));
 		
-		System.out.println(p1.getAvaliacoes().get(0).getComentario()+p1.getAvaliacoes().get(0).getIdUsuario().getNome());
+		System.out.println(p1.getAvaliacoes().get(0).getComentario()+" "+p1.getAvaliacoes().get(0).getIdUsuario().getNome());
 		
 		
 	}
