@@ -237,7 +237,7 @@ public class UsuarioCadastrado implements Serializable {
 		trajetos.remove(trajeto);
 	}
 	
-	public static List<Ponto> informarLocais(String local){
+	public static List<Ponto> informarLocais(String local) throws StatusInvalidoException{
 		return Ponto.informarLocais(local);
 	} 
 

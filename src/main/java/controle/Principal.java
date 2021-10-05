@@ -14,6 +14,13 @@ import modelo.dao.usuario.UsuarioDAOImpl;
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.dao.ponto.PontoDAO;
+import modelo.dao.ponto.PontoDAOImpl;
+import modelo.dao.trajeto.TrajetoDAO;
+import modelo.dao.trajeto.TrajetoDAOImpl;
+import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.Trajeto;
+import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
@@ -30,23 +37,12 @@ public class Principal {
 		UsuarioDAO usuarioDao = new UsuarioDAOImpl();
 		FormularioDAO formDao = new FormularioDAOImpl();
 		
-		Ponto p1 = pontoDao.recuperarPonto(new Ponto(7));
 		
-		System.out.println(pontoDao.recuperarPontoAvaliacoes(p1));
+		UsuarioCadastrado usuario = usuarioDao.recuperarUsuarioId(new UsuarioCadastrado(1));
+		Ponto p1 = pontoDao.recuperarPonto(new Ponto(2));
 		
-//		System.out.println(formDao.recuperarAvaliacaoId(new Formulario(2)));		
+		System.out.println(p1.getAvaliacoes().get(0).getComentario()+p1.getAvaliacoes().get(0).getIdUsuario().getNome());
 		
-//		Ponto p1 = pontoDao.recuperarPontoAvaliacoes(new Ponto(7));
-////		p1.setEndereco("Senac, Blumenau, SC, Brazil");
-////		pontoDao.inserirPonto(p1);
-//		
-//		
-////		Formulario form = new Formulario(false, true, false, false, false, "fui roubado :(", false, p1, usuarioDao.recuperarUsuarioId(new UsuarioCadastrado(1)));
-////		formDao.inserirAvaliacao(form);
-//		
-//		p1.addAvaliacao(formDao.recuperarAvaliacaoId(new Formulario(2)));
-//		p1.addAvaliacao(formDao.recuperarAvaliacaoId(new Formulario(3)));
-//		pontoDao.atualizarPonto(p1);
 		
 	}
 }

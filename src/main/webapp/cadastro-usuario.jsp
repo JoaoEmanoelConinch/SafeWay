@@ -7,14 +7,14 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Tela de Cadastro</title>
 
-<style><%@include file="/resources/css/estilo.css"%></style>
+<%-- <style><%@include file="/resources/css/estilo.css"%></style> --%>
 </head>
 <body>
 	<div id="main-container">
 		<h1>Cadastre-se para acessar no</h1>
 		<h1>SafeWay</h1>
 
-		<form id="register-form" action="inserir-Usuario" method="POST">
+		<form id="register-form" action="inserir-usuario" method="POST">
 			<div class="full-box">
 				<label for="name">Nome</label> <input type="text" name="nome"
 					id="nome" placeholder="Digite seu nome" data-required
@@ -39,7 +39,7 @@
 			<div class="full-box">
 				<button type="submit">Salvar</button>
 
-				<a href="index.jsp" id="Voltar">Voltar</a>
+				<a  href="<%=request.getContextPath()%>/inicio" id="Voltar">Voltar</a>
 			</div>
 		</form>
 	</div>

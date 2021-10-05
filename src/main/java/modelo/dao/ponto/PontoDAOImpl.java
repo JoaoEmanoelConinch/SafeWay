@@ -284,5 +284,6 @@ public class PontoDAOImpl implements PontoDAO {
 		return ponto1;
 		
 	}
+
 	
 }

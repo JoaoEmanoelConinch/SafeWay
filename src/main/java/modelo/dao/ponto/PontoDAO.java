@@ -19,4 +19,6 @@ public interface PontoDAO {
 	Ponto verificarPonto(Ponto ponto);
 	
 	Ponto recuperarPontoAvaliacoes(Ponto ponto);
+	
+	
 }

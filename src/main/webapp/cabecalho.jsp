@@ -14,7 +14,7 @@
 </head>
 <body>
     <header>
-      <a href="index.jsp">Voltar</a>
+      <a  href="<%=request.getContextPath()%>/inicio">Voltar</a>
         <div class="container-logo">
             <div class="logo-imagem"></div>
             <div class="logo-texto">

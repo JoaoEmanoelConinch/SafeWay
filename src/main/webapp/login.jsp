@@ -25,7 +25,7 @@
       <div class="half-box">
         <label for="senha">Senha</label>
         <input type="password" name="senha" id="senha" placeholder="Digite sua senha" data-password-validate data-required>
-        <a href="index.jsp">Voltar</a>
+        <a  href="<%=request.getContextPath()%>/inicio">Voltar</a>
         <button>Logar</button>
       </div>
     </form>

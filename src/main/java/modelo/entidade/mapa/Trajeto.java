@@ -55,13 +55,21 @@ public class Trajeto implements Serializable {
 	private Ponto inicio;
 
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL })
-    @JoinTable(name = "ponto_trajeto",
-    joinColumns = @JoinColumn(name = "id_trajeto"),
-    inverseJoinColumns = @JoinColumn(name = "id_ponto")
-    )
+	// @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL })
+    // @JoinTable(name = "ponto_trajeto",
+    // joinColumns = @JoinColumn(name = "id_trajeto"),
+    // inverseJoinColumns = @JoinColumn(name = "id_ponto")
+    // )
+	@ManyToMany(cascade = {
+		CascadeType.PERSIST,
+		CascadeType.MERGE
+	})
+	@JoinTable(name = "ponto_trajeto",
+		joinColumns = @JoinColumn(name = "id_trajeto"),
+		inverseJoinColumns = @JoinColumn(name = "id_ponto")
+	)
 	private List<Ponto> pontos;
-
+	
 	@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.NO_ACTION)
     @JoinColumn(
@@ -128,7 +136,7 @@ public class Trajeto implements Serializable {
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
 	}
 	
-	public Trajeto(long id, Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws JsonParseException, JsonMappingException, IOException {
+	public Trajeto(long id, Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException {
 		this.setIdTrajeto(id);
 		this.setInicio(inicio);
 		this.setChegada(chegada);
@@ -183,7 +191,7 @@ public class Trajeto implements Serializable {
 	}
 
 	public List<Ponto> criarLineString()
-			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
+			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException, StatusInvalidoException {
 		 return ConsultaTrajeto.criarLineString(this.inicio, this.chegada, this.transporteUsado);
 	}
 	
