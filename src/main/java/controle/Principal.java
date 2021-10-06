@@ -36,22 +36,21 @@ public class Principal {
 		PontoDAO pontoDao = new PontoDAOImpl();
 		UsuarioDAO usuarioDao = new UsuarioDAOImpl();
 		FormularioDAO formDao = new FormularioDAOImpl();
+		TrajetoDAO trajetoDao = new TrajetoDAOImpl();
 		
+		Ponto p1 = Ponto.informarLocal("Rua Paraguai 269, Blumenau, SC, Brasil");
+		Ponto p2 = Ponto.informarLocal("Rua Paraguai 299, Blumenau, SC, Brasil");
 		
-
-//		
-		Ponto p1 = pontoDao.recuperarPonto(new Ponto(2));
-
-		
-		
-		Formulario form = new Formulario(true, true, true, true, true, "asf", false, p1, usuarioDao.recuperarUsuarioId(new UsuarioCadastrado(1)));
-		formDao.inserirAvaliacao(form);
-		
-		p1.addAvaliacao(form);
-		pontoDao.atualizarPonto(p1);
-		
-		System.out.println(p1.getAvaliacoes().get(0).getComentario()+" "+p1.getAvaliacoes().get(0).getIdUsuario().getNome());
-		
+		Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.FOOT_WALKING);
+		 for (int i = 0; i < trajeto.getPontos().size(); i++) {
+				Ponto ponto = trajeto.getPontos().get(i);
+				if (pontoDao.verificarPonto(ponto) == null) {
+					pontoDao.inserirPonto(ponto);
+				}
+				Ponto pontoBD = pontoDao.verificarPonto(ponto);
+				trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
+			}
+		trajetoDao.inserirTrajeto(trajeto);
 		
 	}
 }

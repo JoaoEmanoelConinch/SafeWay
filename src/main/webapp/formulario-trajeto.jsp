@@ -24,21 +24,20 @@
       <div class="half-box">
         <label for="inicio">Chegada</label>
         <div class="half-box-coordenadas" name="chegada" id="chegada">
-          <input class="coordenadas rua" type="text" name="rua-chegada" id="rua-chegada" placeholder="Informe a rua:">
-         
+          <input class="coordenadas rua" type="text" name="chegada" id="rua-chegada" placeholder="Informe a rua:">
         </div>
       </div>
       <div class="half-box">
         <select id="MeioDeTransporte" name="meio-transporte">
-              <option value=0>Carro/Moto</option>
-							<option value=1>Veiculo pesado</option>
-							<option value=2>Ciclismo regular</option>
-							<option value=3>Ciclovia</option>
-							<option value=4>Mountainbike</option>
-							<option value=5>Bicicleta Eletrica</option>
-							<option value=6>Andando a pé</option>
-							<option value=7>trilha</option>
-							<option value=8>Cadeira de rodas</option>
+            <option value=0>Carro/Moto</option>
+			<option value=1>Veiculo pesado</option>
+			<option value=2>Ciclismo regular</option>
+			<option value=3>Ciclovia</option>
+			<option value=4>Mountainbike</option>
+			<option value=5>Bicicleta Eletrica</option>
+			<option value=6>Andando a pé</option>
+			<option value=7>trilha</option>
+			<option value=8>Cadeira de rodas</option>
           
         </select>
       </div>
