@@ -13,15 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
-import modelo.dao.formulario.DenunciaDAO;
-import modelo.dao.formulario.DenunciaDAOImpl;
+import modelo.dao.denuncia.DenunciaDAO;
+import modelo.dao.denuncia.DenunciaDAOImpl;
 import modelo.dao.ponto.PontoDAO;
 import modelo.dao.ponto.PontoDAOImpl;
 import modelo.dao.trajeto.TrajetoDAO;
 import modelo.dao.trajeto.TrajetoDAOImpl;
 import modelo.dao.usuario.UsuarioDAO;
 import modelo.dao.usuario.UsuarioDAOImpl;
-import modelo.entidade.formulario.Denuncia;
+import modelo.entidade.Denuncia.Denuncia;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;

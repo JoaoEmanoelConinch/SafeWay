@@ -1,8 +1,8 @@
-package modelo.dao.formulario;
+package modelo.dao.denuncia;
 
 import java.util.List;
 
-import modelo.entidade.formulario.Denuncia;
+import modelo.entidade.Denuncia.Denuncia;
 import modelo.entidade.mapa.Ponto;
 
 public interface DenunciaDAO {

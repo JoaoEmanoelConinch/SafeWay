@@ -1,4 +1,4 @@
-package modelo.dao.formulario;
+package modelo.dao.denuncia;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
-import modelo.entidade.formulario.Denuncia;
+import modelo.entidade.Denuncia.Denuncia;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Ponto_;
 import modelo.factory.conexao.ConexaoFactory;

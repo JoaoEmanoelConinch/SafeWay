@@ -23,7 +23,7 @@ import javax.persistence.Table;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 
-import modelo.entidade.formulario.Denuncia;
+import modelo.entidade.Denuncia.Denuncia;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Trajeto;
 import modelo.enumeracao.mapa.MeioDeTransporte;

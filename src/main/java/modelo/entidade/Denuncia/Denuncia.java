@@ -1,4 +1,4 @@
-package modelo.entidade.formulario;
+package modelo.entidade.Denuncia;
 
 import java.io.Serializable;
 import java.util.ArrayList;

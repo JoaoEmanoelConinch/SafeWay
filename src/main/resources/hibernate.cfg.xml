@@ -10,7 +10,7 @@
 		<property name="hibernate.connection.password">P0n@refu</property>
 		<property name="show_sql">true</property>
 		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
-		<mapping class="modelo.entidade.formulario.Formulario" />
+		<mapping class="modelo.entidade.Denucia.Denuncia" />
 		<mapping class="modelo.entidade.mapa.Ponto" />
 		<mapping class="modelo.entidade.mapa.Trajeto" />
 		<mapping class="modelo.entidade.usuario.UsuarioCadastrado" />

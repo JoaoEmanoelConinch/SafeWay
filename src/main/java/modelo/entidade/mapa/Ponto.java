@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 import modelo.consultaAPI.ConsultaPonto;
-import modelo.entidade.formulario.Denuncia;
+import modelo.entidade.Denuncia.Denuncia;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
