@@ -204,7 +204,7 @@ public class ServletSafeWay extends HttpServlet{
             throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException, ServletException {
 		String p1 = request.getParameter("inicio");
 		String p2 = request.getParameter("chegada");
-		int meioDeTransporte = Integer.parseInt(request.getParameter("MeioDeTransporte"));
+		int meioDeTransporte = Integer.parseInt(request.getParameter("meio-transporte"));
 
 		// long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		// UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
@@ -234,9 +234,6 @@ public class ServletSafeWay extends HttpServlet{
 		}
 		trajetoDAO.inserirTrajeto(trajeto);
 		// usuarioDAO.atualizarUsuario(usuario);
-
-		trajetoDAO.inserirTrajeto(trajeto);
-//		usuarioDAO.atualizarUsuario(usuario);
 
         List<Ponto> pontos = trajetoDAO.recuperarTrajeto(trajeto).getPontos();
         request.setAttribute("pontos", pontos);
