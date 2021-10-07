@@ -14,6 +14,7 @@ import org.hibernate.Session;
 import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.entidade.usuario.UsuarioCadastrado_;
 import modelo.factory.conexao.ConexaoFactory;
+import modelo.dao.usuario.UsuarioDAO;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 
