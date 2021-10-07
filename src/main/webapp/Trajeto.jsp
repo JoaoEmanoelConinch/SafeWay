@@ -21,7 +21,7 @@
                 </tr>
 				
 				<tbody>
-					<c:forEach var="Ponto" items="${pontos}">
+					<c:forEach var="ponto" items="${pontos}">
 						<tr>
                             
 							<td><c:out value="${ponto.pontos}" /></td>
