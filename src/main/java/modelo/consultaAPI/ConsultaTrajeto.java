@@ -32,8 +32,8 @@ public class ConsultaTrajeto {
 
 			Ponto pontoDoTrajeto = new Ponto();
 
-			BigDecimal latitude = (BigDecimal) pontosDaAPI.getJSONArray(i).get(0);
-			BigDecimal longitude = (BigDecimal) pontosDaAPI.getJSONArray(i).get(1);
+			BigDecimal latitude = (BigDecimal) pontosDaAPI.getJSONArray(i).get(1);
+			BigDecimal longitude = (BigDecimal) pontosDaAPI.getJSONArray(i).get(0);
 
 			pontoDoTrajeto.setLatitude(latitude.doubleValue());
 			pontoDoTrajeto.setLongitude(longitude.doubleValue());
