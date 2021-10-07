@@ -24,7 +24,7 @@
 					<c:forEach var="ponto" items="${pontos}">
 						<tr>
                             
-							<td><c:out value="${ponto.pontos}" /></td>
+							<td><c:out value="${ponto.endereco}" /></td>
                             
                            
                     <td> 
@@ -38,6 +38,8 @@
 					</c:forEach>
 				</tbody>
 			</table>
+         <br>
+         <a  href="<%=request.getContextPath()%>/formulario-trageto">Voltar</a>
          <br>
            
 		</div>
