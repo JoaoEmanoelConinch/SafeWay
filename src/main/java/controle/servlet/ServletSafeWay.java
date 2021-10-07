@@ -235,7 +235,7 @@ public class ServletSafeWay extends HttpServlet{
 
         List<Ponto> pontos = trajetoDAO.recuperarTrajeto(trajeto).getPontos();
         request.setAttribute("pontos", pontos);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("trajeto.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Trajeto.jsp");
 		dispatcher.forward(request, response);
 
     }
