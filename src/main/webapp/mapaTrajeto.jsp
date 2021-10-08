@@ -18,7 +18,7 @@ var style;
 
 var polygonFeature
 
-function test(){
+function test(var pontos){
       lineLayer = new OpenLayers.Layer.Vector("Line Layer");
       style = { strokeColor: '#0000ff',
          strokeOpacity: 0.6,
@@ -33,8 +33,7 @@ var p = pontos.get[i]
 pontos[i] = new OpenLayers.LonLat(pontos.getLongitude, pontos.getLatitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 pontos[i] = new OpenLayers.Geometry.Point(pontos[i].lon,pontos[i].lat);
 
-      }
-    }
+     
 var linear_String = new OpenLayers.Geometry.LineString(pontos);
       lineFeature = new OpenLayers.Feature.Vector(
          new OpenLayers.Geometry.MultiLineString([linear_String]), null, style );
@@ -42,13 +41,10 @@ var linear_String = new OpenLayers.Geometry.LineString(pontos);
 
       map.addLayer(lineLayer);
 
- 
+      }
+}
      
-     
-   
-
-
-  function initialize() 
+  function initialize(var pontos) 
   {    
       map = new OpenLayers.Map ("map_canvas", {
             controls:[
@@ -71,14 +67,14 @@ var linear_String = new OpenLayers.Geometry.LineString(pontos);
         map.zoomTo(3);
         map.setCenter(lonLat, 18);  
 
-    test();
+    test(pontos);
   }
 
   </script>
     </head>
 
-    <body onload="initialize()" >
-
+    <body onload="initialize(<%=${pontos}%>)" >
+    
     <div id="map_canvas" width: 100%; height: 100%></div>  
   </body>
 
