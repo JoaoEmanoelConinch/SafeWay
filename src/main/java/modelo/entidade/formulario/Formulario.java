@@ -72,8 +72,17 @@ public class Formulario implements Serializable {
 		    )
 	private UsuarioCadastrado usuario;
 	
-	public Formulario() {
+	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio, String comentario, boolean bloqueio, Ponto pontoUsavel) {
+		setIdFormulario(idFormulario);
+		setLesaoCorporal(lesaoCorporal);
+		setFurto(furto);
+		setRoubo(roubo);
+		setHomicidio(homicidio);
+		setLatrocinio(latrocinio);
+		setComentario(comentario);
+		setBloqueioRuas(bloqueio);
 		setMedia(calcularMedia());
+		setIdPontoAvaliado(pontoUsavel);
 	}
 	
 	public Formulario(long idFormulario) {
