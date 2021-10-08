@@ -125,7 +125,7 @@ public class ServletSafeWay extends HttpServlet{
         }
 
         catch (Exception ex) {
-        	mostrarErro404(request, response);
+//        	mostrarErro404(request, response);
             throw new ServletException(ex);
         }
 
