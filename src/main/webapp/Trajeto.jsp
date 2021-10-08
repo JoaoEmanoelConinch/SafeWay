@@ -28,7 +28,7 @@
 							<td><c:out value="${ponto.latitude}"/></td>
 							<td><c:out value="${ponto.longitude}"/></td>
 							<td><c:out value="${ponto.endereco}"/></td>
-                            <td><a href="<%=request.getContextPath()%>/formolario-denuncia">Adicionar Avaliação</a></td>
+                            <td><a href="<%=request.getContextPath()%>/formolario-denuncia">Denunciar Crime</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
