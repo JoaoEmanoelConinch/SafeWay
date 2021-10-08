@@ -274,14 +274,14 @@ public class ServletSafeWay extends HttpServlet{
 
         List<Ponto> pontos = trajeto.getPontos();
         request.setAttribute("pontos", pontos);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaTrajeto.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Trajeto.jsp");
 		dispatcher.forward(request, response);
 
     }
 
     private void mostrarFormularioDenuncia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //!!!
-    	RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacao.jsp");
+    	RequestDispatcher dispatcher = request.getRequestDispatcher("denuncia.jsp");
 		dispatcher.forward(request, response);
     }
 
@@ -295,21 +295,22 @@ public class ServletSafeWay extends HttpServlet{
 		String comentario = request.getParameter("comentario");
 		Ponto ponto = (Ponto) request.getAttribute("ponto");
 
-		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
-		UsuarioCadastrado usuario = usuarioDAO.login(new UsuarioCadastrado(idUsuario));
+//		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+//		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 
+		Ponto pontoBD = pontoDAO.verificarPonto(ponto);
+		
 		if (pontoDAO.verificarPonto(ponto) == null) {
 			pontoDAO.inserirPonto(ponto);
 		}
 		Ponto pontoUsavel = pontoDAO.verificarPonto(ponto);
-		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueio, comentario, pontoUsavel, usuario);
+		Formulario avaliacao = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueio, pontoUsavel);
 		
 		formularioDAO.inserirAvaliacao(avaliacao);
 		pontoUsavel.addAvaliacao(avaliacao);
 
 		pontoDAO.atualizarPonto(pontoUsavel);
     }
-
     private void mostrarErro404(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("erro404.jsp");
 		dispatcher.forward(request, response);
