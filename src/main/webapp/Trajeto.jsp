@@ -16,24 +16,19 @@
 			<br>
 			<table>
                 <tr>
-                    <th>Pontos</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Endereço</th>
                     <th>Ações</th>
                 </tr>
 				
 				<tbody>
 					<c:forEach var="ponto" items="${pontos}">
 						<tr>
-                            
-							<td><c:out value="${ponto.endereco}" /></td>
-                            
-                           
-                    <td> 
-                        
-                        <a href="<%=request.getContextPath()%>/formolario-denuncia">Adicionar Avaliação</a>
-                    
-                    
-                    </td>
-                            
+							<td><c:out value="${ponto.latitude}"/></td>
+							<td><c:out value="${ponto.longitude}"/></td>
+							<td><c:out value="${ponto.endereco}"/></td>
+                            <td><a href="<%=request.getContextPath()%>/formolario-denuncia">Adicionar Avaliação</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

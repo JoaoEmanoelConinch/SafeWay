@@ -219,7 +219,7 @@ public class ServletSafeWay extends HttpServlet{
         if (pontoDAO.verificarPonto(chegada)==null){
         	pontoDAO.inserirPonto(chegada);
         }
-        Ponto chegadaTrajeto = pontoDAO.verificarPonto(partida);
+        Ponto chegadaTrajeto = pontoDAO.verificarPonto(chegada);
         
 		Trajeto trajeto = new Trajeto(partidaTrajeto, chegadaTrajeto, meio);
         for (int i = 0; i < trajeto.getPontos().size(); i++) {
