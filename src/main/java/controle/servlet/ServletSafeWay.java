@@ -149,12 +149,25 @@ public class ServletSafeWay extends HttpServlet{
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String email = request.getParameter("email");
+		String pagDestino = "formulario-trajeto.jsp";
 
-        UsuarioCadastrado usuario = new UsuarioCadastrado(nome, senha, email);
+        UsuarioCadastrado usuario = new UsuarioCadastrado();
+        usuario.setNome(nome);
+        usuario.setEmail(email);
+        usuario.setSenha(senha);
+        
+        if(usuarioDAO.verificarUsuarioNome(usuario)) {
+        	pagDestino = "cadastro-usuario.jsp";
+        }
+        
+        if(usuarioDAO.verificarUsuarioEmail(usuario)) {
+        	pagDestino = "cadastro-usuario.jsp";
+        }
+        
 		usuarioDAO.inserirUsuario(usuario);
 
         request.setAttribute("usuario", usuario);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trajeto.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(pagDestino);
         dispatcher.forward(request, response);
     }
 
@@ -176,7 +189,7 @@ public class ServletSafeWay extends HttpServlet{
 
     private void deletarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
         long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
-		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
+		UsuarioCadastrado usuarioCadastrado = usuarioDAO.login(new UsuarioCadastrado(idUsuario));
 		usuarioDAO.deletarUsuario(usuarioCadastrado);
 		response.sendRedirect("inicio");
     }
@@ -192,7 +205,7 @@ public class ServletSafeWay extends HttpServlet{
     	String senha = request.getParameter("senha");
     	String pagDestino = "login.jsp";
     	
-    	UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(email, senha));
+    	UsuarioCadastrado usuario = usuarioDAO.login(new UsuarioCadastrado(email, senha));
     	
     	if(usuario != null) {
     		request.setAttribute("usuario", usuario);
@@ -283,7 +296,7 @@ public class ServletSafeWay extends HttpServlet{
 		Ponto ponto = (Ponto) request.getAttribute("ponto");
 
 		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
-		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
+		UsuarioCadastrado usuario = usuarioDAO.login(new UsuarioCadastrado(idUsuario));
 
 		if (pontoDAO.verificarPonto(ponto) == null) {
 			pontoDAO.inserirPonto(ponto);

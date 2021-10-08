@@ -12,7 +12,7 @@ public interface UsuarioDAO {
 	
 	UsuarioCadastrado recuperarUsuarioId(UsuarioCadastrado usuario);
 	
-	UsuarioCadastrado recuperarUsuario(UsuarioCadastrado usuario);
+	UsuarioCadastrado login(UsuarioCadastrado usuario);
 	
 	boolean verificarUsuarioNome(UsuarioCadastrado usuario);
 	
