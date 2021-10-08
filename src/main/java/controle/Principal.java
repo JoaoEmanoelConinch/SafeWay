@@ -31,6 +31,7 @@ import modelo.excecao.usuario.StringVaziaException;
 public class Principal {
 
 
+
 	public static void main(String[] args) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, StatusInvalidoException, JsonParseException, JsonMappingException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
 		
 		PontoDAO pontoDao = new PontoDAOImpl();

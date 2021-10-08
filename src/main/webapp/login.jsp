@@ -17,7 +17,7 @@
     <h1>Logar em </h1>
     <h1>SafeWay</h1>
 
-    <form id="register-form" action="login" method="POST">
+    <form id="register-form" action="logar-usuario" method="POST">
       <div class="full-box">
         <label for="email">Email</label>
         <input type ="text" name="email" id="email" placeholder="Digite seu email" data-required data-min-length="8">
@@ -26,7 +26,7 @@
         <label for="senha">Senha</label>
         <input type="password" name="senha" id="senha" placeholder="Digite sua senha" data-password-validate data-required>
         <a  href="<%=request.getContextPath()%>/inicio">Voltar</a>
-        <button>Logar</button>
+        <button type="submit">Logar</button>
       </div>
     </form>
 

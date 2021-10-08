@@ -33,6 +33,8 @@ import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
 import modelo.excecao.usuario.StringVaziaException;
 
+
+
 @WebServlet("/")
 public class ServletSafeWay extends HttpServlet{
     
@@ -180,13 +182,32 @@ public class ServletSafeWay extends HttpServlet{
     }
 
     private void mostrarTelaLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("erro404.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 		dispatcher.forward(request, response);
     }
 
-    private void logarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        //logar!
-        response.sendRedirect("erro");
+    private void logarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException, StringVaziaException, SenhaPequenaException, EmailInvalidoException, ServletException {
+        
+    	String email = request.getParameter("email");
+    	String senha = request.getParameter("senha");
+    	String pagDestino = "login.jsp";
+    	
+    	UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(email, senha));
+    	
+    	if(usuario != null) {
+    		request.setAttribute("usuario", usuario);
+    		pagDestino = "formulario-trajeto.jsp";
+    	}
+//    		else {
+//    		 String message = "Email ou senha inválido!";
+//             request.setAttribute("message", message);
+//    	}
+    	
+//      response.sendRedirect("erro");
+    	
+    	RequestDispatcher dispatcher = request.getRequestDispatcher(pagDestino);
+        dispatcher.forward(request, response);   	
+
     }
 
     // private void mostrarMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
