@@ -297,8 +297,6 @@ public class ServletSafeWay extends HttpServlet{
 
 //		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 //		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
-
-		Ponto pontoBD = pontoDAO.verificarPonto(ponto);
 		
 		if (pontoDAO.verificarPonto(ponto) == null) {
 			pontoDAO.inserirPonto(ponto);
