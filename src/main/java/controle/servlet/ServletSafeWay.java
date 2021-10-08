@@ -274,7 +274,7 @@ public class ServletSafeWay extends HttpServlet{
 
         List<Ponto> pontos = trajeto.getPontos();
         request.setAttribute("pontos", pontos);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("Trajeto.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mapaTrajeto.jsp");
 		dispatcher.forward(request, response);
 
     }
