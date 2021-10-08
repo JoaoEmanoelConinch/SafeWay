@@ -151,10 +151,7 @@ public class ServletSafeWay extends HttpServlet{
 		String email = request.getParameter("email");
 		String pagDestino = "formulario-trajeto.jsp";
 
-        UsuarioCadastrado usuario = new UsuarioCadastrado();
-        usuario.setNome(nome);
-        usuario.setEmail(email);
-        usuario.setSenha(senha);
+        UsuarioCadastrado usuario = new UsuarioCadastrado(nome, senha, email);
         
         if(usuarioDAO.verificarUsuarioNome(usuario)) {
         	pagDestino = "cadastro-usuario.jsp";
