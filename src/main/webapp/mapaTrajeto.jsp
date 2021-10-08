@@ -15,7 +15,7 @@ var map;
 var lineLayer;
 
 var style;
-
+var pontos
 var polygonFeature
 
 function test(){
@@ -33,8 +33,8 @@ var p = pontos.get[i]
 pontos[i] = new OpenLayers.LonLat(pontos.getLongitude, pontos.getLatitude).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 pontos[i] = new OpenLayers.Geometry.Point(pontos[i].lon,pontos[i].lat);
 
-      }
-    }
+      
+    
 var linear_String = new OpenLayers.Geometry.LineString(pontos);
       lineFeature = new OpenLayers.Feature.Vector(
          new OpenLayers.Geometry.MultiLineString([linear_String]), null, style );
@@ -42,8 +42,8 @@ var linear_String = new OpenLayers.Geometry.LineString(pontos);
 
       map.addLayer(lineLayer);
 
- 
-     
+      }
+}
      
    
 
