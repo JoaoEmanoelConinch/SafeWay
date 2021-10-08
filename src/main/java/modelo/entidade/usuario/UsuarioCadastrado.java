@@ -77,6 +77,8 @@ public class UsuarioCadastrado implements Serializable {
 		this.setSenha(senha);
 		
 	}
+	
+	
 
 	public UsuarioCadastrado(long idUsuario, String nome, String senha, String email, List<Formulario> formulariosDoUsuario, List<Trajeto> trajetos)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {

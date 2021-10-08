@@ -153,7 +153,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
 	}
 
-	public UsuarioCadastrado recuperarUsuario(UsuarioCadastrado usuario) {
+	public UsuarioCadastrado login(UsuarioCadastrado usuario) {
 		
 		Session sessao = null;
 		UsuarioCadastrado usuarioRetornado = null;
