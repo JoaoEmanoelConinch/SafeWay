@@ -11,11 +11,12 @@ import org.json.JSONObject;
 
 import modelo.entidade.mapa.Ponto;
 import modelo.enumeracao.mapa.MeioDeTransporte;
+import modelo.excecao.mapa.StatusInvalidoException;
 
 public class ConsultaTrajeto {
 
 	public static List<Ponto> criarLineString(Ponto inicio, Ponto chegada, MeioDeTransporte transporte)
-			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
+			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException, StatusInvalidoException {
 
 		List<Ponto> pontosDoTrajeto = new ArrayList<Ponto>();
 		
@@ -30,13 +31,10 @@ public class ConsultaTrajeto {
 
 		for (int i = 0; i < pontosDaAPI.length();i++){
 
-			Ponto pontoDoTrajeto = new Ponto();
-
 			BigDecimal latitude = (BigDecimal) pontosDaAPI.getJSONArray(i).get(1);
 			BigDecimal longitude = (BigDecimal) pontosDaAPI.getJSONArray(i).get(0);
-
-			pontoDoTrajeto.setLatitude(latitude.doubleValue());
-			pontoDoTrajeto.setLongitude(longitude.doubleValue());
+			
+			Ponto pontoDoTrajeto = new Ponto(latitude.doubleValue(),longitude.doubleValue());
 			
 			pontosDoTrajeto.add(pontoDoTrajeto);
 			
