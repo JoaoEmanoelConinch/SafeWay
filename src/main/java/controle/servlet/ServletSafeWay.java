@@ -174,7 +174,7 @@ public class ServletSafeWay extends HttpServlet{
 
     private void deletarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
         long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
-		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
+		UsuarioCadastrado usuarioCadastrado = usuarioDAO.recuperarUsuarioId(new UsuarioCadastrado(idUsuario));
 		usuarioDAO.deletarUsuario(usuarioCadastrado);
 		response.sendRedirect("inicio");
     }
