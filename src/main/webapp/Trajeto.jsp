@@ -28,7 +28,7 @@
 <%--                        		<td><a href="<%=request.getContextPath()%>/formolario-denuncia">Denunciar Crime</a></td> --%>
                             <td>
                             	<label for="${pontos.ponto}">Denunciar</label>
-                            	<input type="checkbox" id="${pontos.ponto}" name="${pontos.ponto}" value="${pontos.ponto}">
+                            	<input type="radio" id="${pontos.ponto}" name="ponto-denunciado" value="${pontos.ponto}">
                             </td>
                             
 						</tr>
