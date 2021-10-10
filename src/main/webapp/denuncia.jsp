@@ -19,33 +19,33 @@
             <legend>Avalie esse ponto</legend>
             <label>Lesão corporal:</label>
             <label for="sim">Sim</label>
-            <input type="radio" id="sim" name="lesaoCorporal" value="sim" >
+            <input type="radio" id="sim" name="lesaoCorporal" value="true" >
             <label for="nao">Não</label>
-            <input type="radio" id="nao" name="lesaoCorporal" value="nao" checked><br><br>
+            <input type="radio" id="nao" name="lesaoCorporal" value="false" checked><br><br>
 
             <label>Furto:</label>
             <label for="sim">Sim</label>
-            <input type="radio" id="sim" name="furto" value="sim">
+            <input type="radio" id="sim" name="furto" value="true">
             <label for="nao">Não</label>
-            <input type="radio" id="nao" name="furto" value="nao" checked><br><br>
+            <input type="radio" id="nao" name="furto" value="false" checked><br><br>
 
             <label>Roubo:</label>
             <label for="sim">Sim</label>
-            <input type="radio" id="sim" name="roubo" value="sim">
+            <input type="radio" id="sim" name="roubo" value="true">
             <label for="nao">Não</label>
-            <input type="radio" id="nao" name="roubo" value="nao" checked><br><br>
+            <input type="radio" id="nao" name="roubo" value="false" checked><br><br>
 
             <label>Homicídio:</label>
             <label for="sim">Sim</label>
-            <input type="radio" id="sim" name="homicidio" value="sim">
+            <input type="radio" id="sim" name="homicidio" value="true">
             <label for="nao">Não</label>
-            <input type="radio" id="nao" name="homicidio" value="nao" checked><br><br>
+            <input type="radio" id="nao" name="homicidio" value="false" checked><br><br>
 
             <label>Latrocínio:</label>
             <label for="sim">Sim</label>
-            <input type="radio" id="sim" name="latrocinio" value="sim">
+            <input type="radio" id="sim" name="latrocinio" value="true">
             <label for="nao">Não</label>
-            <input type="radio" id="nao" name="latrocinio" value="nao" checked>
+            <input type="radio" id="nao" name="latrocinio" value="false" checked>
             <label></label>
         </fieldset>
 
