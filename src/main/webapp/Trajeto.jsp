@@ -14,25 +14,30 @@
 			<hr>
 			
 			<br>
+			<form action="formolario-denuncia">
 			<table>
                 <tr>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
                     <th>Endereço</th>
-                    <th>Ações</th>
+                    <th>Denunciar</th>
                 </tr>
 				
 				<tbody>
 					<c:forEach var="ponto" items="${pontos}">
 						<tr>
-							<td><c:out value="${ponto.latitude}"/></td>
-							<td><c:out value="${ponto.longitude}"/></td>
 							<td><c:out value="${ponto.endereco}"/></td>
-                            <td><a href="<%=request.getContextPath()%>/formolario-denuncia">Denunciar Crime</a></td>
+<%--                        		<td><a href="<%=request.getContextPath()%>/formolario-denuncia">Denunciar Crime</a></td> --%>
+                            <td>
+                            	<label for="${pontos.ponto}">Denunciar</label>
+                            	<input type="checkbox" id="${pontos.ponto}" name="${pontos.ponto}" value="${pontos.ponto}">
+                            </td>
+                            
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+			<br>
+			<input type="submit" value="Denunciar pontos">
+			</form>
          <br>
          <a  href="<%=request.getContextPath()%>/formulario-trageto">Voltar</a>
          <br>
