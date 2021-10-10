@@ -14,8 +14,8 @@
     <div class="bg-modal" id="modal">
         <div class="modal">
            
-            <form action="inserir-denuncia" method="POST" >
-                <fieldset>
+        <form action="inserir-denuncia" method="POST" >
+        <fieldset>
             <legend>Avalie esse ponto</legend>
             <label>Lesão corporal:</label>
             <label for="sim">Sim</label>
@@ -51,7 +51,7 @@
 
         <fieldset>
             <legend>Escreva seu comentário particular</legend>
-            <textarea rows="5" cols="50" maxlength="225" placeholder="Menssagem"></textarea>
+            <textarea name="comentario" rows="5" cols="50" maxlength="225" placeholder="Menssagem"></textarea>
         </fieldset>
         
         <input type="submit" value="Enviar avaliação">
