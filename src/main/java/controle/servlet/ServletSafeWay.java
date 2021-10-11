@@ -33,12 +33,10 @@ import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
 import modelo.excecao.usuario.StringVaziaException;
 
-
-
 @WebServlet("/")
-public class ServletSafeWay extends HttpServlet{
-    
-    private static final long serialVersionUID = 1L;
+public class ServletSafeWay extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
 
 	private UsuarioDAO usuarioDAO;
 	private PontoDAO pontoDAO;
@@ -46,7 +44,7 @@ public class ServletSafeWay extends HttpServlet{
 	private FormularioDAO formularioDAO;
 
 	public void init() {
-		
+
 		usuarioDAO = new UsuarioDAOImpl();
 		pontoDAO = new PontoDAOImpl();
 		trajetoDAO = new TrajetoDAOImpl();
@@ -67,200 +65,207 @@ public class ServletSafeWay extends HttpServlet{
 
 			switch (action) {
 
-                case "/inicio":
-                    mostrarTelaInicial(request, response);
-                    break;
+			case "/inicio":
+				mostrarTelaInicial(request, response);
+				break;
 
-                case "/cadastro":
-                    mostrarTelaCadastro(request, response);
-                    break;
+			case "/cadastro":
+				mostrarTelaCadastro(request, response);
+				break;
 
-                case "/inserir-usuario":
-                    inserirUsuario(request, response);
-                    break;
+			case "/inserir-usuario":
+				inserirUsuario(request, response);
+				break;
 
-                case "/atualizar-usuario":
-                    atualizarUsuario(request, response);
-                    break;
-                
-                case "/deletar-usuario":
-                    deletarUsuario(request, response);
-                    break;
+			case "/atualizar-usuario":
+				atualizarUsuario(request, response);
+				break;
 
-                case "/login":
-                    mostrarTelaLogin(request, response);
-                    break;
+			case "/deletar-usuario":
+				deletarUsuario(request, response);
+				break;
 
-                case "/logar-usuario":
-                    logarUsuario(request, response);
-                    break;
+			case "/login":
+				mostrarTelaLogin(request, response);
+				break;
 
-                // case "/menu":
-                //     mostrarMenu(request, response);
-                //     break;
+			case "/logar-usuario":
+				logarUsuario(request, response);
+				break;
 
-                case "/formulario-trageto":
-                    mostrarFormularioTrajeto(request, response);
-                    break;
+			// case "/menu":
+			// mostrarMenu(request, response);
+			// break;
 
-                case "/criar-trajeto":
-                    criarTrajeto(request, response);
-                    break;
+			case "/formulario-trageto":
+				mostrarFormularioTrajeto(request, response);
+				break;
+
+			case "/criar-trajeto":
+				criarTrajeto(request, response);
+				break;
 
 //                case "/trajeto":
 //                    mostrarTrajeto(request, response);
 //                    break;
 
-                case "/formolario-denuncia":
-                    mostrarFormularioDenuncia(request, response);
-                    break;
+			case "/formolario-denuncia":
+				mostrarFormularioDenuncia(request, response);
+				break;
 
-                case "/inserir-denuncia":
-                    inserirDenuncia(request, response);
-                    break;
+			case "/inserir-denuncia":
+				inserirDenuncia(request, response);
+				break;
 
-                default:
-                    mostrarErro404(request, response);
-                    break;
+			default:
+				mostrarErro404(request, response);
+				break;
 
-            }
-        }
+			}
+		}
 
-        catch (Exception ex) {
+		catch (Exception ex) {
 //        	mostrarErro404(request, response);
-            throw new ServletException(ex);
-        }
+			throw new ServletException(ex);
+		}
 
 	}
 
-    private void mostrarTelaInicial(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+	private void mostrarTelaInicial(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
-		
-    }
-    private void mostrarTelaCadastro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-usuario.jsp");
-		dispatcher.forward(request, response);
-    }
 
-    private void inserirUsuario(HttpServletRequest request, HttpServletResponse response) 
-            throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, IOException, ServletException {
+	}
+
+	private void mostrarTelaCadastro(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastro-usuario.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void inserirUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, IOException, ServletException {
 
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String email = request.getParameter("email");
 		String pagDestino = "formulario-trajeto.jsp";
 
-        UsuarioCadastrado usuario = new UsuarioCadastrado();
-        usuario.setNome(nome);
-        usuario.setEmail(email);
-        usuario.setSenha(senha);
-        
-        if(usuarioDAO.verificarUsuarioNome(usuario)) {
-        	pagDestino = "cadastro-usuario.jsp";
-        }
-        
-        if(usuarioDAO.verificarUsuarioEmail(usuario)) {
-        	pagDestino = "cadastro-usuario.jsp";
-        }
-        
+		UsuarioCadastrado usuario = new UsuarioCadastrado();
+		usuario.setNome(nome);
+		usuario.setEmail(email);
+		usuario.setSenha(senha);
+
+		if (usuarioDAO.verificarUsuarioNome(usuario)) {
+			pagDestino = "cadastro-usuario.jsp";
+		}
+
+		if (usuarioDAO.verificarUsuarioEmail(usuario)) {
+			pagDestino = "cadastro-usuario.jsp";
+		}
+
 		usuarioDAO.inserirUsuario(usuario);
 
-        request.setAttribute("usuario", usuario);
-        RequestDispatcher dispatcher = request.getRequestDispatcher(pagDestino);
-        dispatcher.forward(request, response);
-    }
+		request.setAttribute("usuario", usuario);
+		RequestDispatcher dispatcher = request.getRequestDispatcher(pagDestino);
+		dispatcher.forward(request, response);
+	}
 
-    private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
-            throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, IOException, ServletException {
-        long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+	private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, IOException, ServletException {
+		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		String nome = request.getParameter("nome");
 		String senha = request.getParameter("senha");
 		String email = request.getParameter("email");
-		
-        UsuarioCadastrado usuario = new UsuarioCadastrado(idUsuario, nome, senha, email);
+
+		UsuarioCadastrado usuario = new UsuarioCadastrado(idUsuario, nome, senha, email);
 		usuarioDAO.inserirUsuario(usuario);
 
-        request.setAttribute("usuario", usuario);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trajeto.jsp");
-        dispatcher.forward(request, response);
-    }
+		request.setAttribute("usuario", usuario);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trajeto.jsp");
+		dispatcher.forward(request, response);
+	}
 
-
-    private void deletarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
+	private void deletarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		UsuarioCadastrado usuarioCadastrado = usuarioDAO.login(new UsuarioCadastrado(idUsuario));
 		usuarioDAO.deletarUsuario(usuarioCadastrado);
 		response.sendRedirect("inicio");
-    }
+	}
 
-    private void mostrarTelaLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+	private void mostrarTelaLogin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
 		dispatcher.forward(request, response);
-    }
+	}
 
-    private void logarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException, StringVaziaException, SenhaPequenaException, EmailInvalidoException, ServletException {
-        
-    	String email = request.getParameter("email");
-    	String senha = request.getParameter("senha");
-    	String pagDestino = "login.jsp";
-    	
-    	UsuarioCadastrado usuario = usuarioDAO.login(new UsuarioCadastrado(email, senha));
-    	
-    	if(usuario != null) {
-    		request.setAttribute("usuario", usuario);
-    		pagDestino = "formulario-trajeto.jsp";
-    	}
+	private void logarUsuario(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, StringVaziaException, SenhaPequenaException, EmailInvalidoException, ServletException {
+
+		String email = request.getParameter("email");
+		String senha = request.getParameter("senha");
+		String pagDestino = "login.jsp";
+
+		UsuarioCadastrado usuario = usuarioDAO.login(new UsuarioCadastrado(email, senha));
+
+		if (usuario != null) {
+			request.setAttribute("usuario", usuario);
+			pagDestino = "formulario-trajeto.jsp";
+		}
 //    		else {
 //    		 String message = "Email ou senha inválido!";
 //             request.setAttribute("message", message);
 //    	}
-    	
+
 //      response.sendRedirect("erro");
-    	
-    	RequestDispatcher dispatcher = request.getRequestDispatcher(pagDestino);
-        dispatcher.forward(request, response);   	
 
-    }
-
-    // private void mostrarMenu(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    //     RequestDispatcher dispatcher = request.getRequestDispatcher("menu.jsp");
-	// 	dispatcher.forward(request, response);
-    // }
-
-    private void mostrarFormularioTrajeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioTrajeto.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher(pagDestino);
 		dispatcher.forward(request, response);
-    }
 
-    private void criarTrajeto(HttpServletRequest request, HttpServletResponse response) 
-            throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException, ServletException {
+	}
+
+	// private void mostrarMenu(HttpServletRequest request, HttpServletResponse
+	// response) throws ServletException, IOException {
+	// RequestDispatcher dispatcher = request.getRequestDispatcher("menu.jsp");
+	// dispatcher.forward(request, response);
+	// }
+
+	private void mostrarFormularioTrajeto(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioTrajeto.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void criarTrajeto(HttpServletRequest request, HttpServletResponse response)
+			throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException,
+			NumeroMenorQueZeroException, NumeroMaiorQueLimiteException, ServletException {
 		String p1 = request.getParameter("inicio");
 		String p2 = request.getParameter("chegada");
 		int meioDeTransporte = Integer.parseInt(request.getParameter("meio-transporte"));
 
 		// long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
-		// UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
-		
-        MeioDeTransporte meio = MeioDeTransporte.values()[meioDeTransporte];
-		
-        Ponto partida = Ponto.informarLocal(p1);
-        if (pontoDAO.verificarPonto(partida)==null){
-        	pontoDAO.inserirPonto(partida);
-        }
-        Ponto partidaTrajeto = pontoDAO.verificarPonto(partida);
-        partidaTrajeto.setEndereco(partidaTrajeto.informarLatLong());
-        
-        Ponto chegada = Ponto.informarLocal(p2);
-        if (pontoDAO.verificarPonto(chegada)==null){
-        	pontoDAO.inserirPonto(chegada);
-        }
-        Ponto chegadaTrajeto = pontoDAO.verificarPonto(chegada);
-        chegadaTrajeto.setEndereco(partidaTrajeto.informarLatLong());
+		// UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new
+		// UsuarioCadastrado(idUsuario));
 
-        
+		MeioDeTransporte meio = MeioDeTransporte.values()[meioDeTransporte];
+
+		Ponto partida = Ponto.informarLocal(p1);
+		if (pontoDAO.verificarPonto(partida) == null) {
+			pontoDAO.inserirPonto(partida);
+		}
+		Ponto partidaTrajeto = pontoDAO.verificarPonto(partida);
+		partidaTrajeto.setEndereco(partidaTrajeto.informarLatLong());
+
+		Ponto chegada = Ponto.informarLocal(p2);
+		if (pontoDAO.verificarPonto(chegada) == null) {
+			pontoDAO.inserirPonto(chegada);
+		}
+		Ponto chegadaTrajeto = pontoDAO.verificarPonto(chegada);
+		chegadaTrajeto.setEndereco(partidaTrajeto.informarLatLong());
+
 		Trajeto trajeto = new Trajeto(partidaTrajeto, chegadaTrajeto, meio);
-        for (int i = 0; i < trajeto.getPontos().size(); i++) {
+		for (int i = 0; i < trajeto.getPontos().size(); i++) {
 			Ponto ponto = trajeto.getPontos().get(i);
 			if (pontoDAO.verificarPonto(ponto) == null) {
 				pontoDAO.inserirPonto(ponto);
@@ -272,46 +277,55 @@ public class ServletSafeWay extends HttpServlet{
 		trajetoDAO.inserirTrajeto(trajeto);
 		// usuarioDAO.atualizarUsuario(usuario);
 
-        List<Ponto> pontos = trajeto.getPontos();
-        request.setAttribute("pontos", pontos);
+		List<Ponto> pontos = trajeto.getPontos();
+		request.setAttribute("pontos", pontos);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Trajeto.jsp");
 		dispatcher.forward(request, response);
 
-    }
+	}
 
-    private void mostrarFormularioDenuncia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //!!!
-    	RequestDispatcher dispatcher = request.getRequestDispatcher("denuncia.jsp");
+	private void mostrarFormularioDenuncia(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id"));
+		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(id));
+		RequestDispatcher dispatcher = request.getRequestDispatcher("denuncia.jsp");
+		request.setAttribute("ponto", ponto);
 		dispatcher.forward(request, response);
-    }
+	}
 
-    private void inserirDenuncia(HttpServletRequest request, HttpServletResponse response) throws NullPointerException, StatusInvalidoException {
-        boolean lesaoCorporal = Boolean.parseBoolean(request.getParameter("lesaoCorporal"));
+	private void inserirDenuncia(HttpServletRequest request, HttpServletResponse response)
+			throws NullPointerException, StatusInvalidoException, IOException {
+		boolean lesaoCorporal = Boolean.parseBoolean(request.getParameter("lesaoCorporal"));
 		boolean furto = Boolean.parseBoolean(request.getParameter("furto"));
 		boolean roubo = Boolean.parseBoolean(request.getParameter("roubo"));
 		boolean homicidio = Boolean.parseBoolean(request.getParameter("homicidio"));
 		boolean latrocinio = Boolean.parseBoolean(request.getParameter("latrocinio"));
 		boolean bloqueio = Boolean.parseBoolean(request.getParameter("bloqueio"));
 		String comentario = request.getParameter("comentario");
-		Ponto ponto = (Ponto) request.getAttribute("ponto");
+		long idPonto = Long.parseLong(request.getParameter("idPonto"));
+
+		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(idPonto));
 
 //		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 //		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
-		
+
 		if (pontoDAO.verificarPonto(ponto) == null) {
 			pontoDAO.inserirPonto(ponto);
 		}
 		Ponto pontoUsavel = pontoDAO.verificarPonto(ponto);
-		Formulario avaliacao = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueio, pontoUsavel);
-		
+		Formulario avaliacao = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueio,
+				pontoUsavel);
+
 		formularioDAO.inserirAvaliacao(avaliacao);
 		pontoUsavel.addAvaliacao(avaliacao);
 
 		pontoDAO.atualizarPonto(pontoUsavel);
-    }
-    private void mostrarErro404(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("erro404.jsp");
+	}
+
+	private void mostrarErro404(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("erro404.jsp");
 		dispatcher.forward(request, response);
-    }
+	}
 
 }
