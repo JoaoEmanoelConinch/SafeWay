@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Type;
 
@@ -24,7 +25,7 @@ import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
-@Table(name = "ponto")
+@Table(name = "ponto", uniqueConstraints = {@UniqueConstraint(columnNames = {"latitude", "longitude" }) })
 public class Ponto {
 
 	private static final long serialVersionUID = 1L;
