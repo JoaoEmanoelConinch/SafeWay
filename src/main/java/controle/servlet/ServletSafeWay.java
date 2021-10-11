@@ -249,15 +249,12 @@ public class ServletSafeWay extends HttpServlet{
         	pontoDAO.inserirPonto(partida);
         }
         Ponto partidaTrajeto = pontoDAO.verificarPonto(partida);
-        partidaTrajeto.setEndereco(partidaTrajeto.informarLatLong());
         
         Ponto chegada = Ponto.informarLocal(p2);
         if (pontoDAO.verificarPonto(chegada)==null){
         	pontoDAO.inserirPonto(chegada);
         }
         Ponto chegadaTrajeto = pontoDAO.verificarPonto(chegada);
-        chegadaTrajeto.setEndereco(partidaTrajeto.informarLatLong());
-
         
 		Trajeto trajeto = new Trajeto(partidaTrajeto, chegadaTrajeto, meio);
         for (int i = 0; i < trajeto.getPontos().size(); i++) {
@@ -266,7 +263,6 @@ public class ServletSafeWay extends HttpServlet{
 				pontoDAO.inserirPonto(ponto);
 			}
 			Ponto pontoBD = pontoDAO.verificarPonto(ponto);
-			pontoBD.setEndereco(partidaTrajeto.informarLatLong());
 			trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
 		}
 		trajetoDAO.inserirTrajeto(trajeto);
