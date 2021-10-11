@@ -229,7 +229,7 @@ public class ServletSafeWay extends HttpServlet{
     // }
 
     private void mostrarFormularioTrajeto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioTrajeto.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trajeto.jsp");
 		dispatcher.forward(request, response);
     }
 
