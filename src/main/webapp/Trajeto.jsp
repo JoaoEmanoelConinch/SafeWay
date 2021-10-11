@@ -16,19 +16,25 @@
 			<br>
 			<table>
                 <tr>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
                     <th>Endereço</th>
-                    <th>Ações</th>
+                    <th>Lesoes corporais</th>
+                    <th>Furtos</th>
+                    <th>Roubos</th>
+                    <th>Homicidios</th>
+                    <th>Latrocinios</th>
+                    <th>Denunciar</th>
                 </tr>
 				
 				<tbody>
 					<c:forEach var="ponto" items="${pontos}">
 						<tr>
-							<td><c:out value="${ponto.latitude}"/></td>
-							<td><c:out value="${ponto.longitude}"/></td>
 							<td><c:out value="${ponto.endereco}"/></td>
-                            <td><a href="<%=request.getContextPath()%>/formolario-denuncia">Denunciar Crime</a></td>
+							<td><c:out value="${ponto.quantidadeLesoesCorporais}"/></td>
+							<td><c:out value="${ponto.quantidadeFurtos}"/></td>
+							<td><c:out value="${ponto.quantidadeRoubos}"/></td>
+							<td><c:out value="${ponto.quantidadeHomicidios}"/></td>
+							<td><c:out value="${ponto.quantidadeLatrocinio}"/></td>
+							<td><a href=formolario-denuncia?id=<c:out value="${ponto.idPonto}"/>>Denunciar crime</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
