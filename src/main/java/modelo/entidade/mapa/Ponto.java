@@ -32,7 +32,7 @@ public class Ponto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ponto", nullable = false, unique = true)
-	private long id_ponto;
+	private long idPonto;
 	 
 	@Column(name = "latitude", nullable = false)
 	@Type(type = "double")
@@ -99,11 +99,11 @@ public class Ponto {
 	public Ponto(){}
 
 	public long getIdPonto() {
-		return id_ponto;
+		return idPonto;
 	}
 	
 	public void setIdPonto(long idPonto) {
-		this.id_ponto = idPonto;
+		this.idPonto = idPonto;
 	}
 	
 	public void setLatitude(double latitude) {
