@@ -20,4 +20,6 @@ public interface PontoDAO {
 	
 	Ponto recuperarPontoAvaliacoes(Ponto ponto);
 	
+	boolean PontoExiste(Ponto ponto);
+	
 }

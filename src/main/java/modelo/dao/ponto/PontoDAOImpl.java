@@ -285,5 +285,56 @@ public class PontoDAOImpl implements PontoDAO {
 		return ponto1;
 		
 	}
+
+	@Override
+	public boolean PontoExiste(Ponto ponto) {
+		
+		this.p = ponto;
+		Session sessao = null;
+		Ponto ponto1 = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Ponto> criteria = construtor.createQuery(Ponto.class);
+			Root<Ponto> raizPonto = criteria.from(Ponto.class);
+
+			List<Predicate> predicates = new ArrayList<Predicate>();
+
+			predicates.add(construtor.equal(raizPonto.get(Ponto_.LATITUDE), ponto.getLatitude()));
+			predicates.add(construtor.equal(raizPonto.get(Ponto_.LONGITUDE), ponto.getLongitude()));
+
+			criteria.select(raizPonto).where(predicates.toArray(new Predicate[] {}));
+
+			ponto1 = sessao.createQuery(criteria).getSingleResult();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		if(ponto1 != null)
+			return true;
+		
+		return false;
+
+		
+	}
 	
 }
