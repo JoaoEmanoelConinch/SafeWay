@@ -1,3 +1,4 @@
+
 package controle.servlet;
 
 import java.io.IOException;
@@ -245,13 +246,13 @@ public class ServletSafeWay extends HttpServlet{
         MeioDeTransporte meio = MeioDeTransporte.values()[meioDeTransporte];
 		
         Ponto partida = Ponto.informarLocal(p1);
-        if (pontoDAO.verificarPonto(partida)==null){
+        if (pontoDAO.PontoExiste(partida)){
         	pontoDAO.inserirPonto(partida);
         }
         Ponto partidaTrajeto = pontoDAO.verificarPonto(partida);
         
         Ponto chegada = Ponto.informarLocal(p2);
-        if (pontoDAO.verificarPonto(chegada)==null){
+        if (!pontoDAO.PontoExiste(chegada)){
         	pontoDAO.inserirPonto(chegada);
         }
         Ponto chegadaTrajeto = pontoDAO.verificarPonto(chegada);
@@ -259,7 +260,7 @@ public class ServletSafeWay extends HttpServlet{
 		Trajeto trajeto = new Trajeto(partidaTrajeto, chegadaTrajeto, meio);
         for (int i = 0; i < trajeto.getPontos().size(); i++) {
 			Ponto ponto = trajeto.getPontos().get(i);
-			if (pontoDAO.verificarPonto(ponto) == null) {
+			if (!pontoDAO.PontoExiste(ponto)){
 				pontoDAO.inserirPonto(ponto);
 			}
 			Ponto pontoBD = pontoDAO.verificarPonto(ponto);
@@ -299,7 +300,7 @@ public class ServletSafeWay extends HttpServlet{
 //		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 //		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		
-		if (pontoDAO.verificarPonto(ponto) == null) {
+		if (!pontoDAO.PontoExiste(ponto)) {
 			pontoDAO.inserirPonto(ponto);
 		}
 		Ponto pontoUsavel = pontoDAO.verificarPonto(ponto);

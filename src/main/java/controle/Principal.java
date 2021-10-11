@@ -42,16 +42,18 @@ public class Principal {
 		Ponto p1 = Ponto.informarLocal("Rua Paraguai 269, Blumenau, SC, Brasil");
 		Ponto p2 = Ponto.informarLocal("Rua Paraguai 299, Blumenau, SC, Brasil");
 		
-		Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.FOOT_WALKING);
-		 for (int i = 0; i < trajeto.getPontos().size(); i++) {
-				Ponto ponto = trajeto.getPontos().get(i);
-				if (pontoDao.verificarPonto(ponto) == null) {
-					pontoDao.inserirPonto(ponto);
-				}
-				Ponto pontoBD = pontoDao.verificarPonto(ponto);
-				trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
-			}
-		trajetoDao.inserirTrajeto(trajeto);
+		System.out.println(pontoDao.PontoExiste(p1));
+		
+//		Trajeto trajeto = new Trajeto(p1, p2, MeioDeTransporte.FOOT_WALKING);
+//		 for (int i = 0; i < trajeto.getPontos().size(); i++) {
+//				Ponto ponto = trajeto.getPontos().get(i);
+//				if (pontoDao.verificarPonto(ponto) == null) {
+//					pontoDao.inserirPonto(ponto);
+//				}
+//				Ponto pontoBD = pontoDao.verificarPonto(ponto);
+//				trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
+//			}
+//		trajetoDao.inserirTrajeto(trajeto);
 		
 	}
 }
