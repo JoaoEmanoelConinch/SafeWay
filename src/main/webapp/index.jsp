@@ -3,15 +3,12 @@
 
 <html lang="pt-br">
 <head>
-    <title>Tela de Inicio OSR</title>
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<%--   <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/styles.css"/> --%>
-<!--   <style>  -->
-<%--     <%@include file="/resources/css/styles.css"%>  --%>
-<!--   </style>-->
+    <title>Tela de SafeWay</title>
+  
+   <link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/estilo.css"/>
+  	<style>
+    <%@include file="/resources/css/estilo.css"%>
+		</style>
 </head> 
 
 <body>
@@ -24,8 +21,8 @@
     <div class="logar" >
       <a  href="<%=request.getContextPath()%>/login" id="logar">Logar<br>
      </div>
-
- </div>    
+ </div> 
+    
 </body>
 
 </html>
