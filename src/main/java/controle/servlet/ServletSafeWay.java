@@ -281,11 +281,14 @@ public class ServletSafeWay extends HttpServlet{
 
     private void mostrarFormularioDenuncia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //!!!
+    	Long id = Long.parseLong(request.getParameter("id"));
+    	Ponto ponto = pontoDAO.recuperarPonto(new Ponto(id));
     	RequestDispatcher dispatcher = request.getRequestDispatcher("denuncia.jsp");
+    	request.setAttribute("ponto", ponto);
 		dispatcher.forward(request, response);
     }
 
-    private void inserirDenuncia(HttpServletRequest request, HttpServletResponse response) throws NullPointerException, StatusInvalidoException {
+    private void inserirDenuncia(HttpServletRequest request, HttpServletResponse response) throws NullPointerException, StatusInvalidoException, IOException {
         boolean lesaoCorporal = Boolean.parseBoolean(request.getParameter("lesaoCorporal"));
 		boolean furto = Boolean.parseBoolean(request.getParameter("furto"));
 		boolean roubo = Boolean.parseBoolean(request.getParameter("roubo"));
@@ -293,7 +296,9 @@ public class ServletSafeWay extends HttpServlet{
 		boolean latrocinio = Boolean.parseBoolean(request.getParameter("latrocinio"));
 		boolean bloqueio = Boolean.parseBoolean(request.getParameter("bloqueio"));
 		String comentario = request.getParameter("comentario");
-		Ponto ponto = (Ponto) request.getAttribute("ponto");
+		long idPonto = Long.parseLong(request.getParameter("idPonto"));
+		
+		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(idPonto));
 
 //		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 //		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
@@ -308,6 +313,8 @@ public class ServletSafeWay extends HttpServlet{
 		pontoUsavel.addAvaliacao(avaliacao);
 
 		pontoDAO.atualizarPonto(pontoUsavel);
+		
+		response.sendRedirect("formulario-trageto");
     }
     private void mostrarErro404(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("erro404.jsp");
