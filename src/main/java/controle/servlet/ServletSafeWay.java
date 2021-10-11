@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -32,6 +33,8 @@ import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
 import modelo.excecao.usuario.StringVaziaException;
+
+
 
 
 
@@ -61,8 +64,10 @@ public class ServletSafeWay extends HttpServlet{
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String action = request.getServletPath();
+		String action = request.getServletPath(); 	
 
+		HttpSession session = request.getSession();
+		
 		try {
 
 			switch (action) {
@@ -76,15 +81,15 @@ public class ServletSafeWay extends HttpServlet{
                     break;
 
                 case "/inserir-usuario":
-                    inserirUsuario(request, response);
+                    inserirUsuario(request, response, session);
                     break;
 
                 case "/atualizar-usuario":
-                    atualizarUsuario(request, response);
+                    atualizarUsuario(request, response, session);
                     break;
                 
                 case "/deletar-usuario":
-                    deletarUsuario(request, response);
+                    deletarUsuario(request, response, session);
                     break;
 
                 case "/login":
@@ -92,7 +97,7 @@ public class ServletSafeWay extends HttpServlet{
                     break;
 
                 case "/logar-usuario":
-                    logarUsuario(request, response);
+                    logarUsuario(request, response, session);
                     break;
 
                 // case "/menu":
@@ -104,7 +109,7 @@ public class ServletSafeWay extends HttpServlet{
                     break;
 
                 case "/criar-trajeto":
-                    criarTrajeto(request, response);
+                    criarTrajeto(request, response, session);
                     break;
 
 //                case "/trajeto":
@@ -116,7 +121,7 @@ public class ServletSafeWay extends HttpServlet{
                     break;
 
                 case "/inserir-denuncia":
-                    inserirDenuncia(request, response);
+                    inserirDenuncia(request, response, session);
                     break;
 
                 default:
@@ -143,7 +148,7 @@ public class ServletSafeWay extends HttpServlet{
 		dispatcher.forward(request, response);
     }
 
-    private void inserirUsuario(HttpServletRequest request, HttpServletResponse response) 
+    private void inserirUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession session) 
             throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, IOException, ServletException {
 
 		String nome = request.getParameter("nome");
@@ -151,27 +156,20 @@ public class ServletSafeWay extends HttpServlet{
 		String email = request.getParameter("email");
 		String pagDestino = "formulario-trajeto.jsp";
 
-        UsuarioCadastrado usuario = new UsuarioCadastrado();
-        usuario.setNome(nome);
-        usuario.setEmail(email);
-        usuario.setSenha(senha);
+        UsuarioCadastrado usuario = new UsuarioCadastrado(nome, senha, email);
         
-        if(usuarioDAO.verificarUsuarioNome(usuario)) {
+        if(usuarioDAO.verificarUsuarioNome(usuario) || usuarioDAO.verificarUsuarioEmail(usuario)) {
         	pagDestino = "cadastro-usuario.jsp";
+        }else {
+        	usuarioDAO.inserirUsuario(usuario);
+        	session.setAttribute("usuario", usuario);
         }
-        
-        if(usuarioDAO.verificarUsuarioEmail(usuario)) {
-        	pagDestino = "cadastro-usuario.jsp";
-        }
-        
-		usuarioDAO.inserirUsuario(usuario);
 
-        request.setAttribute("usuario", usuario);
         RequestDispatcher dispatcher = request.getRequestDispatcher(pagDestino);
         dispatcher.forward(request, response);
     }
 
-    private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response)
+    private void atualizarUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession session)
             throws StringVaziaException, EmailInvalidoException, SenhaPequenaException, IOException, ServletException {
         long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		String nome = request.getParameter("nome");
@@ -181,16 +179,17 @@ public class ServletSafeWay extends HttpServlet{
         UsuarioCadastrado usuario = new UsuarioCadastrado(idUsuario, nome, senha, email);
 		usuarioDAO.inserirUsuario(usuario);
 
-        request.setAttribute("usuario", usuario);
+        session.setAttribute("usuario", usuario);
         RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trajeto.jsp");
         dispatcher.forward(request, response);
     }
 
 
-    private void deletarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void deletarUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
         long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		UsuarioCadastrado usuarioCadastrado = usuarioDAO.login(new UsuarioCadastrado(idUsuario));
 		usuarioDAO.deletarUsuario(usuarioCadastrado);
+		session.invalidate();
 		response.sendRedirect("inicio");
     }
 
@@ -199,7 +198,7 @@ public class ServletSafeWay extends HttpServlet{
 		dispatcher.forward(request, response);
     }
 
-    private void logarUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException, StringVaziaException, SenhaPequenaException, EmailInvalidoException, ServletException {
+    private void logarUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException, StringVaziaException, SenhaPequenaException, EmailInvalidoException, ServletException {
         
     	String email = request.getParameter("email");
     	String senha = request.getParameter("senha");
@@ -208,15 +207,9 @@ public class ServletSafeWay extends HttpServlet{
     	UsuarioCadastrado usuario = usuarioDAO.login(new UsuarioCadastrado(email, senha));
     	
     	if(usuario != null) {
-    		request.setAttribute("usuario", usuario);
+    		session.setAttribute("usuario", usuario);
     		pagDestino = "formulario-trajeto.jsp";
     	}
-//    		else {
-//    		 String message = "Email ou senha inválido!";
-//             request.setAttribute("message", message);
-//    	}
-    	
-//      response.sendRedirect("erro");
     	
     	RequestDispatcher dispatcher = request.getRequestDispatcher(pagDestino);
         dispatcher.forward(request, response);   	
@@ -233,11 +226,12 @@ public class ServletSafeWay extends HttpServlet{
 		dispatcher.forward(request, response);
     }
 
-    private void criarTrajeto(HttpServletRequest request, HttpServletResponse response) 
+    private void criarTrajeto(HttpServletRequest request, HttpServletResponse response, HttpSession session) 
             throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException, ServletException {
 		String p1 = request.getParameter("inicio");
 		String p2 = request.getParameter("chegada");
 		int meioDeTransporte = Integer.parseInt(request.getParameter("meio-transporte"));
+		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
 
 		// long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		// UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
@@ -257,9 +251,9 @@ public class ServletSafeWay extends HttpServlet{
         }
         Ponto chegadaTrajeto = pontoDAO.verificarPonto(chegada);
         chegadaTrajeto.setEndereco(partidaTrajeto.informarLatLong());
-
         
 		Trajeto trajeto = new Trajeto(partidaTrajeto, chegadaTrajeto, meio);
+		
         for (int i = 0; i < trajeto.getPontos().size(); i++) {
 			Ponto ponto = trajeto.getPontos().get(i);
 			if (pontoDAO.verificarPonto(ponto) == null) {
@@ -269,8 +263,11 @@ public class ServletSafeWay extends HttpServlet{
 			pontoBD.setEndereco(partidaTrajeto.informarLatLong());
 			trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
 		}
+        
+        trajeto.addUsuarioCadastrado(usuario);        
 		trajetoDAO.inserirTrajeto(trajeto);
-		// usuarioDAO.atualizarUsuario(usuario);
+		usuario.addTrajeto(trajeto);
+		usuarioDAO.atualizarUsuario(usuario);
 
         List<Ponto> pontos = trajeto.getPontos();
         request.setAttribute("pontos", pontos);
@@ -285,7 +282,7 @@ public class ServletSafeWay extends HttpServlet{
 		dispatcher.forward(request, response);
     }
 
-    private void inserirDenuncia(HttpServletRequest request, HttpServletResponse response) throws NullPointerException, StatusInvalidoException {
+    private void inserirDenuncia(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws NullPointerException, StatusInvalidoException {
         boolean lesaoCorporal = Boolean.parseBoolean(request.getParameter("lesaoCorporal"));
 		boolean furto = Boolean.parseBoolean(request.getParameter("furto"));
 		boolean roubo = Boolean.parseBoolean(request.getParameter("roubo"));
@@ -294,7 +291,8 @@ public class ServletSafeWay extends HttpServlet{
 		boolean bloqueio = Boolean.parseBoolean(request.getParameter("bloqueio"));
 		String comentario = request.getParameter("comentario");
 		Ponto ponto = (Ponto) request.getAttribute("ponto");
-
+		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
+		
 //		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 //		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
 		
@@ -302,7 +300,7 @@ public class ServletSafeWay extends HttpServlet{
 			pontoDAO.inserirPonto(ponto);
 		}
 		Ponto pontoUsavel = pontoDAO.verificarPonto(ponto);
-		Formulario avaliacao = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueio, pontoUsavel);
+		Formulario avaliacao = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueio, pontoUsavel, usuario);
 		
 		formularioDAO.inserirAvaliacao(avaliacao);
 		pontoUsavel.addAvaliacao(avaliacao);
