@@ -9,8 +9,7 @@ public enum MeioDeTransporte {
 	CYCLIHG_MOUNTAIN("cycling-mountain"), 
 	CYCCLING_ELECTRIC("cycling-electric"),
 	FOOT_WALKING("foot-walking"), 
-	FOOT_HIKING("foot-hiking"), 
-	WHEELCHAIR("wheelchair");
+	FOOT_HIKING("foot-hiking");
 	
 	private String descricao;
 	

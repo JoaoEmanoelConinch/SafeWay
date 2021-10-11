@@ -27,6 +27,7 @@ public class Formulario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_formulario", nullable = false, unique = true)
 	private long idFormulario;
@@ -89,38 +90,7 @@ public class Formulario implements Serializable {
 		setIdFormulario(idFormulario);
 	}
 
-//	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-//	 String comentario, boolean bloqueioRuas, PontoAvaliado idPontoAvaliado,UsuarioCadastrado idUsuario) {
-//
-//		setLesaoCorporal(lesaoCorporal);
-//		setFurto(furto);
-//		setRoubo(roubo);
-//		setHomicidio(homicidio);
-//		setLatrocinio(latrocinio);
-//		setComentario(comentario);
-//		setBloqueioRuas(bloqueioRuas);
-//		setMedia(calcularMedia());
-//		setIdPontoAvaliado(idPontoAvaliado);
-//		setIdUsuario(idUsuario);
-//
-//	}
 
-//	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
-//	boolean latrocinio, boolean bloqueioRuas, double media, String comentario, Ponto idPontoAvaliado,UsuarioCadastrado idUsuario) {
-//
-//		setIdFormulario(idFormulario);
-//		setLesaoCorporal(lesaoCorporal);
-//		setFurto(furto);
-//		setRoubo(roubo);
-//		setHomicidio(homicidio);
-//		setLatrocinio(latrocinio);
-//		setComentario(comentario);
-//		setBloqueioRuas(bloqueioRuas);
-//		setMedia(media);
-//		setIdPontoAvaliado(idPontoAvaliado);
-//		setIdUsuario(idUsuario);
-//
-//	}
 	
 	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
 			boolean latrocinio, boolean bloqueioRuas, double media, String comentario, Ponto idPontoAvaliado,UsuarioCadastrado idUsuario) {
@@ -151,7 +121,7 @@ public class Formulario implements Serializable {
 				setComentario(comentario);
 				setMedia(calcularMedia());
 				setBloqueioRuas(bloqueioRuas);
-//				setIdPontoAvaliado(idPontoAvaliado);
+
 
 			}
 

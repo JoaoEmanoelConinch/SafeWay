@@ -42,9 +42,7 @@ public class Ponto {
 	@Type(type = "double")
 	private double longitude;
 	
-	// @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	// @JoinTable(name = "ponto_trajeto", joinColumns = @JoinColumn(name = "id_ponto"))
-	// @Fetch(FetchMode.JOIN)
+
 
 	@ManyToMany(mappedBy = "pontos")
 	private List<Trajeto> trajetos;
@@ -237,13 +235,7 @@ public class Ponto {
 	}
 	
 	
-	// public void addAvaliacao(Formulario form) {
-	// 	avaliacoes.add(form);
-	// }
-
-	// public void removeAvaliacao(Formulario form) {
-	// 	avaliacoes.remove(form);
-	// }
+	
 
 	public void addAvaliacao(Formulario avaliacao) throws NullPointerException {
 

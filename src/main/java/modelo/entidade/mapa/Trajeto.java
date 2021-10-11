@@ -55,11 +55,7 @@ public class Trajeto implements Serializable {
 	private Ponto inicio;
 
 	
-	// @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.ALL })
-    // @JoinTable(name = "ponto_trajeto",
-    // joinColumns = @JoinColumn(name = "id_trajeto"),
-    // inverseJoinColumns = @JoinColumn(name = "id_ponto")
-    // )
+	
 	@ManyToMany(cascade = {
 		CascadeType.PERSIST,
 		CascadeType.MERGE
@@ -211,29 +207,7 @@ public class Trajeto implements Serializable {
 
 	
 	
-//	public List<PontoAvaliado> pegarPontosAvaliadosDoTrageto(){
-//		List<PontoAvaliado> pontosAvaliados = new ArrayList<PontoAvaliado>();
-//		List<Ponto> pontos = this.getPontos();
-//		
-//		for (int i = 0; i < pontos.size(); i++) {
-//			if (pontos.get(i).getClass().equals("PontoAvaliado")){
-//				pontosAvaliados.add(pontos.get(i));
-//			}
-//		}
-//		
-//		return pontosAvaliados;
-//	}
-//	
-//	public List<Double> pegarMediasDosPontosAvaliadosDoTrageto() {
-//		List<Double> medias = new ArrayList<Double>();
-//		List<PontoAvaliado> pontosAvaliados = pegarPontosAvaliadosDoTrageto();
-//		
-//		for (int i = 0; i < pontosAvaliados.size(); i++) {
-//			medias.add(pontosAvaliados.get(i).getMediaDeAvaliacao());
-//		}
-//		
-//		return medias;
-//	}
+
 
 	public void addPonto (Ponto ponto){
 		pontos.add(ponto);
