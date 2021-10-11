@@ -11,6 +11,7 @@
   	<style>
     <%@include file="/resources/css/estilo.css"%>
 		</style>
+		
     </head>
 <body>
     <footer>
