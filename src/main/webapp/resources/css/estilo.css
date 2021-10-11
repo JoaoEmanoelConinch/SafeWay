@@ -4,93 +4,85 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Helvetica, sans-serif;
-  color: #323232;
+  color: #084b83;
   border: none;
 }
 
- /*CABEÃ‡ALHO*/
-
-  header {
-    padding: 15px 0;
-    width: 100%;
-    background-color:#030d31;
-    display:flex;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-.container-logo {
-  display: flex;
-  align-items: center;
-  }
-
-.logo-imagem {
-}
-
-.logo-texto {
-  margin-left: 20px;
-  background-color:#041244;
-  padding: 10px 10px;
-  border-radius: 15px;
-}
-
-.menu li{
- display: inline-block;
- margin: 10px 10px;
-}
-
-.menu li a{
- border-radius: 15px;
- background-color: #041244;
- padding: 10px 10px;
- font-size: 20px;
- text-decoration: none;
- text-transform: uppercase;
-}
- 
-/*FIM CABEÃ‡ALHO*/
 input, label {
   display: block;
   outline: none;
   width: 100%;
 }
 
-
-a {
-  color: #323232;
-}
-
- 
-
 body {
-  padding-top: 0;
-  background-image: url('https://media-manager.noticiasaominuto.com/1920/naom_58273ebc63f5e.jpg');
+  background-image: url(mapa-fundo.jpg);
   background-size: cover;
   background-position-y: 0px;
 }
+/* fim geral */
 
- 
+/* forms */
 
-/* form */
-#main-container {
-  width: 500px;
+/* div tela inicial */
+#invisivel {
+  width: 350px;
+  margin-top: 0px;
   margin-left: auto;
   margin-right: auto;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.0);
+  border-radius: 50px;
+  border: 5px solid #ffffff00;
+  padding: 25px;
+ }
+
+#main-container-cadastro {
+  width: 400px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(186, 191, 224, 0.8);
   border-radius: 50px;
   border-color: #1a63ff;
+  border: 5px solid #084b83;
   padding: 25px;
 }
 
- 
+#main-container-cadastro h1 {
+    text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.6rem;
+}
+#main-container {
+  width: 350px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(186, 191, 224, 0.8);
+  border-radius: 50px;
+  border-color: #1a63ff;
+  border: 5px solid #084b83;
+  padding: 25px;
+}
 
 #main-container h1 {
   text-align: center;
   margin-bottom: 25px;
-  font-size: 1.6rem;
+  font-size: 2.0rem;
+
 }
 
- 
+#go {
+ margin-bottom: 0px;
+}
+
+
+#logo{
+  width: 350px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50px;
+}
 
 form {
   display: flex;
@@ -99,45 +91,65 @@ form {
   flex-direction: column;
 }
 
- 
+button {
+  font-size:medium ;
+  box-shadow: 2px 2px 2px black;
+  border-radius: 13px;
+  padding: 5px 5px;
+  color:rgb(255, 255, 255);
+  background-color: #084b83;
+  float: right;
+  left: 88%;
+}
+
+a.bt-inicial {
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 2px black;
+  border-radius: 13px;
+  padding: 5px 5px;
+  color:rgb(255, 255, 255);
+  background-color: #ff4747;
+  left: 88%;
+}
+
+a{
+  box-shadow: 2px 2px 2px black;
+  border-radius: 13px;
+  padding: 5px 5px;
+  color:#ffffff;
+  background-color: #ff4747;
+  text-decoration: none;
+}
+
+/* fim forms */
 
 .full-box {
   flex: 1 1 100%;
   position: relative;
 }
 
- 
-
 .half-box {
   flex: 1 1 45%;
   position: relative;
 }
+
 .half-box-coordenadas{
   display: flex;
-}
-
- 
+} 
 
 .spacing {
   margin-right: 2.5%;
 }
 
- 
-
 .coordenadas{
   margin-right: 22px;
 }
 
- 
-
-label {
+ label {
   font-weight: bold;
-  font-size: .8rem;
+  font-size: .9rem;
   margin-bottom: 1rem;
 }
-
- 
-
 input {
   border-bottom: 2px solid #030d31;
   padding: 10px;
@@ -145,16 +157,12 @@ input {
   margin-bottom: 40px;
 }
 
- 
-/*cor do click*/
-input:focus {
-  border-color: #cfe600;
+ input:focus {
+  border-color: #f6ae2d;
 }
 
- 
-
-input[type="submit"] {
-  background-color: #2300e6;
+ input[type="submit"] {
+  background-color: #084b83;
   color: rgb(255, 255, 255);
   border: none;
   border-radius: 20px;
@@ -162,16 +170,84 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-
 #agreement {
   margin-right: 5px;
+}
+
+#MeioDeTransporte {
+  background-color: #084b83;
+  color:(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+  height: 20px;
+  cursor: pointer;
+  color: #ffffff;
+ }
+
+option{
+  color: #ffffff;
+}
+
+div.relative {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  } 
+
+
+
+  /* COMEÇO CABEÇALHO
+
+header {
+  padding: 15px 0;
+  width: 100%;
+  background-color:#132d8b;
+  display:flex;
+  justify-content:space-around;
+  align-items: center;
+}
+
+.container-logo {
+display: flex;
+align-items: center;
+}
+
+.logo-imagem {
+}
+
+.logo-texto {
+color: blanchedalmond;
+box-shadow: 2px 2px white;
+background-color:#486cf0;
+padding: 10px 10px;
+border-radius: 15px;
+padding-right: 7px;
+padding-left: 7px;
 
 }
 
-button {
-  color:rgb(255, 255, 255);
-margin-bottom: 20px ;
- margin-left: 400px;
- background-color: #2300e6;
-
+.menu li{
+display: inline-block;
+margin: 10px 10px;
 }
+
+.menu li a{
+color: blanchedalmond;
+border-radius: 15px;
+background-color: #486cf0;;
+padding: 10px 10px;
+font-size: 20px;
+text-decoration: none;
+text-transform: uppercase;
+}
+
+a {
+color: blanchedalmond;
+text-decoration: none;
+background-color: #ff4747;
+padding: 5px;
+border-radius: 15px;
+box-shadow: 2px 2px white;
+text-transform: uppercase;
+}
+/* FIM CABEÇALHO */

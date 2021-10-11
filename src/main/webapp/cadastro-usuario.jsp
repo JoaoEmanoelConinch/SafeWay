@@ -7,7 +7,10 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Tela de Cadastro</title>
 
-<%-- <style><%@include file="/resources/css/estilo.css"%></style> --%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/estilo.css"/>
+  	<style>
+    <%@include file="/resources/css/estilo.css"%>
+		</style>
 </head>
 <body>
 	<div id="main-container">

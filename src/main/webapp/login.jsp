@@ -7,10 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Tela de Login</title>
-<%--   <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/styles.css"/> --%>
-<!--   <style>  -->
-<%--     <%@include file="/resources/css/styles.css"%>  --%>
-<!--   </style> -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/estilo.css"/>
+  	<style>
+    <%@include file="/resources/css/estilo.css"%>
+		</style>
+
   </head>
 <body>
   <div id="main-container">
