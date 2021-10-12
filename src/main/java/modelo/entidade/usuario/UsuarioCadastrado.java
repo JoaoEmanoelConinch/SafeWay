@@ -223,20 +223,19 @@ public class UsuarioCadastrado implements Serializable {
 	}
 
 	public void addFormulario(Formulario formulario) {
-		formulariosDoUsuario.add(formulario);
+		this.getFormulariosDoUsuario().add(formulario);
 	}
 
 	public void removerFormulario(Formulario formulario) {
-
-		formulariosDoUsuario.remove(formulario);
+		this.getFormulariosDoUsuario().remove(formulario);
 	}
 
 	public void addTrajeto(Trajeto trajeto) {
-		trajetos.add(trajeto);
+		this.getTrajetos().add(trajeto);
 	}
 
 	public void removerTrajeto(Trajeto trajeto) {
-		trajetos.remove(trajeto);
+		this.getTrajetos().remove(trajeto);
 	}
 	
 	public static List<Ponto> informarLocais(String local) throws StatusInvalidoException{
