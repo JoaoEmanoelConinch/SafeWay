@@ -10,12 +10,10 @@
     <%@include file="/resources/css/estilo.css"%>
 		</style>
 
-   
-  
 
     </head> 
 
-
+<jsp:include page="header.jsp" />
 <body>
   <div id="">
   <div class="absolute" id="logo">
