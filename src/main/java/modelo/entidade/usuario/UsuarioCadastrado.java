@@ -57,7 +57,7 @@ public class UsuarioCadastrado implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Formulario> formulariosDoUsuario;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinTable(name = "usuario_trajeto",
 	joinColumns = @JoinColumn(name = "id_usuario"),
 	inverseJoinColumns = @JoinColumn(name = "id_trajeto")

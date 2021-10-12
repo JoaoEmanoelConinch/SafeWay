@@ -235,6 +235,7 @@ public class ServletSafeWay extends HttpServlet {
 		String p2 = request.getParameter("chegada");
 		int meioDeTransporte = Integer.parseInt(request.getParameter("meio-transporte"));
 		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
+		usuario.setTrajetos(trajetoDAO.recuperarTrajetosUsuario(usuario));
 
 		// long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
 		// UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new
