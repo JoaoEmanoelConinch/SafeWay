@@ -37,7 +37,7 @@
 			<option value=5>Bicicleta Eletrica</option>
 			<option value=6>Andando a pé</option>
 			<option value=7>trilha</option>
-			<option value=8>Cadeira de rodas</option>
+			
           
         </select>
       </div>

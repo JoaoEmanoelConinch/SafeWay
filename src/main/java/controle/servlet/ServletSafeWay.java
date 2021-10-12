@@ -100,9 +100,10 @@ public class ServletSafeWay extends HttpServlet {
 			// mostrarMenu(request, response);
 			// break;
 
-			case "/formulario-trageto":
-				mostrarFormularioTrajeto(request, response);
-				break;
+      case "/formulario-trajeto":
+          mostrarFormularioTrajeto(request, response);
+          break;
+
 
 			case "/criar-trajeto":
 				criarTrajeto(request, response, session);
