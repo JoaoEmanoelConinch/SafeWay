@@ -7,10 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rodapé</title>
-<%--     <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/styles.css"/> --%>
-<!--     <style>  -->
-<%--       <%@include file="/resources/css/styles.css"%>  --%>
-<!--     </style> -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/estilo.css"/>
+  	<style>
+    <%@include file="/resources/css/estilo.css"%>
+		</style>
+		
     </head>
 <body>
     <footer>
@@ -18,7 +19,7 @@
            <h4>Links do Projeto:</h4>
            <ul>
            <%-- Os link serão mudados pra ícones posteriomente --%>
-            <li><a href="https://github.com/JoaoEmanoelConinch/OpenSafeRoutes-OSR" target="_blank">GitHub</a></li>
+            <li><a href="https://github.com/JoaoEmanoelConinch/SafeWay" target="_blank">GitHub</a></li>
             <li><a href=""> | </a></li>
             <li><a href="https://openrouteservice.org/" target="_blank"> API</a></li>
             
