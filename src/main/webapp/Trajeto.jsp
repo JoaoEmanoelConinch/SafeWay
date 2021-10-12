@@ -18,7 +18,7 @@
 <title>Trajeto</title>
 </head>
 <body>
-	
+	<jsp:include page="header.jsp" />
 	
 	<div>
 		<div>
