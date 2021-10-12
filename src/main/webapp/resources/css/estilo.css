@@ -194,7 +194,49 @@ div.relative {
   width: 100%;
   } 
 
+#botaoavaliar{
+  box-shadow: 2px 2px 2px black;
+  border-radius: 13px;
+  padding: 5px 5px;
+  color:#ffffff;
+  background-color: #ff4747;
+  text-decoration: none;
+}
+#botaoavaliar:hover{
+  background-color: #ff0000
+}
 
+
+#botaovoltar{
+  background-color: #084b83;
+  color: #ffffff;
+  border-top:0px;
+}
+
+
+#tabelaop:hover 
+
+{ background-color: #084b83; 
+
+transition: 0.5s;
+
+opacity: 1.0;
+
+}
+
+#divtabela{
+
+height:700px;
+width: 70%;
+margin-left: auto;
+margin-right: auto;
+margin-top: 50px;
+
+}
+#linhatabela:hover{
+  background-color: #084c83af;
+  opacity: 0.5;
+}
 
   /* COMEÇO CABEÇALHO
 
