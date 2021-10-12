@@ -15,7 +15,7 @@ input, label {
 }
 
 body {
-  background-image: url(mapa-fundo.jpg);
+  background-image: url("https://lh3.googleusercontent.com/jan6-1N7adqA4ctdstmC6H9rvvQ1flpsWwgUb2kRn0Ntd09Kkt8f-s1SRPOEC5B2zXsmZi2DIjTM4jpWSWE_8IkkwazRRd0NYSvzNsueRKLQqcAbkq9fmLvdZSgBXr1r5fvBCVWz8iHzFIiSIgw-6bL9XyVwnAlH2f6k3fygMLaIsQ46_ySlU6EfpnOqhiVPzM7G0wP99mLLrn-nyXwvHwO2Pmy_JXd6a7FpR1UdQsXWn_b_b2fKR5BNYZioVuJoC0uPviOwAbYMSwCCj0r8x5ecMuIn_H9EeImLWsamAu4F17OpoKK8LEGgp_ZIItoDkKrWwzzj_txpSmoXjc0UZRkhqDkO4rrBTXumL88rEABhJCdBxCDnYn9PBZO-F6rzIonzJDqqeanv-QF4l976QDnhfkkN28YCsuDqFNjqM5dqj-xPlj4XdFZg_UqHzkee7oEvMhFag-FPZUB7HNP8gcYgZJaAd-PiojrLqC36SDPe1yUY-qdE2Zrw0EAexgsPjQniakxukyGYaEYkax6xNVfjqKKCEoeBSXZq_KnXcbXqzctQFLQYkVa6jIS047hWxvcA6Iccp8ppSk6prvvUtbjPWgobMv5dXGciLBfAebe3exQStbmujQL9Ws9pNqfnqQtGXLqKIZ6pM_faPhsuNtkYcYtOvr2LzcD-SnVOYb6HjhsIRn2y7RTOHocunpVOBB4_Dk8HAGsJAbrBMhy5TNw=w1366-h768-no?authuser=0");
   background-size: cover;
   background-position-y: 0px;
 }
@@ -238,7 +238,15 @@ margin-top: 50px;
   opacity: 0.5;
 }
 
-  /* COMEÇO CABEÇALHO
+
+#meiotela{
+  margin-left:auto;
+  margin-right:auto;
+}
+
+
+
+  /* COMEï¿½O CABEï¿½ALHO
 
 header {
   padding: 15px 0;
@@ -292,4 +300,4 @@ border-radius: 15px;
 box-shadow: 2px 2px white;
 text-transform: uppercase;
 }
-/* FIM CABEÇALHO */
+/* FIM CABEï¿½ALHO */
