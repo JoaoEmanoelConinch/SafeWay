@@ -108,9 +108,9 @@ public class ServletSafeWay extends HttpServlet {
 				criarTrajeto(request, response, session);
 				break;
 
-//                case "/trajeto":
-//                    mostrarTrajeto(request, response);
-//                    break;
+            case "/trajeto":
+                mostrarTrajeto(request, response, session);
+                break;
 
 			case "/formolario-denuncia":
 				mostrarFormularioDenuncia(request, response);
@@ -243,29 +243,49 @@ public class ServletSafeWay extends HttpServlet {
 		MeioDeTransporte meio = MeioDeTransporte.values()[meioDeTransporte];
 
 		Ponto partida = Ponto.informarLocal(p1);
-		if (pontoDAO.verificarPonto(partida) == null) {
+		
+		Ponto partidaSoLatLong = new Ponto();
+		partidaSoLatLong.setLongitude(partida.getLongitude());
+		partidaSoLatLong.setLatitude(partida.getLatitude());
+		
+		if (pontoDAO.verificarPonto(partidaSoLatLong) == null) {
 			pontoDAO.inserirPonto(partida);
 		}
-		Ponto partidaTrajeto = pontoDAO.verificarPonto(partida);
-		partidaTrajeto.setEndereco(partidaTrajeto.informarLatLong());
+		Ponto partidaTrajeto = pontoDAO.verificarPonto(partidaSoLatLong);
 
 		Ponto chegada = Ponto.informarLocal(p2);
-		if (pontoDAO.verificarPonto(chegada) == null) {
+		
+		Ponto chegadaSoLatLong = new Ponto();
+		chegadaSoLatLong.setLongitude(chegada.getLongitude());
+		chegadaSoLatLong.setLatitude(chegada.getLatitude());
+		
+		if (pontoDAO.verificarPonto(chegadaSoLatLong) == null) {
 			pontoDAO.inserirPonto(chegada);
 		}
-		Ponto chegadaTrajeto = pontoDAO.verificarPonto(chegada);
-		chegadaTrajeto.setEndereco(partidaTrajeto.informarLatLong());
-
-		Trajeto trajeto = new Trajeto(partidaTrajeto, chegadaTrajeto, meio);
+		Ponto chegadaTrajeto = pontoDAO.verificarPonto(chegadaSoLatLong);
+		
+		Trajeto trajeto = usuario.trajeto(partidaTrajeto, chegadaTrajeto, meio);
+		
+		System.out.println(trajeto.getPontos().size());
 
 		for (int i = 0; i < trajeto.getPontos().size(); i++) {
 			Ponto ponto = trajeto.getPontos().get(i);
-			if (pontoDAO.verificarPonto(ponto) == null) {
+			
+			Ponto pontoSoLatLong = new Ponto();
+			pontoSoLatLong.setLongitude(ponto.getLongitude());
+			pontoSoLatLong.setLatitude(ponto.getLatitude());
+			
+			if (pontoDAO.verificarPonto(pontoSoLatLong) == null) {
 				pontoDAO.inserirPonto(ponto);
 			}
-			Ponto pontoBD = pontoDAO.verificarPonto(ponto);
-			pontoBD.setEndereco(partidaTrajeto.informarLatLong());
-			trajeto.getPontos().get(i).setIdPonto(pontoBD.getIdPonto());
+			
+			System.out.println(ponto.getLongitude());
+			System.out.println(ponto.getLatitude());
+			System.out.println();
+			System.out.println(pontoSoLatLong.getLongitude());
+			System.out.println(pontoSoLatLong.getLatitude());
+			
+			trajeto.getPontos().get(i).setIdPonto(pontoDAO.verificarPonto(pontoSoLatLong).getIdPonto());
 		}
 
 		trajeto.addUsuarioCadastrado(usuario);
@@ -273,15 +293,22 @@ public class ServletSafeWay extends HttpServlet {
 		usuario.addTrajeto(trajeto);
 		usuarioDAO.atualizarUsuario(usuario);
 
-		List<Ponto> pontos = trajeto.getPontos();
-
-		request.setAttribute("pontos", pontos);
 		session.setAttribute("trajeto", trajeto);
+		
+		response.sendRedirect("trajeto");
+	}
+	
+	private void mostrarTrajeto(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	
+		Trajeto trajeto = (Trajeto)session.getAttribute("trajeto");
+		
+		List<Ponto> pontos = trajeto.getPontos();
+		request.setAttribute("pontos", pontos);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Trajeto.jsp");
 		dispatcher.forward(request, response);
-
-	}
+		
+	} 
 
 	private void mostrarFormularioDenuncia(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -293,7 +320,7 @@ public class ServletSafeWay extends HttpServlet {
 	}
 
 	private void inserirDenuncia(HttpServletRequest request, HttpServletResponse response, HttpSession session)
-			throws NullPointerException, StatusInvalidoException {
+			throws NullPointerException, StatusInvalidoException, IOException {
 		
 		boolean lesaoCorporal = Boolean.parseBoolean(request.getParameter("lesaoCorporal"));
 		boolean furto = Boolean.parseBoolean(request.getParameter("furto"));
@@ -308,21 +335,34 @@ public class ServletSafeWay extends HttpServlet {
 
 		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
 
-//		long idUsuario = Long.parseLong(request.getParameter("idUsuario"));
-//		UsuarioCadastrado usuario = usuarioDAO.recuperarUsuario(new UsuarioCadastrado(idUsuario));
-
-		if (pontoDAO.verificarPonto(ponto) == null) {
+		Ponto pontoSoLatLong = new Ponto();
+		pontoSoLatLong.setLongitude(ponto.getLongitude());
+		pontoSoLatLong.setLatitude(ponto.getLatitude());
+		
+		if (pontoDAO.verificarPonto(pontoSoLatLong) == null) {
 			pontoDAO.inserirPonto(ponto);
 		}
-		Ponto pontoUsavel = pontoDAO.verificarPonto(ponto);
+		Ponto pontoverificado = pontoDAO.verificarPonto(pontoSoLatLong);
 
-		Formulario avaliacao = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueio,
-				pontoUsavel, usuario);
+		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueio, comentario, pontoverificado);
 
 		formularioDAO.inserirAvaliacao(avaliacao);
-		pontoUsavel.addAvaliacao(avaliacao);
+		pontoverificado.addAvaliacao(avaliacao);
 
-		pontoDAO.atualizarPonto(pontoUsavel);
+		usuarioDAO.atualizarUsuario(usuario);
+		pontoDAO.atualizarPonto(pontoverificado);
+		
+		Trajeto trajeto = (Trajeto) session.getAttribute("trajeto");
+		
+		for (int i = 0; i < trajeto.getPontos().size(); i++) {
+			if (trajeto.getPontos().get(i).getLongitude() == pontoverificado.getLongitude() & 
+				trajeto.getPontos().get(i).getLatitude() == pontoverificado.getLatitude()) {
+				trajeto.getPontos().get(i).addAvaliacao(avaliacao);
+			}
+		}
+		
+		session.setAttribute("trajeto", trajeto);
+		response.sendRedirect("trajeto");
 	}
 
 	private void mostrarErro404(HttpServletRequest request, HttpServletResponse response)
