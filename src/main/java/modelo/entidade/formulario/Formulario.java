@@ -72,7 +72,7 @@ public class Formulario implements Serializable {
 		    )
 	private UsuarioCadastrado usuario;
 	
-	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio, String comentario, boolean bloqueio, Ponto pontoUsavel) {
+	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio, String comentario, boolean bloqueio, Ponto ponto) {
 		setIdFormulario(idFormulario);
 		setLesaoCorporal(lesaoCorporal);
 		setFurto(furto);
@@ -82,7 +82,7 @@ public class Formulario implements Serializable {
 		setComentario(comentario);
 		setBloqueioRuas(bloqueio);
 		setMedia(calcularMedia());
-		setIdPontoAvaliado(pontoUsavel);
+		setIdPontoAvaliado(ponto);
 	}
 	
 	public Formulario(long idFormulario) {
