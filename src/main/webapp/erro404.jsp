@@ -6,10 +6,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<%--     <link rel="stylesheet" href="<%request.getContextPath()%>resources/css/styles.css"/> --%>
-<!--     <style>  -->
-<%--       <%@include file="/resources/css/styles.css"%>  --%>
-<!--     </style> -->
+    
+ <link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/estilo.css"/>
+  	<style>
+    <%@include file="/resources/css/estilo.css"%>
+		</style>
+
+
+    </head> 
         <title>Tela de Erro</title>
 </head>
 <body>
@@ -17,6 +21,7 @@
         <h1>404 ERRO</h1>
         <h2>ESSA AÇÃO NÃO ESTÁ DISPONÍVEL NO MOMENTO, SENTIMOS MUITO!</h2><br>
         <h2>POR GENTILEZA CLIQUE ABAIXO PARA VOLTAR A TELA INICIAL</h2><br>
+        
         <a  href="<%=request.getContextPath()%>/inicio">Voltar</a>
     </div >
 

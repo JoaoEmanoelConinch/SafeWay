@@ -15,7 +15,7 @@ input, label {
 }
 
 body {
-  background-image: url("https://lh3.googleusercontent.com/jan6-1N7adqA4ctdstmC6H9rvvQ1flpsWwgUb2kRn0Ntd09Kkt8f-s1SRPOEC5B2zXsmZi2DIjTM4jpWSWE_8IkkwazRRd0NYSvzNsueRKLQqcAbkq9fmLvdZSgBXr1r5fvBCVWz8iHzFIiSIgw-6bL9XyVwnAlH2f6k3fygMLaIsQ46_ySlU6EfpnOqhiVPzM7G0wP99mLLrn-nyXwvHwO2Pmy_JXd6a7FpR1UdQsXWn_b_b2fKR5BNYZioVuJoC0uPviOwAbYMSwCCj0r8x5ecMuIn_H9EeImLWsamAu4F17OpoKK8LEGgp_ZIItoDkKrWwzzj_txpSmoXjc0UZRkhqDkO4rrBTXumL88rEABhJCdBxCDnYn9PBZO-F6rzIonzJDqqeanv-QF4l976QDnhfkkN28YCsuDqFNjqM5dqj-xPlj4XdFZg_UqHzkee7oEvMhFag-FPZUB7HNP8gcYgZJaAd-PiojrLqC36SDPe1yUY-qdE2Zrw0EAexgsPjQniakxukyGYaEYkax6xNVfjqKKCEoeBSXZq_KnXcbXqzctQFLQYkVa6jIS047hWxvcA6Iccp8ppSk6prvvUtbjPWgobMv5dXGciLBfAebe3exQStbmujQL9Ws9pNqfnqQtGXLqKIZ6pM_faPhsuNtkYcYtOvr2LzcD-SnVOYb6HjhsIRn2y7RTOHocunpVOBB4_Dk8HAGsJAbrBMhy5TNw=w1366-h768-no?authuser=0");
+  background-image: url(mapa-fundo.jpg);
   background-size: cover;
   background-position-y: 0px;
 }
@@ -25,7 +25,7 @@ body {
 
 /* div tela inicial */
 #invisivel {
-  width: 350px;
+  width: 500px;
   margin-top: 0px;
   margin-left: auto;
   margin-right: auto;
@@ -34,6 +34,14 @@ body {
   border: 5px solid #ffffff00;
   padding: 25px;
  }
+
+ #logo-inicio{
+  width: 550px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50px;
+}
 
 #main-container-cadastro {
   width: 400px;
@@ -104,24 +112,60 @@ button {
 
 a.bt-inicial {
   margin-bottom: 10px;
-  box-shadow: 2px 2px 2px black;
+  
   border-radius: 13px;
   padding: 5px 5px;
   color:rgb(255, 255, 255);
-  background-color: #ff4747;
+  background-color: #d62246;
   left: 88%;
 }
 
 a{
-  box-shadow: 2px 2px 2px black;
+  box-shadow:  2px 2px 2px black;
   border-radius: 13px;
   padding: 5px 5px;
   color:#ffffff;
-  background-color: #ff4747;
+  background-color: #d62246;
   text-decoration: none;
 }
 
 /* fim forms */
+
+/* tela de erro*/
+
+#erro {
+  background-color: rgb(255, 94, 94);
+  }
+
+#div-erro{
+  border-style: solid;
+  background-color: white;
+  text-align: center;
+  color: red;
+  }
+
+
+a#voltar-erro {
+  font-size: 20px;
+  padding: 10px;
+  background-color: red;
+  text-decoration: none;
+  color: white;
+  border-radius: 7px;
+
+}
+a#voltar-erro:hover {
+    color: rgb(255, 255, 255);
+    background-color: #0579ff;
+
+}
+
+.text-erro {
+  color: red;
+}
+
+/* fim tela de erro*/
+
 
 .full-box {
   flex: 1 1 100%;
@@ -194,36 +238,75 @@ div.relative {
   width: 100%;
   } 
 
-#botaoavaliar{
-  box-shadow: 2px 2px 2px black;
-  border-radius: 13px;
-  padding: 5px 5px;
-  color:#ffffff;
-  background-color: #ff4747;
-  text-decoration: none;
-}
-#botaoavaliar:hover{
-  background-color: #ff0000
-}
+#botaob {
 
+margin-left: 45px;
 
-#botaovoltar{
-  background-color: #084b83;
-  color: #ffffff;
-  border-top:0px;
-}
-
-
-#tabelaop:hover 
-
-{ background-color: #084b83; 
-
-transition: 0.5s;
-
-opacity: 1.0;
+font-size: 25px ;
+padding: 10px 15px;
+border: none;
+background-color:#d62246;
+color: white;
+border-radius: 25px;
 
 }
 
+  /* COME�O CABE�ALHO
+
+header {
+  padding: 15px 0;
+  width: 100%;
+  background-color:#132d8b;
+  display:flex;
+  justify-content:space-around;
+  align-items: center;
+}
+
+.container-logo {
+display: flex;
+align-items: center;
+}
+
+.logo-imagem {
+}
+
+.logo-texto {
+color: blanchedalmond;
+box-shadow: 2px 2px white;
+background-color:#486cf0;
+padding: 10px 10px;
+border-radius: 15px;
+padding-right: 7px;
+padding-left: 7px;
+
+}
+
+.menu li{
+display: inline-block;
+margin: 10px 10px;
+}
+
+.menu li a{
+color: blanchedalmond;
+border-radius: 15px;
+background-color: #486cf0;;
+padding: 10px 10px;
+font-size: 20px;
+text-decoration: none;
+text-transform: uppercase;
+}
+
+a {
+color: blanchedalmond;
+text-decoration: none;
+background-color: #ff4747;
+padding: 5px;
+border-radius: 15px;
+box-shadow: 2px 2px white;
+text-transform: uppercase;
+}
+/* FIM CABE�ALHO */
+=======
 #divtabela{
 
 height:700px;
