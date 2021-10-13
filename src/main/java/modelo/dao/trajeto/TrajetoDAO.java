@@ -8,7 +8,7 @@ import modelo.entidade.usuario.UsuarioCadastrado;
 
 public interface TrajetoDAO {
     
-    void inserirTrajeto(Trajeto trajeto);
+	long inserirTrajeto(Trajeto trajeto);
 
     void deletarTrajeto(Trajeto trajeto);
 

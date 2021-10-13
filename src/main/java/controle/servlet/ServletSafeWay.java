@@ -312,8 +312,11 @@ public class ServletSafeWay extends HttpServlet {
 		}
 
 		trajeto.addUsuarioCadastrado(usuario);
-		trajetoDAO.inserirTrajeto(trajeto);
+		long idTrajetoRecuperadoDoBanco = trajetoDAO.inserirTrajeto(trajeto);
 		usuario.addTrajeto(trajeto);
+		
+		trajeto.setIdTrajeto(idTrajetoRecuperadoDoBanco);
+		
 		usuarioDAO.atualizarUsuario(usuario);
 		
 		session.setAttribute("trajeto", trajeto);
