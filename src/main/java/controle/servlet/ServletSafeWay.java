@@ -1,6 +1,7 @@
 package controle.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -265,6 +266,8 @@ public class ServletSafeWay extends HttpServlet {
 		}
 		Ponto chegadaTrajeto = pontoDAO.verificarPonto(chegadaSoLatLong);
 		
+//		List<Ponto> pontos = new ArrayList<Ponto>();
+	
 		Trajeto trajeto = usuario.trajeto(partidaTrajeto, chegadaTrajeto, meio);
 		
 		System.out.println(trajeto.getPontos().size());
@@ -285,9 +288,17 @@ public class ServletSafeWay extends HttpServlet {
 			System.out.println();
 			System.out.println(pontoSoLatLong.getLongitude());
 			System.out.println(pontoSoLatLong.getLatitude());
+			System.out.println();
+			System.out.println(i);
 			
 			Ponto pontoVerificado = pontoDAO.verificarPonto(pontoSoLatLong);
 			trajeto.getPontos().get(i).setIdPonto(pontoVerificado.getIdPonto());
+			
+		  //List<Ponto>pontos = trajetoDAO.recuperarPontosTrajeto(trajeto)!!!
+			
+//			pontos.add(pontoVerificado);
+//			
+//			trajeto.setPontos(pontos);
 		}
 
 		trajeto.addUsuarioCadastrado(usuario);
