@@ -230,11 +230,11 @@ public class Ponto {
 	}
 
 	public void addTrajeto(Trajeto trajeto) {
-		trajetos.add(trajeto);
+		this.getTrajetos().add(trajeto);
 	}
 
 	public void removeTrajeto(Trajeto trajeto) {
-		trajetos.remove(trajeto);
+		this.getTrajetos().remove(trajeto);
 	}
 	
 	
