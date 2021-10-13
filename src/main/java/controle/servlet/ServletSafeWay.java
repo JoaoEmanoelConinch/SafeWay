@@ -233,7 +233,7 @@ public class ServletSafeWay extends HttpServlet {
 			throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException,
 			NumeroMenorQueZeroException, NumeroMaiorQueLimiteException, ServletException {
 		String p1 = request.getParameter("inicio");
-		String p2 = request.getParameter("chegada");
+		String p2 = request.getParameter("rua-chegada");
 		int meioDeTransporte = Integer.parseInt(request.getParameter("meio-transporte"));
 		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
 		usuario.setTrajetos(trajetoDAO.recuperarTrajetosUsuario(usuario));
