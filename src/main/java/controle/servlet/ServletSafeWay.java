@@ -288,7 +288,7 @@ public class ServletSafeWay extends HttpServlet {
 			}
 
 			Ponto pontoVerificado = pontoDAO.verificarPonto(pontoSoLatLong);
-			pontoVerificado.setTrajetos(trajetoDAO.recuperarTrajetosUsuariosDePonto(pontoVerificado));
+			pontoVerificado.setTrajetos(trajetoDAO.recuperarTrajetosDePonto(pontoVerificado));
 			pontoVerificado.addTrajeto(trajeto);
 			
 			pontoDAO.atualizarPonto(pontoVerificado);
@@ -315,7 +315,7 @@ public class ServletSafeWay extends HttpServlet {
 		trajetoDAO.inserirTrajeto(trajeto);
 		usuario.addTrajeto(trajeto);
 		usuarioDAO.atualizarUsuario(usuario);
-
+		
 		session.setAttribute("trajeto", trajeto);
 		
 		response.sendRedirect("trajeto");

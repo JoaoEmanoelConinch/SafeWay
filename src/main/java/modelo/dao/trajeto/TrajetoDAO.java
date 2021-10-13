@@ -18,6 +18,6 @@ public interface TrajetoDAO {
  
     List<Trajeto> recuperarTrajetosUsuario(UsuarioCadastrado usuario);
     
-    List<Trajeto> recuperarTrajetosUsuariosDePonto(Ponto ponto);
+    List<Trajeto> recuperarTrajetosDePonto(Ponto ponto);
     
 }

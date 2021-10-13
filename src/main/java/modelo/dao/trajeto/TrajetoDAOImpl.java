@@ -247,7 +247,7 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 	}
 
 	@Override
-	public List<Trajeto> recuperarTrajetosUsuariosDePonto(Ponto ponto) {
+	public List<Trajeto> recuperarTrajetosDePonto(Ponto ponto) {
 		Session sessao = null;
 		List<Trajeto> trajetos = null;
 
