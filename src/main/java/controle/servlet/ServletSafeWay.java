@@ -158,6 +158,10 @@ public class ServletSafeWay extends HttpServlet {
 
 		UsuarioCadastrado usuario = new UsuarioCadastrado(nome, senha, email);
 
+		if (senha.isEmpty() || senha.length() < 8 || nome.isEmpty() || !usuario.validarEmail(email) || email.isEmpty()) {
+			pagDestino = "cadastro-usuario.jsp";
+		}
+		
 		if (usuarioDAO.verificarUsuarioNome(usuario) || usuarioDAO.verificarUsuarioEmail(usuario)) {
 			pagDestino = "cadastro-usuario.jsp";
 		} else {

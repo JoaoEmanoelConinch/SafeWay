@@ -122,9 +122,9 @@ public class UsuarioCadastrado implements Serializable {
 
 	public void setNome(String nome) throws StringVaziaException {
 
-		if (nome.isEmpty()) {
-			throw new StringVaziaException("O nome de Usu�rio � inv�lido!");
-		}
+//		if (nome.isEmpty()) {
+//			throw new StringVaziaException("O nome de Usu�rio � inv�lido!");
+//		}
 
 		this.nome = nome;
 	}
@@ -135,13 +135,13 @@ public class UsuarioCadastrado implements Serializable {
 
 	public void setSenha(String senha) throws StringVaziaException, SenhaPequenaException {
 
-		if (senha.length() < 8) {
-			throw new SenhaPequenaException("A senha n�o pode ter menos que 8 digitos");
-		}
-
-		if (senha.isEmpty()) {
-			throw new StringVaziaException("A senha n�o pode ser vazia!");
-		}
+//		if (senha.length() < 8) {
+//			throw new SenhaPequenaException("A senha n�o pode ter menos que 8 digitos");
+//		}
+//
+//		if (senha.isEmpty()) {
+//			throw new StringVaziaException("A senha n�o pode ser vazia!");
+//		}
 
 		this.senha = senha;
 
@@ -153,13 +153,13 @@ public class UsuarioCadastrado implements Serializable {
 
 	public void setEmail(String email) throws EmailInvalidoException, StringVaziaException {
 
-		if (email.isEmpty()) {
-			throw new StringVaziaException("O nome de Usu�rio � inv�lido!");
-		}
-
-		if (validarEmail(email) == false) {
-			throw new EmailInvalidoException("Email Inv�lido!");
-		}
+//		if (email.isEmpty()) {
+//			throw new StringVaziaException("O nome de Usu�rio � inv�lido!");
+//		}
+//
+//		if (validarEmail(email) == false) {
+//			throw new EmailInvalidoException("Email Inv�lido!");
+//		}
 
 		this.email = email;
 
