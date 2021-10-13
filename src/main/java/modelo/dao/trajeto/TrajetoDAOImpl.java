@@ -263,7 +263,6 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 
 			Join<Trajeto, Ponto> juncaoPonto = raizTrajeto.join(Trajeto_.pontos);
 
-
 			ParameterExpression<Long> IdPonto = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(juncaoPonto.get(Ponto_.ID_PONTO), IdPonto));
 
