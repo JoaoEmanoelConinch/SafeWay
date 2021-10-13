@@ -282,17 +282,22 @@ public class ServletSafeWay extends HttpServlet {
 			if (pontoDAO.verificarPonto(pontoSoLatLong) == null) {
 				pontoDAO.inserirPonto(ponto);
 			}
-			
-			System.out.println(ponto.getLongitude());
-			System.out.println(ponto.getLatitude());
-			System.out.println();
-			System.out.println(pontoSoLatLong.getLongitude());
-			System.out.println(pontoSoLatLong.getLatitude());
-			System.out.println();
-			System.out.println(i);
-			
+
 			Ponto pontoVerificado = pontoDAO.verificarPonto(pontoSoLatLong);
-			trajeto.getPontos().get(i).setIdPonto(pontoVerificado.getIdPonto());
+			pontoVerificado.addTrajeto(trajeto);
+			
+			pontoDAO.atualizarPonto(pontoVerificado);
+			
+//			System.out.println(ponto.getLongitude());
+//			System.out.println(ponto.getLatitude());
+//			System.out.println();
+//			System.out.println(pontoSoLatLong.getLongitude());
+//			System.out.println(pontoSoLatLong.getLatitude());
+//			System.out.println();
+//			System.out.println(i);
+			
+//			
+//			trajeto.getPontos().get(i).setIdPonto(pontoVerificado.getIdPonto());
 			
 		  //List<Ponto>pontos = trajetoDAO.recuperarPontosTrajeto(trajeto)!!!
 			
@@ -315,7 +320,7 @@ public class ServletSafeWay extends HttpServlet {
 	
 		Trajeto trajeto = (Trajeto)session.getAttribute("trajeto");
 		
-		List<Ponto> pontos = trajeto.getPontos();
+		List<Ponto> pontos = pontoDAO.recuperarPontoTrajeto(trajeto);
 		request.setAttribute("pontos", pontos);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Trajeto.jsp");

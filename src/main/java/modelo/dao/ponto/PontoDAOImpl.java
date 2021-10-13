@@ -356,7 +356,6 @@ public class PontoDAOImpl implements PontoDAO {
 
 			Join<Ponto, Trajeto> juncaoTrajeto = raizTrajeto.join(Ponto_.trajetos);
 
-
 			ParameterExpression<Long> IdTrajeto = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(juncaoTrajeto.get(Trajeto_.ID_TRAJETO), IdTrajeto));
 
