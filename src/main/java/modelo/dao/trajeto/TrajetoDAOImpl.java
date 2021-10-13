@@ -27,15 +27,16 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 	}
 
 	@Override
-	public void inserirTrajeto(Trajeto trajeto) {
+	public long inserirTrajeto(Trajeto trajeto) {
 
 		Session sessao = null;
+		long id = 0;
 
 		try {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			sessao.save(trajeto);
+			id = (long) sessao.save(trajeto);
 
 			sessao.getTransaction().commit();
 
@@ -52,6 +53,8 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 				sessao.close();
 			}
 		}
+
+		return id;
 
 	}
 
@@ -132,10 +135,10 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 			Root<Trajeto> raizTrajeto = criteria.from(Trajeto.class);
 
 			ParameterExpression<Long> idTrajeto = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(raizTrajeto.get(Trajeto_.ID_TRAJETO), idTrajeto)); 
+			criteria.where(construtor.equal(raizTrajeto.get(Trajeto_.ID_TRAJETO), idTrajeto));
 
 			trajeto1 = sessao.createQuery(criteria).setParameter(idTrajeto, trajeto.getIdTrajeto()).getSingleResult();
-			
+
 			sessao.getTransaction().commit();
 
 		} catch (Exception sqlException) {
@@ -157,8 +160,8 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 
 	}
 
-	public List<Trajeto> recuperarTajetosUsuario(UsuarioCadastrado usuario){
-		
+	public List<Trajeto> recuperarTajetosUsuario(UsuarioCadastrado usuario) {
+
 		Session sessao = null;
 		List<Trajeto> trajetos = null;
 
@@ -173,7 +176,6 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 			Root<Trajeto> raizPontoFav = criteria.from(Trajeto.class);
 
 			Join<Trajeto, UsuarioCadastrado> juncaoUsuario = raizPontoFav.join(Trajeto_.usuariosCadastrados);
-
 
 			ParameterExpression<Long> idUsuario = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(juncaoUsuario.get(UsuarioCadastrado_.ID), idUsuario));
@@ -198,12 +200,11 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 		}
 
 		return trajetos;
-		
+
 	}
 
-	
 	public List<Trajeto> recuperarTrajetosUsuario(UsuarioCadastrado usuario) {
-		
+
 		Session sessao = null;
 		List<Trajeto> trajetos = null;
 
@@ -218,7 +219,6 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 			Root<Trajeto> raizTrajeto = criteria.from(Trajeto.class);
 
 			Join<Trajeto, UsuarioCadastrado> juncaoPonto = raizTrajeto.join(Trajeto_.usuariosCadastrados);
-
 
 			ParameterExpression<Long> IdUsuario = construtor.parameter(Long.class);
 			criteria.where(construtor.equal(juncaoPonto.get(UsuarioCadastrado_.ID), IdUsuario));
@@ -243,7 +243,7 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 		}
 
 		return trajetos;
-		
+
 	}
 
 	@Override
@@ -287,5 +287,5 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 
 		return trajetos;
 	}
-	
+
 }
