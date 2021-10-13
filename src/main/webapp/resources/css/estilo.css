@@ -251,7 +251,7 @@ border-radius: 25px;
 
 }
 
-  /* COMEÇO CABEÇALHO
+  /* COMEï¿½O CABEï¿½ALHO
 
 header {
   padding: 15px 0;
@@ -305,4 +305,42 @@ border-radius: 15px;
 box-shadow: 2px 2px white;
 text-transform: uppercase;
 }
-/* FIM CABEÇALHO */
+/* FIM CABEï¿½ALHO */
+=======
+#divtabela{
+
+height:700px;
+width: 70%;
+margin-left: auto;
+margin-right: auto;
+margin-top: 50px;
+
+}
+#linhatabela:hover{
+  background-color: #084c83af;
+  opacity: 0.5;
+}
+
+
+#meiotela{
+  margin-left:auto;
+  margin-right:auto;
+}
+#logoheader{
+  height: 80px;
+  width: 80px;
+}
+
+#header{
+  background-color: #084c83af;
+}
+#botaoheader{
+  margin-left: 30px;
+  background-color: #ff0000
+}
+
+#botaoheader:hover{
+  background-color: #ab0909
+    
+}
+
