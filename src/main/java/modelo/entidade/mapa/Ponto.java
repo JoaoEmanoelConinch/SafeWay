@@ -251,7 +251,7 @@ public class Ponto {
 		if (avaliacao == null) {
 			throw new NullPointerException();
 		}
-		this.avaliacoes.add(avaliacao);
+		this.getAvaliacoes().add(avaliacao);
 		
 		if (avaliacao.isLesaoCorporal()){
 			setQuantidadeLesoesCorporais(getQuantidadeLesoesCorporais()+1);
