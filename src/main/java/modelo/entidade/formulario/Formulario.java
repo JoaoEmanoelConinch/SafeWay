@@ -33,7 +33,7 @@ public class Formulario implements Serializable {
 
 	@Column(name = "media_formulario", scale = 2, precision = 1, nullable = false)
 	private double media;
-	
+
 	@Column(name = "lesao_corporal_formulario", nullable = false)
 	private boolean lesaoCorporal;
 
@@ -51,28 +51,21 @@ public class Formulario implements Serializable {
 
 	@Column(name = "bloqueio_rua_formulario", nullable = false)
 	private boolean bloqueioRua;
-	
+
 	@Column(name = "comentario_formulario", length = 300, nullable = true)
 	private String comentario;
 
-	@ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@OnDelete(action = OnDeleteAction.NO_ACTION)
-	@JoinColumn(name = "id_ponto",
-				referencedColumnName = "id_ponto",
-				nullable = false
-			)
+	@JoinColumn(name = "id_ponto", referencedColumnName = "id_ponto", nullable = false)
 	private Ponto idPonto;
-	
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	 @JoinColumn(
-		        name = "id_usuario",
-		        referencedColumnName = "id_usuario",
-		        nullable = true
-		    )
+	@JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", nullable = true)
 	private UsuarioCadastrado usuario;
-	
-	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio, String comentario, boolean bloqueio, Ponto ponto) {
+
+	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
+			String comentario, boolean bloqueio, Ponto ponto) {
 		setIdFormulario(idFormulario);
 		setLesaoCorporal(lesaoCorporal);
 		setFurto(furto);
@@ -84,26 +77,10 @@ public class Formulario implements Serializable {
 		setMedia(calcularMedia());
 		setIdPontoAvaliado(ponto);
 	}
-	
+
 	public Formulario(long idFormulario) {
 		setIdFormulario(idFormulario);
 	}
-
-//	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-//	 String comentario, boolean bloqueioRuas, Ponto ponto, UsuarioCadastrado usuario) {
-//
-//		setLesaoCorporal(lesaoCorporal);
-//		setFurto(furto);
-//		setRoubo(roubo);
-//		setHomicidio(homicidio);
-//		setLatrocinio(latrocinio);
-//		setComentario(comentario);
-//		setBloqueioRuas(bloqueioRuas);
-//		setMedia(calcularMedia());
-//		setIdPontoAvaliado(idPontoAvaliado);
-//		setIdUsuario(idUsuario);
-//
-//	}
 
 //	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
 //	boolean latrocinio, boolean bloqueioRuas, double media, String comentario, Ponto idPontoAvaliado,UsuarioCadastrado idUsuario) {
@@ -121,42 +98,42 @@ public class Formulario implements Serializable {
 //		setIdUsuario(idUsuario);
 //
 //	}
-	
-	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
-			boolean latrocinio, boolean bloqueioRuas, double media, String comentario, Ponto ponto, UsuarioCadastrado usuario) {
 
-				setIdFormulario(idFormulario);
-				setLesaoCorporal(lesaoCorporal);
-				setFurto(furto);
-				setRoubo(roubo);
-				setHomicidio(homicidio);
-				setLatrocinio(latrocinio);
-				setComentario(comentario);
-				setBloqueioRuas(bloqueioRuas);
-				setMedia(calcularMedia());
-				setIdPontoAvaliado(ponto);
-				setIdUsuario(usuario);
+	public Formulario(long idFormulario, boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
+			boolean latrocinio, boolean bloqueioRuas, double media, String comentario, Ponto ponto,
+			UsuarioCadastrado usuario) {
 
-			}
-	
-	public Formulario(long idFormulario,boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
+		setIdFormulario(idFormulario);
+		setLesaoCorporal(lesaoCorporal);
+		setFurto(furto);
+		setRoubo(roubo);
+		setHomicidio(homicidio);
+		setLatrocinio(latrocinio);
+		setComentario(comentario);
+		setBloqueioRuas(bloqueioRuas);
+		setMedia(calcularMedia());
+		setIdPontoAvaliado(ponto);
+		setIdUsuario(usuario);
+
+	}
+
+	public Formulario(long idFormulario, boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
 			boolean latrocinio, boolean bloqueioRuas, String comentario) {
 
-				setIdFormulario(idFormulario);
-				setLesaoCorporal(lesaoCorporal);
-				setFurto(furto);
-				setRoubo(roubo);
-				setHomicidio(homicidio);
-				setLatrocinio(latrocinio);
-				setComentario(comentario);
-				setMedia(calcularMedia());
-				setBloqueioRuas(bloqueioRuas);
-//				setIdPontoAvaliado(idPontoAvaliado);
+		setIdFormulario(idFormulario);
+		setLesaoCorporal(lesaoCorporal);
+		setFurto(furto);
+		setRoubo(roubo);
+		setHomicidio(homicidio);
+		setLatrocinio(latrocinio);
+		setComentario(comentario);
+		setMedia(calcularMedia());
+		setBloqueioRuas(bloqueioRuas);
 
-			}
+	}
 
 	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-	 String comentario, boolean bloqueioRuas, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
+			String comentario, boolean bloqueioRuas, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
 
 		setLesaoCorporal(lesaoCorporal);
 		setFurto(furto);
@@ -265,9 +242,9 @@ public class Formulario implements Serializable {
 
 		int media = 0;
 
-		for (int i = 0; i < ocorrencias.size(); i++){
-			if (ocorrencias.get(i)){
-				media += i+1;
+		for (int i = 0; i < ocorrencias.size(); i++) {
+			if (ocorrencias.get(i)) {
+				media += i + 1;
 			}
 		}
 

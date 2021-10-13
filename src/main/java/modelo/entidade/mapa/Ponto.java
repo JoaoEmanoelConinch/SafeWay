@@ -7,7 +7,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,16 +24,16 @@ import modelo.excecao.mapa.NumeroMenorQueZeroException;
 import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
-@Table(name = "ponto", uniqueConstraints = {@UniqueConstraint(columnNames = {"latitude", "longitude" }) })
+@Table(name = "ponto", uniqueConstraints = { @UniqueConstraint(columnNames = { "latitude", "longitude" }) })
 public class Ponto {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_ponto", nullable = false, unique = true)
 	private long id_ponto;
-	 
+
 	@Column(name = "latitude", nullable = false)
 	@Type(type = "double")
 	private double latitude;
@@ -42,20 +41,16 @@ public class Ponto {
 	@Column(name = "longitude", nullable = false)
 	@Type(type = "double")
 	private double longitude;
-	
-	// @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	// @JoinTable(name = "ponto_trajeto", joinColumns = @JoinColumn(name = "id_ponto"))
-	// @Fetch(FetchMode.JOIN)
 
 	@ManyToMany(mappedBy = "pontos")
 	private List<Trajeto> trajetos;
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idPonto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Formulario> avaliacoes;
 
 	@Column(name = "quantidade_lesoes_corporais_ponto_avaliado", nullable = false)
 	private long quantidadeLesoesCorporais;
-	
+
 	@Column(name = "quantidade_furtos_ponto_avaliado", nullable = false)
 	private long quantidadeFurtos;
 
@@ -73,7 +68,7 @@ public class Ponto {
 
 	@Column(name = "endereco", nullable = true, length = 100)
 	private String endereco;
-	
+
 	public Ponto(long idPonto, double latitude, double longitude, List<Trajeto> trajetos, List<Formulario> avaliacoes) {
 		this.setIdPonto(idPonto);
 		this.setLatitude(latitude);
@@ -81,32 +76,32 @@ public class Ponto {
 		this.setTrajetos(trajetos);
 		this.setAvaliacoes(avaliacoes);
 		this.setEndereco(informarLatLong());
-		
+
 	}
-	
+
 	public Ponto(double latitude, double longitude) throws StatusInvalidoException {
-		
+
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(new ArrayList<Trajeto>());
 		this.setEndereco(informarLatLong());
 	}
 
-	
 	public Ponto(long id) {
 		setIdPonto(id);
 	}
-	
-	public Ponto(){}
+
+	public Ponto() {
+	}
 
 	public long getIdPonto() {
 		return id_ponto;
 	}
-	
+
 	public void setIdPonto(long idPonto) {
 		this.id_ponto = idPonto;
 	}
-	
+
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
@@ -133,15 +128,15 @@ public class Ponto {
 		return trajetos;
 
 	}
-	
-	public List<Formulario> getAvaliacoes(){
+
+	public List<Formulario> getAvaliacoes() {
 		return avaliacoes;
 	}
-	
+
 	public void setAvaliacoes(List<Formulario> avaliacoes) {
 		this.avaliacoes = avaliacoes;
 	}
-	
+
 	public long getQuantidadeLatrocinio() {
 		return quantidadeLatrocinio;
 	}
@@ -189,8 +184,9 @@ public class Ponto {
 	public String getEndereco() {
 		return this.endereco;
 	}
-	
-	public static Ponto informarLocal(String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+
+	public static Ponto informarLocal(String local)
+			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return ConsultaPonto.informarLocal(local);
 	}
 
@@ -205,7 +201,7 @@ public class Ponto {
 
 	@Override
 	public boolean equals(Object objeto) {
-		
+
 		if (this == objeto)
 			return true;
 
@@ -214,19 +210,19 @@ public class Ponto {
 
 		if (getClass() != objeto.getClass())
 			return false;
-		
+
 		Ponto ponto = (Ponto) objeto;
-		
-		if (!(this.getLatitude() == ponto.getLatitude())||!(this.getLongitude() == ponto.getLongitude())) {
+
+		if (!(this.getLatitude() == ponto.getLatitude()) || !(this.getLongitude() == ponto.getLongitude())) {
 			return false;
 		}
-		
+
 		return true;
-		
+
 	}
 
 	private void verificarBloqueio() {
-		this.bloqueio = getAvaliacoes().get((getAvaliacoes().size()-1)).isBloqueioRuas();
+		this.bloqueio = getAvaliacoes().get((getAvaliacoes().size() - 1)).isBloqueioRuas();
 	}
 
 	public void addTrajeto(Trajeto trajeto) {
@@ -236,15 +232,6 @@ public class Ponto {
 	public void removeTrajeto(Trajeto trajeto) {
 		this.getTrajetos().remove(trajeto);
 	}
-	
-	
-	// public void addAvaliacao(Formulario form) {
-	// 	avaliacoes.add(form);
-	// }
-
-	// public void removeAvaliacao(Formulario form) {
-	// 	avaliacoes.remove(form);
-	// }
 
 	public void addAvaliacao(Formulario avaliacao) throws NullPointerException {
 
@@ -252,21 +239,21 @@ public class Ponto {
 			throw new NullPointerException();
 		}
 		this.getAvaliacoes().add(avaliacao);
-		
-		if (avaliacao.isLesaoCorporal()){
-			setQuantidadeLesoesCorporais(getQuantidadeLesoesCorporais()+1);
+
+		if (avaliacao.isLesaoCorporal()) {
+			setQuantidadeLesoesCorporais(getQuantidadeLesoesCorporais() + 1);
 		}
-		if (avaliacao.isFurto()){
-			setQuantidadeFurtos(getQuantidadeFurtos()+1);
+		if (avaliacao.isFurto()) {
+			setQuantidadeFurtos(getQuantidadeFurtos() + 1);
 		}
-		if (avaliacao.isRoubo()){
-			setQuantidadeRoubos(getQuantidadeRoubos()+1);
+		if (avaliacao.isRoubo()) {
+			setQuantidadeRoubos(getQuantidadeRoubos() + 1);
 		}
-		if (avaliacao.isHomicidio()){
-			setQuantidadeHomicidios(getQuantidadeHomicidios()+1);
+		if (avaliacao.isHomicidio()) {
+			setQuantidadeHomicidios(getQuantidadeHomicidios() + 1);
 		}
-		if (avaliacao.isLatrocinio()){
-			setQuantidadeLatrocinio(getQuantidadeLatrocinio()+1);
+		if (avaliacao.isLatrocinio()) {
+			setQuantidadeLatrocinio(getQuantidadeLatrocinio() + 1);
 		}
 		this.verificarBloqueio();
 
@@ -281,37 +268,37 @@ public class Ponto {
 		this.getAvaliacoes().remove(avaliacao);
 
 		if (getAvaliacoes().size() > 0) {
-			
-			if (avaliacao.isLesaoCorporal()){
-				setQuantidadeLesoesCorporais(getQuantidadeLesoesCorporais()-1);
+
+			if (avaliacao.isLesaoCorporal()) {
+				setQuantidadeLesoesCorporais(getQuantidadeLesoesCorporais() - 1);
 			}
-			if (avaliacao.isFurto()){
-				setQuantidadeFurtos(getQuantidadeFurtos()-1);
+			if (avaliacao.isFurto()) {
+				setQuantidadeFurtos(getQuantidadeFurtos() - 1);
 			}
-			if (avaliacao.isRoubo()){
-				setQuantidadeRoubos(getQuantidadeRoubos()-1);
+			if (avaliacao.isRoubo()) {
+				setQuantidadeRoubos(getQuantidadeRoubos() - 1);
 			}
-			if (avaliacao.isHomicidio()){
-				setQuantidadeHomicidios(getQuantidadeHomicidios()-1);
+			if (avaliacao.isHomicidio()) {
+				setQuantidadeHomicidios(getQuantidadeHomicidios() - 1);
 			}
-			if (avaliacao.isLatrocinio()){
-				setQuantidadeLatrocinio(getQuantidadeLatrocinio()-1);
+			if (avaliacao.isLatrocinio()) {
+				setQuantidadeLatrocinio(getQuantidadeLatrocinio() - 1);
 			}
 			this.verificarBloqueio();
 		}
 	}
-  
-  public List<Double> criarVetor(){
+
+	public List<Double> criarVetor() {
 		List<Double> pontoVetor = new ArrayList<Double>(2);
-		
+
 		pontoVetor.add(this.getLongitude());
 		pontoVetor.add(this.getLatitude());
-		
+
 		return pontoVetor;
 	}
 
 	public String informarLatLong() {
 		return ConsultaPonto.informarLatLong(this);
-	
-}
+
+	}
 }
