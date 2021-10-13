@@ -12,15 +12,12 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
-
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.formulario.Formulario_;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Ponto_;
 import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.mapa.Trajeto_;
-import modelo.entidade.usuario.UsuarioCadastrado;
-import modelo.entidade.usuario.UsuarioCadastrado_;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class PontoDAOImpl implements PontoDAO {

@@ -41,10 +41,10 @@ public class UsuarioCadastrado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_usuario", nullable = false, unique = true)
-    private long id;
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_usuario", nullable = false, unique = true)
+	private long id;
+
 	@Column(name = "nome_usuario", length = 45, nullable = false, unique = true)
 	private String nome;
 
@@ -57,30 +57,27 @@ public class UsuarioCadastrado implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Formulario> formulariosDoUsuario;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-	@JoinTable(name = "usuario_trajeto",
-	joinColumns = @JoinColumn(name = "id_usuario"),
-	inverseJoinColumns = @JoinColumn(name = "id_trajeto")
-	)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+	@JoinTable(name = "usuario_trajeto", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_trajeto"))
 	private List<Trajeto> trajetos;
 
 	public UsuarioCadastrado() {
 	}
-	
+
 	public UsuarioCadastrado(long id) {
 		this.setId(id);
 	}
 
-	public UsuarioCadastrado(String email, String senha) throws StringVaziaException, SenhaPequenaException, EmailInvalidoException {
-		
+	public UsuarioCadastrado(String email, String senha)
+			throws StringVaziaException, SenhaPequenaException, EmailInvalidoException {
+
 		this.setEmail(email);
 		this.setSenha(senha);
-		
-	}
-	
-	
 
-	public UsuarioCadastrado(long idUsuario, String nome, String senha, String email, List<Formulario> formulariosDoUsuario, List<Trajeto> trajetos)
+	}
+
+	public UsuarioCadastrado(long idUsuario, String nome, String senha, String email,
+			List<Formulario> formulariosDoUsuario, List<Trajeto> trajetos)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
 		this.setId(idUsuario);
 		this.setNome(nome);
@@ -90,17 +87,18 @@ public class UsuarioCadastrado implements Serializable {
 		this.setTrajetos(trajetos);
 	}
 
-	public UsuarioCadastrado(long id, String nome, String senha, String email) throws StringVaziaException, EmailInvalidoException, SenhaPequenaException{
+	public UsuarioCadastrado(long id, String nome, String senha, String email)
+			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
 		this.setId(id);
 		this.setNome(nome);
 		this.setEmail(email);
 		this.setSenha(senha);
-		
+
 	}
 
 	public UsuarioCadastrado(String nome, String senha, String email)
 			throws StringVaziaException, EmailInvalidoException, SenhaPequenaException {
-		
+
 		this.setNome(nome);
 		this.setSenha(senha);
 		this.setEmail(email);
@@ -111,20 +109,16 @@ public class UsuarioCadastrado implements Serializable {
 	public long getId() {
 		return id;
 	}
-	
+
 	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) throws StringVaziaException {
-
-//		if (nome.isEmpty()) {
-//			throw new StringVaziaException("O nome de Usu�rio � inv�lido!");
-//		}
 
 		this.nome = nome;
 	}
@@ -135,14 +129,6 @@ public class UsuarioCadastrado implements Serializable {
 
 	public void setSenha(String senha) throws StringVaziaException, SenhaPequenaException {
 
-//		if (senha.length() < 8) {
-//			throw new SenhaPequenaException("A senha n�o pode ter menos que 8 digitos");
-//		}
-//
-//		if (senha.isEmpty()) {
-//			throw new StringVaziaException("A senha n�o pode ser vazia!");
-//		}
-
 		this.senha = senha;
 
 	}
@@ -152,14 +138,6 @@ public class UsuarioCadastrado implements Serializable {
 	}
 
 	public void setEmail(String email) throws EmailInvalidoException, StringVaziaException {
-
-//		if (email.isEmpty()) {
-//			throw new StringVaziaException("O nome de Usu�rio � inv�lido!");
-//		}
-//
-//		if (validarEmail(email) == false) {
-//			throw new EmailInvalidoException("Email Inv�lido!");
-//		}
 
 		this.email = email;
 
@@ -197,8 +175,8 @@ public class UsuarioCadastrado implements Serializable {
 		return isEmailValid;
 	}
 
-	public Trajeto trajeto(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException {
-
+	public Trajeto trajeto(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado)
+			throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException {
 
 		Trajeto trajeto = new Trajeto(inicio, chegada, transporteUsado);
 
@@ -209,11 +187,12 @@ public class UsuarioCadastrado implements Serializable {
 
 	}
 
-	public Formulario avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-			boolean bloqueioRuas, String comentario, Ponto Ponto)
-			throws NullPointerException, StatusInvalidoException{
+	public Formulario avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
+			boolean latrocinio, boolean bloqueioRuas, String comentario, Ponto Ponto)
+			throws NullPointerException, StatusInvalidoException {
 
-		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas, Ponto, this);
+		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario,
+				bloqueioRuas, Ponto, this);
 
 		this.addFormulario(formulario);
 		Ponto.addAvaliacao(formulario);
@@ -237,32 +216,38 @@ public class UsuarioCadastrado implements Serializable {
 	public void removerTrajeto(Trajeto trajeto) {
 		this.getTrajetos().remove(trajeto);
 	}
-	
-	public static List<Ponto> informarLocais(String local) throws StatusInvalidoException{
-		return Ponto.informarLocais(local);
-	} 
 
-	public Ponto DefinirLocal (String local) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
+	public static List<Ponto> informarLocais(String local) throws StatusInvalidoException {
+		return Ponto.informarLocais(local);
+	}
+
+	public Ponto DefinirLocal(String local)
+			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return Ponto.informarLocal(local);
 	}
 
-	public Ponto DefinirLocal (String local, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
+	public Ponto DefinirLocal(String local, int posicao)
+			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return Ponto.informarLocal(local, posicao);
 	}
-	
-	public Ponto DefinirPartida(String inicio) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+
+	public Ponto DefinirPartida(String inicio)
+			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return DefinirLocal(inicio);
 	}
 
-	public Ponto DefinirDestino(String chegada) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+	public Ponto DefinirDestino(String chegada)
+			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return DefinirLocal(chegada);
 	}
 
-	public Ponto DefinirPartida(String inicio, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+	public Ponto DefinirPartida(String inicio, int posicao)
+			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return DefinirLocal(inicio, posicao);
 	}
 
-	public Ponto DefinirDestino(String chegada, int posicao) throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+	public Ponto DefinirDestino(String chegada, int posicao)
+			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return DefinirLocal(chegada, posicao);
 	}
 
@@ -271,15 +256,18 @@ public class UsuarioCadastrado implements Serializable {
 	}
 
 	public Trajeto trajeto(String inicio, String chegada, MeioDeTransporte transporte)
-			throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
+			throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException,
+			NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 
 		return new Trajeto(DefinirPartida(inicio), DefinirDestino(chegada), DefinirTransporte(transporte));
 	}
 
-	public Trajeto trajeto(String inicio, int posicaoInicio, String chegada, int posicaoChegada, MeioDeTransporte transporte)
-			throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException{
+	public Trajeto trajeto(String inicio, int posicaoInicio, String chegada, int posicaoChegada,
+			MeioDeTransporte transporte) throws JsonParseException, JsonMappingException, StatusInvalidoException,
+			IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 
-		return new Trajeto(DefinirPartida(inicio, posicaoInicio), DefinirDestino(chegada, posicaoChegada),DefinirTransporte(transporte));
+		return new Trajeto(DefinirPartida(inicio, posicaoInicio), DefinirDestino(chegada, posicaoChegada),
+				DefinirTransporte(transporte));
 	}
 
 }
