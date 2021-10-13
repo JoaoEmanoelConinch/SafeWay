@@ -10,7 +10,8 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 
-
+import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.Ponto_;
 import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.mapa.Trajeto_;
 import modelo.entidade.usuario.UsuarioCadastrado;
@@ -243,6 +244,48 @@ public class TrajetoDAOImpl implements TrajetoDAO {
 
 		return trajetos;
 		
+	}
+
+	@Override
+	public List<Trajeto> recuperarTrajetosDePonto(Ponto ponto) {
+		Session sessao = null;
+		List<Trajeto> trajetos = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Trajeto> criteria = construtor.createQuery(Trajeto.class);
+			Root<Trajeto> raizTrajeto = criteria.from(Trajeto.class);
+
+			Join<Trajeto, Ponto> juncaoPonto = raizTrajeto.join(Trajeto_.pontos);
+
+			ParameterExpression<Long> IdPonto = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoPonto.get(Ponto_.ID_PONTO), IdPonto));
+
+			trajetos = sessao.createQuery(criteria).setParameter(IdPonto, ponto.getIdPonto()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return trajetos;
 	}
 	
 }

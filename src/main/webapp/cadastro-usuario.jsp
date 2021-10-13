@@ -7,12 +7,13 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Tela de Cadastro</title>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/estilo.css"/>
-  	<style>
-    <%@include file="/resources/css/estilo.css"%>
-		</style>
+<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/estilo.css"/> --%>
+<!--   	<style> -->
+<%--     <%@include file="/resources/css/estilo.css"%> --%>
+<!-- 		</style> -->
 </head>
 <body>
+<jsp:include page="header.jsp" />
 	<div id="main-container">
 		<h1>Cadastre-se para acessar no</h1>
 		<h1>SafeWay</h1>

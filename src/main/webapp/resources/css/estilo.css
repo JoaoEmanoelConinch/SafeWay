@@ -243,7 +243,23 @@ margin-top: 50px;
   margin-left:auto;
   margin-right:auto;
 }
+#logoheader{
+  height: 80px;
+  width: 80px;
+}
 
+#header{
+  background-color: #084c83af;
+}
+#botaoheader{
+  margin-left: 30px;
+  background-color: #ff0000
+}
+
+#botaoheader:hover{
+  background-color: #ab0909
+    
+}
 
 
   /* COME�O CABE�ALHO
