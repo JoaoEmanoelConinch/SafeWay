@@ -286,7 +286,8 @@ public class ServletSafeWay extends HttpServlet {
 			System.out.println(pontoSoLatLong.getLongitude());
 			System.out.println(pontoSoLatLong.getLatitude());
 			
-			trajeto.getPontos().get(i).setIdPonto(pontoDAO.verificarPonto(pontoSoLatLong).getIdPonto());
+			Ponto pontoVerificado = pontoDAO.verificarPonto(pontoSoLatLong);
+			trajeto.getPontos().get(i).setIdPonto(pontoVerificado.getIdPonto());
 		}
 
 		trajeto.addUsuarioCadastrado(usuario);
