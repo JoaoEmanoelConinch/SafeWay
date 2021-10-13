@@ -89,6 +89,7 @@ public class Ponto {
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
 		this.setTrajetos(new ArrayList<Trajeto>());
+		this.setAvaliacoes(new ArrayList<Formulario>());
 		this.setEndereco(informarLatLong());
 	}
 
