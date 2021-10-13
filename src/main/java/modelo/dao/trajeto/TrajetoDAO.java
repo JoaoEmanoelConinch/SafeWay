@@ -2,6 +2,7 @@ package modelo.dao.trajeto;
 
 import java.util.List;
 
+import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Trajeto;
 import modelo.entidade.usuario.UsuarioCadastrado;
 
@@ -16,5 +17,7 @@ public interface TrajetoDAO {
     Trajeto recuperarTrajeto(Trajeto trajeto);
  
     List<Trajeto> recuperarTrajetosUsuario(UsuarioCadastrado usuario);
+    
+    List<Trajeto> recuperarTrajetosUsuariosDePonto(Ponto ponto);
     
 }
