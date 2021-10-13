@@ -14,6 +14,7 @@
 
   </head>
 <body>
+<jsp:include page="header.jsp" />
   <div id="main-container">
     <h1>Logar em </h1>
     <h1>SafeWay</h1>
