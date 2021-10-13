@@ -14,6 +14,8 @@ import modelo.entidade.formulario.Formulario;
 import modelo.entidade.formulario.Formulario_;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Ponto_;
+import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.entidade.usuario.UsuarioCadastrado_;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class FormularioDAOImpl implements FormularioDAO {
@@ -197,4 +199,46 @@ public class FormularioDAOImpl implements FormularioDAO {
 
 	}
 
+	public List<Formulario> recuperarAvaliacaoUsuario(UsuarioCadastrado usuario){
+		
+		Session sessao = null;
+		List<Formulario> forms = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Formulario> criteria = construtor.createQuery(Formulario.class);
+			Root<Formulario> raizFormulario = criteria.from(Formulario.class);
+
+			Join<Formulario, UsuarioCadastrado> juncaoPonto = raizFormulario.join(Formulario_.usuario);
+
+			ParameterExpression<Long> IdPonto = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoPonto.get(UsuarioCadastrado_.ID), IdPonto));
+
+			forms = sessao.createQuery(criteria).setParameter(IdPonto, usuario.getId()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return forms;
+	}
+	
 }

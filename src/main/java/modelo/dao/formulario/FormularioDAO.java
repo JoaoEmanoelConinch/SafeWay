@@ -4,6 +4,7 @@ import java.util.List;
 
 import modelo.entidade.formulario.Formulario;
 import modelo.entidade.mapa.Ponto;
+import modelo.entidade.usuario.UsuarioCadastrado;
 
 public interface FormularioDAO {
 	
@@ -17,4 +18,6 @@ public interface FormularioDAO {
 	
 	Formulario recuperarAvaliacaoId(Formulario form);
 
+	List<Formulario> recuperarAvaliacaoUsuario(UsuarioCadastrado usuario);
+	
 }
