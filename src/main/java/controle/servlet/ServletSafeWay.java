@@ -288,8 +288,8 @@ public class ServletSafeWay extends HttpServlet {
 			}
 
 			Ponto pontoVerificado = pontoDAO.verificarPonto(pontoSoLatLong);
-			pontoVerificado.setTrajetos(trajetoDAO.recuperarTrajetosDePonto(pontoVerificado));
-			pontoVerificado.addTrajeto(trajeto);
+			
+			trajeto.getPontos().set(i, pontoVerificado);
 			
 			pontoDAO.atualizarPonto(pontoVerificado);
 			
@@ -312,10 +312,9 @@ public class ServletSafeWay extends HttpServlet {
 		}
 
 		trajeto.addUsuarioCadastrado(usuario);
-		long idTrajetoRecuperadoDoBanco = trajetoDAO.inserirTrajeto(trajeto);
+		trajetoDAO.inserirTrajeto(trajeto);
 		usuario.addTrajeto(trajeto);
 		
-		trajeto.setIdTrajeto(idTrajetoRecuperadoDoBanco);
 		
 		usuarioDAO.atualizarUsuario(usuario);
 		
@@ -328,7 +327,7 @@ public class ServletSafeWay extends HttpServlet {
 	
 		Trajeto trajeto = (Trajeto)session.getAttribute("trajeto");
 		
-		List<Ponto> pontos = pontoDAO.recuperarPontoTrajeto(trajeto);
+		List<Ponto> pontos = trajeto.getPontos();
 		request.setAttribute("pontos", pontos);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Trajeto.jsp");
