@@ -17,6 +17,10 @@ import modelo.entidade.formulario.Formulario;
 import modelo.entidade.formulario.Formulario_;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Ponto_;
+import modelo.entidade.mapa.Trajeto;
+import modelo.entidade.mapa.Trajeto_;
+import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.entidade.usuario.UsuarioCadastrado_;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class PontoDAOImpl implements PontoDAO {
@@ -332,6 +336,49 @@ public class PontoDAOImpl implements PontoDAO {
 			return true;
 		
 		return false;
+	}
+
+	@Override
+	public List<Ponto> recuperarPontoTrajeto(Trajeto trajeto) {
+
+		Session sessao = null;
+		List<Ponto> pontos = null;
+
+		try {
+
+			sessao = fabrica.getConexao().openSession();
+			sessao.beginTransaction();
+
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+
+			CriteriaQuery<Ponto> criteria = construtor.createQuery(Ponto.class);
+			Root<Ponto> raizTrajeto = criteria.from(Ponto.class);
+
+			Join<Ponto, Trajeto> juncaoTrajeto = raizTrajeto.join(Ponto_.trajetos);
+
+			ParameterExpression<Long> IdTrajeto = construtor.parameter(Long.class);
+			criteria.where(construtor.equal(juncaoTrajeto.get(Trajeto_.ID_TRAJETO), IdTrajeto));
+
+			pontos = sessao.createQuery(criteria).setParameter(IdTrajeto, trajeto.getIdTrajeto()).getResultList();
+
+			sessao.getTransaction().commit();
+
+		} catch (Exception sqlException) {
+
+			sqlException.printStackTrace();
+
+			if (sessao.getTransaction() != null) {
+				sessao.getTransaction().rollback();
+			}
+
+		} finally {
+
+			if (sessao != null) {
+				sessao.close();
+			}
+		}
+
+		return pontos;
 	}
 	
 }

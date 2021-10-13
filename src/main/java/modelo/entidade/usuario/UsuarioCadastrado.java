@@ -57,7 +57,7 @@ public class UsuarioCadastrado implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Formulario> formulariosDoUsuario;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL})
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
 	@JoinTable(name = "usuario_trajeto",
 	joinColumns = @JoinColumn(name = "id_usuario"),
 	inverseJoinColumns = @JoinColumn(name = "id_trajeto")
@@ -210,10 +210,10 @@ public class UsuarioCadastrado implements Serializable {
 	}
 
 	public Formulario avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-			boolean bloqueioRuas, String comentario, Ponto Ponto, UsuarioCadastrado idUsuario)
+			boolean bloqueioRuas, String comentario, Ponto Ponto)
 			throws NullPointerException, StatusInvalidoException{
 
-		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas, Ponto, idUsuario);
+		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, bloqueioRuas, Ponto, this);
 
 		this.addFormulario(formulario);
 		Ponto.addAvaliacao(formulario);
@@ -223,20 +223,19 @@ public class UsuarioCadastrado implements Serializable {
 	}
 
 	public void addFormulario(Formulario formulario) {
-		formulariosDoUsuario.add(formulario);
+		this.getFormulariosDoUsuario().add(formulario);
 	}
 
 	public void removerFormulario(Formulario formulario) {
-
-		formulariosDoUsuario.remove(formulario);
+		this.getFormulariosDoUsuario().remove(formulario);
 	}
 
 	public void addTrajeto(Trajeto trajeto) {
-		trajetos.add(trajeto);
+		this.getTrajetos().add(trajeto);
 	}
 
 	public void removerTrajeto(Trajeto trajeto) {
-		trajetos.remove(trajeto);
+		this.getTrajetos().remove(trajeto);
 	}
 	
 	public static List<Ponto> informarLocais(String local) throws StatusInvalidoException{

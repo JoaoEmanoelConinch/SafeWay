@@ -50,7 +50,7 @@ public class Ponto {
 	@ManyToMany(mappedBy = "pontos")
 	private List<Trajeto> trajetos;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "idPonto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idPonto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Formulario> avaliacoes;
 
 	@Column(name = "quantidade_lesoes_corporais_ponto_avaliado", nullable = false)
@@ -230,11 +230,11 @@ public class Ponto {
 	}
 
 	public void addTrajeto(Trajeto trajeto) {
-		trajetos.add(trajeto);
+		this.getTrajetos().add(trajeto);
 	}
 
 	public void removeTrajeto(Trajeto trajeto) {
-		trajetos.remove(trajeto);
+		this.getTrajetos().remove(trajeto);
 	}
 	
 	
@@ -251,7 +251,7 @@ public class Ponto {
 		if (avaliacao == null) {
 			throw new NullPointerException();
 		}
-		this.avaliacoes.add(avaliacao);
+		this.getAvaliacoes().add(avaliacao);
 		
 		if (avaliacao.isLesaoCorporal()){
 			setQuantidadeLesoesCorporais(getQuantidadeLesoesCorporais()+1);
@@ -278,7 +278,7 @@ public class Ponto {
 			throw new NullPointerException();
 		}
 
-		this.avaliacoes.remove(avaliacao);
+		this.getAvaliacoes().remove(avaliacao);
 
 		if (getAvaliacoes().size() > 0) {
 			

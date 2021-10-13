@@ -3,6 +3,7 @@ package modelo.dao.ponto;
 import java.util.List;
 
 import modelo.entidade.mapa.Ponto;
+import modelo.entidade.mapa.Trajeto;
 
 public interface PontoDAO {
 
@@ -21,5 +22,7 @@ public interface PontoDAO {
 	boolean verificarPontoExiste(Ponto ponto);
 	
 	Ponto recuperarPontoAvaliacoes(Ponto ponto);
+	
+	List<Ponto> recuperarPontoTrajeto(Trajeto trajeto);
 	
 }

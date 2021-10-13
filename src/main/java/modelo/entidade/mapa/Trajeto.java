@@ -83,7 +83,7 @@ public class Trajeto implements Serializable {
 	private MeioDeTransporte transporteUsado;
 	
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.ALL})
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.ALL})
 	    @JoinTable(name = "usuario_trajeto",
 	    joinColumns = @JoinColumn(name = "id_trajeto"),
 	    inverseJoinColumns = @JoinColumn(name = "id_usuario")
