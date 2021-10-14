@@ -120,7 +120,18 @@
     color:#ffffff;
     background-color: #d62246;
     text-decoration: none;
-  }
+}
+
+
+
+/* fim forms */
+
+/* tela de erro*/
+
+#erro {
+  background-color: rgb(255, 94, 94);
+
+}
   /* fim forms */
   /* tela de erro*/
   #erro {
@@ -207,7 +218,7 @@
     height: 400px;
     width: 100%;
     } 
-    /* COMEÇO CABEÇALHO
+    /* COMEï¿½O CABEï¿½ALHO
   header {
     padding: 15px 0;
     width: 100%;
@@ -218,7 +229,8 @@
   }
   .container-logo {
   display: flex;
-  align-items: center;
+
+align-items: center;
   }
   .logo-imagem {
   }
@@ -253,7 +265,8 @@
   box-shadow: 2px 2px white;
   text-transform: uppercase;
   }
-  /* FIM CABEÇALHO */:space-around;
+  /* FIM CABEï¿½ALHO */:space-around;
+
   align-items: center;
 }
 
@@ -312,7 +325,7 @@ margin-top: 50px;
 
 }
 #linhatabela:hover{
-  background-color: #084c83af;
+  background-color: #bfc9d165;
   opacity: 0.5;
 }
 
@@ -337,5 +350,8 @@ margin-top: 50px;
 #botaoheader:hover{
   background-color: #ab0909
     
+}
+#invisivel2{
+	background-color: #ffffff00;
 }
 

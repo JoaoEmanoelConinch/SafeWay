@@ -63,9 +63,6 @@ public class Ponto {
 	@Column(name = "quantidade_latrocinio_ponto_avaliado", nullable = false)
 	private long quantidadeLatrocinio;
 
-	@Column(name = "nivel_Bloqueio_Ponto_Avaliado", nullable = false)
-	private boolean bloqueio;
-
 	@Column(name = "endereco", nullable = true, length = 100)
 	private String endereco;
 
@@ -221,10 +218,6 @@ public class Ponto {
 
 	}
 
-	private void verificarBloqueio() {
-		this.bloqueio = getAvaliacoes().get((getAvaliacoes().size() - 1)).isBloqueioRuas();
-	}
-
 	public void addTrajeto(Trajeto trajeto) {
 		this.getTrajetos().add(trajeto);
 	}
@@ -255,7 +248,6 @@ public class Ponto {
 		if (avaliacao.isLatrocinio()) {
 			setQuantidadeLatrocinio(getQuantidadeLatrocinio() + 1);
 		}
-		this.verificarBloqueio();
 
 	}
 
@@ -284,7 +276,6 @@ public class Ponto {
 			if (avaliacao.isLatrocinio()) {
 				setQuantidadeLatrocinio(getQuantidadeLatrocinio() - 1);
 			}
-			this.verificarBloqueio();
 		}
 	}
 
