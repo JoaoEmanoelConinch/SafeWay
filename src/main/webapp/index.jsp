@@ -41,7 +41,7 @@
 
         <div class="row">
     <div class="col"></div>
-    <div class="col"><button type="button" class="btn btn-primary btn-lg bt-inicial"  href="<%=request.getContextPath()%>/login" >Logar</button></div>
+    <div class="col"><a type="button" class="btn btn-primary btn-lg bt-inicial"  href="<%=request.getContextPath()%>/login" >Logar</a></div>
     <div class="col"></div>
 </div>
         
