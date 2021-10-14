@@ -60,9 +60,13 @@ public class Formulario implements Serializable {
 	@JoinColumn(name = "id_ponto", referencedColumnName = "id_ponto", nullable = false)
 	private Ponto idPonto;
 
+
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", nullable = true)
 	private UsuarioCadastrado usuario;
+  
+	public Formulario() {
+	}
 
 	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
 			String comentario, boolean bloqueio, Ponto ponto) {
