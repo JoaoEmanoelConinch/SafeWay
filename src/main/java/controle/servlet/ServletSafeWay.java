@@ -321,7 +321,6 @@ public class ServletSafeWay extends HttpServlet {
 		boolean roubo = Boolean.parseBoolean(request.getParameter("roubo"));
 		boolean homicidio = Boolean.parseBoolean(request.getParameter("homicidio"));
 		boolean latrocinio = Boolean.parseBoolean(request.getParameter("latrocinio"));
-//		boolean bloqueio = Boolean.parseBoolean(request.getParameter("bloqueio"));
 		String comentario = request.getParameter("comentario");
 		long idPonto = Long.parseLong(request.getParameter("idPonto"));
 
@@ -343,7 +342,7 @@ public class ServletSafeWay extends HttpServlet {
 
 		ponto.setAvaliacoes(avaliacoesDoPonto);
 
-		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, false, comentario, ponto);
+		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, ponto);
 
 		formularioDAO.inserirAvaliacao(avaliacao);
 
