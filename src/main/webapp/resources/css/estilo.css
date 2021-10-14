@@ -86,6 +86,16 @@
     margin-right: auto;
     border-radius: 50px;
   }
+  
+  #logo-grande{
+    width: 550px;
+    margin-top: 0px;
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50px;
+  }
+  
   form {
     display: flex;
     flex-wrap: wrap;
@@ -103,7 +113,7 @@
     font-size: 20pt;
   }
 
-  a.bt-inicial-logar {
+  .bt-inicial-logar {
     margin-bottom: 10px;
     border-radius: 30px;
     padding: 13px 10px;
@@ -113,14 +123,7 @@
     float: right;
   }
   
-  a{
-    
-    border-radius: 13px;
-    padding: 5px 5px;
-    color:#ffffff;
-    background-color: #d62246;
-    text-decoration: none;
-}
+  
 
 
 
@@ -128,12 +131,6 @@
 
 /* tela de erro*/
 
-#erro {
-  background-color: rgb(255, 94, 94);
-
-}
-  /* fim forms */
-  /* tela de erro*/
   #erro {
     background-color: rgb(255, 94, 94);
     }
@@ -159,6 +156,8 @@
     color: red;
   }
   /* fim tela de erro*/
+  
+  /* demais caracteristicas do projeto....*/
   .full-box {
     flex: 1 1 100%;
     position: relative;
@@ -304,17 +303,8 @@ text-decoration: none;
 text-transform: uppercase;
 }
 
-a {
-color: blanchedalmond;
-text-decoration: none;
-background-color: #ff4747;
-padding: 5px;
-border-radius: 15px;
-box-shadow: 2px 2px white;
-text-transform: uppercase;
-}
 /* FIM CABE�ALHO */
-=======
+
 #divtabela{
 
 height:700px;
