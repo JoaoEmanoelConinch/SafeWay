@@ -120,14 +120,7 @@ a.bt-inicial {
   left: 88%;
 }
 
-a{
-  box-shadow:  2px 2px 2px black;
-  border-radius: 13px;
-  padding: 5px 5px;
-  color:#ffffff;
-  background-color: #d62246;
-  text-decoration: none;
-}
+
 
 /* fim forms */
 
@@ -245,11 +238,13 @@ margin-left: 45px;
 font-size: 25px ;
 padding: 10px 15px;
 border: none;
+
 background-color:#d62246;
 color: white;
 border-radius: 25px;
 
 }
+
 
   /* COME�O CABE�ALHO
 
@@ -317,7 +312,7 @@ margin-top: 50px;
 
 }
 #linhatabela:hover{
-  background-color: #084c83af;
+  background-color: #bfc9d165;
   opacity: 0.5;
 }
 
@@ -342,5 +337,8 @@ margin-top: 50px;
 #botaoheader:hover{
   background-color: #ab0909
     
+}
+#invisivel2{
+	background-color: #ffffff00;
 }
 

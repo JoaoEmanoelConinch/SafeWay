@@ -27,7 +27,7 @@
 			
 			<br>
 			<table class="table">
-				<thead class="thead-dark" >	
+				<thead class="table table-striped" >	
                 <tr>
                     <th id="tabelaop">Endereço</th>
                     <th id="tabelaop">Lesoes corporais</th>
