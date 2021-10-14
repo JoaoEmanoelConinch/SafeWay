@@ -23,7 +23,14 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         
+       <li class="nav-item dropdown">
        
+       <h4 class="nav-link dropdown-toggle" id="dropheader" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><c:out value="${sessionScope.usuario.nome}"/></h4>
+       <div class="dropdown-menu" aria-labelledby="navbarUsuario">
+       <a class="dropdown-item" id="dropheader" href="<%=request.getContextPath()%>/avaliacoes-usuario">Meus trajetos</a>
+       <a class="dropdown-item" id="dropheader" href="<%=request.getContextPath()%>/trajetos-usuario">Minhas Denuncias</a>
+       </div>
+       </li>
       </ul>
     </div>
   </nav> 
