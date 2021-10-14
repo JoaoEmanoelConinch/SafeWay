@@ -23,7 +23,7 @@ public class ConsultaTrajeto {
 		JSONpontoDAO JSONpontoDAO = new JSONpontoDAOImpl();
 		
 		JSONObject jsonObject1 = JSONpontoDAO.readJsonFromUrl("https://api.openrouteservice.org/v2/directions/"
-		+transporte.getDescricao()+"?api_key=5b3ce3597851110001cf624839b64a140f534a82a4750d447a4df110&text&start=%20"
+		+transporte.getDescricao()+"?api_key=5b3ce3597851110001cf6248c4496801893e4eedb6c83eec3808dc6b&text&start=%20"
 		+((Double)inicio.getLongitude()).toString()+",%20"+((Double)inicio.getLatitude()).toString()
 		+"&end=%20"+((Double)chegada.getLongitude()).toString()+",%20"+((Double)chegada.getLatitude()).toString());
 

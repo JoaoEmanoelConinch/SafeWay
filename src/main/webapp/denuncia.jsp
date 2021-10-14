@@ -16,7 +16,7 @@
            
         <form action="inserir-denuncia" method="POST" >
         
-        <input type="number" id="ponto" name="idPonto" value="<c:out value="${ponto.idPonto}"/>"/>
+        <input type="hidden" id="ponto" name="idPonto" value="<c:out value="${ponto.idPonto}"/>"/>
         
         <fieldset>
             <legend>Avalie esse ponto</legend>

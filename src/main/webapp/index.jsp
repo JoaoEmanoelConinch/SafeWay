@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <html lang="pt-br">
+
 <head>
     <title>Tela de SafeWay</title>
   
@@ -21,21 +22,21 @@
 <body>
 
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/jstyle.css">
-</head>
-
 <body>
   <div class="container text-center">
     <div class="row">
         
-        <div class="col-12"><img src="logo.png" id="logo" alt="Logo do projeto"></img></div>
+        <div class="col-12">
+   <img id="imagenindex" src ="https://lh3.googleusercontent.com/62ENRr4PVgseYwi970BwZy4bML5uf4Y_lpV8tl1BSawXJ6pH6qsW2OeVfk5IdePFnYLgUxglCaf4ulVWk-lohaL0JeT2Uf0E_Kvc5sJTyBxT4GxNnDxprepJT7OLI3PU9bb92j4YhoIStqT_nBet94c_KT8zhUUHgt-qvbz_9KEtSIfsC1tL_67hEFVMPRGQ84iVuoSex2txcoi-0arqyu7ENYUR7OcFleSWyfuDPgK6DOzKFVZF7bVxAsMRHENtGEVOIpt206aJreB3uZ5Cl9uvEZCP38Aw5IsdwdRORBAq4wf-td6DVbapf91LUlQZxNwgHfy3LMVjzNVlyesberjeoF_8gVRbgO-V0WXrlGZXMEcrhF2v-W1v_kCJfuVu0AF45UTCNXVVsbPyaiwdkK6pVvYziFBk2uR4j4N9wLTLT0FH1yF_bbwpbMwXUkgj5AvRL6CxIf-sVsJUuxmLjTHaCEdjkF2kW__3JXAP-w4deLHt-RuNo-IZJFScYC18LMZWuaa4aI4EbMuHSOq1_wzNA9wMzXD5kGkUULU8JMm-xq1ckcj_41nhKiaYfONYtOuDrsGBZtrBJ7gd887fmeIvop2RPbxsLuC3w34Utgqcp_bVnhVLn__HNBpXRm_eDRUg3Z8ZaebxMRqDCdy6TfpqBdOQdl22RF5KlF57jWT5khQEOzhdZffQC4OttMnG6JLqG_vmXHS_GpPYUTpsPh0=w359-h282-no?authuser=0">
+        
+        
+        </div>
         
         </div>
 
         <div class="row">
     <div class="col"></div>
-    <div class="col"><button type="button" class="btn btn-primary btn-lg bt-inicial" href="<%=request.getContextPath()%>/cadastro" >Cadastrar</button></div>
+    <div class="col"><a type="button" class="btn btn-primary btn-lg bt-inicial"  href="<%=request.getContextPath()%>/cadastro" >Cadastrar</a></div>
     <div class="col"></div>
             </div>
 

@@ -188,11 +188,10 @@ public class UsuarioCadastrado implements Serializable {
 	}
 
 	public Formulario avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
-			boolean latrocinio, boolean bloqueioRuas, String comentario, Ponto Ponto)
+			boolean latrocinio, String comentario, Ponto Ponto)
 			throws NullPointerException, StatusInvalidoException {
 
-		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario,
-				bloqueioRuas, Ponto, this);
+		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, Ponto, this);
 
 		this.addFormulario(formulario);
 		Ponto.addAvaliacao(formulario);
