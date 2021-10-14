@@ -116,6 +116,10 @@ public class ServletSafeWay extends HttpServlet {
 			case "/inserir-denuncia":
 				inserirDenuncia(request, response, session);
 				break;
+				
+			case "/avaliacoes":
+				mostrarAvaliacoesUsuario(request, response, session);
+				break;
 
 			default:
 				mostrarErro404(request, response);
@@ -374,6 +378,19 @@ public class ServletSafeWay extends HttpServlet {
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("erro404.jsp");
 		dispatcher.forward(request, response);
+	}
+	
+	private void mostrarAvaliacoesUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException{
+		
+		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
+		usuario.setFormulariosDoUsuario(formularioDAO.recuperarAvaliacoesDoUsuario(usuario));
+		
+		List<Formulario> avaliacoes = usuario.getFormulariosDoUsuario();
+		request.setAttribute("avaliacoes", avaliacoes);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacoes-usuario.jsp");
+		dispatcher.forward(request, response);
+		
 	}
 
 }
