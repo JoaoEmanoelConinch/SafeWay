@@ -328,33 +328,40 @@ public class ServletSafeWay extends HttpServlet {
 		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(idPonto));
 
 		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
-		usuario.setFormulariosDoUsuario(formularioDAO.recuperarAvaliacoesDoUsuario(usuario));
-
-		Ponto pontoSoLatLong = new Ponto();
-		pontoSoLatLong.setLongitude(ponto.getLongitude());
-		pontoSoLatLong.setLatitude(ponto.getLatitude());
-
-		if (pontoDAO.verificarPonto(pontoSoLatLong) == null) {
-			pontoDAO.inserirPonto(ponto);
+		
+		List<Formulario> avaliacoesDoUsuario = formularioDAO.recuperarAvaliacoesDoUsuario(usuario);
+		if (avaliacoesDoUsuario == null) {
+			avaliacoesDoUsuario = new ArrayList<Formulario>();
 		}
-		Ponto pontoverificado = pontoDAO.verificarPonto(pontoSoLatLong);
-		pontoverificado.setAvaliacoes(formularioDAO.recuperarAvaliacoes(pontoverificado));
+		
+		usuario.setFormulariosDoUsuario(avaliacoesDoUsuario);
+		
+		List<Formulario> avaliacoesDoPonto = formularioDAO.recuperarAvaliacoes(ponto);
+		if (avaliacoesDoPonto == null) {
+			avaliacoesDoPonto = new ArrayList<Formulario>();
+		}
 
-		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, false, comentario, pontoverificado);
+		ponto.setAvaliacoes(avaliacoesDoPonto);
+
+		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, false, comentario, ponto);
 
 		formularioDAO.inserirAvaliacao(avaliacao);
-		pontoverificado.addAvaliacao(avaliacao);
 
 		usuarioDAO.atualizarUsuario(usuario);
-		pontoDAO.atualizarPonto(pontoverificado);
+		pontoDAO.atualizarPonto(ponto);
 
 		Trajeto trajeto = (Trajeto) session.getAttribute("trajeto");
 
 		for (int i = 0; i < trajeto.getPontos().size(); i++) {
-			if (trajeto.getPontos().get(i).getLongitude() == pontoverificado.getLongitude()
-				& trajeto.getPontos().get(i).getLatitude() == pontoverificado.getLatitude()) {
+			if (trajeto.getPontos().get(i).getLongitude() == ponto.getLongitude()
+				& trajeto.getPontos().get(i).getLatitude() == ponto.getLatitude()) {
 				
-				trajeto.getPontos().get(i).setAvaliacoes(formularioDAO.recuperarAvaliacoes(trajeto.getPontos().get(i)));
+				List<Formulario> avaliacoesDoPontoDoTrjeto = formularioDAO.recuperarAvaliacoes(trajeto.getPontos().get(i));
+				if (avaliacoesDoPontoDoTrjeto == null) {
+					avaliacoesDoPontoDoTrjeto = new ArrayList<Formulario>();
+				}
+				
+				trajeto.getPontos().get(i).setAvaliacoes(avaliacoesDoPontoDoTrjeto);
 				
 				trajeto.getPontos().get(i).addAvaliacao(avaliacao);
 			}
