@@ -231,8 +231,8 @@ public class ServletSafeWay extends HttpServlet {
 		String p2 = request.getParameter("rua-chegada");
 		int meioDeTransporte = Integer.parseInt(request.getParameter("meio-transporte"));
 		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
-		usuario.setTrajetos(trajetoDAO.recuperarTrajetosUsuario(usuario));
-
+		usuario.setTrajetos( trajetoDAO.recuperarTrajetosUsuario(usuario));
+		
 		MeioDeTransporte meio = MeioDeTransporte.values()[meioDeTransporte];
 
 		Ponto partida = Ponto.informarLocal(p1);
@@ -321,13 +321,14 @@ public class ServletSafeWay extends HttpServlet {
 		boolean roubo = Boolean.parseBoolean(request.getParameter("roubo"));
 		boolean homicidio = Boolean.parseBoolean(request.getParameter("homicidio"));
 		boolean latrocinio = Boolean.parseBoolean(request.getParameter("latrocinio"));
-		boolean bloqueio = Boolean.parseBoolean(request.getParameter("bloqueio"));
+//		boolean bloqueio = Boolean.parseBoolean(request.getParameter("bloqueio"));
 		String comentario = request.getParameter("comentario");
 		long idPonto = Long.parseLong(request.getParameter("idPonto"));
 
 		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(idPonto));
 
 		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
+		usuario.setFormulariosDoUsuario(formularioDAO.recuperarAvaliacoesDoUsuario(usuario));
 
 		Ponto pontoSoLatLong = new Ponto();
 		pontoSoLatLong.setLongitude(ponto.getLongitude());
@@ -337,9 +338,9 @@ public class ServletSafeWay extends HttpServlet {
 			pontoDAO.inserirPonto(ponto);
 		}
 		Ponto pontoverificado = pontoDAO.verificarPonto(pontoSoLatLong);
+		pontoverificado.setAvaliacoes(formularioDAO.recuperarAvaliacoes(pontoverificado));
 
-		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, bloqueio,
-				comentario, pontoverificado);
+		Formulario avaliacao = usuario.avaliacao(lesaoCorporal, furto, roubo, homicidio, latrocinio, false, comentario, pontoverificado);
 
 		formularioDAO.inserirAvaliacao(avaliacao);
 		pontoverificado.addAvaliacao(avaliacao);
@@ -351,7 +352,10 @@ public class ServletSafeWay extends HttpServlet {
 
 		for (int i = 0; i < trajeto.getPontos().size(); i++) {
 			if (trajeto.getPontos().get(i).getLongitude() == pontoverificado.getLongitude()
-					& trajeto.getPontos().get(i).getLatitude() == pontoverificado.getLatitude()) {
+				& trajeto.getPontos().get(i).getLatitude() == pontoverificado.getLatitude()) {
+				
+				trajeto.getPontos().get(i).setAvaliacoes(formularioDAO.recuperarAvaliacoes(trajeto.getPontos().get(i)));
+				
 				trajeto.getPontos().get(i).addAvaliacao(avaliacao);
 			}
 		}
