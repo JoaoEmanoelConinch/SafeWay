@@ -49,9 +49,6 @@ public class Formulario implements Serializable {
 	@Column(name = "latrocinio_formulario", nullable = false)
 	private boolean latrocinio;
 
-	@Column(name = "bloqueio_rua_formulario", nullable = false)
-	private boolean bloqueioRua;
-
 	@Column(name = "comentario_formulario", length = 300, nullable = true)
 	private String comentario;
 
@@ -69,7 +66,7 @@ public class Formulario implements Serializable {
 	}
 
 	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-			String comentario, boolean bloqueio, Ponto ponto) {
+			String comentario, Ponto ponto) {
 		setIdFormulario(idFormulario);
 		setLesaoCorporal(lesaoCorporal);
 		setFurto(furto);
@@ -77,7 +74,6 @@ public class Formulario implements Serializable {
 		setHomicidio(homicidio);
 		setLatrocinio(latrocinio);
 		setComentario(comentario);
-		setBloqueioRuas(bloqueio);
 		setMedia(calcularMedia());
 		setIdPontoAvaliado(ponto);
 	}
@@ -104,7 +100,7 @@ public class Formulario implements Serializable {
 //	}
 
 	public Formulario(long idFormulario, boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
-			boolean latrocinio, boolean bloqueioRuas, double media, String comentario, Ponto ponto,
+			boolean latrocinio, double media, String comentario, Ponto ponto,
 			UsuarioCadastrado usuario) {
 
 		setIdFormulario(idFormulario);
@@ -114,7 +110,6 @@ public class Formulario implements Serializable {
 		setHomicidio(homicidio);
 		setLatrocinio(latrocinio);
 		setComentario(comentario);
-		setBloqueioRuas(bloqueioRuas);
 		setMedia(calcularMedia());
 		setIdPontoAvaliado(ponto);
 		setIdUsuario(usuario);
@@ -122,7 +117,7 @@ public class Formulario implements Serializable {
 	}
 
 	public Formulario(long idFormulario, boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
-			boolean latrocinio, boolean bloqueioRuas, String comentario) {
+			boolean latrocinio, String comentario) {
 
 		setIdFormulario(idFormulario);
 		setLesaoCorporal(lesaoCorporal);
@@ -132,12 +127,11 @@ public class Formulario implements Serializable {
 		setLatrocinio(latrocinio);
 		setComentario(comentario);
 		setMedia(calcularMedia());
-		setBloqueioRuas(bloqueioRuas);
 
 	}
 
 	public Formulario(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio, boolean latrocinio,
-			String comentario, boolean bloqueioRuas, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
+			String comentario, Ponto idPontoAvaliado, UsuarioCadastrado idUsuario) {
 
 		setLesaoCorporal(lesaoCorporal);
 		setFurto(furto);
@@ -145,7 +139,6 @@ public class Formulario implements Serializable {
 		setHomicidio(homicidio);
 		setLatrocinio(latrocinio);
 		setComentario(comentario);
-		setBloqueioRuas(bloqueioRuas);
 		setMedia(calcularMedia());
 		setIdPontoAvaliado(idPontoAvaliado);
 		setIdUsuario(idUsuario);
@@ -198,14 +191,6 @@ public class Formulario implements Serializable {
 
 	public void setLesaoCorporal(boolean lesaoCorporal) {
 		this.lesaoCorporal = lesaoCorporal;
-	}
-
-	public boolean isBloqueioRuas() {
-		return bloqueioRua;
-	}
-
-	public void setBloqueioRuas(boolean bloqueioRua) {
-		this.bloqueioRua = bloqueioRua;
 	}
 
 	public String getComentario() {
