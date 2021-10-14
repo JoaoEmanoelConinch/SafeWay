@@ -1,0 +1,346 @@
+/* geral */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Helvetica, sans-serif;
+  color: #084b83;
+  border: none;
+}
+
+input, label {
+  display: block;
+  outline: none;
+  width: 100%;
+}
+
+body {
+  background-image: url(mapa-fundo.jpg);
+  background-size: cover;
+  background-position-y: 0px;
+}
+/* fim geral */
+
+/* forms */
+
+/* div tela inicial */
+#invisivel {
+  width: 500px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(255, 255, 255, 0.0);
+  border-radius: 50px;
+  border: 5px solid #ffffff00;
+  padding: 25px;
+ }
+
+ #logo-inicio{
+  width: 550px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50px;
+}
+
+#main-container-cadastro {
+  width: 400px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(186, 191, 224, 0.8);
+  border-radius: 50px;
+  border-color: #1a63ff;
+  border: 5px solid #084b83;
+  padding: 25px;
+}
+
+#main-container-cadastro h1 {
+    text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.6rem;
+}
+#main-container {
+  width: 350px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(186, 191, 224, 0.8);
+  border-radius: 50px;
+  border-color: #1a63ff;
+  border: 5px solid #084b83;
+  padding: 25px;
+}
+
+#main-container h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2.0rem;
+
+}
+
+#go {
+ margin-bottom: 0px;
+}
+
+
+#logo{
+  width: 350px;
+  margin-top: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50px;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+button {
+  font-size:medium ;
+  box-shadow: 2px 2px 2px black;
+  border-radius: 13px;
+  padding: 5px 5px;
+  color:rgb(255, 255, 255);
+  background-color: #084b83;
+  float: right;
+  left: 88%;
+}
+
+a.bt-inicial {
+  margin-bottom: 10px;
+  
+  border-radius: 13px;
+  padding: 5px 5px;
+  color:rgb(255, 255, 255);
+  background-color: #d62246;
+  left: 88%;
+}
+
+a{
+  box-shadow:  2px 2px 2px black;
+  border-radius: 13px;
+  padding: 5px 5px;
+  color:#ffffff;
+  background-color: #d62246;
+  text-decoration: none;
+}
+
+/* fim forms */
+
+/* tela de erro*/
+
+#erro {
+  background-color: rgb(255, 94, 94);
+  }
+
+#div-erro{
+  border-style: solid;
+  background-color: white;
+  text-align: center;
+  color: red;
+  }
+
+
+a#voltar-erro {
+  font-size: 20px;
+  padding: 10px;
+  background-color: red;
+  text-decoration: none;
+  color: white;
+  border-radius: 7px;
+
+}
+a#voltar-erro:hover {
+    color: rgb(255, 255, 255);
+    background-color: #0579ff;
+
+}
+
+.text-erro {
+  color: red;
+}
+
+/* fim tela de erro*/
+
+
+.full-box {
+  flex: 1 1 100%;
+  position: relative;
+}
+
+.half-box {
+  flex: 1 1 45%;
+  position: relative;
+}
+
+.half-box-coordenadas{
+  display: flex;
+} 
+
+.spacing {
+  margin-right: 2.5%;
+}
+
+.coordenadas{
+  margin-right: 22px;
+}
+
+ label {
+  font-weight: bold;
+  font-size: .9rem;
+  margin-bottom: 1rem;
+}
+input {
+  border-bottom: 2px solid #030d31;
+  padding: 10px;
+  font-size: .9rem;
+  margin-bottom: 40px;
+}
+
+ input:focus {
+  border-color: #f6ae2d;
+}
+
+ input[type="submit"] {
+  background-color: #084b83;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 20px;
+  height: 40px;
+  cursor: pointer;
+}
+
+#agreement {
+  margin-right: 5px;
+}
+
+#MeioDeTransporte {
+  background-color: #084b83;
+  color:(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+  height: 20px;
+  cursor: pointer;
+  color: #ffffff;
+ }
+
+option{
+  color: #ffffff;
+}
+
+div.relative {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  } 
+
+#botaob {
+
+margin-left: 45px;
+
+font-size: 25px ;
+padding: 10px 15px;
+border: none;
+background-color:#d62246;
+color: white;
+border-radius: 25px;
+
+}
+
+  /* COME�O CABE�ALHO
+
+header {
+  padding: 15px 0;
+  width: 100%;
+  background-color:#132d8b;
+  display:flex;
+  justify-content:space-around;
+  align-items: center;
+}
+
+.container-logo {
+display: flex;
+align-items: center;
+}
+
+.logo-imagem {
+}
+
+.logo-texto {
+color: blanchedalmond;
+box-shadow: 2px 2px white;
+background-color:#486cf0;
+padding: 10px 10px;
+border-radius: 15px;
+padding-right: 7px;
+padding-left: 7px;
+
+}
+
+.menu li{
+display: inline-block;
+margin: 10px 10px;
+}
+
+.menu li a{
+color: blanchedalmond;
+border-radius: 15px;
+background-color: #486cf0;;
+padding: 10px 10px;
+font-size: 20px;
+text-decoration: none;
+text-transform: uppercase;
+}
+
+a {
+color: blanchedalmond;
+text-decoration: none;
+background-color: #ff4747;
+padding: 5px;
+border-radius: 15px;
+box-shadow: 2px 2px white;
+text-transform: uppercase;
+}
+/* FIM CABE�ALHO */
+=======
+#divtabela{
+
+height:700px;
+width: 70%;
+margin-left: auto;
+margin-right: auto;
+margin-top: 50px;
+
+}
+#linhatabela:hover{
+  background-color: #084c83af;
+  opacity: 0.5;
+}
+
+
+#meiotela{
+  margin-left:auto;
+  margin-right:auto;
+}
+#logoheader{
+  height: 80px;
+  width: 80px;
+}
+
+#header{
+  background-color: #084c83af;
+}
+#botaoheader{
+  margin-left: 30px;
+  background-color: #ff0000
+}
+
+#botaoheader:hover{
+  background-color: #ab0909
+    
+}
+

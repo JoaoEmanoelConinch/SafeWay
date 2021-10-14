@@ -2,9 +2,9 @@
 <!DOCTYPE hibernate-configuration PUBLIC   "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/opensaferoutes?useTimezone=true&amp;serverTimezone=UTC</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/safeway?useTimezone=true&amp;serverTimezone=UTC</property>
 		<property name="hbm2ddl.auto">update</property>
 		<property name="hibernate.connection.username">root</property>
 		<property name="hibernate.connection.password">P0n@refu</property>
@@ -12,8 +12,6 @@
 		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
 		<mapping class="modelo.entidade.formulario.Formulario" />
 		<mapping class="modelo.entidade.mapa.Ponto" />
-		<mapping class="modelo.entidade.mapa.PontoAvaliado" />
-		<mapping class="modelo.entidade.mapa.PontoFavorito" />
 		<mapping class="modelo.entidade.mapa.Trajeto" />
 		<mapping class="modelo.entidade.usuario.UsuarioCadastrado" />
 	</session-factory>
