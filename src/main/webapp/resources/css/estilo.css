@@ -123,9 +123,38 @@
     float: right;
   }
   
+ a#login-voltar{
   
+  border: none;
+  border-radius: 10px;
+  padding: 5px 5px;
+  color:rgb(255, 255, 255);
+  background-color: #d62246;
+  transition: background-color 0.5s;
+  float: left;
+  
+}
+a#login-voltar:hover{
+  color: rgb(255, 255, 255);
+  background-color: #0579ff;
+}
+
+button#login-avancar{
+  border: none;
+  border-radius: 10px;
+  padding: 5px 5px;
+  color:rgb(255, 255, 255);
+  background-color: #084b83;
+  transition: background-color 0.5s;
+  float: right;
+  
+}
+button#login-avancar:hover{
+  color: rgb(255, 255, 255);
+  background-color: #0579ff;
 
 
+}
 
 /* fim forms */
 
@@ -216,7 +245,10 @@
     position: relative;
     height: 400px;
     width: 100%;
-    } 
+    }
+    
+    
+    
     /* COME�O CABE�ALHO
   header {
     padding: 15px 0;

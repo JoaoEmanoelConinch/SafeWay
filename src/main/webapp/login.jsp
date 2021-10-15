@@ -6,7 +6,8 @@
 
   <title>Tela de Login</title>
   
-<link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/estilo.css"/>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/estilo.css"/>
+
   	<style>
     <%@include file="/resources/css/estilo.css"%>
 		</style>
@@ -18,9 +19,10 @@
 
     </head>
   </head>
+  
 <body>
 <jsp:include page="header.jsp" />
-  <div id="main-container">
+  <div class="container "id="main-container">
     <h1>Logar em </h1>
     <h1>SafeWay</h1>
 
@@ -31,9 +33,10 @@
       </div>
       <div class="half-box">
         <label for="senha">Senha</label>
-        <input type="password" name="senha" id="senha" placeholder="Digite sua senha" required>
-        <a  href="<%=request.getContextPath()%>/inicio">Voltar</a>
-        <button type="submit">Logar</button>
+
+        <input type="password" name="senha" id="senha" placeholder="Digite sua senha" data-password-validate data-required>
+        <a id="login-voltar" type="button" class="btn btn-primary btn-lg" href="<%=request.getContextPath()%>/inicio">Voltar</a>
+        <button id="login-avancar"  type="button" class="btn btn-primary btn-lg" type="submit">Logar</button>
       </div>
     </form>
 

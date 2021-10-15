@@ -15,6 +15,7 @@ import modelo.entidade.formulario.Formulario_;
 import modelo.entidade.mapa.Ponto;
 import modelo.entidade.mapa.Ponto_;
 import modelo.entidade.usuario.UsuarioCadastrado;
+import modelo.entidade.usuario.UsuarioCadastrado_;
 import modelo.factory.conexao.ConexaoFactory;
 
 public class FormularioDAOImpl implements FormularioDAO {
@@ -218,7 +219,7 @@ public class FormularioDAOImpl implements FormularioDAO {
 
 
 			ParameterExpression<Long> IdUsuario = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(juncaoUsuario.get(Ponto_.ID_PONTO), IdUsuario));
+			criteria.where(construtor.equal(juncaoUsuario.get(UsuarioCadastrado_.ID), IdUsuario));
 
 			forms = sessao.createQuery(criteria).setParameter(IdUsuario, usuario.getId()).getResultList();
 

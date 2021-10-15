@@ -117,8 +117,12 @@ public class ServletSafeWay extends HttpServlet {
 				inserirDenuncia(request, response, session);
 				break;
 				
-			case "/avaliacoes":
+			case "/avaliacoes-usuario":
 				mostrarAvaliacoesUsuario(request, response, session);
+				break;
+				
+			case "/trajetos-usuario":
+				mostrarTrjetosDoUsuario(request, response, session);
 				break;
 
 			default:
@@ -224,7 +228,7 @@ public class ServletSafeWay extends HttpServlet {
 
 	private void mostrarFormularioTrajeto(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioTrajeto.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trajeto.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -383,12 +387,35 @@ public class ServletSafeWay extends HttpServlet {
 	private void mostrarAvaliacoesUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException{
 		
 		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
-		usuario.setFormulariosDoUsuario(formularioDAO.recuperarAvaliacoesDoUsuario(usuario));
+		List<Formulario> avaliacoesDoUsuario = formularioDAO.recuperarAvaliacoesDoUsuario(usuario);
+		if (avaliacoesDoUsuario == null) {
+			avaliacoesDoUsuario = new ArrayList<Formulario>();
+		}
+		
+		usuario.setFormulariosDoUsuario(avaliacoesDoUsuario);
 		
 		List<Formulario> avaliacoes = usuario.getFormulariosDoUsuario();
 		request.setAttribute("avaliacoes", avaliacoes);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacoes-usuario.jsp");
+		dispatcher.forward(request, response);
+		
+	}
+	
+	private void mostrarTrjetosDoUsuario(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session) throws ServletException, IOException {
+
+		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
+		List<Trajeto> trajetosDoUsuario = trajetoDAO.recuperarTrajetosUsuario(usuario);
+		if (trajetosDoUsuario == null) {
+			trajetosDoUsuario = new ArrayList<Trajeto>();
+		}
+		
+		usuario.setTrajetos(trajetosDoUsuario);
+		
+		List<Trajeto> trajetos = usuario.getTrajetos();
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("trajetosUsuario.jsp");
 		dispatcher.forward(request, response);
 		
 	}
