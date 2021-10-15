@@ -15,7 +15,7 @@ input, label {
 }
 
 body {
-  background-image: url(mapa-fundo.jpg);
+  background-image: url("https://lh3.googleusercontent.com/pw/AM-JKLUfk6ldFZFGVbWZQ0_puvYTqP9rrO9I30N4VgVHq-0r3LYc4ei0yEVoWPQJ6A1avzePTjxpXv_YL1MDVIFmzNmCYmLfheVyIozOrkSkGh56HafizKKHaXoQzPzpgK_ednn7hPT9JCwAoF7--uPT9Qqx=w1366-h768-no?authuser=0");
   background-size: cover;
   background-position-y: 0px;
 }
