@@ -96,7 +96,7 @@ public class PontoDAOImpl implements PontoDAO {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			sessao.update(ponto);
+			sessao.merge(ponto);
 
 			sessao.getTransaction().commit();
 
