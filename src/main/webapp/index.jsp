@@ -36,13 +36,13 @@
 
         <div class="row">
     <div class="col"></div>
-    <div class="col"><a type="button" class="btn btn-primary btn-lg bt-inicial"  href="<%=request.getContextPath()%>/cadastro" >Cadastrar</a></div>
+    <div class="col"><a class="btn btn-primary btn-lg bt-inicial"  href="<%=request.getContextPath()%>/cadastro" >Cadastrar</a></div>
     <div class="col"></div>
             </div>
 
         <div class="row">
     <div class="col"></div>
-    <div class="col"><a type="button" class="btn btn-primary btn-lg bt-inicial"  href="<%=request.getContextPath()%>/login" >Logar</a></div>
+    <div class="col"><a class="btn btn-primary btn-lg bt-inicial"  href="<%=request.getContextPath()%>/login" >Logar</a></div>
     <div class="col"></div>
 </div>
         
