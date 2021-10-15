@@ -24,12 +24,12 @@
 				<tbody>
 					<c:forEach var="avaliacoes" items="${avaliacoes}">
 						<tr class="table-active" id="linhatabela">
-							<td><c:out value="${formulario.ponto.endereco}"/></td>
-							<td><c:out value="${formulario.lesaoCorporal}"/></td>
-							<td><c:out value="${formulario.furto}"/></td>
-							<td><c:out value="${formulario.roubo}"/></td>
-							<td><c:out value="${formulario.homicidio}"/></td>
-							<td><c:out value="${formulario.latrocinio}"/></td>
+							<td><c:out value="${avaliacoes.ponto.endereco}"/></td>
+							<td><c:out value="${avaliacoes.lesaoCorporal}"/></td>
+							<td><c:out value="${avaliacoes.furto}"/></td>
+							<td><c:out value="${avaliacoes.roubo}"/></td>
+							<td><c:out value="${avaliacoes.homicidio}"/></td>
+							<td><c:out value="${avaliacoes.latrocinio}"/></td>
 						</tr>
 					</c:forEach>
 				</tbody>
