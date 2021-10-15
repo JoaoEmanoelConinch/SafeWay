@@ -52,9 +52,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-         
-         <a id="botaovoltar" href="<%=request.getContextPath()%>/formulario-trageto">Voltar</a>
-           
+                    
 		</div>
 	</div>
 </body>
