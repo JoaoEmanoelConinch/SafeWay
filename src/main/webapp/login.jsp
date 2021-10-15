@@ -3,9 +3,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+
   <title>Tela de Login</title>
   
   <link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/estilo.css"/>
+
   	<style>
     <%@include file="/resources/css/estilo.css"%>
 		</style>
@@ -15,6 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+    </head>
   </head>
   
 <body>
@@ -26,10 +29,11 @@
     <form id="register-form" action="logar-usuario" method="POST">
       <div class="full-box">
         <label for="email">Email</label>
-        <input type ="text" name="email" id="email" placeholder="Digite seu email" data-required data-min-length="8">
+        <input type ="text" name="email" id="email" placeholder="Digite seu email" minlength="8" maxlength="45" required>
       </div>
       <div class="half-box">
         <label for="senha">Senha</label>
+
         <input type="password" name="senha" id="senha" placeholder="Digite sua senha" data-password-validate data-required>
         <a id="login-voltar" type="button" class="btn btn-primary btn-lg" href="<%=request.getContextPath()%>/inicio">Voltar</a>
         <button id="login-avancar"  type="button" class="btn btn-primary btn-lg" type="submit">Logar</button>

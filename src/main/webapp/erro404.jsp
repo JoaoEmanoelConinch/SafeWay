@@ -15,14 +15,15 @@
 
     </head> 
         <title>Tela de Erro</title>
-</head>
-<body>
-    <div id="conteudo">
-        <h1>404 ERRO</h1>
-        <h2>ESSA AÇÃO NÃO ESTÁ DISPONÍVEL NO MOMENTO, SENTIMOS MUITO!</h2><br>
-        <h2>POR GENTILEZA CLIQUE ABAIXO PARA VOLTAR A TELA INICIAL</h2><br>
+
+<body id="erro">
+
+    <div id="div-erro">
+        <h1 class="text-erro">404 ERRO</h1>
+        <h2 class="text-erro">ESSA AÇÃO NÃO ESTÁ DISPONÍVEL NO MOMENTO, SENTIMOS MUITO!</h2><br>
+        <h2 class="text-erro">POR GENTILEZA CLIQUE ABAIXO PARA VOLTAR A TELA INICIAL</h2><br>
         
-        <a  href="<%=request.getContextPath()%>/inicio">Voltar</a>
+        <a id="voltar-erro"  href="<%=request.getContextPath()%>/inicio">Voltar</a>
     </div >
 
 </body>
