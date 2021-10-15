@@ -90,7 +90,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			sessao = fabrica.getConexao().openSession();
 			sessao.beginTransaction();
 
-			sessao.update(usuario);
+			sessao.merge(usuario);
 
 			sessao.getTransaction().commit();
 
