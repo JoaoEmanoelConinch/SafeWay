@@ -45,7 +45,5 @@
 			</div>
 		</form>
 	</div>
-	<p class="error-validation template"></p>
-	<script src="js/scripts.js"></script>
-</body>
+	</body>
 </html>
