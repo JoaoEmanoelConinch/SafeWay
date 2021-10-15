@@ -18,7 +18,8 @@
     </head>
 <body>
 <jsp:include page="header.jsp" />
-	<div id="main-container">
+
+	<div id="main-container" class="conteiner">
 		<h1>Cadastre-se para acessar no</h1>
 		<h1>SafeWay</h1>
 
@@ -43,9 +44,11 @@
 				<input type="password" name="passwordconfirmation" id="passwordconfirmation" placeholder="Digite novamente sua senha" minlength="8" maxlength="45" required>
 			</div>
 			<div class="full-box">
-				<button type="submit">Salvar</button>
+			
+			<a type="button" id="cadastro-voltar" class="btn btn-primary btn-lg" href="<%=request.getContextPath()%>/inicio" id="Voltar">Voltar</a>
+			<button type="button" id="cadastro-avancar" class="btn btn-primary btn-lg">Salvar</button>
 
-				<a  href="<%=request.getContextPath()%>/inicio" id="Voltar">Voltar</a>
+				
 			</div>
 		</form>
 	</div>
