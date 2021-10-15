@@ -45,8 +45,8 @@
 			</div>
 			<div class="full-box">
 			
-			<a type="button" id="cadastro-voltar" class="btn btn-primary btn-lg" href="<%=request.getContextPath()%>/inicio" id="Voltar">Voltar</a>
-			<button type="button" id="cadastro-avancar" class="btn btn-primary btn-lg">Salvar</button>
+			<a id="cadastro-voltar" class="btn btn-primary btn-lg" href="<%=request.getContextPath()%>/inicio" id="Voltar">Voltar</a>
+			<button type="submit" id="cadastro-avancar" class="btn btn-primary btn-lg">Salvar</button>
 
 				
 			</div>
