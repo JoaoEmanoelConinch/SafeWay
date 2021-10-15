@@ -414,6 +414,7 @@ public class ServletSafeWay extends HttpServlet {
 		usuario.setTrajetos(trajetosDoUsuario);
 		
 		List<Trajeto> trajetos = usuario.getTrajetos();
+		request.setAttribute("trajetos", trajetos);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("trajetosUsuario.jsp");
 		dispatcher.forward(request, response);
