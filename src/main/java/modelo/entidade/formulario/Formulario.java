@@ -58,7 +58,7 @@ public class Formulario implements Serializable {
 	private Ponto idPonto;
 
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario", nullable = true)
 	private UsuarioCadastrado usuario;
   
