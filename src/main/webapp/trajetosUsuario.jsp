@@ -33,13 +33,13 @@
                 </tr>
 			</thead>
 				<tbody>
-					<c:forEach var="trajetoUsuario" items="${trajetos}">
+					<c:forEach var="Trajeto" items="${trajetosDoUsuario}">
 						<tr class="table-active" id="linhatabela">
-							<td><c:out value="${trajetoUsuario.inicio.endereço}"/></td>
-							<td><c:out value="${trajetoUsuario.chegada.endereço}"/></td>
-							<td><c:out value="${trajetoUsuario.transporteUsado}"/></td>
+							<td><c:out value="${Trajeto.inicio.endereço}"/></td>
+							<td><c:out value="${Trajeto.chegada.endereço}"/></td>
+							<td><c:out value="${Trajeto.transporteUsado}"/></td>
                            
-							<td><input id="botaoTrajeto" type="submit" <c:out value="${trajetoUsuario.idtrajeto}"/>> realizar trajeto</td></input>
+							<td><input id="botaoTrajeto" type="submit" <c:out value="${Trajeto.idtrajeto}"/>> realizar trajeto</td></input>
 						</tr>
 					</c:forEach>
 				</tbody>
