@@ -228,7 +228,7 @@ public class ServletSafeWay extends HttpServlet {
 
 	private void mostrarFormularioTrajeto(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("FormularioTrajeto.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trajeto.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -415,7 +415,7 @@ public class ServletSafeWay extends HttpServlet {
 		
 		List<Trajeto> trajetos = usuario.getTrajetos();
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("trajetos-usuario.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("trajetosUsuario.jsp");
 		dispatcher.forward(request, response);
 		
 	}
