@@ -22,14 +22,14 @@
             </tr>
 			</thead>
 				<tbody>
-					<c:forEach var="avaliacoes" items="${avaliacoes}">
+					<c:forEach var="avaliacao" items="${avaliacoes}">
 						<tr class="table-active" id="linhatabela">
-							<td><c:out value="${avaliacoes.ponto.endereco}"/></td>
-							<td><c:out value="${avaliacoes.lesaoCorporal}"/></td>
-							<td><c:out value="${avaliacoes.furto}"/></td>
-							<td><c:out value="${avaliacoes.roubo}"/></td>
-							<td><c:out value="${avaliacoes.homicidio}"/></td>
-							<td><c:out value="${avaliacoes.latrocinio}"/></td>
+							<td><c:out value="${avaliacao.ponto.endereco}"/></td>
+							<td><c:out value="${avaliacao.lesaoCorporal}"/></td>
+							<td><c:out value="${avaliacao.furto}"/></td>
+							<td><c:out value="${avaliacao.roubo}"/></td>
+							<td><c:out value="${avaliacao.homicidio}"/></td>
+							<td><c:out value="${avaliacao.latrocinio}"/></td>
 						</tr>
 					</c:forEach>
 				</tbody>
