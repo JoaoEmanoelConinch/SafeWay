@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Formulario de avaliação</title>
-    <link rel="stylesheet" href="estilosss.css">
-    <link rel="stylesheet" href="css/estilo.css">
+    
+ <link rel="stylesheet" href="<%=request.getContextPath()%>resources/css/estilo.css"/>
+  	<style>
+    <%@include file="/resources/css/estilo.css"%>
+		</style>
   </head>
 <body id="bodytelaavaliar">
     <div class="absolute" id="logo">
