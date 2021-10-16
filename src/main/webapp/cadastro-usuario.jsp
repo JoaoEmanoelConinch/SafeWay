@@ -20,8 +20,8 @@
 <jsp:include page="header.jsp" />
 
 	<div id="main-container" class="conteiner">
-		<h1>Cadastre-se para acessar no</h1>
-		<h1>SafeWay</h1>
+		<h1>Cadastre-se</h1>
+		
 
 		<form id="register-form" action="inserir-usuario" method="POST">
 			<div class="full-box">
@@ -51,6 +51,8 @@
 				
 			</div>
 		</form>
+		
 	</div>
+	 <jsp:include page="rodape.jsp" />
 	</body>
 </html>
