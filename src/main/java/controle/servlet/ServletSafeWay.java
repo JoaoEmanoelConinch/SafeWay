@@ -92,6 +92,10 @@ public class ServletSafeWay extends HttpServlet {
 			case "/login":
 				mostrarTelaLogin(request, response);
 				break;
+				
+			case "/logout":
+				deslogarUsuario(request, response, session);
+				break;
 
 			case "/logar-usuario":
 				logarUsuario(request, response, session);
@@ -138,6 +142,7 @@ public class ServletSafeWay extends HttpServlet {
 		}
 
 	}
+
 
 	private void mostrarTelaInicial(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -224,6 +229,13 @@ public class ServletSafeWay extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(pagDestino);
 		dispatcher.forward(request, response);
 
+	}
+	
+	private void deslogarUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		
+		session.invalidate();
+		response.sendRedirect("index.jsp");
+		
 	}
 
 	private void mostrarFormularioTrajeto(HttpServletRequest request, HttpServletResponse response)
