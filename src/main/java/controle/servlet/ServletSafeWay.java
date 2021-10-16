@@ -102,7 +102,7 @@ public class ServletSafeWay extends HttpServlet {
 				break;
 
 			case "/formulario-trageto":
-				mostrarFormularioTrajeto(request, response);
+				mostrarFormularioTrajeto(request, response, session);
 				break;
 
 			case "/criar-trajeto":
@@ -238,9 +238,17 @@ public class ServletSafeWay extends HttpServlet {
 		
 	}
 
-	private void mostrarFormularioTrajeto(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarFormularioTrajeto(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trajeto.jsp");
+		
+		String pagDestino = "formulario-trajeto.jsp";
+		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
+		
+		if(usuario == null) {
+			pagDestino = "index.jsp";
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(pagDestino);
 		dispatcher.forward(request, response);
 	}
 
