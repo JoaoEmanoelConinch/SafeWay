@@ -30,7 +30,6 @@ import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
-import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
 import modelo.excecao.usuario.StringVaziaException;
@@ -119,14 +118,6 @@ public class ServletSafeWay extends HttpServlet {
 
 			case "/inserir-denuncia":
 				inserirDenuncia(request, response, session);
-				break;
-
-			case "/avaliacoes-usuario":
-				mostrarAvaliacoesUsuario(request, response, session);
-				break;
-
-			case "/trajetos-usuario":
-				mostrarTrjetosDoUsuario(request, response, session);
 				break;
 
 			default:
@@ -253,7 +244,7 @@ public class ServletSafeWay extends HttpServlet {
 	}
 
 	private void criarTrajeto(HttpServletRequest request, HttpServletResponse response, HttpSession session)
-			throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException,
+			throws JsonParseException, JsonMappingException, IOException,
 			NumeroMenorQueZeroException, NumeroMaiorQueLimiteException, ServletException {
 		String p1 = request.getParameter("inicio");
 		String p2 = request.getParameter("rua-chegada");
@@ -275,7 +266,7 @@ public class ServletSafeWay extends HttpServlet {
 		partidaSoLatLong.setLongitude(partida.getLongitude());
 		partidaSoLatLong.setLatitude(partida.getLatitude());
 
-		if (pontoDAO.verificarPonto(partidaSoLatLong) == null) {
+		if (!pontoDAO.verificarPontoExiste(partidaSoLatLong)) {
 			pontoDAO.inserirPonto(partida);
 		}
 		Ponto partidaTrajeto = pontoDAO.verificarPonto(partidaSoLatLong);
@@ -286,7 +277,7 @@ public class ServletSafeWay extends HttpServlet {
 		chegadaSoLatLong.setLongitude(chegada.getLongitude());
 		chegadaSoLatLong.setLatitude(chegada.getLatitude());
 
-		if (pontoDAO.verificarPonto(chegadaSoLatLong) == null) {
+		if (!pontoDAO.verificarPontoExiste(chegadaSoLatLong)) {
 			pontoDAO.inserirPonto(chegada);
 		}
 		Ponto chegadaTrajeto = pontoDAO.verificarPonto(chegadaSoLatLong);
@@ -302,7 +293,7 @@ public class ServletSafeWay extends HttpServlet {
 			pontoSoLatLong.setLongitude(ponto.getLongitude());
 			pontoSoLatLong.setLatitude(ponto.getLatitude());
 
-			if (pontoDAO.verificarPonto(pontoSoLatLong) == null) {
+			if (!pontoDAO.verificarPontoExiste(pontoSoLatLong)) {
 				pontoDAO.inserirPonto(ponto);
 			}
 
@@ -348,7 +339,7 @@ public class ServletSafeWay extends HttpServlet {
 	}
 
 	private void inserirDenuncia(HttpServletRequest request, HttpServletResponse response, HttpSession session)
-			throws NullPointerException, StatusInvalidoException, IOException {
+			throws NullPointerException, IOException {
 
 		boolean lesaoCorporal = Boolean.parseBoolean(request.getParameter("lesaoCorporal"));
 		boolean furto = Boolean.parseBoolean(request.getParameter("furto"));
@@ -409,43 +400,6 @@ public class ServletSafeWay extends HttpServlet {
 			throws ServletException, IOException {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("erro404.jsp");
 		dispatcher.forward(request, response);
-	}
-
-	private void mostrarAvaliacoesUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession session)
-			throws ServletException, IOException {
-
-		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
-		List<Formulario> avaliacoesDoUsuario = formularioDAO.recuperarAvaliacoesDoUsuario(usuario);
-		if (avaliacoesDoUsuario == null) {
-			avaliacoesDoUsuario = new ArrayList<Formulario>();
-		}
-		usuario.setFormulariosDoUsuario(avaliacoesDoUsuario);
-
-		List<Formulario> avaliacoes = usuario.getFormulariosDoUsuario();
-		request.setAttribute("avaliacoes", avaliacoes);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacoes-usuario.jsp");
-		dispatcher.forward(request, response);
-
-	}
-
-	private void mostrarTrjetosDoUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession session)
-			throws ServletException, IOException {
-
-		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
-		List<Trajeto> trajetosDoUsuario = trajetoDAO.recuperarTrajetosUsuario(usuario);
-		if (trajetosDoUsuario == null) {
-			trajetosDoUsuario = new ArrayList<Trajeto>();
-		}
-		
-		usuario.setTrajetos(trajetosDoUsuario);
-
-		List<Trajeto> trajetos = usuario.getTrajetos();
-		request.setAttribute("trajetos", trajetos);
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("trajetosUsuario.jsp");
-		dispatcher.forward(request, response);
-
 	}
 
 }

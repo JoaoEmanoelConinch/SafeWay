@@ -47,10 +47,7 @@
             <input type="radio"  name="latrocinio" value="false" checked>
             <label></label>
         </fieldset>
-        <fieldset>
-            <legend id="comentariolegenda">Escreva seu comentário particular</legend>
-            <textarea name="comentario" rows="5" cols="50" maxlength="225" placeholder="⠀Menssagem" id="comentario"></textarea>
-        </fieldset>
+        
         <input type="submit" value="Enviar avaliação" id="botaoEavaliacao">
         </form>
     </div>

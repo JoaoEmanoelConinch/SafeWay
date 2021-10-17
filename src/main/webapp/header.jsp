@@ -27,8 +27,6 @@
        
        <h4 class="nav-link dropdown-toggle" id="dropheader" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><c:out value="${sessionScope.usuario.nome}"/></h4>
        <div class="dropdown-menu" aria-labelledby="navbarUsuario">
-       		<a class="dropdown-item" id="dropheader" href="<%=request.getContextPath()%>/trajetos-usuario">Meus trajetos</a>
-       		<a class="dropdown-item" id="dropheader" href="<%=request.getContextPath()%>/avaliacoes-usuario">Minhas Denuncias</a>
        		<a class="dropdown-item" id="dropheader" href="<%=request.getContextPath()%>/logout">Sair</a>
        </div>
        </li>

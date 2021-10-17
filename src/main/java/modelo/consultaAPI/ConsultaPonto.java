@@ -11,7 +11,6 @@ import modelo.entidade.mapa.Ponto;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
-import modelo.excecao.mapa.StatusInvalidoException;
 
 public class ConsultaPonto {
 
@@ -19,13 +18,13 @@ public class ConsultaPonto {
 	}
 
 	public static Ponto informarLocal(String local)
-			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+			throws  NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 
 		return informarLocal(local, 1);
 	}
 
 	public static Ponto informarLocal(String local, int posicao)
-			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+			throws  NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 
 		posicao--;
 
@@ -55,35 +54,6 @@ public class ConsultaPonto {
 		Ponto ponto = new Ponto(latitude.doubleValue(), longitude.doubleValue());
 
 		return ponto;
-	}
-
-	public static List<Ponto> informarLocais(String local) throws StatusInvalidoException {
-		List<Ponto> pontos = new ArrayList<Ponto>();
-
-		String localParaURL = local.replaceAll(" ", "%20");
-
-		JSONpontoDAO JSONpontoDAO = new JSONpontoDAOImpl();
-
-		JSONObject jsonObject = JSONpontoDAO.readJsonFromUrl(
-				"https://api.openrouteservice.org/geocode/search?api_key=5b3ce3597851110001cf6248c4496801893e4eedb6c83eec3808dc6b&text="
-						+ localParaURL);
-
-		JSONArray tamanho = jsonObject.getJSONArray("features");
-
-		for (int i = 0; i < tamanho.length(); i++) {
-
-			BigDecimal longitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(i)
-					.getJSONObject("geometry").getJSONArray("coordinates").get(0);
-			BigDecimal latitude = (BigDecimal) jsonObject.getJSONArray("features").getJSONObject(i)
-					.getJSONObject("geometry").getJSONArray("coordinates").get(1);
-
-			Ponto ponto = new Ponto(latitude.doubleValue(), longitude.doubleValue());
-
-			pontos.add(ponto);
-
-		}
-
-		return pontos;
 	}
 
 	public static String informarLatLong(Ponto ponto) {
