@@ -436,6 +436,7 @@ public class ServletSafeWay extends HttpServlet {
 		if (trajetosDoUsuario == null) {
 			trajetosDoUsuario = new ArrayList<Trajeto>();
 		}
+		
 		usuario.setTrajetos(trajetosDoUsuario);
 
 		List<Trajeto> trajetos = usuario.getTrajetos();
