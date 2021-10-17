@@ -35,8 +35,8 @@
         <label for="senha">Senha</label>
 
         <input type="password" name="senha" id="senha" placeholder="Digite sua senha" data-password-validate data-required>
-        <a id="login-voltar" type="button" class="btn btn-primary btn-lg" href="<%=request.getContextPath()%>/inicio">Voltar</a>
-        <button id="login-avancar"  type="button" class="btn btn-primary btn-lg" type="submit">Logar</button>
+        <a id="login-voltar" class="btn btn-primary btn-lg" href="<%=request.getContextPath()%>/inicio">Voltar</a>
+        <button id="login-avancar" type="submit" class="btn btn-primary btn-lg" type="submit">Logar</button>
       </div>
     </form>
 
