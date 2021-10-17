@@ -21,7 +21,6 @@ import modelo.consultaAPI.ConsultaPonto;
 import modelo.entidade.formulario.Formulario;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
-import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
 @Table(name = "ponto", uniqueConstraints = { @UniqueConstraint(columnNames = { "latitude", "longitude" }) })
@@ -73,10 +72,9 @@ public class Ponto {
 		this.setTrajetos(trajetos);
 		this.setAvaliacoes(avaliacoes);
 		this.setEndereco(informarLatLong());
-
 	}
 
-	public Ponto(double latitude, double longitude) throws StatusInvalidoException {
+	public Ponto(double latitude, double longitude) {
 
 		this.setLatitude(latitude);
 		this.setLongitude(longitude);
@@ -183,39 +181,8 @@ public class Ponto {
 	}
 
 	public static Ponto informarLocal(String local)
-			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
+			throws NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
 		return ConsultaPonto.informarLocal(local);
-	}
-
-	public static Ponto informarLocal(String local, int posicao)
-			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		return ConsultaPonto.informarLocal(local, posicao);
-	}
-
-	public static List<Ponto> informarLocais(String local) throws StatusInvalidoException {
-		return ConsultaPonto.informarLocais(local);
-	}
-
-	@Override
-	public boolean equals(Object objeto) {
-
-		if (this == objeto)
-			return true;
-
-		if (objeto == null)
-			return false;
-
-		if (getClass() != objeto.getClass())
-			return false;
-
-		Ponto ponto = (Ponto) objeto;
-
-		if (!(this.getLatitude() == ponto.getLatitude()) || !(this.getLongitude() == ponto.getLongitude())) {
-			return false;
-		}
-
-		return true;
-
 	}
 
 	public void addTrajeto(Trajeto trajeto) {
@@ -277,15 +244,6 @@ public class Ponto {
 				setQuantidadeLatrocinio(getQuantidadeLatrocinio() - 1);
 			}
 		}
-	}
-
-	public List<Double> criarVetor() {
-		List<Double> pontoVetor = new ArrayList<Double>(2);
-
-		pontoVetor.add(this.getLongitude());
-		pontoVetor.add(this.getLatitude());
-
-		return pontoVetor;
 	}
 
 	public String informarLatLong() {
