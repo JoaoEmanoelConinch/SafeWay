@@ -116,11 +116,11 @@ public class ServletSafeWay extends HttpServlet {
 			case "/inserir-denuncia":
 				inserirDenuncia(request, response, session);
 				break;
-				
+
 			case "/avaliacoes-usuario":
 				mostrarAvaliacoesUsuario(request, response, session);
 				break;
-				
+
 			case "/trajetos-usuario":
 				mostrarTrjetosDoUsuario(request, response, session);
 				break;
@@ -239,8 +239,8 @@ public class ServletSafeWay extends HttpServlet {
 		String p2 = request.getParameter("rua-chegada");
 		int meioDeTransporte = Integer.parseInt(request.getParameter("meio-transporte"));
 		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
-		usuario.setTrajetos( trajetoDAO.recuperarTrajetosUsuario(usuario));
-		
+		usuario.setTrajetos(trajetoDAO.recuperarTrajetosUsuario(usuario));
+
 		MeioDeTransporte meio = MeioDeTransporte.values()[meioDeTransporte];
 
 		Ponto partida = Ponto.informarLocal(p1);
@@ -281,29 +281,28 @@ public class ServletSafeWay extends HttpServlet {
 			}
 
 			Ponto pontoVerificado = pontoDAO.verificarPonto(pontoSoLatLong);
-			
+
 			trajeto.getPontos().set(i, pontoVerificado);
-			
+
 			pontoDAO.atualizarPonto(pontoVerificado);
 
 		}
 
 		trajeto.addUsuarioCadastrado(usuario);
 		trajetoDAO.inserirTrajeto(trajeto);
-		usuario.addTrajeto(trajeto);
-		
-		
+
 		usuarioDAO.atualizarUsuario(usuario);
 
 		session.setAttribute("trajeto", trajeto);
 
 		response.sendRedirect("trajeto");
 	}
-	
-	private void mostrarTrajeto(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
-	
-		Trajeto trajeto = (Trajeto)session.getAttribute("trajeto");
-		
+
+	private void mostrarTrajeto(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws ServletException, IOException {
+
+		Trajeto trajeto = (Trajeto) session.getAttribute("trajeto");
+
 		List<Ponto> pontos = trajeto.getPontos();
 		request.setAttribute("pontos", pontos);
 
@@ -314,8 +313,8 @@ public class ServletSafeWay extends HttpServlet {
 
 	private void mostrarFormularioDenuncia(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Long id = Long.parseLong(request.getParameter("id"));
-		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(id));
+		Long idPonto = Long.parseLong(request.getParameter("idPonto"));
+		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(idPonto));
 		RequestDispatcher dispatcher = request.getRequestDispatcher("denuncia.jsp");
 		request.setAttribute("ponto", ponto);
 		dispatcher.forward(request, response);
@@ -335,14 +334,14 @@ public class ServletSafeWay extends HttpServlet {
 		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(idPonto));
 
 		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
-		
+
 		List<Formulario> avaliacoesDoUsuario = formularioDAO.recuperarAvaliacoesDoUsuario(usuario);
 		if (avaliacoesDoUsuario == null) {
 			avaliacoesDoUsuario = new ArrayList<Formulario>();
 		}
-		
+
 		usuario.setFormulariosDoUsuario(avaliacoesDoUsuario);
-		
+
 		List<Formulario> avaliacoesDoPonto = formularioDAO.recuperarAvaliacoes(ponto);
 		if (avaliacoesDoPonto == null) {
 			avaliacoesDoPonto = new ArrayList<Formulario>();
@@ -361,15 +360,16 @@ public class ServletSafeWay extends HttpServlet {
 
 		for (int i = 0; i < trajeto.getPontos().size(); i++) {
 			if (trajeto.getPontos().get(i).getLongitude() == ponto.getLongitude()
-				& trajeto.getPontos().get(i).getLatitude() == ponto.getLatitude()) {
-				
-				List<Formulario> avaliacoesDoPontoDoTrjeto = formularioDAO.recuperarAvaliacoes(trajeto.getPontos().get(i));
+					& trajeto.getPontos().get(i).getLatitude() == ponto.getLatitude()) {
+
+				List<Formulario> avaliacoesDoPontoDoTrjeto = formularioDAO
+						.recuperarAvaliacoes(trajeto.getPontos().get(i));
 				if (avaliacoesDoPontoDoTrjeto == null) {
 					avaliacoesDoPontoDoTrjeto = new ArrayList<Formulario>();
 				}
-				
+
 				trajeto.getPontos().get(i).setAvaliacoes(avaliacoesDoPontoDoTrjeto);
-				
+
 				trajeto.getPontos().get(i).addAvaliacao(avaliacao);
 			}
 		}
@@ -383,41 +383,41 @@ public class ServletSafeWay extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("erro404.jsp");
 		dispatcher.forward(request, response);
 	}
-	
-	private void mostrarAvaliacoesUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException{
-		
+
+	private void mostrarAvaliacoesUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws ServletException, IOException {
+
 		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
 		List<Formulario> avaliacoesDoUsuario = formularioDAO.recuperarAvaliacoesDoUsuario(usuario);
 		if (avaliacoesDoUsuario == null) {
 			avaliacoesDoUsuario = new ArrayList<Formulario>();
 		}
-		
 		usuario.setFormulariosDoUsuario(avaliacoesDoUsuario);
-		
+
 		List<Formulario> avaliacoes = usuario.getFormulariosDoUsuario();
 		request.setAttribute("avaliacoes", avaliacoes);
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("avaliacoes-usuario.jsp");
 		dispatcher.forward(request, response);
-		
+
 	}
-	
-	private void mostrarTrjetosDoUsuario(HttpServletRequest request, HttpServletResponse response,
-			HttpSession session) throws ServletException, IOException {
+
+	private void mostrarTrjetosDoUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws ServletException, IOException {
 
 		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
 		List<Trajeto> trajetosDoUsuario = trajetoDAO.recuperarTrajetosUsuario(usuario);
 		if (trajetosDoUsuario == null) {
 			trajetosDoUsuario = new ArrayList<Trajeto>();
 		}
-		
 		usuario.setTrajetos(trajetosDoUsuario);
-		
+
 		List<Trajeto> trajetos = usuario.getTrajetos();
-		
+		request.setAttribute("trajetos", trajetos);
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("trajetosUsuario.jsp");
 		dispatcher.forward(request, response);
-		
+
 	}
 
 }
