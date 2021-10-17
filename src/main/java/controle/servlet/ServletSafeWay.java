@@ -262,6 +262,12 @@ public class ServletSafeWay extends HttpServlet {
 		usuario.setTrajetos(trajetoDAO.recuperarTrajetosUsuario(usuario));
 
 		MeioDeTransporte meio = MeioDeTransporte.values()[meioDeTransporte];
+		
+		Trajeto trajetoSessao = (Trajeto) session.getAttribute("trajeto");
+		
+		if (trajetoSessao != null) {
+			session.setAttribute("trajeto", null);
+		}
 
 		Ponto partida = Ponto.informarLocal(p1);
 
