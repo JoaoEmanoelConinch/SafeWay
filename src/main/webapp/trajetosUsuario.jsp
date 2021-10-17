@@ -51,8 +51,8 @@
 								<td><c:out value="${Trajeto.inicio.endereço}" /></td>
 								<td><c:out value="${Trajeto.chegada.endereço}" /></td>
 								<td><c:out value="${Trajeto.transporteUsado}" /></td>
-								<td><input id="botaoTrajeto" type="submit"
-									<c:out value="${Trajeto.idtrajeto}"/>> realizar trajeto</input></td>
+								<td><c:out value="${Trajeto.idtrajeto}"/></td>
+								<input id="botaoTrajeto" type="submit"> realizar trajeto</input>
 							</tr>
 						</c:forEach>
 					</tbody>
