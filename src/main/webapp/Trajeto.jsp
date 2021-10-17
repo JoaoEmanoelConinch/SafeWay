@@ -7,19 +7,8 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>resources/css/estilo.css" />
 <style>
-<%@
-include
- 
-file
-="/
-resources
-/
-css
-/
-estilo
-.css
-"%
->
+<%@includefile = "/resources/css/estilo.css"%>
+
 </style>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -64,7 +53,7 @@ estilo
 							<td><c:out value="${ponto.quantidadeRoubos}" /></td>
 							<td><c:out value="${ponto.quantidadeHomicidios}" /></td>
 							<td><c:out value="${ponto.quantidadeLatrocinio}" /></td>
-							<td><a id="botaoavaliar" href=formolario-denuncia?id=
+							<td><a id="botaoavaliar" href=formolario-denuncia?idPonto=
 								<c:out value="${ponto.idPonto}"/>> Denunciar crime</a></td>
 						</tr>
 					</c:forEach>
