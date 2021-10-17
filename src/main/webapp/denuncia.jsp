@@ -20,32 +20,32 @@
         <input type="hidden" id="ponto" name="idPonto" value="<c:out value="${ponto.idPonto}"/>"/>
         <fieldset id="nonenn">
             <legend id="avaliarponto">Avalie esse ponto</legend>
+            
+            <div id="form-avaliar">
+            
             <label>Lesão corporal:</label>
-            <label for="sim">Sim</label>
-            <input  type="radio"  name="lesaoCorporal" value="true" >
-            <label for="nao">Não</label>
-            <input type="radio" name="lesaoCorporal" value="false" checked><br><br>
-            <label>Furto:⠀⠀⠀⠀⠀⠀⠀</label>
-            <label for="sim">Sim</label>
-            <input type="radio"  name="furto" value="true">
-            <label for="nao">Não</label>
-            <input type="radio"  name="furto" value="false" checked><br><br>
-            <label>Roubo:⠀⠀⠀⠀⠀⠀</label>
-            <label for="sim">Sim</label>
-            <input type="radio"  name="roubo" value="true">
-            <label for="nao">Não</label>
-            <input type="radio"  name="roubo" value="false" checked><br><br>
-            <label>Homicídio:⠀⠀ ⠀</label>
-            <label for="sim">Sim</label>
-            <input type="radio" name="homicidio" value="true">
-            <label for="nao">Não</label>
-            <input type="radio" name="homicidio" value="false" checked><br><br>
-            <label>Latrocínio:⠀⠀ ⠀</label>
-            <label for="sim">Sim</label>
-            <input type="radio"  name="latrocinio" value="true">
-            <label for="nao">Não</label>
-            <input type="radio"  name="latrocinio" value="false" checked>
-            <label></label>
+             <label id="label-esquerda" for="sim">Sim</label> <input id="input-esquerda" type="radio"  name="lesaoCorporal" value="true"><br>
+             <label id="label-esquerda" for="nao">Não</label> <input id="input-esquerda" type="radio" name="lesaoCorporal" value="false" checked><br><br>
+            
+            
+            
+            <label>Furto:</label>
+            <label id="label-esquerda" for="sim">Sim</label> <input type="radio" id="input-esquerda" name="furto" value="true"><br>
+            <label id="label-esquerda" for="nao">Não</label> <input type="radio" id="input-esquerda" name="furto" value="false" checked><br><br>
+            
+            <label>Roubo:</label>
+            <label id="label-esquerda" for="sim">Sim</label> <input type="radio" id="input-esquerda" name="roubo" value="true"><br>
+            <label id="label-esquerda" for="nao">Não</label> <input type="radio" id="input-esquerda" name="roubo" value="false" checked><br><br>
+            
+            <label>Homicídio:</label>
+            <label id="label-esquerda" for="sim">Sim</label> <input type="radio" id="input-esquerda" name="homicidio" value="true"><br>
+            <label id="label-esquerda" for="nao">Não</label> <input type="radio" id="input-esquerda" name="homicidio" value="false" checked><br><br>
+            
+            <label>Latrocínio:</label>
+            <label id="label-esquerda" for="sim">Sim</label> <input type="radio" id="input-esquerda" name="latrocinio" value="true"><br>
+            <label id="label-esquerda" for="nao">Não</label> <input type="radio" id="input-esquerda" name="latrocinio" value="false" checked>
+            
+            </div>
         </fieldset>
         
         <input type="submit" value="Enviar avaliação" id="botaoEavaliacao">

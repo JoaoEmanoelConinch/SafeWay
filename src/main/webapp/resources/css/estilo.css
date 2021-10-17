@@ -9,8 +9,7 @@
   }
   input, label {
     display: block;
-    outline: none;
-    width: 100%;
+    
   }
   body {
   background-image: url("https://lh3.googleusercontent.com/jan6-1N7adqA4ctdstmC6H9rvvQ1flpsWwgUb2kRn0Ntd09Kkt8f-s1SRPOEC5B2zXsmZi2DIjTM4jpWSWE_8IkkwazRRd0NYSvzNsueRKLQqcAbkq9fmLvdZSgBXr1r5fvBCVWz8iHzFIiSIgw-6bL9XyVwnAlH2f6k3fygMLaIsQ46_ySlU6EfpnOqhiVPzM7G0wP99mLLrn-nyXwvHwO2Pmy_JXd6a7FpR1UdQsXWn_b_b2fKR5BNYZioVuJoC0uPviOwAbYMSwCCj0r8x5ecMuIn_H9EeImLWsamAu4F17OpoKK8LEGgp_ZIItoDkKrWwzzj_txpSmoXjc0UZRkhqDkO4rrBTXumL88rEABhJCdBxCDnYn9PBZO-F6rzIonzJDqqeanv-QF4l976QDnhfkkN28YCsuDqFNjqM5dqj-xPlj4XdFZg_UqHzkee7oEvMhFag-FPZUB7HNP8gcYgZJaAd-PiojrLqC36SDPe1yUY-qdE2Zrw0EAexgsPjQniakxukyGYaEYkax6xNVfjqKKCEoeBSXZq_KnXcbXqzctQFLQYkVa6jIS047hWxvcA6Iccp8ppSk6prvvUtbjPWgobMv5dXGciLBfAebe3exQStbmujQL9Ws9pNqfnqQtGXLqKIZ6pM_faPhsuNtkYcYtOvr2LzcD-SnVOYb6HjhsIRn2y7RTOHocunpVOBB4_Dk8HAGsJAbrBMhy5TNw=w1366-h768-no?authuser=0");
@@ -67,8 +66,12 @@
 
     font-size: 2.0rem;
   }
-  #go {
-   margin-bottom: 0px;
+  #ir {
+  	text-align: center;
+  	padding: 5px;
+  	margin-bottom: 0px;
+   	width: 100%;
+   	font-size: 20px;
   }
 
   #logo-inicio{
@@ -129,7 +132,7 @@
   }
   
  a#login-voltar{
-  
+  margin-top: 5px;
   border: none;
   border-radius: 10px;
   padding: 5px 5px;
@@ -145,6 +148,7 @@ a#login-voltar:hover{
 }
 
 button#login-avancar{
+  margin-top: 5px;
   border: none;
   border-radius: 10px;
   padding: 5px 5px;
@@ -198,28 +202,26 @@ button#login-avancar:hover{
     margin-bottom: 10px;
   }
   .half-box {
-    flex: 1 1 45%;
+    flex: 1 1 100%;
     position: relative;
   }
   .half-box-coordenadas{
     display: flex;
   } 
-  .spacing {
-    margin-right: 2.5%;
-  }
+  
   .coordenadas{
     margin-right: 22px;
   }
    label {
     font-weight: bold;
     font-size: .9rem;
-    margin-bottom: 1rem;
+    
   }
   input {
     border-bottom: 2px solid #030d31;
     padding: 10px;
     font-size: .9rem;
-    margin-bottom: 20px;
+    
   }
    input:focus {
     border-color: #f6ae2d;
@@ -312,8 +314,7 @@ display: flex;
 align-items: center;
 }
 
-.logo-imagem {
-}
+
 
 .logo-texto {
 color: blanchedalmond;
@@ -533,3 +534,26 @@ position: absolute;
     margin-bottom: 0px;
   }
 
+#email {
+	width: 100%;
+	
+}
+
+#senha {
+	width: 100%;
+}
+
+#resp-form{
+	width: 100%
+}
+
+#input-esquerda {
+	display: block;
+	float: left;
+}
+
+label#label-esquerda{
+	float: left;
+	display: block;
+	margin-right: 10px;
+}

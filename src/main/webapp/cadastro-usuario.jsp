@@ -26,22 +26,22 @@
 		<form id="register-form" action="inserir-usuario" method="POST">
 			<div class="full-box">
 				<label for="name">Nome</label>
-				 <input type="text" name="nome" id="nome" placeholder="Digite seu nome" minlength="3" maxlength="45" required>
+				 <input type="text" name="nome" id="resp-form" placeholder="Digite seu nome" minlength="3" maxlength="45" required>
 			</div>
 			
 			<div class="full-box">
 				<label for="email">Email</label>
-				<input type="email" name="email" id="email" placeholder="Digite seu email" minlength="8" maxlength="45" required>
+				<input type="email" name="email" id="resp-form" placeholder="Digite seu email" minlength="8" maxlength="45" required>
 			</div>
 			
 			<div class="full-box">
 				<label for="lastname">Senha</label>
-				<input type="password" name="senha" id="senha" placeholder="Digite sua senha" minlength="8" maxlength="45" placeholder="Digite sua senha" required>
+				<input type="password" name="senha" id="resp-form" placeholder="Digite sua senha" minlength="8" maxlength="45" placeholder="Digite sua senha" required>
 			</div>
 			
 			<div class="full-box">
 				<label for="passconfirmation">Confirmação de senha</label>
-				<input type="password" name="passwordconfirmation" id="passwordconfirmation" placeholder="Digite novamente sua senha" minlength="8" maxlength="45" required>
+				<input type="password" name="passwordconfirmation" id="resp-form" placeholder="Digite novamente sua senha" minlength="8" maxlength="45" required>
 			</div>
 			<div class="full-box">
 			

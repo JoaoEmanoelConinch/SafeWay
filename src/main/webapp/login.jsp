@@ -27,15 +27,17 @@
     <form id="register-form" action="logar-usuario" method="POST">
       <div class="full-box">
         <label for="email">Email</label>
-        <input type ="text" name="email" id="email" placeholder="Digite seu email" minlength="8" maxlength="45" required>
+        <input type ="text" name="email" id="resp-form" placeholder="Digite seu email" minlength="8" maxlength="45" required>
       </div>
       <div class="half-box">
         <label for="senha">Senha</label>
 
-        <input type="password" name="senha" id="senha" placeholder="Digite sua senha" data-password-validate data-required>
+        <input type="password" name="senha" id="resp-form" placeholder="Digite sua senha" minlength="8" maxlength="45" required>
+        
         <a id="login-voltar" class="btn btn-primary btn-lg" href="<%=request.getContextPath()%>/inicio">Voltar</a>
         <button id="login-avancar" type="submit" class="btn btn-primary btn-lg" type="submit">Logar</button>
       </div>
+      
     </form>
 
   </div>
