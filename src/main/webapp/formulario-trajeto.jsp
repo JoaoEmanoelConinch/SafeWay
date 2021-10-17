@@ -42,15 +42,15 @@
       </div>
       <div class="half-box">
         <select id="MeioDeTransporte" name="meio-transporte" placeholder="Informe a rua:">
-              <option value=0>Carro/Moto</option>
-							<option value=1>Veiculo pesado</option>
-							<option value=2>Ciclismo regular</option>
-							<option value=3>Ciclovia</option>
-							<option value=4>Mountainbike</option>
-							<option value=5>Bicicleta Eletrica</option>
-							<option value=6>Andando a pÃ©</option>
-							<option value=7>Trilha</option>
-							<option value=8>Cadeira de rodas</option>
+            <option value=0>Carro/Moto</option>
+			<option value=1>Veiculo pesado</option>
+			<option value=2>Ciclismo regular</option>
+			<option value=3>Ciclovia</option>
+			<option value=4>Mountainbike</option>
+			<option value=5>Bicicleta Eletrica</option>
+			<option value=6>Andando a pé</option>
+			<option value=7>Trilha</option>
+			<option value=8>Cadeira de rodas</option>
           
         </select>
       </div>
