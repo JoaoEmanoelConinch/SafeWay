@@ -23,25 +23,25 @@
             
             <div id="form-avaliar">
             
-            <label>Lesão corporal:</label>
+            <label id="titulo-avaliar">Lesão corporal:</label>
              <label id="label-esquerda" for="sim">Sim</label> <input id="input-esquerda" type="radio"  name="lesaoCorporal" value="true"><br>
              <label id="label-esquerda" for="nao">Não</label> <input id="input-esquerda" type="radio" name="lesaoCorporal" value="false" checked><br><br>
             
             
             
-            <label>Furto:</label>
+            <label id="titulo-avaliar">Furto:</label>
             <label id="label-esquerda" for="sim">Sim</label> <input type="radio" id="input-esquerda" name="furto" value="true"><br>
             <label id="label-esquerda" for="nao">Não</label> <input type="radio" id="input-esquerda" name="furto" value="false" checked><br><br>
             
-            <label>Roubo:</label>
+            <label id="titulo-avaliar">Roubo:</label>
             <label id="label-esquerda" for="sim">Sim</label> <input type="radio" id="input-esquerda" name="roubo" value="true"><br>
             <label id="label-esquerda" for="nao">Não</label> <input type="radio" id="input-esquerda" name="roubo" value="false" checked><br><br>
             
-            <label>Homicídio:</label>
+            <label id="titulo-avaliar">Homicídio:</label>
             <label id="label-esquerda" for="sim">Sim</label> <input type="radio" id="input-esquerda" name="homicidio" value="true"><br>
             <label id="label-esquerda" for="nao">Não</label> <input type="radio" id="input-esquerda" name="homicidio" value="false" checked><br><br>
             
-            <label>Latrocínio:</label>
+            <label id="titulo-avaliar">Latrocínio:</label>
             <label id="label-esquerda" for="sim">Sim</label> <input type="radio" id="input-esquerda" name="latrocinio" value="true"><br>
             <label id="label-esquerda" for="nao">Não</label> <input type="radio" id="input-esquerda" name="latrocinio" value="false" checked>
             
