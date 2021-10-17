@@ -313,8 +313,8 @@ public class ServletSafeWay extends HttpServlet {
 
 	private void mostrarFormularioDenuncia(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Long id = Long.parseLong(request.getParameter("id"));
-		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(id));
+		Long idPonto = Long.parseLong(request.getParameter("idPonto"));
+		Ponto ponto = pontoDAO.recuperarPonto(new Ponto(idPonto));
 		RequestDispatcher dispatcher = request.getRequestDispatcher("denuncia.jsp");
 		request.setAttribute("ponto", ponto);
 		dispatcher.forward(request, response);
