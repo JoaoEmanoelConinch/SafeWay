@@ -556,4 +556,17 @@ label#label-esquerda{
 	float: left;
 	display: block;
 	margin-right: 10px;
+	
+}
+
+label#label-direita{
+	float: right;
+	display: block;
+	margin-right: 10px;
+	
+}
+
+#titulo-avaliar{
+	font-size: 21px;
+	margin-bottom: 10px;
 }
