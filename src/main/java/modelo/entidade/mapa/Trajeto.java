@@ -173,7 +173,16 @@ public class Trajeto implements Serializable {
 
 	public List<Ponto> criarLineString() throws JsonParseException, org.codehaus.jackson.map.JsonMappingException,
 			IOException, StatusInvalidoException {
-		return ConsultaTrajeto.criarLineString(this.inicio, this.chegada, this.transporteUsado);
+		List<Ponto> pontos = ConsultaTrajeto.criarLineString(this.inicio, this.chegada, this.transporteUsado);
+		
+		List<Ponto> todosOsPontosDoTrajeto = new ArrayList<Ponto>();
+		
+		todosOsPontosDoTrajeto.add(this.getInicio());
+		todosOsPontosDoTrajeto.addAll(pontos);
+		todosOsPontosDoTrajeto.add(this.getChegada());
+		
+		return todosOsPontosDoTrajeto;
+		
 	}
 
 	public List<Ponto> verificarQuaisPontosExixtemEm(List<Ponto> pontos) {

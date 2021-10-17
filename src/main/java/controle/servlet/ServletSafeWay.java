@@ -330,6 +330,7 @@ public class ServletSafeWay extends HttpServlet {
 		Trajeto trajeto = (Trajeto) session.getAttribute("trajeto");
 
 		List<Ponto> pontos = trajeto.getPontos();
+		
 		request.setAttribute("pontos", pontos);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("Trajeto.jsp");
