@@ -30,7 +30,6 @@ import modelo.entidade.usuario.UsuarioCadastrado;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
-import modelo.excecao.mapa.StatusInvalidoException;
 
 @Entity
 @Table(name = "trajeto")
@@ -72,48 +71,16 @@ public class Trajeto implements Serializable {
 		setIdTrajeto(id);
 	}
 
-	public Trajeto(long id, Ponto inicio, Ponto chegada, List<Ponto> pontos, MeioDeTransporte transporteUsado,
-			List<UsuarioCadastrado> usuariosCadastrados) throws StatusInvalidoException, JsonParseException,
-			org.codehaus.jackson.map.JsonMappingException, IOException {
-		this.setIdTrajeto(id);
+	public Trajeto(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
 		this.setInicio(inicio);
 		this.setChegada(chegada);
-		this.setTransporteUsado(transporteUsado);
-		this.setPontos(pontos);
-		this.setUsuariosCadastrados(usuariosCadastrados);
-	}
-
-	public Trajeto(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado) throws StatusInvalidoException,
-			JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
-		this.setInicio(inicio);
-		this.setChegada(chegada);
-		this.setTransporteUsado(transporteUsado);
-		this.setPontos(criarLineString());
-		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
-	}
-
-	public Trajeto(String inicio, String chegada, MeioDeTransporte transporteUsado)
-			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, StatusInvalidoException,
-			IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		this.setInicio(Ponto.informarLocal(inicio));
-		this.setChegada(Ponto.informarLocal(chegada));
-		this.setTransporteUsado(transporteUsado);
-		this.setPontos(criarLineString());
-		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
-	}
-
-	public Trajeto(String inicio, int posicaoInicio, String chegada, int posicaoChegada,
-			MeioDeTransporte transporteUsado) throws JsonParseException, org.codehaus.jackson.map.JsonMappingException,
-			StatusInvalidoException, IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		this.setInicio(Ponto.informarLocal(inicio, posicaoInicio));
-		this.setChegada(Ponto.informarLocal(chegada, posicaoChegada));
 		this.setTransporteUsado(transporteUsado);
 		this.setPontos(criarLineString());
 		this.setUsuariosCadastrados(new ArrayList<UsuarioCadastrado>());
 	}
 
 	public Trajeto(long id, Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado)
-			throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException {
+			throws JsonParseException, JsonMappingException, IOException {
 		this.setIdTrajeto(id);
 		this.setInicio(inicio);
 		this.setChegada(chegada);
@@ -172,7 +139,7 @@ public class Trajeto implements Serializable {
 	}
 
 	public List<Ponto> criarLineString() throws JsonParseException, org.codehaus.jackson.map.JsonMappingException,
-			IOException, StatusInvalidoException {
+			IOException {
 		List<Ponto> pontos = ConsultaTrajeto.criarLineString(this.inicio, this.chegada, this.transporteUsado);
 		
 		List<Ponto> todosOsPontosDoTrajeto = new ArrayList<Ponto>();
@@ -183,18 +150,6 @@ public class Trajeto implements Serializable {
 		
 		return todosOsPontosDoTrajeto;
 		
-	}
-
-	public List<Ponto> verificarQuaisPontosExixtemEm(List<Ponto> pontos) {
-		List<Ponto> pontosNaoExistentes = new ArrayList<Ponto>();
-
-		for (int i = 0; i < this.getPontos().size(); i++) {
-			if (!(pontos.contains(this.getPontos().get(i)))) {
-				pontosNaoExistentes.add(this.getPontos().get(i));
-			}
-		}
-
-		return pontosNaoExistentes;
 	}
 
 	public void addPonto(Ponto ponto) {
