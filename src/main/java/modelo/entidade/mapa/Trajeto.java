@@ -130,9 +130,8 @@ public class Trajeto implements Serializable {
 		this.idTrajeto = idTrajeto;
 	}
 
-	public void setInicio(String inicio)
-			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		this.inicio = Ponto.informarLocal(inicio);
+	public Ponto getInicio() {
+		return inicio;
 	}
 
 	public void setInicio(Ponto inicio) {
@@ -148,6 +147,10 @@ public class Trajeto implements Serializable {
 		this.pontos = pontos;
 	}
 
+	public Ponto getChegada() {
+		return chegada;
+	}
+	
 	public void setChegada(Ponto chegada) {
 		this.chegada = chegada;
 	}
