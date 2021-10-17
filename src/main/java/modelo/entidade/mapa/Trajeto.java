@@ -130,9 +130,8 @@ public class Trajeto implements Serializable {
 		this.idTrajeto = idTrajeto;
 	}
 
-	public void setInicio(String inicio)
-			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		this.inicio = Ponto.informarLocal(inicio);
+	public Ponto getInicio() {
+		return inicio;
 	}
 
 	public void setInicio(Ponto inicio) {
@@ -148,6 +147,10 @@ public class Trajeto implements Serializable {
 		this.pontos = pontos;
 	}
 
+	public Ponto getChegada() {
+		return chegada;
+	}
+	
 	public void setChegada(Ponto chegada) {
 		this.chegada = chegada;
 	}
@@ -170,7 +173,16 @@ public class Trajeto implements Serializable {
 
 	public List<Ponto> criarLineString() throws JsonParseException, org.codehaus.jackson.map.JsonMappingException,
 			IOException, StatusInvalidoException {
-		return ConsultaTrajeto.criarLineString(this.inicio, this.chegada, this.transporteUsado);
+		List<Ponto> pontos = ConsultaTrajeto.criarLineString(this.inicio, this.chegada, this.transporteUsado);
+		
+		List<Ponto> todosOsPontosDoTrajeto = new ArrayList<Ponto>();
+		
+		todosOsPontosDoTrajeto.add(this.getInicio());
+		todosOsPontosDoTrajeto.addAll(pontos);
+		todosOsPontosDoTrajeto.add(this.getChegada());
+		
+		return todosOsPontosDoTrajeto;
+		
 	}
 
 	public List<Ponto> verificarQuaisPontosExixtemEm(List<Ponto> pontos) {
