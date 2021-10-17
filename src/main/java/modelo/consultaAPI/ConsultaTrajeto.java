@@ -11,12 +11,11 @@ import org.json.JSONObject;
 
 import modelo.entidade.mapa.Ponto;
 import modelo.enumeracao.mapa.MeioDeTransporte;
-import modelo.excecao.mapa.StatusInvalidoException;
 
 public class ConsultaTrajeto {
 
 	public static List<Ponto> criarLineString(Ponto inicio, Ponto chegada, MeioDeTransporte transporte)
-			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException, StatusInvalidoException {
+			throws JsonParseException, org.codehaus.jackson.map.JsonMappingException, IOException {
 
 		List<Ponto> pontosDoTrajeto = new ArrayList<Ponto>();
 		
