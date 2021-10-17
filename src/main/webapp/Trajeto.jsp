@@ -53,8 +53,7 @@
 							<td><c:out value="${ponto.quantidadeRoubos}" /></td>
 							<td><c:out value="${ponto.quantidadeHomicidios}" /></td>
 							<td><c:out value="${ponto.quantidadeLatrocinio}" /></td>
-							<td><a id="botaoavaliar" href=formolario-denuncia?idPonto=
-								<c:out value="${ponto.idPonto}"/>> Denunciar crime</a></td>
+							<td><a id="botaoavaliar" href=formolario-denuncia?idPonto=<c:out value="${ponto.idPonto}"/>> Denunciar crime</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
