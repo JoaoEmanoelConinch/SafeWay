@@ -244,49 +244,6 @@ public class PontoDAOImpl implements PontoDAO {
 
 	}
 
-	public Ponto recuperarPontoAvaliacoes(Ponto ponto) {
-		
-		Session sessao = null;
-		Ponto ponto1 = null;
-
-		try {
-
-			sessao = fabrica.getConexao().openSession();
-			sessao.beginTransaction();
-
-			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
-
-			CriteriaQuery<Ponto> criteria = construtor.createQuery(Ponto.class);
-			Root<Ponto> raizContato = criteria.from(Ponto.class);
-
-			Join<Ponto, Formulario> juncaoCliente = raizContato.join(Ponto_.avaliacoes);
-
-			ParameterExpression<Long> idPonto = construtor.parameter(Long.class);
-			criteria.where(construtor.equal(juncaoCliente.get(Formulario_.ID_PONTO), idPonto));
-
-			ponto1 = sessao.createQuery(criteria).setParameter(idPonto, ponto.getIdPonto()).getSingleResult();
-
-			sessao.getTransaction().commit();
-
-		} catch (Exception sqlException) {
-
-			sqlException.printStackTrace();
-
-			if (sessao.getTransaction() != null) {
-				sessao.getTransaction().rollback();
-			}
-
-		} finally {
-
-			if (sessao != null) {
-				sessao.close();
-			}
-		}
-
-		return ponto1;
-		
-	}
-	
 	public boolean verificarPontoExiste(Ponto ponto) {
 		
 		this.p = ponto;
