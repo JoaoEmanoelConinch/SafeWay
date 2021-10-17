@@ -92,13 +92,17 @@ public class ServletSafeWay extends HttpServlet {
 			case "/login":
 				mostrarTelaLogin(request, response);
 				break;
+				
+			case "/logout":
+				deslogarUsuario(request, response, session);
+				break;
 
 			case "/logar-usuario":
 				logarUsuario(request, response, session);
 				break;
 
 			case "/formulario-trageto":
-				mostrarFormularioTrajeto(request, response);
+				mostrarFormularioTrajeto(request, response, session);
 				break;
 
 			case "/criar-trajeto":
@@ -138,6 +142,7 @@ public class ServletSafeWay extends HttpServlet {
 		}
 
 	}
+
 
 	private void mostrarTelaInicial(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -225,10 +230,25 @@ public class ServletSafeWay extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
+	
+	private void deslogarUsuario(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
+		
+		session.invalidate();
+		response.sendRedirect("index.jsp");
+		
+	}
 
-	private void mostrarFormularioTrajeto(HttpServletRequest request, HttpServletResponse response)
+	private void mostrarFormularioTrajeto(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("formulario-trajeto.jsp");
+		
+		String pagDestino = "formulario-trajeto.jsp";
+		UsuarioCadastrado usuario = (UsuarioCadastrado) session.getAttribute("usuario");
+		
+		if(usuario == null) {
+			pagDestino = "index.jsp";
+		}
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher(pagDestino);
 		dispatcher.forward(request, response);
 	}
 
