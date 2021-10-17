@@ -29,14 +29,14 @@
       <div class="half-box">
         <label for="inicio">Inicio</label>
         <div class="half-box-coordenadas" name="inicio" id="inicio">
-           <input class="coordenadas rua" type="text" name="inicio" id="inicio" placeholder="Informe a rua:" required minlength="1" >
+           <input class="coordenadas rua" type="text" name="inicio" id="resp-form" placeholder="Informe a rua:" required minlength="1" >
            
         </div>
       </div>
       <div class="half-box">
         <label for="inicio">Chegada</label>
         <div class="half-box-coordenadas" name="chegada" id="chegada">
-          <input class="coordenadas rua" type="text" name="rua-chegada" id="rua-chegada" placeholder="Informe a rua:" required minlength="1">
+          <input class="coordenadas rua" type="text" name="rua-chegada" id="resp-form" placeholder="Informe a rua:" required minlength="1">
          
         </div>
       </div>
@@ -56,7 +56,7 @@
       </div>
       <br>
       <div class="full-box" id = "boxf">
-        <input id="go" type="submit" value="GO">
+        <input id="ir" type="submit" value="Iniciar trajeto">
       </div>
     </form>
 
