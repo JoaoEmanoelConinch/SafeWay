@@ -14,9 +14,11 @@
   }
   body {
   background-image: url("https://lh3.googleusercontent.com/jan6-1N7adqA4ctdstmC6H9rvvQ1flpsWwgUb2kRn0Ntd09Kkt8f-s1SRPOEC5B2zXsmZi2DIjTM4jpWSWE_8IkkwazRRd0NYSvzNsueRKLQqcAbkq9fmLvdZSgBXr1r5fvBCVWz8iHzFIiSIgw-6bL9XyVwnAlH2f6k3fygMLaIsQ46_ySlU6EfpnOqhiVPzM7G0wP99mLLrn-nyXwvHwO2Pmy_JXd6a7FpR1UdQsXWn_b_b2fKR5BNYZioVuJoC0uPviOwAbYMSwCCj0r8x5ecMuIn_H9EeImLWsamAu4F17OpoKK8LEGgp_ZIItoDkKrWwzzj_txpSmoXjc0UZRkhqDkO4rrBTXumL88rEABhJCdBxCDnYn9PBZO-F6rzIonzJDqqeanv-QF4l976QDnhfkkN28YCsuDqFNjqM5dqj-xPlj4XdFZg_UqHzkee7oEvMhFag-FPZUB7HNP8gcYgZJaAd-PiojrLqC36SDPe1yUY-qdE2Zrw0EAexgsPjQniakxukyGYaEYkax6xNVfjqKKCEoeBSXZq_KnXcbXqzctQFLQYkVa6jIS047hWxvcA6Iccp8ppSk6prvvUtbjPWgobMv5dXGciLBfAebe3exQStbmujQL9Ws9pNqfnqQtGXLqKIZ6pM_faPhsuNtkYcYtOvr2LzcD-SnVOYb6HjhsIRn2y7RTOHocunpVOBB4_Dk8HAGsJAbrBMhy5TNw=w1366-h768-no?authuser=0");
-    
+   
     background-size: cover;
     background-position-y: 0px;
+    height: 100%;
+    
   }
   /* fim geral */
   /* forms */
@@ -48,18 +50,21 @@
   }
   #main-container {
     width: 350px;
-    margin-top: 0px;
+    margin-top: 15px;
     margin-left: auto;
     margin-right: auto;
     background-color: rgba(186, 191, 224, 0.8);
     border-radius: 50px;
     border-color: #1a63ff;
     border: 5px solid #084b83;
-    padding: 25px;
+    padding: 15px;
+    
+     
+ 
   }
   #main-container h1 {
     text-align: center;
-    margin-bottom: 25px;
+
     font-size: 2.0rem;
   }
   #go {
@@ -190,6 +195,7 @@ button#login-avancar:hover{
   .full-box {
     flex: 1 1 100%;
     position: relative;
+    margin-bottom: 10px;
   }
   .half-box {
     flex: 1 1 45%;
@@ -213,7 +219,7 @@ button#login-avancar:hover{
     border-bottom: 2px solid #030d31;
     padding: 10px;
     font-size: .9rem;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
    input:focus {
     border-color: #f6ae2d;
@@ -478,5 +484,51 @@ background-color: #052b4aaf
   }
   #denuncias{
     margin-top: 15px;
+
+#footer{
+  background-color: #084b83;
+}
+
+#gitimg{
+ 
+    height: 60px;
+    width: 60px;
+ 
+}
+#ors{
+  height: 60px;
+  width: 180px;
+margin-left: 30px;;
+
+}
+
+
+footer{
+  text-align: center;
+position: absolute;
+	bottom: 0;
+	width: 100%;
+ position:fixed;
+ padding: 5px;
+}
+#tudo{
+	min-height: 100%;
+	height: 100%;
+	position: relative;
+	width: 100%;
+	margin-top: 100px;
+}
+#conteudo{
+	padding-bottom: 30px;
+	width: 100%;
+	height: 100%;
+}
+#rodape2{
+	
+	width: 100%;
+	bottom: 0;
+}
+#boxf {
+    margin-bottom: 0px;
   }
 
