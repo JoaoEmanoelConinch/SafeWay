@@ -29,7 +29,6 @@ import modelo.entidade.mapa.Trajeto;
 import modelo.enumeracao.mapa.MeioDeTransporte;
 import modelo.excecao.mapa.NumeroMaiorQueLimiteException;
 import modelo.excecao.mapa.NumeroMenorQueZeroException;
-import modelo.excecao.mapa.StatusInvalidoException;
 import modelo.excecao.usuario.EmailInvalidoException;
 import modelo.excecao.usuario.SenhaPequenaException;
 import modelo.excecao.usuario.StringVaziaException;
@@ -93,7 +92,6 @@ public class UsuarioCadastrado implements Serializable {
 		this.setNome(nome);
 		this.setEmail(email);
 		this.setSenha(senha);
-
 	}
 
 	public UsuarioCadastrado(String nome, String senha, String email)
@@ -176,7 +174,7 @@ public class UsuarioCadastrado implements Serializable {
 	}
 
 	public Trajeto trajeto(Ponto inicio, Ponto chegada, MeioDeTransporte transporteUsado)
-			throws JsonParseException, JsonMappingException, IOException, StatusInvalidoException {
+			throws JsonParseException, JsonMappingException, IOException {
 
 		Trajeto trajeto = new Trajeto(inicio, chegada, transporteUsado);
 
@@ -184,20 +182,18 @@ public class UsuarioCadastrado implements Serializable {
 		trajeto.addUsuarioCadastrado(this);
 
 		return trajeto;
-
 	}
 
 	public Formulario avaliacao(boolean lesaoCorporal, boolean furto, boolean roubo, boolean homicidio,
 			boolean latrocinio, String comentario, Ponto Ponto)
-			throws NullPointerException, StatusInvalidoException {
+			throws NullPointerException {
 
-		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, comentario, Ponto, this);
+		Formulario formulario = new Formulario(lesaoCorporal, furto, roubo, homicidio, latrocinio, Ponto, this);
 
 		this.addFormulario(formulario);
 		Ponto.addAvaliacao(formulario);
 
 		return formulario;
-
 	}
 
 	public void addFormulario(Formulario formulario) {
@@ -214,59 +210,6 @@ public class UsuarioCadastrado implements Serializable {
 
 	public void removerTrajeto(Trajeto trajeto) {
 		this.getTrajetos().remove(trajeto);
-	}
-
-	public static List<Ponto> informarLocais(String local) throws StatusInvalidoException {
-		return Ponto.informarLocais(local);
-	}
-
-	public Ponto DefinirLocal(String local)
-			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		return Ponto.informarLocal(local);
-	}
-
-	public Ponto DefinirLocal(String local, int posicao)
-			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		return Ponto.informarLocal(local, posicao);
-	}
-
-	public Ponto DefinirPartida(String inicio)
-			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		return DefinirLocal(inicio);
-	}
-
-	public Ponto DefinirDestino(String chegada)
-			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		return DefinirLocal(chegada);
-	}
-
-	public Ponto DefinirPartida(String inicio, int posicao)
-			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		return DefinirLocal(inicio, posicao);
-	}
-
-	public Ponto DefinirDestino(String chegada, int posicao)
-			throws StatusInvalidoException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-		return DefinirLocal(chegada, posicao);
-	}
-
-	public MeioDeTransporte DefinirTransporte(MeioDeTransporte transporte) {
-		return transporte;
-	}
-
-	public Trajeto trajeto(String inicio, String chegada, MeioDeTransporte transporte)
-			throws JsonParseException, JsonMappingException, StatusInvalidoException, IOException,
-			NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-
-		return new Trajeto(DefinirPartida(inicio), DefinirDestino(chegada), DefinirTransporte(transporte));
-	}
-
-	public Trajeto trajeto(String inicio, int posicaoInicio, String chegada, int posicaoChegada,
-			MeioDeTransporte transporte) throws JsonParseException, JsonMappingException, StatusInvalidoException,
-			IOException, NumeroMenorQueZeroException, NumeroMaiorQueLimiteException {
-
-		return new Trajeto(DefinirPartida(inicio, posicaoInicio), DefinirDestino(chegada, posicaoChegada),
-				DefinirTransporte(transporte));
 	}
 
 }
