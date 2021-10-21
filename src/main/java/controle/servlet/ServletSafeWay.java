@@ -97,7 +97,7 @@ public class ServletSafeWay extends HttpServlet {
 				logarUsuario(request, response, session);
 				break;
 
-			case "/formulario-trageto":
+			case "/formulario-trajeto":
 				mostrarFormularioTrajeto(request, response);
 				break;
 
@@ -109,7 +109,7 @@ public class ServletSafeWay extends HttpServlet {
 				mostrarTrajeto(request, response, session);
 				break;
 
-			case "/formolario-denuncia":
+			case "/formulario-denuncia":
 				mostrarFormularioDenuncia(request, response);
 				break;
 
